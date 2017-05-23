@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 17, 2017 at 08:52 AM
+-- Generation Time: May 23, 2017 at 06:54 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -85,7 +85,19 @@ INSERT INTO `egn_branch` (`id`, `name`) VALUES
 CREATE TABLE `egn_course` (
   `id` int(11) NOT NULL,
   `name` varchar(150) NOT NULL,
-  `branch_id` int(11) NOT NULL
+  `batch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `egn_course_reg`
+--
+
+CREATE TABLE `egn_course_reg` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -372,7 +384,15 @@ ALTER TABLE `egn_branch`
 --
 ALTER TABLE `egn_course`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `egn_course_ibfk_1` (`branch_id`);
+  ADD KEY `batch_id` (`batch_id`);
+
+--
+-- Indexes for table `egn_course_reg`
+--
+ALTER TABLE `egn_course_reg`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_id` (`student_id`),
+  ADD KEY `course_id` (`course_id`);
 
 --
 -- Indexes for table `egn_notes`
@@ -534,6 +554,11 @@ ALTER TABLE `egn_branch`
 ALTER TABLE `egn_course`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `egn_course_reg`
+--
+ALTER TABLE `egn_course_reg`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `egn_notes`
 --
 ALTER TABLE `egn_notes`
@@ -633,7 +658,14 @@ ALTER TABLE `egn_batch`
 -- Constraints for table `egn_course`
 --
 ALTER TABLE `egn_course`
-  ADD CONSTRAINT `egn_course_ibfk_1` FOREIGN KEY (`branch_id`) REFERENCES `egn_branch` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `egn_course_ibfk_1` FOREIGN KEY (`batch_id`) REFERENCES `egn_batch` (`id`);
+
+--
+-- Constraints for table `egn_course_reg`
+--
+ALTER TABLE `egn_course_reg`
+  ADD CONSTRAINT `egn_course_reg_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `egn_student` (`id`),
+  ADD CONSTRAINT `egn_course_reg_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `egn_course` (`id`);
 
 --
 -- Constraints for table `egn_notes`
