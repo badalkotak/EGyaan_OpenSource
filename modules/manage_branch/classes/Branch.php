@@ -1,5 +1,7 @@
 <?php
 
+include("../../../classes/Constants.php");
+
 class Branch
 {
 	private $connection;
@@ -44,7 +46,7 @@ class Branch
         }
         else
         {
-            $message="Already Exists";
+            $message=Constants::STATUS_EXISTS;
             return $message;
         }
     }
