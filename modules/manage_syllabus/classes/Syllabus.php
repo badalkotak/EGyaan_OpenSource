@@ -42,7 +42,7 @@ class Syllabus
 		}
 		else
 		{
-			 $message="Already Exists";
+			 $message=Constants::STATUS_EXISTS;
             return $message;
 		}
 	}
