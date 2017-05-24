@@ -1,5 +1,6 @@
 <?php
 
+require_once("../../../classes/Constants.php");
 class Syllabus
 {
 
@@ -80,7 +81,7 @@ class Syllabus
 	    }
 		else
 		{
-			 $message="Already Exists";
+			 $message=Constants::STATUS_EXISTS;
             return $message;
 		}
     }
