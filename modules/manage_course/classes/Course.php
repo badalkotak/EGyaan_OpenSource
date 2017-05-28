@@ -18,7 +18,7 @@ class Course
         } elseif ($userId == 0) { //This will give course details in general
             $sql = "SELECT * FROM egn_course";
         } elseif ($teacherStatus == "no" && $userId > 0) { //This will give course details for Student
-            $sql = "SELECT * FROM `egn_course_reg` WHERE student_id='$userId'";
+            $sql = "SELECT * FROM `egn_course_reg` AS cr, `egn_course` AS c WHERE cr.course_id = c.id AND student_id='$userId'";
         } else {
             return false;
         }
