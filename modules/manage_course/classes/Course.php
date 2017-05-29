@@ -14,7 +14,7 @@ class Course
     public function getCourse($teacherStatus, $userId)
     {
         if ($teacherStatus == "yes" && $userId > 0) { //This will give course details for Teacher
-            $sql = "SELECT * FROM `egn_teacher_course` AS tc,`egn_course` AS c WHERE tc.course_id = c.id AND user_id = '$userId'";
+            $sql = "SELECT tc.id,tc.user_id,tc.course_id,tc.addedby_user_id,c.id,c.name,c.batch_id FROM `egn_teacher_course` AS tc,`egn_course` AS c WHERE tc.course_id = c.id AND user_id = '$userId'";
         } elseif ($userId == 0) { //This will give course details in general
             $sql = "SELECT * FROM egn_course";
         } elseif ($teacherStatus == "no" && $userId > 0) { //This will give course details for Student
