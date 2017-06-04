@@ -42,7 +42,7 @@ class Test
         if ($this->stringChecker($title)) {
             $message = 'Test name should be less than 255';
         } elseif (!is_numeric($total_marks) || $total_marks <= 0) {
-            $message = $total_marks .'Enter valid marks';
+            $message = 'Enter valid marks';
         } elseif ($date_of_test < date("Y-m-d")) {
             $message = 'Please enter a valid date';
         } elseif ($course_id == NULL) {
