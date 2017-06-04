@@ -1,6 +1,6 @@
 <html>
 <body>
-<form action="?" method="post">
+<form id="test_input" action="?" method="post" enctype="multipart/form-data">
 
 <?php
 require_once("../../../classes/Constants.php");
@@ -104,9 +104,38 @@ if($course_id>0){
     <label for="date">Date of test:</label>
     <input type="date" id="date" name="date" required><br>
     <label for="type">Type of test:</label>
-    <input type="radio" id="type" name="type" value="online" checked required>Online
-    <input type="radio" id="type" name="type" value="offline" required>Offline
+    <input type="radio" id="online" name="type" value="online" onchange="changeAction()" checked required>Online
+    <input type="radio" id="offline" name="type" value="offline" onchange="changeAction()" required>Offline<br>
     <button formaction="add_questions.php" formmethod="post" id="test_button" name="test_button" type="submit">Next</button>
+    <script>
+        var form = document.getElementById("test_input");
+        var br = document.createElement("br");
+        function changeAction(){
+            form.removeChild(document.getElementById("test_button"));
+            var button = document.createElement("button");
+            if(document.getElementById("online").checked){
+                console.log("online");
+                form.removeChild(document.getElementById("test_file").nextElementSibling);
+                form.removeChild(document.getElementById("test_file"));
+                button.setAttribute('formaction','add_questions.php');
+            }else{
+                console.log("offline");
+                button.setAttribute('formaction','add_offline_test.php');
+                var file_input=document.createElement("input");
+                file_input.setAttribute('type','file');
+                file_input.setAttribute('id','test_file');
+                file_input.setAttribute('name','test_file');
+                form.appendChild(file_input);
+                form.appendChild(br);
+            }
+            button.setAttribute('formmethod','post');
+            button.setAttribute('id','test_button');
+            button.setAttribute('name','test_button');
+            button.setAttribute('type','submit');
+            button.innerHTML = 'Next';
+            form.appendChild(button);
+        }
+    </script>
     <?
 }
 ?>

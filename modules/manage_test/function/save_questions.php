@@ -34,20 +34,20 @@ if(is_numeric($test_id) && $test_id>0){
     }
     if($error_flag != 1){
         if($test->insertQuestion($question_query)){
-            header("Location: add_test.php?message=Test added successfully");
+            $test->parentPageRedirect("Test added successfully");
         }else{
-            $test->deleteTest($test_id);
-            header("Location: add_test.php?message=Error while processing1");
+            $test->deleteTest($test_id,$teacher_id); //Deleted all records related to test_id
+            $test->parentPageRedirect("Error while processing"); //Error while inserting questions into database
         }
     }else{
-        header("Location: add_test.php?message=Error while processing2");
+        header("Location: add_test.php?message=2");
     }
 }
 else{
    if($test_id == null){
-       header("Location: add_test.php?message=Error while processing3");
+       $test->parentPageRedirect("Error while processing"); //Error generated while inserting test details
    }else{
-       header("Location: add_test.php?message=".$test_id);
+       $test->parentPageRedirect($test_id); //Duplicate test entry
    }
 }
 ?>

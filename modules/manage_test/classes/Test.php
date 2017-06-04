@@ -42,7 +42,7 @@ class Test
         if ($this->stringChecker($title)) {
             $message = 'Test name should be less than 255';
         } elseif (!is_numeric($total_marks) || $total_marks <= 0) {
-            $message = 'Enter valid marks';
+            $message = $total_marks .'Enter valid marks';
         } elseif ($date_of_test < date("Y-m-d")) {
             $message = 'Please enter a valid date';
         } elseif ($course_id == NULL) {
@@ -167,13 +167,23 @@ class Test
             return false;
         }
     }
-    public function deleteTest($test_id){
-        $sql = "DELETE FROM `egn_test` WHERE id='$test_id';";
+    public function deleteTest($test_id,$teacher_id){
+        $sql = "DELETE FROM `egn_test` WHERE id='$test_id' AND user_id='$teacher_id';";
         $this->connection->query($sql);
+        $delete = $this->connection->affected_rows;
+        if($delete == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public function parentPageRedirect($message){
-        header("Location: add_test.php?message=" . $message);
+        header("Location: manage_test.php?message=" . $message);
     }
+
 }
 ?>

@@ -9,6 +9,9 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
 $teacher_id = 1; //To Do: Change This
+if(isset($_REQUEST["message"]) && !empty(trim($_REQUEST["message"]))){
+    echo $_REQUEST["message"];
+}
 $test = new Test($dbConnect->getInstance());
 $result=$test->getTestsByTeacher($teacher_id);
 if($result!=null)
@@ -24,8 +27,7 @@ if($result!=null)
             <th>Date of Result</th>
             <th>Type</th>
             <th>Course name</th>
-            <th>Edit</th>
-            <th>Cancel</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -41,8 +43,7 @@ if($result!=null)
                     <td>' . $row["date_of_result"]  . '</td>
                     <td>' . (($row["type"] == 'O')?'Offline':'Online') . '</td>
                     <td>' . $row["name"]  . '</td>
-                    <td><button id="edit_button" value=' . $row["id"] . ' type="button">Edit</button></td>
-                    <td><button id="delete_button" value=' . $row["id"] . ' type="button">Delete</button></td>
+                    <td><a href="delete_test.php?id=' . $row["id"] . '">Delete</a></td>
                   </tr>';
         $i++;
     }
