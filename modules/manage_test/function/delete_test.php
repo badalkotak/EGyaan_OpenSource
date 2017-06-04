@@ -10,6 +10,10 @@ $teacher_id = 1; //To Do: Change This
 $test = new Test($dbConnect->getInstance());
 if($test->deleteTest($_REQUEST["id"],$teacher_id)){
     $test->parentPageRedirect("Test deleted successfully");
+    if(file_exists("offline_test/" . $_REQUEST["id"] . ".pdf")){
+        unlink("offline_test/" . $_REQUEST["id"] . ".pdf");
+    }else{
+    }
 }else{
     $test->parentPageRedirect("Error while deleting test");
 }

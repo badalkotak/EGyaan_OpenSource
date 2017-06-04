@@ -103,9 +103,9 @@ if($course_id>0){
     <input type="number" min=1 id="marks" name="marks" placeholder="Enter marks here" required><br>
     <label for="date">Date of test:</label>
     <input type="date" id="date" name="date" required><br>
-    <label for="type">Type of test:</label>
-    <input type="radio" id="online" name="type" value="online" onchange="changeAction()" checked required>Online
-    <input type="radio" id="offline" name="type" value="offline" onchange="changeAction()" required>Offline<br>
+    <label>Type of test:</label>
+    <input type="radio" id="online" name="type" value="online" onchange="changeAction()" checked required><label for="online">Online</label>
+    <input type="radio" id="offline" name="type" value="offline" onchange="changeAction()" required><label for="offline">Offline</label><br>
     <button formaction="add_questions.php" formmethod="post" id="test_button" name="test_button" type="submit">Next</button>
     <script>
         var form = document.getElementById("test_input");
@@ -115,8 +115,14 @@ if($course_id>0){
             var button = document.createElement("button");
             if(document.getElementById("online").checked){
                 console.log("online");
-                form.removeChild(document.getElementById("test_file").nextElementSibling);
-                form.removeChild(document.getElementById("test_file"));
+                var visible_file_input=document.getElementById("test_file");
+                if (typeof(visible_file_input) != 'undefined' && visible_file_input != null)
+                {
+                    if(typeof(visible_file_input.nextElementSibling) != 'undefined' && visible_file_input.nextElementSibling != null){
+                        form.removeChild(visible_file_input.nextElementSibling);
+                    }
+                    form.removeChild(visible_file_input);
+                }
                 button.setAttribute('formaction','add_questions.php');
             }else{
                 console.log("offline");
