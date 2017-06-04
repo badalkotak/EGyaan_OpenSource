@@ -2,7 +2,7 @@
 
 include("../../../classes/Constants.php");
 
-class Branch
+class Course
 {
     private $connection;
 
@@ -11,9 +11,17 @@ class Branch
         $this->connection = $connection;
     }
 
-    public function getBranch()
+    public function getCourse($teacherStatus, $userId)
     {
-        $sql = "SELECT * FROM egn_branch";
+        if ($teacherStatus == "yes" && $userId > 0) { //This will give course details for Teacher
+            $sql = "SELECT tc.id,tc.user_id,tc.course_id,tc.addedby_user_id,c.id,c.name,c.batch_id FROM `egn_teacher_course` AS tc,`egn_course` AS c WHERE tc.course_id = c.id AND user_id = '$userId'";
+        } elseif ($userId == 0) { //This will give course details in general
+            $sql = "SELECT * FROM egn_course";
+        } elseif ($teacherStatus == "no" && $userId > 0) { //This will give course details for Student
+            $sql = "SELECT * FROM `egn_course_reg` AS cr, `egn_course` AS c WHERE cr.course_id = c.id AND student_id='$userId'";
+        } else {
+            return false;
+        }
         $result = $this->connection->query($sql);
 
         if ($result->num_rows > 0) {
@@ -24,13 +32,13 @@ class Branch
     }
 
 // In case of multiple inserts, you need to check whether or not each insert query is being executed, if it is executed only then execute the next query, or else if a particular query is not executed, first delete all the previous RELATED INSERT queries and then return false.
-    public function insertBranch($name)
+    public function insertCourse($name, $batch_id)
     {
-        $sql = "SELECT * FROM `egn_branch` WHERE name='$name'";
+        $sql = "SELECT * FROM `egn_course` WHERE name='$name' AND batch_id='$batch_id'";
         $result = $this->connection->query($sql);
 
         if ($result->num_rows == 0) {
-            $insert_sql = "INSERT INTO `egn_branch`(`name`) VALUES ('$name')";
+            $insert_sql = "INSERT INTO `egn_course`(`name`,`batch_id`) VALUES ('$name','$batch_id')";
             $insert = $this->connection->query($insert_sql);
             if ($insert === true) {
                 return true;
@@ -43,9 +51,9 @@ class Branch
         }
     }
 
-    public function updateBranch($id, $name)
+    public function updateCourse($id, $name, $batch_id)
     {
-        $sql = "UPDATE `egn_branch` SET `name`='$name' WHERE id='$id'";
+        $sql = "UPDATE `egn_course` SET `name`='$name' AND `batch_id`='$batch_id' WHERE id='$id'";
         $update = $this->connection->query($sql);
 
         if ($update === true) {
@@ -55,9 +63,9 @@ class Branch
         }
     }
 
-    public function deleteBranch($id)
+    public function deleteCourse($id)
     {
-        $sql = "DELETE FROM egn_branch WHERE id='$id'";
+        $sql = "DELETE FROM egn_course WHERE id='$id'";
         $delete = $this->connection->query($sql);
 
         if ($delete === true) {

@@ -1,5 +1,5 @@
 <?php
-
+require_once("../../../classes/Constants.php");
 class Timetable
 {
 	private $connection;
@@ -40,7 +40,7 @@ class Timetable
 		}
 		else
 		{
-			 $message="Already Exists";
+			$message=Constants::STATUS_EXISTS;
             return $message;
 		}
 	}
