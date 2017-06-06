@@ -8,9 +8,14 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_NAME);
 $user_id = 1; //To Do: Change This
 $fees = new Fees($dbConnect->getInstance());
-if($fees->addFees($_REQUEST["id"],$_REQUEST["fees_input"])){
-    $fees->parentPageRedirect("Fees updated successfully");
+if(isset($_REQUEST["id"]) && $_REQUEST["fees_input"]){
+    if($fees->addFees($_REQUEST["id"],$_REQUEST["fees_input"])){
+        $fees->parentPageRedirect("Fees updated successfully");
+    }else{
+        $fees->parentPageRedirect("Error while processing");
+    }
 }else{
     $fees->parentPageRedirect("Error while processing");
 }
+
 ?>
