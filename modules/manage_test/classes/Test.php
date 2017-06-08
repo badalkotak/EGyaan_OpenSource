@@ -117,7 +117,7 @@ class Test
         $check_params =$this->checkTestDetails($title,$total_marks,$date_of_test,$course_id,$type_id);
         if($check_params == Constants::STATUS_SUCCESS){
             $sql="INSERT INTO `egn_test` (`id`, `title`, `total_marks`, `date_of_test`, `date_of_result`, `course_id`, `user_id`, `type`) 
-                  SELECT * FROM (SELECT NULL as 'id', '$title', $total_marks , '$date_of_test' , NULL as 'date_of_test', $course_id, $teacher_id ,'" . (($type_id=='online')?("O"):("F")) . "') as temp
+                  SELECT * FROM (SELECT NULL as 'id', '$title', $total_marks , '$date_of_test' , NULL as 'date_of_result', $course_id, $teacher_id ,'" . (($type_id=='online')?("O"):("F")) . "') as temp
                   WHERE NOT EXISTS (
                   SELECT `id`
                   FROM `egn_test`

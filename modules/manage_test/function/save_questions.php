@@ -40,10 +40,10 @@ if(is_numeric($test_id) && $test_id>0){
             $test->parentPageRedirect("Error while processing"); //Error while inserting questions into database
         }
     }else{
-        header("Location: add_test.php?message=2");
+        $test->deleteTest($test_id,$teacher_id);
+        $test->parentPageRedirect("Error while processing");
     }
-}
-else{
+}else{
    if($test_id == null){
        $test->parentPageRedirect("Error while processing"); //Error generated while inserting test details
    }else{
