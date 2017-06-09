@@ -1,6 +1,6 @@
 <?php
 
-include("../../../classes/Constants.php");
+require_once("../../../classes/Constants.php");
 
 class Course
 {
@@ -11,23 +11,34 @@ class Course
         $this->connection = $connection;
     }
 
-    public function getCourse($teacherStatus, $userId)
+    public function getCourse($teacherStatus, $userId, $multiQuery)
     {
-        if ($teacherStatus == "yes" && $userId > 0) { //This will give course details for Teacher
-            $sql = "SELECT tc.id,tc.user_id,tc.course_id,tc.addedby_user_id,c.id,c.name,c.batch_id FROM `egn_teacher_course` AS tc,`egn_course` AS c WHERE tc.course_id = c.id AND user_id = '$userId'";
-        } elseif ($userId == 0) { //This will give course details in general
-            $sql = "SELECT * FROM egn_course";
-        } elseif ($teacherStatus == "no" && $userId > 0) { //This will give course details for Student
-            $sql = "SELECT * FROM `egn_course_reg` AS cr, `egn_course` AS c WHERE cr.course_id = c.id AND student_id='$userId'";
+        if ($teacherStatus == "yes" && $userId > 0 && $multiQuery == 'no') { //This will give course details for Teacher
+            $sql = "SELECT tc.id AS teacherCourseId,tc.user_id AS teacherCourseUserId,tc.course_id 
+AS teacherCourseCourseId,tc.addedby_user_id AS teacherCourseAddedbyUserId,c.id AS courseId,c.name AS courseName,
+c.batch_id AS courseBatchId FROM `egn_teacher_course` AS tc,`egn_course` AS c WHERE tc.course_id = c.id 
+AND user_id = '$userId'";
+        }
+//        elseif ($teacherStatus == 'no' && $userId == 0 && $multiQuery == 'no') { //This will give course details in General
+//            $sql = "SELECT * FROM egn_course";
+//        }
+        elseif ($teacherStatus == "no" && $userId > 0 && $multiQuery == 'no') { //This will give course details for Student
+            $sql = "SELECT * FROM `egn_course_reg` AS cr, `egn_course` AS c WHERE cr.course_id = c.id 
+AND student_id='$userId'";
+        } elseif ($teacherStatus == "no" && $userId == 0 && $multiQuery == 'yes') {
+            $sql = "SELECT eBranch.id AS branchId,eBranch.name AS branchName,eBatch.id AS batchId,eBatch.name 
+AS batchName,eBatch.branch_id AS batchBranchId,eCourse.id AS courseId,eCourse.name AS courseName,eCourse.batch_id 
+AS courseBatchId FROM `egn_course` AS eCourse,`egn_batch` AS eBatch,`egn_branch` AS eBranch 
+WHERE eCourse.batch_id = eBatch.id AND eBatch.branch_id = eBranch.id";
         } else {
-            return false;
+            $sql = "SELECT * FROM egn_course";
         }
         $result = $this->connection->query($sql);
 
         if ($result->num_rows > 0) {
             return $result;
         } else {
-            return null;
+            return false;
         }
     }
 
@@ -53,7 +64,7 @@ class Course
 
     public function updateCourse($id, $name, $batch_id)
     {
-        $sql = "UPDATE `egn_course` SET `name`='$name' AND `batch_id`='$batch_id' WHERE id='$id'";
+        $sql = "UPDATE `egn_course` SET `name`='$name' WHERE id='$id' AND `batch_id`='$batch_id'";
         $update = $this->connection->query($sql);
 
         if ($update === true) {

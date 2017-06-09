@@ -1,6 +1,6 @@
 <?php
 
-include("../../../classes/Constants.php");
+require_once("../../../classes/Constants.php");
 
 class Branch
 {
@@ -26,6 +26,7 @@ class Branch
 // In case of multiple inserts, you need to check whether or not each insert query is being executed, if it is executed only then execute the next query, or else if a particular query is not executed, first delete all the previous RELATED INSERT queries and then return false.
     public function insertBranch($name)
     {
+        $name = $this->connection->real_escape_string($name);
         $sql = "SELECT * FROM `egn_branch` WHERE name='$name'";
         $result = $this->connection->query($sql);
 
@@ -45,6 +46,7 @@ class Branch
 
     public function updateBranch($id, $name)
     {
+        $name = $this->connection->real_escape_string($name);
         $sql = "UPDATE `egn_branch` SET `name`='$name' WHERE id='$id'";
         $update = $this->connection->query($sql);
 
@@ -67,5 +69,3 @@ class Branch
         }
     }
 }
-
-?>
