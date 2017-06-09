@@ -8,9 +8,9 @@ class Notes
         $this->connection = $connection;
     }
 
-	public function getNotes()
+	public function getNotes($course_id)
 	{
-		$sql="select * from egn_notes";
+		$sql="select * from egn_notes WHERE $course_id='".$course_id."'";
 		$result = $this->connection->query($sql);
 		if($result->num_rows > 0)
 		{

@@ -9,9 +9,9 @@ class Syllabus
 	{
 		$this->connection=$connection;
 	}
-	public function getSyllabus()
+	public function getSyllabus($course_id)
 	{
-		$sql="select * from egn_syllabus";
+		$sql="select * from egn_syllabus WHERE course_id='".$course_id."'";
 		$result=$this->connection->query($sql);
 		if($result->num_rows > 0)
 		{

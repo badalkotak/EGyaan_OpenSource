@@ -7,9 +7,11 @@ class Timetable
 	{
 		$this->connection=$connection;
 	}
-	public function getTimetable()
+	public function getTimetable($batch_id)
 	{
-		$sql="select * from egn_timetable";
+		$sql="SELECT * FROM egn_timetable WHERE teacher_course_id IN (SELECT id FROM egn_teacher_course WHERE course_id IN (SELECT id FROM egn_course WHERE batch_id='$batch_id'))";
+
+		// $sql="select * from egn_timetable";
 		$result=$this->connection->query($sql);
 		if($result->num_rows > 0)
 		{

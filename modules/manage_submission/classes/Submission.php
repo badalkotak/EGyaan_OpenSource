@@ -8,9 +8,9 @@ class Submission
 	{
 		$this->connection=$connection;
 	}
-	public function getSubmission()
+	public function getSubmission($course_id)
 	{
-		$sql="select * from egn_submissions";
+		$sql="select * from egn_submissions WHERE course_id='".$course_id."'";
 		$result=$this->connection->query($sql);
 		if($result->num_rows > 0)
 		{
