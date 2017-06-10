@@ -2,19 +2,19 @@
 
 require_once("../../../classes/Constants.php");
 
-class Noticeboard
+class Suggestioncomplaint
 {
-	private $connection;
+    private $connection;
 
     function __construct($connection){
         $this->connection = $connection;
     }
 
-    public function getNoticeboard($var1,$type,$var2,$urgent,$var3,$id)
+    public function getSuggestioncomplaint($var1,$id,$var2,$type)
     {
-    	$sql="SELECT * FROM egn_noticeboard where $var1=$type and $var2='$urgent' and $var3=$id";
-        var_dump($sql);
-    	$result = $this->connection->query($sql);
+        $sql="SELECT * FROM egn_suggestion_complaint where $var2='$type' and $var1=$id";
+        //var_dump($sql);
+        $result = $this->connection->query($sql);
 
         if($result->num_rows > 0)
         {
@@ -27,9 +27,11 @@ class Noticeboard
     }
 
 // In case of multiple inserts, you need to check whether or not each insert query is being executed, if it is executed only then execute the next query, or else if a particular query is not executed, first delete all the previous RELATED INSERT queries and then return false.
-    public function insertNoticeboard($title,$notice,$file,$urgent,$type,$user_id)
+    public function insertSuggestioncomplaint($title,$description,$type)
     {
-            $insert_sql="INSERT INTO `egn_noticeboard`( `title`, `notice`, `file`, `urgent_notice`, `type`, `user_id`) VALUES ('$title','$notice','$file','$urgent','$type',$user_id)";
+        if(isset($title))
+        {
+            $insert_sql="INSERT INTO `egn_suggestion_complaint`(`title`,`description`,`type`) VALUES ('$title','$description','$type')";
             $insert=$this->connection->query($insert_sql);
             if($insert === true)
             {
@@ -39,13 +41,15 @@ class Noticeboard
             {
                 return false;
             }
+        }
+
         
     }
 
 
-    public function deleteNoticeboard($id)
+    public function deleteSuggestioncomplaint($id)
     {
-        $sql="DELETE FROM egn_noticeboard WHERE id='$id'";
+        $sql="DELETE FROM egn_suggestion_complaint WHERE id='$id'";
         $delete=$this->connection->query($sql);
 
         if($delete===true)
