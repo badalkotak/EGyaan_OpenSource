@@ -47,6 +47,7 @@ if($result!=null)
                     <td>' . (($row["type"] == 'O')?'NA':(($row["status"] == 0)?'<a href="add_marks_offline_test.php?id=' . $row["id"] . '&action=add">Add</a>':'<a href="add_marks_offline_test.php?id=' . $row["id"] . '&action=edit">Edit</a>')) . '</td>
                     <td><a href="delete_test.php?id=' . $row["id"] . '">Delete</a></td>
                   </tr>';
+        $i++;
     }
     ?>
         </tbody>
