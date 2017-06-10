@@ -5,7 +5,6 @@ include_once("../../../classes/Constants.php");
 class Test
 {
 	private $connection;
-//    private $title,$total_marks,$date_of_test,$course_id,$user_id,$type_id;
     function __construct($connection){
         $this->connection = $connection;
     }
@@ -21,11 +20,17 @@ class Test
 
     public function getTestsByTeacher($id)
     {
-    	$sql="SELECT egn_test.id,title,total_marks,date_of_test,date_of_result,type,c.name 
-              FROM egn_test,egn_course as c 
-              WHERE user_id = '$id' AND egn_test.course_id = c.id";
+    	$sql="  SELECT t.id,title,total_marks,date_of_test,date_of_result,type,c.name, '0' as status
+                FROM egn_test as t ,egn_course as c
+                WHERE user_id = '$id' AND t.course_id = c.id AND t.id NOT IN
+                (SELECT t.id FROM egn_test as t ,egn_test_marks as m WHERE m.test_id = t.id)
+                UNION
+                SELECT t.id,title,total_marks,date_of_test,date_of_result,type,c.name, '1' as status
+                FROM egn_test as t ,egn_course as c
+                WHERE user_id = 1 AND t.course_id = c.id AND t.id IN
+                (SELECT t.id FROM egn_test as t ,egn_test_marks as m WHERE m.test_id = t.id)
+                ORDER BY date_of_test,title,type DESC";
     	$result = $this->connection->query($sql);
-
         if($result->num_rows > 0)
         {
             return $result;
@@ -181,9 +186,83 @@ class Test
         }
     }
 
+    public function getStudentList($test_id,$teacher_id){
+        $sql = "SELECT * FROM (SELECT DISTINCT s.id,s.firstname,s.lastname,t.total_marks
+                FROM egn_student as s , egn_test as t ,egn_course as c ,egn_course_reg as cr ,egn_batch as batch ,egn_branch as branch 
+                WHERE batch.branch_id =  branch.id AND s.batch_id = batch.id AND t.course_id = c.id AND c.branch_id = branch.id AND cr.student_id=s.id AND cr.course_id = c.id AND t.id = '$test_id' AND t.user_id='$teacher_id' AND t.type='F') as A
+                LEFT OUTER JOIN
+                (SELECT DISTINCT student_id,marks
+                FROM egn_test_marks
+                WHERE test_id = '$test_id') AS B
+                ON A.id = B.student_id";
+        $result = $this->connection->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return null;
+        }
+    }
+
+    public function checkMarksEntered($test_id,$action){
+        $sql = "SELECT DISTINCT id
+                FROM egn_test_marks
+                WHERE test_id = '$test_id'";
+        $result = $this->connection->query($sql);
+        if($result->num_rows > 0){
+            if($action == "edit"){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            if($action == "add"){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+
+    public function createInsertMarksQuery($student_id,$test_id,$marks){
+        $sql = "INSERT INTO `egn_test_marks` (`id`, `student_id`, `test_id`, `marks`) 
+                VALUES (NULL, '$student_id', '$test_id', '$marks');";
+        return $sql;
+    }
+
+    public function insertMarks($sql){
+        $insert = $this->connection->multi_query($sql);
+        if($insert === true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function createUpdateMarksQuery($student_id,$test_id,$marks){
+        $sql = "UPDATE `egn_test_marks`
+                SET marks = '$marks'
+                WHERE student_id = '$student_id' AND test_id ='$test_id';";
+        return $sql;
+    }
+
+    public function updateMarks($sql){
+        $update = $this->connection->multi_query($sql);
+        if($update === true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
     public function parentPageRedirect($message){
         header("Location: manage_test.php?message=" . $message);
     }
-
 }
 ?>

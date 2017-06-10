@@ -27,6 +27,7 @@ if($result!=null)
             <th>Date of Result</th>
             <th>Type</th>
             <th>Course name</th>
+            <th>Edit Marks</th>
             <th>Delete</th>
         </tr>
         </thead>
@@ -43,9 +44,9 @@ if($result!=null)
                     <td>' . $row["date_of_result"]  . '</td>
                     <td>' . (($row["type"] == 'O')?'Online':'Offline') . '</td>
                     <td>' . $row["name"]  . '</td>
+                    <td>' . (($row["type"] == 'O')?'NA':(($row["status"] == 0)?'<a href="add_marks_offline_test.php?id=' . $row["id"] . '&action=add">Add</a>':'<a href="add_marks_offline_test.php?id=' . $row["id"] . '&action=edit">Edit</a>')) . '</td>
                     <td><a href="delete_test.php?id=' . $row["id"] . '">Delete</a></td>
                   </tr>';
-        $i++;
     }
     ?>
         </tbody>
