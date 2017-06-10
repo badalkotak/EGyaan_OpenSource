@@ -29,17 +29,37 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
 echo "<br>List of Department - Branches<br>";
 $branch = new Branch($dbConnect->getInstance());
 $result = $branch->getBranch();
+
 if ($result != null) {
+    $i=0;
     echo "<table border='3'>";
-    echo "<tr><th>Name</th><th>Edit</th><th>Delete</th></tr>";
+    echo "<tr><th>Sr No.</th><th>Name</th><th>Edit</th><th>Delete</th></tr>";
     while ($row = $result->fetch_assoc()) {
         $id = $row['id'];
         $name = $row['name'];
-        echo "<tr><td>" . $name . "</td><td><form action='editBranch.php' method='post'>
-        <input type='hidden' value='" . $id . "' name='branchId'><input type='hidden' value='" . $name . "' name='branchName'>
-        <input type='submit' value='Edit'></form></td><td><form action='delete_branch.php' method='post'>
-        <input type='hidden' value='" . $id . "' name='branchId'><input type='hidden' value='" . $name . "' name='branchName'>
-        <input type='submit' value='Delete'></form></td></tr>";
+        // echo "<tr><td>" . $name . "</td><td><form action='editBranch.php' method='post'>
+        // <input type='hidden' value='" . $id . "' name='branchId'><input type='hidden' value='" . $name . "' name='branchName'>
+        // <input type='submit' value='Edit'></form></td><td><form action='delete_branch.php' method='post'>
+        // <input type='hidden' value='" . $id . "' name='branchId'><input type='hidden' value='" . $name . "' name='branchName'>
+        // <input type='submit' value='Delete'></form></td></tr>";
+
+        echo "<tr>";
+        $i++;
+        echo "<td>";
+        echo $i;
+        echo "</td>";
+
+        echo "<td>";
+        echo $name;
+        echo "</td>";
+
+        echo "<td>";
+        echo "<form action='editBranch.php' method='get'><input type='submit' value='$id' name='edit'></form>";        
+        echo "</td>";
+
+        echo "<td>";
+        echo "<form action='delete_branch.php' method='post'><input type='submit' value='$id' name='delete'></form>"; 
+        echo "</td>";
     }
     echo "</table>";
 } else {

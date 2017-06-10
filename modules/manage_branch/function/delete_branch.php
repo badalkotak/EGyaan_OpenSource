@@ -15,11 +15,9 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
 
-if (isset($_REQUEST['branchName']) && isset($_REQUEST['branchId']) && !empty(trim($_REQUEST['branchName']))
-    && !empty(trim($_REQUEST['branchId']))
-) {
-    $branchId = $_REQUEST['branchId'];
-    $branchName = $_REQUEST['branchName'];
+if (isset($_REQUEST['delete']) && !empty(trim($_REQUEST['delete'])))
+ {
+    $branchId = $_REQUEST['delete'];
 
     $branch = new Branch($dbConnect->getInstance());
 

@@ -9,11 +9,36 @@ require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../classes/Branch.php");
 
-if (isset($_REQUEST['branchName']) && isset($_REQUEST['branchId']) && !empty(trim($_REQUEST['branchName']))
-    && !empty(trim($_REQUEST['branchId']))
-) {
-    $branchId = $_REQUEST['branchId'];
-    $branchName = $_REQUEST['branchName'];
+$dbConnect = new DBConnect(Constants::SERVER_NAME,
+    Constants::DB_USERNAME,
+    Constants::DB_PASSWORD,
+    Constants::DB_NAME);
+
+if (isset($_REQUEST['edit']) && !empty(trim($_REQUEST['edit']))) 
+{
+    $branchId = $_REQUEST['edit'];
+    // $branchName = $_REQUEST['branchName'];
+
+    $branch = new Branch($dbConnect->getInstance());
+
+    $getBranchName = $branch->getBranch();
+    if($getBranchName!=null)
+    {
+        while($row=$getBranchName->fetch_assoc())
+        {
+            $id=$row['id'];
+            if($id === $branchId)
+            {
+                $branchName=$row['name'];
+                break;
+            }
+        }
+    }
+    else
+    {
+        echo Constants::STATUS_FAILURE;
+    }
+
 } else {
     echo Constants::EMPTY_PARAMETERS;
 }
