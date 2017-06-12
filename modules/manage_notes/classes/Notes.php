@@ -10,7 +10,7 @@ class Notes
 
 	public function getNotes($course_id)
 	{
-		 $sql="select * from egn_notes WHERE course_id='".$course_id."'";
+		$sql="select * from egn_notes WHERE $course_id='".$course_id."'";
 		$result = $this->connection->query($sql);
 		if($result->num_rows > 0)
 		{
@@ -23,27 +23,17 @@ class Notes
 	}
 	public function insertNotes($title,$file,$course_id,$downloadable,$user_id)
 	{
-		 $sql="SELECT * FROM `egn_notes` WHERE course_id=".$course_id." && title='".$title."'";
-        $result = $this->connection->query($sql);
+		
+		 $sql_insert="INSERT INTO `egn_notes`(`title`, `file`, `course_id`, `downloadable`, `user_id`) VALUES ('".$title."','".$file."',".$course_id.",'".$downloadable."',".$user_id.")";
 
-        if($result->num_rows == 0)
-        {
-			 $sql_insert="INSERT INTO `egn_notes`(`title`, `file`, `course_id`, `downloadable`, `user_id`) VALUES ('".$title."','".$file."',".$course_id.",'".$downloadable."',".$user_id.")";
-
-			$insert = $this->connection->query($sql_insert);
-			if($insert === true)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+		$insert = $this->connection->query($sql_insert);
+		if($insert === true)
+		{
+			return true;
 		}
 		else
 		{
-			$message=Constants::STATUS_EXISTS;
-            return $message;
+			return false;
 		}
 	}
 	 public function deleteNotes($id)

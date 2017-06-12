@@ -17,4 +17,13 @@ class Constants
     const INSERT_SUCCESS_MSG = "successfully inserted!";
     const INSERT_FAIL_MSG = "Unable to insert ";
     const DELETE_CONFIRMATION = "Are you sure you want to delete it ?";
+    const ROLE_STUDENT_ID = 1;
+    const ROLE_TEACHER_ID = 2;
+    const ROLE_PARENT_ID = 3;
+    const ROLE_ADMIN_ID = 9;
+    const NO_USER_ERR = "No user found!";
+    const INSERT_ALREADY_EXIST_MSG = "with this name already exists!";
+    const PRIVILEGE_ASSIGN_SUCCESS = "Privilege assigned successfully";
+    const PRIVILEGE_ASSIGN_FAIL = "Unable to assign privilege";
+    const NO_PRIVILEGE_MSG = "You have not been assigned any privilege as yet. Contact the Admin for futher help!";
 }
