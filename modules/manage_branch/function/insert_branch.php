@@ -17,22 +17,13 @@ if (isset($_REQUEST['branch_name']) && !empty(trim($_REQUEST['branch_name']))) {
 //    var_dump($insertData);
 
     if ($insertData == "true") {
-        echo "Branch ".Constants::STATUS_SUCCESS."fully inserted<br>";
-        header('Location: branch.php');
-//        echo "List of Department - Branches<br>";
-//        $result = $branch->getBranch();
-//        if ($result != null) {
-//            while ($row = $result->fetch_assoc()) {
-//                echo $name = $row['name'];
-//                echo "<br>";
-//            }
-//        } else {
-//            echo "No Records Found";
-//        }
+        echo "Branch " . Constants::STATUS_SUCCESS . "fully inserted<br>";
+//        echo "<script>alert('Branch " . Constants::STATUS_SUCCESS . "fully inserted');</script>";
+//        header('Location: branch.php');
     } elseif ($insertData == Constants::STATUS_EXISTS) {
         echo "Branch Name " . Constants::STATUS_EXISTS;
     } else {
-        echo Constants::STATUS_FAILED;
+        echo Constants::STATUS_FAILED . " to add branch";
     }
 
 } else {

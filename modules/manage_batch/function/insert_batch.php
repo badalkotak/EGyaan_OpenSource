@@ -17,8 +17,9 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
 if (isset($_REQUEST['batchName']) && isset($_REQUEST['branchId']) && !empty(trim($_REQUEST['batchName']))
     && !empty(trim($_REQUEST['branchId']))
 ) {
-    $batchName = $_REQUEST['batchName'];
+    $batchName = trim($_REQUEST['batchName']);
     $branchId = $_REQUEST['branchId'];
+
     $batch = new Batch($dbConnect->getInstance());
 
     $insertData = $batch->insertBatch($batchName, $branchId);
@@ -27,7 +28,7 @@ if (isset($_REQUEST['batchName']) && isset($_REQUEST['branchId']) && !empty(trim
 
     if ($insertData == "true") {
         echo "Batch " . Constants::STATUS_SUCCESS . "fully inserted<br>";
-        header('Location: batch.php');
+//        header('Location: batch.php');
 //        echo "List of Department - Branches<br>";
 //        $result = $branch->getBranch();
 //        if ($result != null) {
@@ -41,7 +42,7 @@ if (isset($_REQUEST['batchName']) && isset($_REQUEST['branchId']) && !empty(trim
     } elseif ($insertData == Constants::STATUS_EXISTS) {
         echo "Batch Name " . Constants::STATUS_EXISTS;
     } else {
-        echo Constants::STATUS_FAILED;
+        echo Constants::STATUS_FAILED . " to insert batch";
     }
 
 } else {

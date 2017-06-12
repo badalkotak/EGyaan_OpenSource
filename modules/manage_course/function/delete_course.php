@@ -22,10 +22,10 @@ if (isset($_REQUEST['courseId']) && !empty(trim($_REQUEST['courseId']))) {
     $deleteData = $course->deleteCourse($courseId);
 
     if ($deleteData == true) {
-        echo Constants::STATUS_SUCCESS;
-        header('Location:course.php');
+        echo "Course " . Constants::STATUS_SUCCESS . "fully deleted";
+//        header('Location:course.php');
     } else {
-        echo Constants::STATUS_FAILED;
+        echo Constants::STATUS_FAILED . " to delete course";
     }
 } else {
     echo Constants::EMPTY_PARAMETERS;

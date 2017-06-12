@@ -14,28 +14,22 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
 
-if (isset($_REQUEST['edit']) && !empty(trim($_REQUEST['edit']))) 
-{
+if (isset($_REQUEST['edit']) && !empty(trim($_REQUEST['edit']))) {
     $branchId = $_REQUEST['edit'];
     // $branchName = $_REQUEST['branchName'];
 
     $branch = new Branch($dbConnect->getInstance());
 
-    $getBranchName = $branch->getBranch();
-    if($getBranchName!=null)
-    {
-        while($row=$getBranchName->fetch_assoc())
-        {
-            $id=$row['id'];
-            if($id === $branchId)
-            {
-                $branchName=$row['name'];
+    $getBranchName = $branch->getBranch(0);
+    if ($getBranchName != null) {
+        while ($row = $getBranchName->fetch_assoc()) {
+            $id = $row['id'];
+            if ($id === $branchId) {
+                $branchName = $row['name'];
                 break;
             }
         }
-    }
-    else
-    {
+    } else {
         echo Constants::STATUS_FAILURE;
     }
 

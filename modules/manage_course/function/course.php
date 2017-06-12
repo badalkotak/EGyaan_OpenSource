@@ -50,7 +50,7 @@
 <?php
 if (isset($_REQUEST['branchId'])) {
     $branch_Id = $_REQUEST['branchId'];
-    $getBatchData = $batch->getBatch('yes', $branch_Id);
+    $getBatchData = $batch->getBatch('yes', $branch_Id, 0);
     if ($branch_Id > 0) {
         echo "<form action='' method='post'>";
         echo "<select name='batchId'>";
@@ -100,10 +100,12 @@ if (isset($_REQUEST['branchId']) && isset($_REQUEST['batchId'])) {
 }
 
 echo "List of Courses";
-$getCourseData = $course->getCourse('no', 0, 'yes');
-if ($getCourseData) {
+
+$getCourseData = $course->getCourse('no', 0, 'yes', 0, 0);
+if ($getCourseData != false) {
+    $id = 1;
     echo "<table border='3'>";
-    echo "<tr><th>Branch Name</th><th>Batch Name</th><th>Course Name</th><th>Edit</th><th>Delete</th></tr>";
+    echo "<tr><th>Sr. no.</th><th>Branch Name</th><th>Batch Name</th><th>Course Name</th><th>Edit</th><th>Delete</th></tr>";
     while ($rowData = $getCourseData->fetch_assoc()) {
         $_branchId = $rowData['branchId'];
         $_branchName = $rowData['branchName'];
@@ -111,12 +113,13 @@ if ($getCourseData) {
         $_batchName = $rowData['batchName'];
         $_courseId = $rowData['courseId'];
         $_courseName = $rowData['courseName'];
-        echo "<tr><td>" . $_branchName . "</td><td>" . $_batchName . "</td><td>" . $_courseName . "</td>
+        echo "<tr><td>" . $id . "</td><td>" . $_branchName . "</td><td>" . $_batchName . "</td><td>" . $_courseName . "</td>
         <td><form action='editCourse.php' method='post'><input type='hidden' name='branchId' value='" . $_branchId . "'>
-        <input type='hidden' name='branchName' value='" . $_branchName . "'><input type='hidden' name='batchId' value='" . $_batchId . "'>
-        <input type='hidden' name='batchName' value='" . $_batchName . "'><input type='hidden' name='courseId' value='" . $_courseId . "'>
-        <input type='hidden' name='courseName' value='" . $_courseName . "'><input type='submit' value='Edit'></form></td><td>
+        <input type='hidden' name='batchId' value='" . $_batchId . "'>
+        <input type='hidden' name='courseId' value='" . $_courseId . "'>
+        <input type='submit' value='Edit'></form></td><td>
         <form action='delete_course.php' method='post'><input type='hidden' name='courseId' value='" . $_courseId . "'><input type='submit' value='Delete'></form></td></tr>";
+        $id++;
     }
     echo "</table>";
 } else {

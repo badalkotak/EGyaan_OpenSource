@@ -26,12 +26,12 @@ if (isset($_REQUEST['courseName']) && isset($_REQUEST['batch_id']) && !empty(tri
     $insertData = $course->insertCourse($courseName, $batchId);
 
     if ($insertData == 'true') {
-        echo Constants::STATUS_SUCCESS;
-        header('Location:course.php');
+        echo "Course " . Constants::STATUS_SUCCESS . "fully inserted";
+//        header('Location:course.php');
     } elseif ($insertData == Constants::STATUS_EXISTS) {
         echo "Course Name " . Constants::STATUS_EXISTS;
     } else {
-        echo Constants::STATUS_FAILED;
+        echo Constants::STATUS_FAILED . " to insert course";
     }
 } else {
     echo Constants::EMPTY_PARAMETERS;

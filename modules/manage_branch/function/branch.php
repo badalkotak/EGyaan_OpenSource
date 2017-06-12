@@ -28,10 +28,10 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
 
 echo "<br>List of Department - Branches<br>";
 $branch = new Branch($dbConnect->getInstance());
-$result = $branch->getBranch();
+$result = $branch->getBranch(0);
 
 if ($result != null) {
-    $i=0;
+    $i = 0;
     echo "<table border='3'>";
     echo "<tr><th>Sr No.</th><th>Name</th><th>Edit</th><th>Delete</th></tr>";
     while ($row = $result->fetch_assoc()) {
@@ -54,11 +54,13 @@ if ($result != null) {
         echo "</td>";
 
         echo "<td>";
-        echo "<form action='editBranch.php' method='get'><input type='submit' value='$id' name='edit'></form>";        
+        echo "<form action='editBranch.php' method='post'><input type='hidden' value='$id' name='edit'>
+<input type='submit' value='Edit'></form>";
         echo "</td>";
 
         echo "<td>";
-        echo "<form action='delete_branch.php' method='post'><input type='submit' value='$id' name='delete'></form>"; 
+        echo "<form action='delete_branch.php' method='post'><input type='hidden' value='$id' name='delete'>
+<input type='submit' value='Delete'></form>";
         echo "</td>";
     }
     echo "</table>";

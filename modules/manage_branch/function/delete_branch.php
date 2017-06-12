@@ -15,8 +15,7 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
 
-if (isset($_REQUEST['delete']) && !empty(trim($_REQUEST['delete'])))
- {
+if (isset($_REQUEST['delete']) && !empty(trim($_REQUEST['delete']))) {
     $branchId = $_REQUEST['delete'];
 
     $branch = new Branch($dbConnect->getInstance());
@@ -24,10 +23,10 @@ if (isset($_REQUEST['delete']) && !empty(trim($_REQUEST['delete'])))
     $deleteData = $branch->deleteBranch($branchId);
 
     if ($deleteData == true) {
-        header('Location:branch.php');
-        echo Constants::STATUS_SUCCESS;
+//        header('Location:branch.php');
+        echo "Branch " . Constants::STATUS_SUCCESS . "fully deleted";
     } else {
-        echo Constants::STATUS_FAILED;
+        echo Constants::STATUS_FAILED . " to delete branch";
     }
 
 } else {

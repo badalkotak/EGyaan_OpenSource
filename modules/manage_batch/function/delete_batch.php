@@ -23,10 +23,10 @@ if (isset($_REQUEST['batchId']) && !empty(trim($_REQUEST['batchId']))) {
     $deleteData = $batch->deleteBatch($batchId);
 
     if ($deleteData == true) {
-        echo Constants::STATUS_SUCCESS;
-        header('Location:batch.php');
+        echo "Batch " . Constants::STATUS_SUCCESS . "fully deleted";
+//        header('Location:batch.php');
     } else {
-        echo Constants::STATUS_FAILED;
+        echo Constants::STATUS_FAILED . " to delete batch";
     }
 } else {
     echo Constants::EMPTY_PARAMETERS;

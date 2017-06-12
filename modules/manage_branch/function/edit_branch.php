@@ -26,10 +26,10 @@ if (isset($_REQUEST['branchName']) && isset($_REQUEST['branchId']) && !empty(tri
     $editData = $branch->updateBranch($branchId, $branchName);
 
     if ($editData == true) {
-        header('Location:branch.php');
-        echo Constants::STATUS_SUCCESS;
+//        header('Location:branch.php');
+        echo "Branch " . Constants::STATUS_SUCCESS . "fully updated";
     } else {
-        echo Constants::STATUS_FAILED;
+        echo Constants::STATUS_FAILED . " to update branch";
     }
 
 } else {

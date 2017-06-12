@@ -27,10 +27,10 @@ if (isset($_REQUEST['batchId']) && isset($_REQUEST['batchName']) && isset($_REQU
     $updateData = $batch->updateBatch($batchId, $batchName, $branchId);
 
     if ($updateData == true) {
-        echo Constants::STATUS_SUCCESS;
-        header('Location:batch.php');
+        echo "Batch " . Constants::STATUS_SUCCESS . "fully updated";
+//        header('Location:batch.php');
     } else {
-        echo Constants::STATUS_FAILED;
+        echo Constants::STATUS_FAILED . " to update batch";
     }
 } else {
     echo Constants::EMPTY_PARAMETERS;

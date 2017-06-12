@@ -27,10 +27,10 @@ if (isset($_REQUEST['courseId']) && isset($_REQUEST['courseName']) && isset($_RE
     $updateData = $course->updateCourse($courseId, $courseName, $batchId);
 
     if ($updateData == true) {
-        echo Constants::STATUS_SUCCESS;
-        header('Location:course.php');
+        echo "Course " . Constants::STATUS_SUCCESS . "fully updated";
+//        header('Location:course.php');
     } else {
-        echo Constants::STATUS_FAILED;
+        echo Constants::STATUS_FAILED . " to update course";
     }
 } else {
     echo Constants::EMPTY_PARAMETERS;

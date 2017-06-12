@@ -2,7 +2,13 @@
 
 require_once("../../../classes/Constants.php");
 
-class Branch
+/**
+ * Created by PhpStorm.
+ * User: fireion
+ * Date: 10/6/17
+ * Time: 5:11 PM
+ */
+class StudentCourseRegistration
 {
     private $connection;
 
@@ -11,32 +17,30 @@ class Branch
         $this->connection = $connection;
     }
 
-    public function getBranch($id)
+    public function getStudentCourse()
     {
-        if ($id > 0) {
-            $sql = "SELECT * FROM `egn_branch` WHERE id='$id'";
-        } else {
-            $sql = "SELECT * FROM `egn_branch`";
-        }
+        $sql = "SELECT * FROM `egn_course_reg`";
         $result = $this->connection->query($sql);
 
         if ($result->num_rows > 0) {
             return $result;
         } else {
-            return null;
+            return false;
         }
     }
 
 // In case of multiple inserts, you need to check whether or not each insert query is being executed, if it is executed only then execute the next query, or else if a particular query is not executed, first delete all the previous RELATED INSERT queries and then return false.
-    public function insertBranch($name)
+    public function insertStudentCourse($studentId, $courseId)
     {
-        $name = $this->connection->real_escape_string($name);
+        $studentId = $this->connection->real_escape_string($studentId);
+        $courseId = $this->connection->real_escape_string($courseId);
 
-        $sql = "SELECT * FROM `egn_branch` WHERE name='$name'";
+        $sql = "SELECT * FROM `egn_course_reg` WHERE student_id='$studentId' AND course_id='$courseId'";
         $result = $this->connection->query($sql);
 
         if ($result->num_rows == 0) {
-            $insert_sql = "INSERT INTO `egn_branch`(`name`) VALUES ('$name')";
+            $insert_sql = "INSERT INTO `egn_course_reg`(`student_id`, `course_id`) 
+VALUES ('$studentId','$courseId')";
             $insert = $this->connection->query($insert_sql);
             if ($insert === true) {
                 return true;
@@ -49,11 +53,12 @@ class Branch
         }
     }
 
-    public function updateBranch($id, $name)
+    public function updateStudent($id, $studentId, $courseId)
     {
-        $name = $this->connection->real_escape_string($name);
+        $studentId = $this->connection->real_escape_string($studentId);
+        $courseId = $this->connection->real_escape_string($courseId);
 
-        $sql = "UPDATE `egn_branch` SET `name`='$name' WHERE id='$id'";
+        $sql = "UPDATE `egn_course_reg` SET `course_id`='$courseId' WHERE `id`='$id' AND `student_id`='$studentId'";
         $update = $this->connection->query($sql);
 
         if ($update === true) {
@@ -63,9 +68,9 @@ class Branch
         }
     }
 
-    public function deleteBranch($id)
+    public function deleteStudent($id)
     {
-        $sql = "DELETE FROM egn_branch WHERE id='$id'";
+        $sql = "DELETE FROM `egn_course_reg` WHERE id='$id'";
         $delete = $this->connection->query($sql);
 
         if ($delete === true) {

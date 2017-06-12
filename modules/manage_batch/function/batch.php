@@ -26,12 +26,14 @@
 
         $branch = new Branch($dbConnect->getInstance());
         $batch = new Batch($dbConnect->getInstance());
-        $getData = $branch->getBranch();
+
+        $getData = $branch->getBranch(0);
 
         if ($getData != null) {
             while ($arrayGetData = $getData->fetch_assoc()) {
                 $branchId = $arrayGetData['id'];
                 $branchName = $arrayGetData['name'];
+
                 if ($branchId == $_REQUEST['branchId']) {
                     echo "<option value='" . $branchId . "' selected>" . $branchName . "</option>";
                 } else {
@@ -65,27 +67,40 @@ if (isset($_REQUEST['branchId'])) {
     echo "Select Appropriate Branch/Department";
 }
 
-$getBatchData = $batch->getBatch('yes', 0);
+echo "<br><br><br>List of Batches - ";
+$getBatchData = $branch->getBranch(0);
+//var_dump($getBatchData);
+if ($getBatchData != null) {
+    while ($array = $getBatchData->fetch_assoc()) {
+        $branch_id[] = $array['id'];
+        $branch_name[] = $array['name'];
+    }
+    for ($i = 0; $i < count($branch_id); $i++) {
+        echo "<br><br>" . $branch_name[$i];
+        $getBatchData = $batch->getBatch('yes', $branch_id[$i], 0);
+        if ($getBatchData != null) {
+            $id = 1;
+            echo "<table border='3'>";
+            echo "<tr><th>Sr. no.</th><th>Batch Name</th><th>Edit</th><th>Delete</th></tr>";
 
-if ($getBatchData != false) {
-    echo "<br><br>List of Batches";
-    echo "<table border='3'>";
-    echo "<tr><th>Branch Name</th><th>Batch Name</th><th>Edit</th><th>Delete</th></tr>";
-    while ($row = $getBatchData->fetch_assoc()) {
-//        var_dump($row);
-        $branchTableId = $row['branchId'];
-        $branchTableName = $row['branchName'];
-        $batchTableId = $row['batchId'];
-        $batchTableName = $row['batchName'];
-        echo "<tr><td>" . $branchTableName . "</td><td>" . $batchTableName . "</td><td><form action='editBatch.php' method='post'>
-        <input type='hidden' name='branchId' value='" . $branchTableId . "'><input type='hidden' name='branchName' value='" . $branchTableName . "'>
-        <input type='hidden' name='batchId' value='" . $batchTableId . "'><input type='hidden' name='batchName' value='" . $batchTableName . "'><input type='submit' value='Edit'></form>
-        </td><td><form action='delete_batch.php' method='post'><input type='hidden' name='branchId' value='" . $branchTableId . "'>
+            while ($row = $getBatchData->fetch_assoc()) {
+                $batchTableId = $row['batchId'];
+                $batchTableName = $row['batchName'];
+
+                echo "<tr><td>" . $id . "</td><td>" . $batchTableName . "</td><td><form action='editBatch.php' method='post'>
+        <input type='hidden' name='branchId' value='" . $branch_id[$i] . "'><input type='hidden' name='batchId' value='" . $batchTableId . "'>
+        <input type='submit' value='Edit'></form></td>
+        <td><form action='delete_batch.php' method='post'><input type='hidden' name='branchId' value='" . $branch_id[$i] . "'>
         <input type='hidden' name='batchId' value='" . $batchTableId . "'><input type='submit' value='Delete'></form>
         </td></tr>";
+                $id++;
+            }
+            echo "</table>";
+        } else {
+            echo "<br><br>No Records found";
+        }
     }
-    echo "</table>";
 } else {
-    echo "<br><br>No Records found";
+    echo Constants::STATUS_FAILED;
 }
 ?>
