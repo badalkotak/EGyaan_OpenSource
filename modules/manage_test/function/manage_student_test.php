@@ -28,6 +28,7 @@ if($result!=null)
             <th>Marks Obtained</th>
             <th>Out of</th>
             <th>Give Test</th>
+            <th>View Answers</th>
         </tr>
         </thead>
         <tbody>
@@ -44,6 +45,7 @@ if($result!=null)
                     <td>' . $row["marks"] . '</td>
                     <td>' .  $row["total_marks"]  . '</td>
                     <td>' . (($row["type"] == 'O')?(($row["marks"]=="-")?'<a href="give_test.php?test_id=' . $row["id"] . '">Start</a>':'Submitted'):'NA') . '</td> 
+                    <td>' . (($row["type"] == 'O')?(($row["marks"]=="-")?'-':'<a href="view_answer.php?test_id=' . $row["id"] . '&marks=' .  $row["total_marks"]  . '">View</a>'):'NA') . '</td> 
                   </tr>';
             $i++;
         }

@@ -124,6 +124,22 @@ class StudentTest
         }
     }
 
+    public function getTestAnswers($test_id,$student_id){
+        $sql = "SELECT q.id,question,option1,option2,option3,option4,option_id,answer,marks
+                FROM egn_test_answers as a ,egn_test_questions as q
+                WHERE a.question_id=q.id AND a.student_id='$student_id' AND q.test_id = '$test_id'
+                ORDER BY q.id";
+        $result = $this->connection->query($sql);
+        if($result->num_rows > 0)
+        {
+            return $result;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public function parentRedirect($message){
         header("location: manage_student_test.php?message=" . $message);
     }
