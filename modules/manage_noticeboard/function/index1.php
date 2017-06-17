@@ -1,11 +1,12 @@
 <html>
 <body>
 
-
 <?php
 require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../classes/Noticeboard.php");
+
+include("../../../Resources/sessions.php");
 
 
 $dbConnect = new DBConnect(Constants::SERVER_NAME,
