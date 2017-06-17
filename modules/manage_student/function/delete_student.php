@@ -23,7 +23,7 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
 
     $deleteData = $student->deleteStudent($studentId);
 
-    if ($deleteData == true) {
+    if ($deleteData === true) {
         echo "Student " . Constants::STATUS_SUCCESS . "fully deleted";
 //        header('Location:student.php');
     } else {

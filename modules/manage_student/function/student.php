@@ -13,7 +13,7 @@
     <input type="text" name="firstName" placeholder="Enter First Name"><br>
     <input type="text" name="lastName" placeholder="Enter Last Name"><br>
     <input type="email" name="emailId" placeholder="Enter Email Id"><br>
-    <input type="password" name="studentPassword" placeholder="Enter Student Password"><br>
+    <!-- <input type="password" name="studentPassword" placeholder="Enter Student Password"><br> -->
     <input type="number" name="mobile" placeholder="Enter Mobile Number"><br>
     <select name="gender">
         <option value="-1">Select Gender</option>
@@ -24,7 +24,7 @@
     <br>
     <input type="text" name="parentName" placeholder="Enter Parent name"><br>
     <input type="email" name="parentEmail" placeholder="Enter Parent Email"><br>
-    <input type="password" name="parentPassword" placeholder="Enter Parent Password"><br>
+    <!-- <input type="password" name="parentPassword" placeholder="Enter Parent Password"><br> -->
     <input type="number" name="totalFees" placeholder="Enter Total Fees"><br>
     <input type="number" name="feesPaid" placeholder="Enter Fees Paid"><br>
     <textarea name="feesComment" placeholder="Enter Fees Comment"></textarea><br>

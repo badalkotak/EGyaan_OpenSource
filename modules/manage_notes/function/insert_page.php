@@ -1,7 +1,5 @@
 <?php
-session_start();
-
-include("../../../Resources/session.php");
+include("../../../Resources/sessions.php");
 
 $user_id=$_SESSION['id'];
 require_once("../../../classes/Constants.php");
@@ -25,7 +23,7 @@ $course=new Course($dbconnect->getInstance());
 	Downloadable:<input type="checkbox" name="downloadable" value="Yes">
 	
 	<?php
-		$result=$course->getCourse("yes",$user_id,'no');
+		$result=$course->getCourse("yes",$user_id,'no',0,0);
 		echo "Course:<select name='course'>";
 		echo "<option value=0>Select</option>";
 		if($result!=null)

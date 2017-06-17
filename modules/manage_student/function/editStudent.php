@@ -20,6 +20,8 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
 
+echo $_REQUEST['studentId'];
+
 if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
 
     $studentId = $_REQUEST['studentId'];

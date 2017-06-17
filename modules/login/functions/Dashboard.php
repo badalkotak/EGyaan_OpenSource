@@ -24,3 +24,7 @@ if($getDashboard!=null)
 	}
 }
 ?>
+
+<br>
+<br>
+<a href="logout.php">Logout</a>

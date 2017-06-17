@@ -75,20 +75,20 @@ class Student
         }
     }
 
-    public function updateStudent($id, $firstname, $lastname, $email, $student_passwd, $mobile, $gender, $parent_name,
-                                  $parent_email, $parent_passwd, $total_fees, $fees_paid, $fees_comment,
+    public function updateStudent($id, $firstname, $lastname, $email, $mobile, $gender, $parent_name,
+                                  $parent_email, $total_fees, $fees_paid, $fees_comment,
                                   $date_of_admission, $parent_mobile, $student_profile_photo, $parent_profile_photo,
                                   $batch_id)
     {
         $firstname = $this->connection->real_escape_string($firstname);
         $lastname = $this->connection->real_escape_string($lastname);
         $email = $this->connection->real_escape_string($email);
-        $student_passwd = $this->connection->real_escape_string($student_passwd);
+        // $student_passwd = $this->connection->real_escape_string($student_passwd);
         $mobile = $this->connection->real_escape_string($mobile);
         $gender = $this->connection->real_escape_string($gender);
         $parent_name = $this->connection->real_escape_string($parent_name);
         $parent_email = $this->connection->real_escape_string($parent_email);
-        $parent_passwd = $this->connection->real_escape_string($parent_passwd);
+        // $parent_passwd = $this->connection->real_escape_string($parent_passwd);
         $total_fees = $this->connection->real_escape_string($total_fees);
         $fees_paid = $this->connection->real_escape_string($fees_paid);
         $fees_comment = $this->connection->real_escape_string($fees_comment);
@@ -99,8 +99,8 @@ class Student
         $batch_id = $this->connection->real_escape_string($batch_id);
 
         $sql = "UPDATE `egn_student` SET `firstname`='$firstname',`lastname`='$lastname',
-`email`='$email',`student_passwd`='$student_passwd',`mobile`='$mobile',`gender`='$gender',`parent_name`='$parent_name',
-`parent_email`='$parent_email',`parent_passwd`='$parent_passwd',`total_fees`='$total_fees',`fees_paid`='$fees_paid',
+`email`='$email',`mobile`='$mobile',`gender`='$gender',`parent_name`='$parent_name',
+`parent_email`='$parent_email',`total_fees`='$total_fees',`fees_paid`='$fees_paid',
 `fees_comment`='$fees_comment',`date_of_admission`='$date_of_admission',`parent_mobile`='$parent_mobile',
 `student_profile_photo`='$student_profile_photo',`parent_profile_photo`='$parent_profile_photo',`batch_id`='$batch_id'
  WHERE id='$id'";
@@ -115,7 +115,7 @@ class Student
 
     public function deleteStudent($id)
     {
-        $sql = "DELETE FROM `egn_student` WHERE id='$id'";
+        $sql = "DELETE FROM `egn_student` WHERE `id`='$id'";
         $delete = $this->connection->query($sql);
 
         if ($delete === true) {
