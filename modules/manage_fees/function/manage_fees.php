@@ -70,7 +70,9 @@ if($result!=null)
             }
             var temp_fees = pending_fees - fees_input;
             if(temp_fees >= 0 && fees_input>0){
-                document.location = "add_fees.php?id="+id+"&fees_input="+fees_input;
+                if (confirm("Do you want to proceed?") == true) {
+                    document.location = "add_fees.php?id="+id+"&fees_input="+fees_input;
+                } else {}
             }else{
                 alert("The amount of fees to be added should be less than/equal to the pending fees and greater than 0.");
             }
