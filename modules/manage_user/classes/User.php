@@ -94,10 +94,9 @@ class User
 
             return $id;
         }
-
         else
         {
-            $getStudentId="SELECT id FROM egn_student WHERE email='$email' OR parent_email='$parent_email'";
+            $getStudentId="SELECT id FROM egn_student WHERE email='$email' OR parent_email='$email'";
             $getStudentIdResult=$this->connection->query($getStudentId);
 
             if($getStudentIdResult->num_rows === 0)

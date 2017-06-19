@@ -26,4 +26,5 @@ class Constants
     const PRIVILEGE_ASSIGN_SUCCESS = "Privilege assigned successfully";
     const PRIVILEGE_ASSIGN_FAIL = "Unable to assign privilege";
     const NO_PRIVILEGE_MSG = "You have not been assigned any privilege as yet. Contact the Admin for futher help!";
+    const NO_BATCH_ERR = "No batches Found";
 }

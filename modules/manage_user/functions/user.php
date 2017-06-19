@@ -86,11 +86,13 @@ $user=new User($dbConnect->getInstance());
 		<th>Email</th>
 		<th>Mobile</th>
 		<th>Role</th>
+		<th>Assign Courses</th>
 	</thead>
 	<tbody>";
 				while($row=$getUsers->fetch_assoc())
 				{
 					$i++;
+					$user_id=$row['id'];
 					$name=$row['name'];
 					$gender=$row['gender'];
 					if($gender=="M")
@@ -147,6 +149,17 @@ $user=new User($dbConnect->getInstance());
 
 					echo "<td>";
 					echo $role_name;
+					echo "</td>";
+
+					echo "<td>";
+					if($role_id==Constants::ROLE_TEACHER_ID)
+					{
+						echo "<form action=../../manage_teacher_course/functions/assign_course.php method=post><input type=submit value=$user_id></form>";
+					}
+					else
+					{
+						echo "We can assign a course only to a Teacher";
+					}
 					echo "</td>";
 
 					echo "</tr>";

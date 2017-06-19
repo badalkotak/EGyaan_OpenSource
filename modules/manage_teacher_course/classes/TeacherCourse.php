@@ -25,7 +25,7 @@ class TeacherCourse
     	}
     }
 
-    public insertTeacherCourse($user_id,$course_id)
+    public function insertTeacherCourse($user_id,$course_id)
     {
     	$sql="INSERT INTO `egn_teacher_course`(`user_id`, `course_id`) VALUES ('$user_id',$course_id)";
     	$insert=$this->connection->query($insert);
@@ -40,7 +40,7 @@ class TeacherCourse
     	}
     }
 
-    public deleteTeacherCourse($id)
+    public function deleteTeacherCourse($id)
     {
     	$sql="DELETE FROM `egn_teacher_course` WHERE `id`='$id'";
     	$delete=$this->connection->query($delete);

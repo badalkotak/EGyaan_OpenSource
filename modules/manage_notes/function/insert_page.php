@@ -6,6 +6,7 @@ require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../classes/Notes.php");
 require_once("../../manage_course/classes/Course.php");
+// require_once("../../manage_teacher_course/classes/TeacherCourse.php");
 
 $dbconnect=new DBConnect(Constants::SERVER_NAME,
 						Constants::DB_USERNAME,
@@ -23,14 +24,23 @@ $course=new Course($dbconnect->getInstance());
 	Downloadable:<input type="checkbox" name="downloadable" value="Yes">
 	
 	<?php
-		$result=$course->getCourse("yes",$user_id,'no',0,0);
+	$getTeacherCourse=$course->getCourse("yes",$user_id,"no",0,0);
+	if($getTeacherCourse===false)
+	{
+		$result=$course->getCourse("no",0,'no',0,0);	
+	}
+	else
+	{
+		$result=$course->getCourse("yes",$user_id,"no",0,0);
+	}
+		// $result=$course->getCourse("yes",$id,'no',0,0);
 		echo "Course:<select name='course'>";
 		echo "<option value=0>Select</option>";
 		if($result!=null)
 		{
 			while($row=$result->fetch_assoc())
 			{
-				echo "<option value=".$row['courseId'].">".$row['courseName']."</option>";
+				echo "<option value=".$row['courseId'].">".$row['branchName']." - ".$row['batchName']." - ".$row['courseName']."</option>";
 			}
 		}
 	?>
@@ -40,7 +50,16 @@ $course=new Course($dbconnect->getInstance());
 
 <?php
 
-	$courses_result=$course->getCourse("yes",$user_id,'no');
+	$getTeacherCourse=$course->getCourse("yes",$id,"no",0,0);
+	if($getTeacherCourse===false)
+	{
+		$courses_result=$course->getCourse("no",0,'no',0,0);	
+	}
+	else
+	{
+		$courses_result=$course->getCourse("yes",$id,"no",0,0);
+	}
+
 	echo '<table>
 							<tr>
 							<th>No.</th>
@@ -68,6 +87,10 @@ $course=new Course($dbconnect->getInstance());
 				}
 			}
 		}	
+	}
+	else
+	{
+		echo "Null";
 	}
 echo '</table>';
 	

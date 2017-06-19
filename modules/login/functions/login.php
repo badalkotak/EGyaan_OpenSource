@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
 <head>
 	<title>Login</title>
@@ -7,7 +7,7 @@
 <body>
 	<center><h1><b><u>Welcome to EGyaan!!</u></b></h1></center><br><br>
 	<center>
-		<form action="check_login.php" method="post" id="login">
+		<form action="" method="post" id="login">
 			<input type="text" name="email" id="email" placeholder="Enter Email ID"><br><br>
 			<input type="password" name="passwd" id="passwd" placeholder="Enter Password"><br><br>
 			<input type="submit" value="Login" id="submit">

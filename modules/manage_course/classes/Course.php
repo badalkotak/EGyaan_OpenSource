@@ -34,7 +34,11 @@ AS batchName,eBatch.branch_id AS batchBranchId,eCourse.id AS courseId,eCourse.na
 AS courseBatchId FROM `egn_course` AS eCourse,`egn_batch` AS eBatch,`egn_branch` AS eBranch 
 WHERE eCourse.batch_id = eBatch.id AND eBatch.branch_id = eBranch.id AND eCourse.batch_id = '$batchId'";
         } else {
-            $sql = "SELECT * FROM `egn_course`";
+            // $sql = "SELECT * FROM `egn_course`";
+            $sql = "SELECT eBranch.id AS branchId,eBranch.name AS branchName,eBatch.id AS batchId,eBatch.name 
+AS batchName,eBatch.branch_id AS batchBranchId,eCourse.id AS courseId,eCourse.name AS courseName,eCourse.batch_id 
+AS courseBatchId FROM `egn_course` AS eCourse,`egn_batch` AS eBatch,`egn_branch` AS eBranch 
+WHERE eCourse.batch_id = eBatch.id AND eBatch.branch_id = eBranch.id";
         }
         $result = $this->connection->query($sql);
 
