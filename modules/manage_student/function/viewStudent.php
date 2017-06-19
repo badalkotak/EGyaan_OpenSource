@@ -71,7 +71,7 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
         $getBatchData = $batch->getBatch('no', 0, $batchId, 'no');
         if ($getBatchData != null) {
             while ($row = $getBatchData->fetch_assoc()) {
-                $batchName = $row['name'];
+                $batchName = $row['batchName'];
                 echo $batchName . "<br>";
             }
         } else {

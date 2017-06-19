@@ -38,11 +38,11 @@
                 $branchName = $row['name'];
             }
 
-            $getBatchData = $batch->getBatch('no', 0, $batchId);
+            $getBatchData = $batch->getBatch('no', 0, $batchId, 'no');
 //            var_dump($getBatchData);
             if ($getBatchData != null) {
                 while ($array = $getBatchData->fetch_assoc()) {
-                    $batchName = $array['name'];
+                    $batchName = $array['batchName'];
                 }
                 echo "<label>" . $branchName . "</label>";
                 echo "<br>";

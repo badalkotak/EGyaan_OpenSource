@@ -31,7 +31,7 @@ if (isset($_REQUEST['batchId']) && isset($_REQUEST['studentId']) && !empty(trim(
     $student = new Student($dbConnect->getInstance());
     $course = new Course($dbConnect->getInstance());
 
-    $getStudentData = $student->getStudent(0);
+    $getStudentData = $student->getStudent(0, 0);
 
     if ($getStudentData != false) {
         while ($row = $getStudentData->fetch_assoc()) {
@@ -40,7 +40,7 @@ if (isset($_REQUEST['batchId']) && isset($_REQUEST['studentId']) && !empty(trim(
         }
         echo "<h2>Course Registration for " . $firstName . " " . $lastName . "</h2>";
 
-        $getCourseData = $course->getCourse('no', 0, 'yes', $batchId, 0);
+        $getCourseData = $course->getCourse('no', 0, 'yes', $batchId, 0, null);
 //        var_dump($getCourseData);
         if ($getCourseData != false) {
             $id = 1;
