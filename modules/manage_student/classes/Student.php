@@ -11,10 +11,12 @@ class Student
         $this->connection = $connection;
     }
 
-    public function getStudent($id)
+    public function getStudent($id, $batchId)
     {
-        if ($id > 0) {
+        if ($id > 0 && $batchId == 0) {
             $sql = "SELECT * FROM `egn_student` WHERE id='$id'";
+        } elseif ($id == 0 && $batchId > 0) {
+            $sql = "SELECT * FROM `egn_student` WHERE batch_id = '" . $batchId . "'";
         } else {
             $sql = "SELECT * FROM `egn_student`";
         }
