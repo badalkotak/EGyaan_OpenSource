@@ -154,7 +154,7 @@ $user=new User($dbConnect->getInstance());
 					echo "<td>";
 					if($role_id==Constants::ROLE_TEACHER_ID)
 					{
-						echo "<form action=../../manage_teacher_course/functions/assign_course.php method=post><input type=submit value=$user_id></form>";
+						echo "<form action=../../manage_teacher_course/functions/assign_course.php method=post><input type=submit name=user_id value=$user_id></form>";
 					}
 					else
 					{

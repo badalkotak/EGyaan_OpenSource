@@ -22,7 +22,7 @@ if($delete)
 
 else
 {
-	$message=Constants::DELETE_FAIL_MSG." role";
+	$message=Constants::DELETE_FAIL_MSG."role";
 	echo "<script>alert('$message');window.location.href='role.php';</script>";	
 }
 ?>

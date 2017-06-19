@@ -8,10 +8,12 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
 
+// $user_id=$_REQUEST['user_id'];
+
 $batch=new Batch($dbConnect->getInstance());
 
 $branch_id=$_REQUEST['branch_id'];
-$getBatch=$batch->getBatch("yes",$branch_id,0);
+$getBatch=$batch->getBatch("yes",$branch_id,0,"no");
 
 $json=array();
 $final=array();

@@ -4,12 +4,14 @@ require_once("../../../classes/Constants.php");
 require_once("../classes/TeacherCourse.php");
 require_once("../../manage_role/classes/Role.php");
 require_once("../../manage_branch/classes/Branch.php");
+require_once("../../manage_course/classes/Course.php");
 
 $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_USERNAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
 
+$user_id=$_REQUEST['user_id'];
 ?>
 
 <html>
@@ -42,12 +44,76 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
 	</form>
 	<br>
 	<div id="batch_div"></div>
+			<?php
+				$course=new Course($dbConnect->getInstance());
+
+				$getCourse=$course->getCourse("yes",$user_id,"no",0,0,null);
+
+				$i=0;
+
+				if($getCourse!=false)
+				{
+					echo "<table>
+							<thead>
+								<th>Sr No.</th>
+								<th>Branch</th>
+								<th>Batch</th>
+								<th>Course</th>
+								<th>Delete</th>
+							</thead>
+							<tbody>";
+
+					while($row=$getCourse->fetch_assoc())
+					{
+						$i++;
+						$courseId=$row['courseId'];
+						$courseName=$row['courseName'];
+
+						$batchName=$row['batchName'];
+						$branchName=$row['branchName'];
+
+						echo "<tr>";
+
+						echo "<td>";
+						echo $i;
+						echo "</td>";
+
+						echo "<td>";
+						echo $branchName;
+						echo "</td>";
+
+						echo "<td>";
+						echo $batchName;
+						echo "</td>";
+
+						echo "<td>";
+						echo $courseName;
+						echo "</td>";
+
+						echo "<td>";
+						echo "<form action=delete_teacher_course.php method=post><input type=submit value=$courseId name=courseId></form>";
+						echo "</td>";
+
+						echo "</tr>";
+					}
+
+					echo "</tbody>
+					</table>";
+				}
+				else
+				{
+					echo "No courses assigned yet!";
+				}
+			?>
 </body>
 
 <script>
 $(document).ready(function(){
 	$("#branch").change(function(){
 		var branch_id=$("#branch").val();
+		<?php
+			echo "var user_id=$user_id";
+		?>
 
 		if(branch_id!=-1)
 		{
@@ -61,14 +127,14 @@ $(document).ready(function(){
 				{
 					var status=json.status;
 					var count=json.batch.length;
-					var batch_dropdown="<select name=batch id=batch><option value=-1>Select Batch</option>";
+					var batch_dropdown="<input type=radio hidden value="+user_id+" id=user_id><select name=batch id=batch><option value=-1>Select Batch</option>";
 
 					for(var i=0;i<count;i++)
 					{
 						batch_dropdown = batch_dropdown + "<option value="+json.batch[i].id+">"+json.batch[i].name+"</option>";
 					}
 
-					batch_dropdown = batch_dropdown + "</select><script type=text/javascript src='getBatch.js'></ script>";
+					batch_dropdown = batch_dropdown + "</select><br><br><div id=course_div></div><script type=text/javascript src='getBatch.js'></ script>";
 
 					$("#batch_div").html(batch_dropdown);
 				}
@@ -101,4 +167,6 @@ $(document).ready(function(){
 	// });
 });
 </script>
+	<script src=getBatch.js></script>
+	<script src=checkCourse.js></script>
 </html>

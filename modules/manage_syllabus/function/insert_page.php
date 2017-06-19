@@ -18,14 +18,24 @@ $course=new COurse($dbconnect->getInstance());
 <form method="post" action="insert_syllabus.php" enctype="multipart/form-data"> 
 	file:<input type="file" name="fileToUpload" >
 	<?php
-		$result=$course->getCourse("yes",$user_id,'no');
+		// $result=$course->getCourse("yes",$user_id,'no');
+
+	$getTeacherCourse=$course->getCourse("yes",$user_id,"no",0,0,null);
+	if($getTeacherCourse===false)
+	{
+		$result=$course->getCourse("no",0,'no',0,0,null);	
+	}
+	else
+	{
+		$result=$course->getCourse("yes",$user_id,"no",0,0,null);
+	}
 		echo "Course:<select name='course'>";
 		echo "<option value=0>Select</option>";
 		if($result!=null)
 		{
 			while($row=$result->fetch_assoc())
 			{
-				echo "<option value=".$row['courseId'].">".$row['courseName']."</option>";
+				echo "<option value=".$row['courseId'].">".$row['branchName']." - ".$row['batchName']." - ".$row['courseName']."</option>";
 			}
 		}
 	?>
@@ -35,12 +45,23 @@ $course=new COurse($dbconnect->getInstance());
 </form>
 
 <?php
-	$courses_result=$course->getCourse("yes",$user_id,'no');
+	// $courses_result=$course->getCourse("yes",$user_id,'no');
+
+$getTeacherCourse=$course->getCourse("yes",$user_id,"no",0,0,null);
+	if($getTeacherCourse===false)
+	{
+		$courses_result=$course->getCourse("no",0,'no',0,0,null);	
+	}
+	else
+	{
+		$courses_result=$course->getCourse("yes",$user_id,"no",0,0,null);
+	}
 	echo '<table>
 							<tr>
 							<th>No.</th>
-							<th>course</th>
-							<th>Title</th>
+							<th>Branch</th>
+							<th>Batch</th>
+							<th>Course</th>
 							<th>File</th>
 							<th>Delete</th>
 							</tr>';
@@ -54,7 +75,7 @@ $course=new COurse($dbconnect->getInstance());
 				while($row=$result->fetch_assoc())
 				{
 					
-					echo '<tr><td>'.$no.'</td><td>'.$rowCourses['courseName'].'</td>';
+					echo '<tr><td>'.$no.'</td><td>'.$rowCourses['branchName'].'</td><td>'.$rowCourses['batchName'].'</td><td>'.$rowCourses['courseName'].'</td>';
 						echo '<td><a href='.$row['file'].'>File</a></td>';
 						echo '<td><form action=delete.php method=post><input type=hidden name=file value='.$row['file'].'><input type=hidden name=id value='.$row['id'].'><input type=submit name=delete value=Delete></td></form>
 							</tr>';

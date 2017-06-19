@@ -10,7 +10,7 @@ $dbconnect=new DBConnect(Constants::SERVER_NAME,
 						Constants::DB_NAME);
 
 $user_id=$_SESSION["id"];
-if(empty($_REQUEST['course']) || empty($_FILES['fileToUpload']) || empty($_REQUEST['title']) || empty($_REQUEST['dateOfSubmission']) || empty($_REQUEST['dateOfUpload']) )
+if(empty($_REQUEST['course']) || empty($_FILES['fileToUpload']) || empty($_REQUEST['title']) || empty($_REQUEST['dateOfSubmission']) )
 {
 	$msg=Constants::EMPTY_PARAMETERS;
 	echo ("<SCRIPT LANGUAGE='JavaScript'>
@@ -23,7 +23,8 @@ else
 	$course_id=$_REQUEST["course"];
 	$title=$_REQUEST['title'];
 	$date_of_submission=$_REQUEST['dateOfSubmission'];
-	$date_of_upload=$_REQUEST['dateOfUpload'];
+	// $date_of_upload=$_REQUEST['dateOfUpload'];
+	$date_of_upload=date("Y/m/d");
 }
 
 $submission=new Submission($dbconnect->getInstance());

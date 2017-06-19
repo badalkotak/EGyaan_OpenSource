@@ -24,14 +24,14 @@ $course=new Course($dbconnect->getInstance());
 	Downloadable:<input type="checkbox" name="downloadable" value="Yes">
 	
 	<?php
-	$getTeacherCourse=$course->getCourse("yes",$user_id,"no",0,0);
+	$getTeacherCourse=$course->getCourse("yes",$user_id,"no",0,0,null);
 	if($getTeacherCourse===false)
 	{
-		$result=$course->getCourse("no",0,'no',0,0);	
+		$result=$course->getCourse("no",0,'no',0,0,null);	
 	}
 	else
 	{
-		$result=$course->getCourse("yes",$user_id,"no",0,0);
+		$result=$course->getCourse("yes",$user_id,"no",0,0,null);
 	}
 		// $result=$course->getCourse("yes",$id,'no',0,0);
 		echo "Course:<select name='course'>";
@@ -50,20 +50,22 @@ $course=new Course($dbconnect->getInstance());
 
 <?php
 
-	$getTeacherCourse=$course->getCourse("yes",$id,"no",0,0);
+	$getTeacherCourse=$course->getCourse("yes",$id,"no",0,0,null);
 	if($getTeacherCourse===false)
 	{
-		$courses_result=$course->getCourse("no",0,'no',0,0);	
+		$courses_result=$course->getCourse("no",0,'no',0,0,null);	
 	}
 	else
 	{
-		$courses_result=$course->getCourse("yes",$id,"no",0,0);
+		$courses_result=$course->getCourse("yes",$id,"no",0,0,null);
 	}
 
 	echo '<table>
 							<tr>
 							<th>No.</th>
-							<th>course</th>
+							<th>Branch</th>
+							<th>Batch</th>
+							<th>Course</th>
 							<th>Title</th>
 							<th>File</th>
 							<th>Delete</th>
@@ -78,7 +80,7 @@ $course=new Course($dbconnect->getInstance());
 				while($row=$result->fetch_assoc())
 				{
 					
-					echo '<tr><td>'.$no.'</td><td>'.$rowCourses['courseName'].'</td>';
+					echo '<tr><td>'.$no.'</td><td>'.$rowCourses['branchName'].'</td><td>'.$rowCourses['batchName'].'</td><td>'.$rowCourses['courseName'].'</td>';
 					echo '<td>'.$row['title'].'</td>';
 					echo '<td><a href='.$row['file'].'>File</a></td>';
 					echo '<td><form action=delete.php method=post><input type=hidden name=file value='.$row['file'].'><input type=hidden name=id value='.$row['id'].'><input type=submit name=delete value=Delete></td></form>

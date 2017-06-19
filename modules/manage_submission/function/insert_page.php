@@ -20,16 +20,25 @@ $course=new Course($dbconnect->getInstance());
 	Title:<input type="text" name="title" required>
 	file:<input type="file" name="fileToUpload" required>
 	Date Of Submission:<input type="date" name="dateOfSubmission" required>
-	Date Of Upload:<input type="date" name="dateOfUpload" required>
+	<!-- Date Of Upload:<input type="date" name="dateOfUpload" required> -->
 	<?php
-		$result=$course->getCourse("yes",$user_id,'no');
+		// $result=$course->getCourse("yes",$user_id,'no');
+		$getTeacherCourse=$course->getCourse("yes",$user_id,"no",0,0,null);
+	if($getTeacherCourse===false)
+	{
+		$result=$course->getCourse("no",0,'no',0,0,null);	
+	}
+	else
+	{
+		$result=$course->getCourse("yes",$user_id,"no",0,0,null);
+	}
 		echo "Course:<select name='course'>";
 		echo "<option value=0>Select</option>";
 		if($result!=null)
 		{
 			while($row=$result->fetch_assoc())
 			{
-				echo "<option value=".$row['courseId'].">".$row['courseName']."</option>";
+				echo "<option value=".$row['courseId'].">".$row['branchName']." - ".$row['batchName']." - ".$row['courseName']."</option>";
 			}
 		}
 	?>
@@ -39,7 +48,17 @@ $course=new Course($dbconnect->getInstance());
 </form>
 
 <?php
-	$courses_result=$course->getCourse("yes",$user_id,'no');
+	// $courses_result=$course->getCourse("yes",$user_id,'no');
+
+$getTeacherCourse=$course->getCourse("yes",$user_id,"no",0,0,null);
+	if($getTeacherCourse===false)
+	{
+		$courses_result=$course->getCourse("no",0,'no',0,0,null);	
+	}
+	else
+	{
+		$courses_result=$course->getCourse("yes",$user_id,"no",0,0,null);
+	}
 	echo '<table>
 		<tr>
 		<th>No.</th>

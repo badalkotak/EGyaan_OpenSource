@@ -13,7 +13,7 @@ $dbconnect=new DBConnect(Constants::SERVER_NAME,
 $user_id=$_SESSION["id"];
 $notes=new Notes($dbconnect->getInstance());
 $course=new Course($dbconnect->getInstance());
-$courses_result=$course->getCourse('no',$user_id,'no',0,0);
+$courses_result=$course->getCourse('no',$user_id,'no',0,0,null);
 	echo '<table>
 							<tr>
 							<th>No.</th>

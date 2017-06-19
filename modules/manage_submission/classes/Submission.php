@@ -60,9 +60,9 @@ class Submission
             return false;
         }
     }
-     public function updateSubmission($id,$title,$file,$date_of_submission,$date_of_upload,$course_id)
+     public function updateSubmission($id,$title,$file,$date_of_submission,$course_id)
     {
-         $sql="UPDATE `egn_submissions` SET `title`='".$title."',`file`='".$file."',`date_of_submission`='".$date_of_submission."',`date_of_upload`='".$date_of_upload."',`course_id`=".$course_id." WHERE `id`=".$id;
+         $sql="UPDATE `egn_submissions` SET `title`='".$title."',`file`='".$file."',`date_of_submission`='".$date_of_submission."',`course_id`=".$course_id." WHERE `id`=".$id;
         $update=$this->connection->query($sql);
 
         if($update===true)

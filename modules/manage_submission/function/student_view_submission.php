@@ -13,13 +13,15 @@ $dbconnect=new DBConnect(Constants::SERVER_NAME,
 $user_id=$_SESSION["id"];
 $submission=new Submission($dbconnect->getInstance());
 $course=new Course($dbconnect->getInstance());
-$courses_result=$course->getCourse('no',$user_id,'no');
+$courses_result=$course->getCourse('no',$user_id,'no',0,0,null);
 	echo '<table>
 							<tr>
 							<th>No.</th>
 							<th>Course</th>
 							<th>Title</th>
 							<th>File</th>
+							<th>Date of Submission</th>
+							<th>Date of Upload</th>
 							</tr>';
 	if($courses_result!=null)
 	{

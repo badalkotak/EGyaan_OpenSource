@@ -27,8 +27,18 @@ class TeacherCourse
 
     public function insertTeacherCourse($user_id,$course_id)
     {
+        $check="SELECT * FROM egn_teacher_course WHERE user_id='$user_id' && course_id='$course_id'";
+        $check_result=$this->connection->query($check);
+
+        if($check_result->num_rows > 0)
+        {
+            return Constants::STATUS_EXISTS;
+        }
+        else
+        {
+
     	$sql="INSERT INTO `egn_teacher_course`(`user_id`, `course_id`) VALUES ('$user_id',$course_id)";
-    	$insert=$this->connection->query($insert);
+    	$insert=$this->connection->query($sql);
 
     	if($insert===true)
     	{
@@ -39,11 +49,12 @@ class TeacherCourse
     		return false;
     	}
     }
+    }
 
     public function deleteTeacherCourse($id)
     {
     	$sql="DELETE FROM `egn_teacher_course` WHERE `id`='$id'";
-    	$delete=$this->connection->query($delete);
+    	$delete=$this->connection->query($sql);
 
     	if($delete===true)
     	{
