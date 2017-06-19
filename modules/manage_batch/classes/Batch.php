@@ -11,16 +11,19 @@ class Batch
         $this->connection = $connection;
     }
 
-    public function getBatch($multiQuery, $branchId, $batchId)
+    public function getBatch($multiQuery, $branchId, $batchId, $distinct)
     {
-        if ($multiQuery == 'yes' && $branchId == 0 && $batchId == 0) {
+        if ($multiQuery == 'yes' && $branchId == 0 && $batchId == 0 && $distinct == 'no') {
             $sql = "SELECT eBatch.id AS batchId,eBatch.name AS batchName,eBatch.branch_id AS batchBranchId,eBranch.id AS branchId,eBranch.name AS branchName
 FROM `egn_batch` AS eBatch,`egn_branch` AS eBranch WHERE eBatch.branch_id = eBranch.id";
-        } elseif ($multiQuery == 'no' && $branchId == 0 && $batchId > 0) {
-            $sql = "SELECT * FROM `egn_batch` WHERE id = '$batchId'";
-        } elseif ($multiQuery == 'yes' && $branchId > 0 && $batchId == 0) {
+        } elseif ($multiQuery == 'no' && $branchId == 0 && $batchId > 0 && $distinct == 'no') {
+            $sql = "SELECT eBatch.id AS batchId,eBatch.name AS batchName,eBatch.branch_id AS batchBranchId,eBranch.id AS branchId,eBranch.name AS branchName
+FROM `egn_batch` AS eBatch,`egn_branch` AS eBranch WHERE eBatch.branch_id = eBranch.id AND eBatch.id = '$batchId'";
+        } elseif ($multiQuery == 'yes' && $branchId > 0 && $batchId == 0 && $distinct == 'no') {
             $sql = "SELECT eBatch.id AS batchId,eBatch.name AS batchName,eBatch.branch_id AS batchBranchId,eBranch.id AS branchId,eBranch.name AS branchName
 FROM `egn_batch` AS eBatch,`egn_branch` AS eBranch WHERE eBatch.branch_id = eBranch.id AND eBatch.branch_id='" . $branchId . "'";
+        } elseif ($multiQuery == 'no' && $branchId == 0 && $batchId == 0 && $distinct == 'yes') {
+            $sql = "SELECT DISTINCT name FROM `egn_batch`";
         } else {
 //            return false;
             $sql = "SELECT * FROM `egn_batch`";

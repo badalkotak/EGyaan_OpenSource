@@ -28,7 +28,7 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
 
     $student = new Student($dbConnect->getInstance());
 
-    $getData = $student->getStudent($studentId);
+    $getData = $student->getStudent($studentId, 0);
 
     if ($getData != false) {
         while ($row = $getData->fetch_assoc()) {
@@ -68,17 +68,19 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
 
         $batch = new Batch($dbConnect->getInstance());
 
-        $getBatchData = $batch->getBatch('no', 0, $batchId);
+        $getBatchData = $batch->getBatch('no', 0, $batchId, 'no');
         if ($getBatchData != null) {
             while ($row = $getBatchData->fetch_assoc()) {
-                $batchName = $row['name'];
+                $batchName = $row['batchName'];
                 echo $batchName . "<br>";
             }
         } else {
             echo Constants::STATUS_FAILED;
         }
-    } else {
+    } elseif ($getData == false) {
         echo Constants::STATUS_FAILED;
+    } else {
+        echo "No Records Found!";
     }
 } else {
     echo Constants::EMPTY_PARAMETERS;

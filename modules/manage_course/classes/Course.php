@@ -11,28 +11,36 @@ class Course
         $this->connection = $connection;
     }
 
-    public function getCourse($teacherStatus, $userId, $multiQuery, $batchId, $courseId)
+    public function getCourse($teacherStatus, $userId, $multiQuery, $batchId, $courseId, $batchName)
     {
-        if ($teacherStatus == "yes" && $userId > 0 && $multiQuery == 'no' && $batchId == 0 && $courseId == 0) { //This will give course details for Teacher
-            $sql = "SELECT tc.id AS teacherCourseId,tc.user_id AS teacherCourseUserId,tc.course_id 
-AS teacherCourseCourseId,tc.addedby_user_id AS teacherCourseAddedbyUserId,c.id AS courseId,c.name AS courseName,
-c.batch_id AS courseBatchId FROM `egn_teacher_course` AS tc,`egn_course` AS c WHERE tc.course_id = c.id 
-AND user_id = '$userId'";
-        } elseif ($teacherStatus == 'no' && $userId == 0 && $multiQuery == 'no' && $batchId == 0 && $courseId > 0) { //This will give course details in General
+        if ($teacherStatus == "yes" && $userId > 0 && $multiQuery == 'no' && $batchId == 0 && $courseId == 0 && $batchName == null) { //This will give course details for Teacher
+            $sql = "SELECT eBranch.id AS branchId,eBranch.name AS branchName,eBatch.id AS batchId,eBatch.name 
+AS batchName,eBatch.branch_id AS batchBranchId,eCourse.id AS courseId,eCourse.name AS courseName,eCourse.batch_id 
+AS courseBatchId,eTeacherCourse.id AS teacherCourseId,eTeacherCourse.user_id 
+AS teacherCourseUserId,eTeacherCourse.course_id AS teacherCourseCourseId,eTeacherCourse.addedby_user_id 
+AS teacherCourseAddedbyUserId FROM `egn_teacher_course` AS eTeacherCourse,`egn_course` AS eCourse,`egn_batch` 
+AS eBatch,`egn_branch` AS eBranch WHERE eTeacherCourse.course_id = eCourse.id AND eCourse.batch_id = eBatch.id 
+AND eBatch.branch_id = eBranch.id AND eTeacherCourse.user_id = '$userId'";
+        } elseif ($teacherStatus == 'no' && $userId == 0 && $multiQuery == 'no' && $batchId == 0 && $courseId > 0 && $batchName == null) { //This will give course details in General
             $sql = "SELECT * FROM `egn_course` WHERE id = '$courseId'";
-        } elseif ($teacherStatus == "no" && $userId > 0 && $multiQuery == 'no' && $batchId == 0 && $courseId == 0) { //This will give course details for Student
+        } elseif ($teacherStatus == "no" && $userId > 0 && $multiQuery == 'no' && $batchId == 0 && $courseId == 0 && $batchName == null) { //This will give course details for Student
             $sql = "SELECT * FROM `egn_course_reg` AS cr, `egn_course` AS c WHERE cr.course_id = c.id 
 AND student_id='$userId'";
-        } elseif ($teacherStatus == "no" && $userId == 0 && $multiQuery == 'yes' && $batchId == 0 && $courseId == 0) {
+        } elseif ($teacherStatus == "no" && $userId == 0 && $multiQuery == 'yes' && $batchId == 0 && $courseId == 0 && $batchName == null) {
             $sql = "SELECT eBranch.id AS branchId,eBranch.name AS branchName,eBatch.id AS batchId,eBatch.name 
 AS batchName,eBatch.branch_id AS batchBranchId,eCourse.id AS courseId,eCourse.name AS courseName,eCourse.batch_id 
 AS courseBatchId FROM `egn_course` AS eCourse,`egn_batch` AS eBatch,`egn_branch` AS eBranch 
 WHERE eCourse.batch_id = eBatch.id AND eBatch.branch_id = eBranch.id";
-        } elseif ($teacherStatus == "no" && $userId == 0 && $multiQuery == 'yes' && $batchId > 0 && $courseId == 0) {
+        } elseif ($teacherStatus == "no" && $userId == 0 && $multiQuery == 'yes' && $batchId > 0 && $courseId == 0 && $batchName == null) {
             $sql = "SELECT eBranch.id AS branchId,eBranch.name AS branchName,eBatch.id AS batchId,eBatch.name 
 AS batchName,eBatch.branch_id AS batchBranchId,eCourse.id AS courseId,eCourse.name AS courseName,eCourse.batch_id 
 AS courseBatchId FROM `egn_course` AS eCourse,`egn_batch` AS eBatch,`egn_branch` AS eBranch 
 WHERE eCourse.batch_id = eBatch.id AND eBatch.branch_id = eBranch.id AND eCourse.batch_id = '$batchId'";
+        } elseif ($teacherStatus == "no" && $userId == 0 && $multiQuery == 'yes' && $batchId == 0 && $courseId == 0 && $batchName != null) {
+            $sql = "SELECT eBranch.id AS branchId,eBranch.name AS branchName,eBatch.id AS batchId,eBatch.name 
+AS batchName,eBatch.branch_id AS batchBranchId,eCourse.id AS courseId,eCourse.name AS courseName,eCourse.batch_id 
+AS courseBatchId FROM `egn_course` AS eCourse,`egn_batch` AS eBatch,`egn_branch` AS eBranch 
+WHERE eCourse.batch_id = eBatch.id AND eBatch.branch_id = eBranch.id AND eBatch.name = '$batchName'";
         } else {
             // $sql = "SELECT * FROM `egn_course`";
             $sql = "SELECT eBranch.id AS branchId,eBranch.name AS branchName,eBatch.id AS batchId,eBatch.name 

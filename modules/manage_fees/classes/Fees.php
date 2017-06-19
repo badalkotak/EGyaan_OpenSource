@@ -51,9 +51,9 @@ class Fees
         }
     }
 
-    public function refundFees($id)
+    public function refundFees($id,$refund_fees)
     {
-        $sql = "UPDATE egn_student SET fees_paid = '0' WHERE id='$id'";
+        $sql = "UPDATE egn_student SET fees_paid = fees_paid - '$refund_fees' WHERE id='$id' AND '$refund_fees' BETWEEN '1' AND fees_paid";
         $this->connection->query($sql);
         $update = $this->connection->affected_rows;
         if($update == 1)

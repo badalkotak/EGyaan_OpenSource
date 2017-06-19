@@ -77,7 +77,7 @@ if ($getBatchData != null) {
     }
     for ($i = 0; $i < count($branch_id); $i++) {
         echo "<br><br>" . $branch_name[$i];
-        $getBatchData = $batch->getBatch('yes', $branch_id[$i], 0);
+        $getBatchData = $batch->getBatch('yes', $branch_id[$i], 0, 'no');
         if ($getBatchData != null) {
             $id = 1;
             echo "<table border='3'>";

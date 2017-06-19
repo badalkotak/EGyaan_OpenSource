@@ -1,6 +1,7 @@
 <html>
 <head>
     <title>Edit Student Information | EGyaan</title>
+    <script type="text/javascript" src="../../../Resources/jQuery/jquery-3.2.1.js"></script>
 </head>
 <body>
 <?php
@@ -15,13 +16,14 @@ require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../classes/Student.php");
 require_once("../../manage_batch/classes/Batch.php");
+require_once("../../manage_branch/classes/Branch.php");
 
 $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_USERNAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
 
-echo $_REQUEST['studentId'];
+//echo $_REQUEST['studentId'];
 
 if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
 
@@ -30,7 +32,7 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
 
     $student = new Student($dbConnect->getInstance());
 
-    $getData = $student->getStudent($studentId);
+    $getData = $student->getStudent($studentId, 0);
 
     if ($getData != false) {
         while ($row = $getData->fetch_assoc()) {
@@ -52,17 +54,6 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
 //            $studentProfilePhoto = $row['student_profile_photo'];
 //            $parentProfilePhoto = $row['parent_profile_photo'];
             $batchId = $row['batch_id'];
-        }
-
-        $batch = new Batch($dbConnect->getInstance());
-
-        $getBatchData = $batch->getBatch('no', 0, $batchId);
-        if ($getBatchData != null) {
-            while ($row = $getBatchData->fetch_assoc()) {
-                $batchName = $row['name'];
-            }
-        } else {
-            echo Constants::STATUS_FAILED;
         }
 
         echo "<form  action='edit_student.php' method='post'>";
@@ -97,8 +88,65 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
         echo "<textarea name='feesComment'>" . $feesComment . "</textarea><br>";
         echo "<input type='date' name='dateOfAdmission' value='" . $dateOfAdmission . "'><br>";
         echo "<input type='number' name='parentMobile' value='" . $parentMobile . "'><br>";
-        echo $batchName . "<br>";
-        echo "<input type='hidden' name='batchId' value='" . $batchId . "'>";
+//        echo $batchName . "<br>";
+//        echo "<input type='hidden' name='batchId' value='" . $batchId . "'>";
+        echo "<select name='branchId' id='branch-id'>";
+        echo "<option value='-1'>Select Branch</option>";
+
+        $batch = new Batch($dbConnect->getInstance());
+
+        $getBatchData = $batch->getBatch('no', 0, $batchId, 'no');
+        if ($getBatchData != null) {
+            while ($row = $getBatchData->fetch_assoc()) {
+                $_branchId = $row['branchId'];
+//                $_branchName = $row['branchName'];
+                $_batchId = $row['batchId'];
+//                $_batchName = $row['name'];
+            }
+            $branch = new Branch($dbConnect->getInstance());
+            $getBranchData = $branch->getBranch(0);
+            if ($getBranchData != null) {
+                while ($array = $getBranchData->fetch_assoc()) {
+                    $__branchId = $array['id'];
+                    $__branchName = $array['name'];
+
+                    if ($_branchId == $__branchId) {
+                        echo "<option value='" . $__branchId . "' selected>" . $__branchName . "</option>";
+                    } else {
+                        echo "<option value='" . $__branchId . "'>" . $__branchName . "</option>";
+                    }
+                }
+            } else {
+                echo Constants::STATUS_FAILED;
+            }
+        } else {
+            echo Constants::STATUS_FAILED;
+        }
+
+        echo "</select>";
+        echo "<br>";
+
+        echo "<div id='new-drop-down' class='hide'>";
+        echo "<select id='batch-id' name='batchId'>";
+        echo "<option value='-2'>Select Batch</option>";
+        $_getBatchData = $batch->getBatch('yes', $_branchId, 0, 'no');
+        if ($_getBatchData != null) {
+            while ($row = $_getBatchData->fetch_assoc()) {
+                $__batchId = $row['batchId'];
+                $__batchName = $row['batchName'];
+
+                if ($__batchId == $_batchId) {
+                    echo "<option value='" . $__batchId . "' selected>" . $__batchName . "</option>";
+                } else {
+                    echo "<option value='" . $__batchId . "'>" . $__batchName . "</option>";
+                }
+            }
+        } else {
+            echo Constants::STATUS_FAILED;
+        }
+        echo "</select>";
+        echo "</div>";
+
         echo "<input type='submit' value='Update'>";
         echo "</form>";
     } else {
@@ -108,5 +156,42 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
     echo Constants::EMPTY_PARAMETERS;
 }
 ?>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#branch-id").change(function () {
+            var branchId = $("#branch-id option:selected").val();
+            if (branchId < 0) {
+                alert("Select Valid Branch");
+                $("#new-drop-down").hide();
+            } else {
+                $("#new-drop-down").show();
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "get_batch_jquery.php",
+                        data: "branchId=" + branchId,
+//                        dataType: "json",
+                        success: function (json) {
+                            console.log(json);
+                            $("div#new-drop-down").removeClass("hide");
+                            $("#batch-id").empty();
+                            $("#batch-id").append("<option value='-3'>Select Batch</option>");
+                            var parsed = jQuery.parseJSON(json);
+                            for (var i = 0; i < parsed.batchId.length; i++) {
+                                var batchId = parsed.batchId[i];
+                                var batchName = parsed.batchName[i];
+                                $("#batch-id").append("<option value='" + batchId + "'>" + batchName + "</option>");
+                            }
+                        },
+                        error: function (a, b, c) {
+                            console.log("Error");
+                        }
+                    });
+            }
+        });
+    });
+</script>
+
 </body>
 </html>

@@ -21,33 +21,41 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
 
-$student = new Student($dbConnect->getInstance());
+if (isset($_REQUEST['branchId']) && isset($_REQUEST['batchId']) && !empty(trim($_REQUEST['branchId']))
+    && !empty(trim($_REQUEST['batchId']))
+) {
+    $branchId = $_REQUEST['branchId'];
+    $batchId = $_REQUEST['batchId'];
 
-$getData = $student->getStudent(0);
+    $student = new Student($dbConnect->getInstance());
 
-if ($getData != false) {
-    $id = 1;
-    echo "<table border='3'>";
-    echo "<tr><th>Sr. no.</th><th>Student Name</th><th>View</th><th>Edit</th><th>Delete</th></tr>";
-    while ($row = $getData->fetch_assoc()) {
-        $studentId = $row['id'];
-        $studentFirstName = $row['firstname'];
-        $studentLastName = $row['lastname'];
+    $getData = $student->getStudent(0, $batchId);
 
-        echo "<tr><td>" . $id . "</td><td>" . $studentFirstName . " " . $studentLastName . "</td><td>
+    if ($getData != false) {
+        $id = 1;
+        echo "<table border='3'>";
+        echo "<tr><th>Sr. no.</th><th>Student Name</th><th>View</th><th>Edit</th><th>Delete</th></tr>";
+        while ($row = $getData->fetch_assoc()) {
+            $studentId = $row['id'];
+            $studentFirstName = $row['firstname'];
+            $studentLastName = $row['lastname'];
+
+            echo "<tr><td>" . $id . "</td><td>" . $studentFirstName . " " . $studentLastName . "</td><td>
         <form action='viewStudent.php' method='post'><input type='hidden' name='studentId' value='" . $studentId . "'>
         <input type='submit' value='View'></form></td><td><form action='editStudent.php' method='post'>
         <input type='hidden' name='studentId' value='" . $studentId . "'><input type='submit' value='Edit'></form></td>
         <td><form action='delete_student.php' method='post'><input type='hidden' name='studentId' value='" . $studentId . "'>
         <input type='submit' value='Delete'></form></td></tr>";
-        $id++;
+            $id++;
+        }
+    } elseif ($getData == false) {
+        echo Constants::STATUS_FAILED;
+    } else {
+        echo "No Records Found!";
     }
-} elseif ($getData == false) {
-    echo Constants::STATUS_FAILED;
 } else {
-    echo "No Records Found!";
+    echo Constants::EMPTY_PARAMETERS;
 }
-
 ?>
 </body>
 </html>

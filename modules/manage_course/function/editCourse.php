@@ -43,13 +43,13 @@
                 $branchName = $row['name'];
             }
 
-            $getBatchData = $batch->getBatch('no', 0, $batchId);
+            $getBatchData = $batch->getBatch('no', 0, $batchId, 'no');
             if ($getBatchData != null) {
                 while ($row1 = $getBatchData->fetch_assoc()) {
-                    $batchName = $row1['name'];
+                    $batchName = $row1['batchName'];
                 }
 
-                $getCourseData = $course->getCourse('no', 0, 'no', 0, $courseId);
+                $getCourseData = $course->getCourse('no', 0, 'no', 0, $courseId, null);
                 if ($getCourseData != null) {
                     while ($row2 = $getCourseData->fetch_assoc()) {
                         $courseName = $row2['name'];
