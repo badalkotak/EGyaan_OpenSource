@@ -14,6 +14,7 @@
 require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../classes/Student.php");
+require_once("../../manage_batch/classes/Batch.php");
 
 $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_USERNAME,
@@ -53,6 +54,17 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
             $batchId = $row['batch_id'];
         }
 
+        $batch = new Batch($dbConnect->getInstance());
+
+        $getBatchData = $batch->getBatch('no', 0, $batchId);
+        if ($getBatchData != null) {
+            while ($row = $getBatchData->fetch_assoc()) {
+                $batchName = $row['name'];
+            }
+        } else {
+            echo Constants::STATUS_FAILED;
+        }
+
         echo "<form  action='edit_student.php' method='post'>";
         echo "<input type='hidden' name='studentId' value='" . $studentId . "'>";
         echo "<input type='text' name='firstName' value='" . $firstName . "'><br>";
@@ -85,7 +97,7 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
         echo "<textarea name='feesComment'>" . $feesComment . "</textarea><br>";
         echo "<input type='date' name='dateOfAdmission' value='" . $dateOfAdmission . "'><br>";
         echo "<input type='number' name='parentMobile' value='" . $parentMobile . "'><br>";
-        echo $batchId . "<br>";
+        echo $batchName . "<br>";
         echo "<input type='hidden' name='batchId' value='" . $batchId . "'>";
         echo "<input type='submit' value='Update'>";
         echo "</form>";

@@ -86,9 +86,10 @@
         $("#branch-id").change(function () {
             var branchId = $("#branch-id option:selected").val();
             if (branchId < 0) {
-                $("#new-drop-down").hide();
                 alert("Select Valid Branch");
+                $("#new-drop-down").hide();
             } else {
+                $("#new-drop-down").show();
                 $.ajax(
                     {
                         type: "POST",

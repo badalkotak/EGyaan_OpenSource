@@ -14,6 +14,7 @@
 require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../classes/Student.php");
+require_once("../../manage_batch/classes/Batch.php");
 
 $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_USERNAME,
@@ -50,7 +51,8 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
 //            $parentProfilePhoto = $row['parent_profile_photo'];
             $batchId = $row['batch_id'];
         }
-//        var_dump($studentProfilePhoto);
+
+        //        var_dump($studentProfilePhoto);
         echo "<img src='http://localhost/" . $studentProfilePhoto . "' width='75' height='75'><br>";
         echo $firstName . " " . $lastName . "<br>";
         echo $email . "<br>";
@@ -63,7 +65,18 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
         echo $feesComment . "<br>";
         echo $dateOfAdmission . "<br>";
         echo $parentMobile . "<br>";
-        echo $batchId . "<br>";
+
+        $batch = new Batch($dbConnect->getInstance());
+
+        $getBatchData = $batch->getBatch('no', 0, $batchId);
+        if ($getBatchData != null) {
+            while ($row = $getBatchData->fetch_assoc()) {
+                $batchName = $row['name'];
+                echo $batchName . "<br>";
+            }
+        } else {
+            echo Constants::STATUS_FAILED;
+        }
     } else {
         echo Constants::STATUS_FAILED;
     }
