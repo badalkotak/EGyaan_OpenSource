@@ -40,7 +40,7 @@ if($title!=""  && !empty($description))
 	}
 	else
 	{
-		echo "Error in inserting!";
+		echo "location:index.php?errormessage=Error in inserting!";
 	}
 		
 	

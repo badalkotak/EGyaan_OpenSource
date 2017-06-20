@@ -2,6 +2,8 @@
 require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../classes/Noticeboard.php");
+require_once("../../manage_branch/classes/Branch.php");
+
 
 
 $dbConnect = new DBConnect(Constants::SERVER_NAME,
@@ -19,10 +21,23 @@ if(isset($_REQUEST['u']))
 else{
 	$urgent=null;
 }
-$type=mysql_real_escape_string($_REQUEST['type']);
-$user_id=2;
-if(isset($_FILES['file']))
+
+if(isset($_REQUEST['select_branch']))
+{	
+	$chk=implode(",",$_REQUEST['select_branch']);
+
+}
+else{
+	$chk=="";
+}
+if(isset($_REQUEST['type']))
 {
+	$type=$_REQUEST['type'];
+}
+$user_id=2;
+if($_FILES['file']=="")
+{
+	$pass=$_FILES['file'];
 	$target_dir="../uploads/";
 	$file=$_FILES['file']['name'];
 	$path="../uploads/".$file;
@@ -34,39 +49,52 @@ else{
 	$path=null;
 }
 
-
-
-if($title!="" && !empty($notice) && $type!=0)
+if($type=="b" && $chk=="")
 {
 
+		header("location:add_noticeboard.php?title=".$title."&type=".$type."&notice=".$notice."&u=".$urgent);
 
-	$noticeboard = new Noticeboard($dbConnect->getInstance());
-	$insertData=$noticeboard->insertNoticeboard($title,$notice,$path,$urgent,$type,$user_id);
-	if($insertData)
-	{
-		/*$result=$branch->getBranch();
-		if($result!=null)
-		{
-		while($row=$result->fetch_assoc())
-		{
-			echo $name=$row['name'];echo "<br>";
-		}
-		}
-		else
-		{
-		echo "Null Result!";
-		}*/
-		header("location:index.php?errormessage=Successfully added!");
-	}
-	else
-	{
-		echo "Error in inserting!";
-	}
-		
-	
 }
 else{
-	header("location:add_noticeboard.php?errormessage=Please input all fields");
 
-	
+
+	if($title=="" || empty($notice))
+	{
+
+		header("location:add_noticeboard.php?errormessage=Please input all fields");	
+	}
+	else{
+
+		if($type=="c")
+		{
+			$noticeboard = new Noticeboard($dbConnect->getInstance());
+			$insertData=$noticeboard->insertNoticeboard($title,$notice,$path,$urgent,$type,$user_id);
+			if($insertData)
+			{
+				header("location:index.php?errormessage=Successfully added!");
+			}
+			else
+			{
+				echo "Error in inserting!";
+			}
+		}
+		else{
+		$chk = explode(',', $chk);
+
+		foreach ((array)$chk as $chcks )
+		{
+
+			$noticeboard = new Noticeboard($dbConnect->getInstance());
+			$insertData=$noticeboard->insertNoticeboard($title,$notice,$path,$urgent,$chcks,$user_id);
+			if($insertData)
+			{
+				header("location:index.php?errormessage=Successfully added!");
+			}
+			else
+			{
+				echo "Error in inserting!";
+			}
+		}
+		}	
+	}
 }

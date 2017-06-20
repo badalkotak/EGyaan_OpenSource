@@ -29,9 +29,10 @@ class Suggestioncomplaint
 // In case of multiple inserts, you need to check whether or not each insert query is being executed, if it is executed only then execute the next query, or else if a particular query is not executed, first delete all the previous RELATED INSERT queries and then return false.
     public function insertSuggestioncomplaint($title,$description,$type)
     {
-        if(isset($title))
+        if($title != "" && $description!= "")
         {
             $insert_sql="INSERT INTO `egn_suggestion_complaint`(`title`,`description`,`type`) VALUES ('$title','$description','$type')";
+            var_dump($insert_sql);
             $insert=$this->connection->query($insert_sql);
             if($insert === true)
             {
@@ -41,6 +42,9 @@ class Suggestioncomplaint
             {
                 return false;
             }
+        }
+        else{
+            return true;
         }
 
         

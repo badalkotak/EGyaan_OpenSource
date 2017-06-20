@@ -13,13 +13,14 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
         Constants::DB_PASSWORD,
         Constants::DB_NAME);
 
+$role_id=1;
 $var2="type";
 $type="s";
 $var1=1;
 $id=1;
 $suggestion = new Suggestioncomplaint($dbConnect->getInstance());
 $selectData=$suggestion->getSuggestioncomplaint($var1,$id,$var2,$type);
-if($selectData)
+if($selectData && $role_id==1)
 {
 	while($row=$selectData->fetch_assoc())
 	{
@@ -39,7 +40,32 @@ if($selectData)
 		
 		<?php
 		echo'
-		<a href="delete_suggestion.php?delete='.$id.'"><button type=button name=delete id=delete >Delete</button> </a>
+		<a href="delete_suggestion.php?delete='.$id.'"><button type=button name=delete id=delete onclick=del_confirm()`>Delete</button> </a>';
+		echo'
+		<a href="view_suggestion.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
+	}
+}
+else if($selectData && $role_id==2)
+{
+	while($row=$selectData->fetch_assoc())
+	{
+		$title=$row['title'];
+		$description=$row['description'];
+		$id=$row['id'];
+		?>
+		<?php
+		echo$title;
+		?>
+		<article>
+		<?php
+		echo$description;
+		?>
+		</article>
+
+		
+		<?php
+		
+		echo'
 		<a href="view_suggestion.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
 	}
 }
@@ -47,4 +73,15 @@ else{
 	echo "No suggestion";
 }
 ?>
+	<script>
+		function del_confirm() {
+			var x;
+			if (confirm("Do you want to continue") == true) {
 
+			} else {
+				event.preventDefault() ;
+			}
+    //document.getElementById("demo").innerHTML = x;
+}
+
+</script>
