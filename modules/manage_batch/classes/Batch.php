@@ -11,7 +11,7 @@ class Batch
         $this->connection = $connection;
     }
 
-    public function getBatch($multiQuery, $branchId, $batchId, $distinct)
+    public function getBatch($multiQuery, $branchId, $batchId, $distinct, $teacherId)
     {
         if ($multiQuery == 'yes' && $branchId == 0 && $batchId == 0 && $distinct == 'no') {
             $sql = "SELECT eBatch.id AS batchId,eBatch.name AS batchName,eBatch.branch_id AS batchBranchId,eBranch.id AS branchId,eBranch.name AS branchName
@@ -22,6 +22,17 @@ FROM `egn_batch` AS eBatch,`egn_branch` AS eBranch WHERE eBatch.branch_id = eBra
         } elseif ($multiQuery == 'yes' && $branchId > 0 && $batchId == 0 && $distinct == 'no') {
             $sql = "SELECT eBatch.id AS batchId,eBatch.name AS batchName,eBatch.branch_id AS batchBranchId,eBranch.id AS branchId,eBranch.name AS branchName
 FROM `egn_batch` AS eBatch,`egn_branch` AS eBranch WHERE eBatch.branch_id = eBranch.id AND eBatch.branch_id='" . $branchId . "'";
+        } elseif ($multiQuery == 'yes' && $branchId > 0 && $batchId == 0 && $distinct == 'no' && $teacherId > 0) {
+            $sql = "SELECT DISTINCT batch.id,batch.name 
+                FROM egn_batch as batch ,egn_course as c ,egn_branch as branch ,egn_teacher_course as tc ,egn_users as u 
+                WHERE 
+                u.role_id = " . $teacherId . " AND 
+                branch.id = " . $branchId . " AND 
+                c.branch_id=branch.id AND 
+                batch.branch_id = branch.id AND
+                tc.user_id = u.id AND
+                tc.course_id = c.id
+                ORDER BY batch.id";
         } elseif ($multiQuery == 'no' && $branchId == 0 && $batchId == 0 && $distinct == 'yes') {
             $sql = "SELECT DISTINCT name FROM `egn_batch`";
         } else {

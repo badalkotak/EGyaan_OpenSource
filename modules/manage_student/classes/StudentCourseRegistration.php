@@ -17,9 +17,14 @@ class StudentCourseRegistration
         $this->connection = $connection;
     }
 
-    public function getStudentCourse()
+    public function getStudentCourse($id)
     {
-        $sql = "SELECT * FROM `egn_course_reg`";
+        if ($id > 0) {
+            $sql = "SELECT * FROM `egn_course_reg` AS eCourseReg,`egn_course` AS eCourse 
+WHERE eCourseReg.course_id = eCourse.id AND eCourseReg.student_id = '" . $id . "'";
+        } else {
+            $sql = "SELECT * FROM `egn_course_reg`";
+        }
         $result = $this->connection->query($sql);
 
         if ($result->num_rows > 0) {
@@ -53,7 +58,7 @@ VALUES ('$studentId','$courseId')";
         }
     }
 
-    public function updateStudent($id, $studentId, $courseId)
+    public function updateStudentCourse($id, $studentId, $courseId)
     {
         $studentId = $this->connection->real_escape_string($studentId);
         $courseId = $this->connection->real_escape_string($courseId);
@@ -68,7 +73,7 @@ VALUES ('$studentId','$courseId')";
         }
     }
 
-    public function deleteStudent($id)
+    public function deleteStudentCourse($id)
     {
         $sql = "DELETE FROM `egn_course_reg` WHERE id='$id'";
         $delete = $this->connection->query($sql);

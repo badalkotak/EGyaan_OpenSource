@@ -40,19 +40,19 @@
         $getBranchData = $branch->getBranch($branchId);
         if ($getBranchData != null) {
             while ($row = $getBranchData->fetch_assoc()) {
-                $branchName = $row['name'];
+                $branchName = htmlentities($row['name'], ENT_QUOTES);
             }
 
-            $getBatchData = $batch->getBatch('no', 0, $batchId, 'no');
+            $getBatchData = $batch->getBatch('no', 0, $batchId, 'no', 0);
             if ($getBatchData != null) {
                 while ($row1 = $getBatchData->fetch_assoc()) {
-                    $batchName = $row1['batchName'];
+                    $batchName = htmlentities($row1['batchName'], ENT_QUOTES);
                 }
 
-                $getCourseData = $course->getCourse('no', 0, 'no', 0, $courseId, null);
+                $getCourseData = $course->getCourse('no', 0, 'no', 0, $courseId, null, 0);
                 if ($getCourseData != null) {
                     while ($row2 = $getCourseData->fetch_assoc()) {
-                        $courseName = $row2['name'];
+                        $courseName = htmlentities($row2['name'], ENT_QUOTES);
                     }
 
                     //        echo "<select name='branchId' disabled>";

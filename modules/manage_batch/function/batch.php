@@ -32,7 +32,7 @@
         if ($getData != null) {
             while ($arrayGetData = $getData->fetch_assoc()) {
                 $branchId = $arrayGetData['id'];
-                $branchName = $arrayGetData['name'];
+                $branchName = htmlentities($arrayGetData['name'], ENT_QUOTES);
 
                 if ($branchId == $_REQUEST['branchId']) {
                     echo "<option value='" . $branchId . "' selected>" . $branchName . "</option>";
@@ -73,11 +73,11 @@ $getBatchData = $branch->getBranch(0);
 if ($getBatchData != null) {
     while ($array = $getBatchData->fetch_assoc()) {
         $branch_id[] = $array['id'];
-        $branch_name[] = $array['name'];
+        $branch_name[] = htmlentities($array['name'], ENT_QUOTES);
     }
     for ($i = 0; $i < count($branch_id); $i++) {
         echo "<br><br>" . $branch_name[$i];
-        $getBatchData = $batch->getBatch('yes', $branch_id[$i], 0, 'no');
+        $getBatchData = $batch->getBatch('yes', $branch_id[$i], 0, 'no', 0);
         if ($getBatchData != null) {
             $id = 1;
             echo "<table border='3'>";
@@ -85,7 +85,7 @@ if ($getBatchData != null) {
 
             while ($row = $getBatchData->fetch_assoc()) {
                 $batchTableId = $row['batchId'];
-                $batchTableName = $row['batchName'];
+                $batchTableName = htmlentities($row['batchName'], ENT_QUOTES);
 
                 echo "<tr><td>" . $id . "</td><td>" . $batchTableName . "</td><td><form action='editBatch.php' method='post'>
         <input type='hidden' name='branchId' value='" . $branch_id[$i] . "'><input type='hidden' name='batchId' value='" . $batchTableId . "'>

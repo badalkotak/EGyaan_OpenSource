@@ -35,14 +35,14 @@
         $getBranchData = $branch->getBranch($branchId);
         if ($getBranchData != null) {
             while ($row = $getBranchData->fetch_assoc()) {
-                $branchName = $row['name'];
+                $branchName = htmlentities($row['name'], ENT_QUOTES);
             }
 
-            $getBatchData = $batch->getBatch('no', 0, $batchId, 'no');
+            $getBatchData = $batch->getBatch('no', 0, $batchId, 'no', 0);
 //            var_dump($getBatchData);
             if ($getBatchData != null) {
                 while ($array = $getBatchData->fetch_assoc()) {
-                    $batchName = $array['batchName'];
+                    $batchName = htmlentities($array['batchName'], ENT_QUOTES);
                 }
                 echo "<label>" . $branchName . "</label>";
                 echo "<br>";

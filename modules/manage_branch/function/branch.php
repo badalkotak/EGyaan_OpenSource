@@ -36,7 +36,7 @@ if ($result != null) {
     echo "<tr><th>Sr No.</th><th>Name</th><th>Edit</th><th>Delete</th></tr>";
     while ($row = $result->fetch_assoc()) {
         $id = $row['id'];
-        $name = $row['name'];
+        $name = htmlentities($row['name'], ENT_QUOTES);
         // echo "<tr><td>" . $name . "</td><td><form action='editBranch.php' method='post'>
         // <input type='hidden' value='" . $id . "' name='branchId'><input type='hidden' value='" . $name . "' name='branchName'>
         // <input type='submit' value='Edit'></form></td><td><form action='delete_branch.php' method='post'>

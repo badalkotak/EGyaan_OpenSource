@@ -32,7 +32,7 @@ if (isset($_REQUEST['branchId']) && !empty(trim($_REQUEST['branchId']))) {
 
     $batch = new Batch($dbConnect->getInstance());
 
-    $getData = $batch->getBatch('yes', $branchId, 0,'no');
+    $getData = $batch->getBatch('yes', $branchId, 0, 'no', 0);
 
     if ($getData != null) {
         while ($row = $getData->fetch_assoc()) {

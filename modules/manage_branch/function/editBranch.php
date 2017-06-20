@@ -25,7 +25,7 @@ if (isset($_REQUEST['edit']) && !empty(trim($_REQUEST['edit']))) {
         while ($row = $getBranchName->fetch_assoc()) {
             $id = $row['id'];
             if ($id === $branchId) {
-                $branchName = $row['name'];
+                $branchName = htmlentities($row['name'], ENT_QUOTES);
                 break;
             }
         }

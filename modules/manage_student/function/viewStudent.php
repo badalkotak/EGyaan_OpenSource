@@ -68,7 +68,7 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
 
         $batch = new Batch($dbConnect->getInstance());
 
-        $getBatchData = $batch->getBatch('no', 0, $batchId, 'no');
+        $getBatchData = $batch->getBatch('no', 0, $batchId, 'no', 0);
         if ($getBatchData != null) {
             while ($row = $getBatchData->fetch_assoc()) {
                 $batchName = $row['batchName'];
