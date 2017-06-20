@@ -105,7 +105,7 @@
 						?>
 					</article>
 
-					
+
 					<?php
 					echo'
 					<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
@@ -168,7 +168,7 @@
 						?>
 					</article>
 
-					
+
 					<?php
 					echo'
 					<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
@@ -189,60 +189,63 @@
 	}
 	$course = new Course($dbConnect->getInstance());
 	$branchData=$course->getCourse("yes", $user_id, 'no',0, 0,null);
+	if($branchData!=null)
+	{
 
-	?>
-	<h1>TeacherBRANCH Urgent</h1>
-	<?php
-	while($row=$branchData->fetch_assoc())
-	{	
-		$teacher_branch=$row['branchId'];
-		$teacher_branch_name=$row['branchName'];
-		echo"<h3>".$teacher_branch_name."</h3>";
-		$var1="type";
-		$var2="urgent_notice";
-		$var3=1;
-		$urgent="u";
-		$id=1;
+		?>
+		<h1>TeacherBRANCH Urgent</h1>
+		<?php
+		while($row=$branchData->fetch_assoc())
+		{	
+			$teacher_branch=$row['branchId'];
+			$teacher_branch_name=$row['branchName'];
+			echo"<h3>".$teacher_branch_name."</h3>";
+			$var1="type";
+			$var2="urgent_notice";
+			$var3=1;
+			$urgent="u";
+			$id=1;
 
-		$noticeboard = new Noticeboard($dbConnect->getInstance());
-		$selectData=$noticeboard->getNoticeboard($var1,$teacher_branch,$var2,$urgent,$var3,$id);
-		if($selectData)
-		{
-			while($row=$selectData->fetch_assoc())
+			$noticeboard = new Noticeboard($dbConnect->getInstance());
+			$selectData=$noticeboard->getNoticeboard($var1,$teacher_branch,$var2,$urgent,$var3,$id);
+			if($selectData)
 			{
-				$title=$row['title'];
-				$notice=$row['notice'];
-				$id=$row['id'];
-				$file=$row['file'];
-
-				?>
-				<?php
-				echo$title;
-				?>
-				<article>
-					<?php
-					echo$notice;
-					?>
-				</article>
-
-				
-				<?php
-				echo'
-				<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
-				if($file!=null)
+				while($row=$selectData->fetch_assoc())
 				{
-					echo "<label>Attached File :</label>";echo "<a href=$file>Attached Notice</a>";
+					$title=$row['title'];
+					$notice=$row['notice'];
+					$id=$row['id'];
+					$file=$row['file'];
+
+					?>
+					<?php
+					echo$title;
+					?>
+					<article>
+						<?php
+						echo$notice;
+						?>
+					</article>
+
+
+					<?php
+					echo'
+					<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
+					if($file!=null)
+					{
+						echo "<label>Attached File :</label>";echo "<a href=$file>Attached Notice</a>";
+					}
 				}
 			}
+			else{
+				echo "No Urgent notice!";
+			}	
 		}
-		else{
-			echo "No Urgent notice!";
-		}	
 	}
 
 
-	$course = new Course($dbConnect->getInstance());
-	$branchData=$course->getCourse("yes", $user_id, 'no',0, 0,null);
+	$branch = new Branch($dbConnect->getInstance());
+	$branchData=$branch->getBranch(0);
 
 	if($branchData!=null)
 	{
@@ -251,8 +254,8 @@
 		<?php
 		while($row=$branchData->fetch_assoc())
 		{	
-			$teacher_branch=$row['branchId'];
-			$teacher_branch_name=$row['branchName'];
+			$teacher_branch=$row['id'];
+			$teacher_branch_name=$row['name'];
 			echo"<h3>".$teacher_branch_name."</h3>";
 			$var1="type";
 			$var2=1;
@@ -281,7 +284,7 @@
 						?>
 					</article>
 
-					
+
 					<?php
 					echo'
 					<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
@@ -299,16 +302,16 @@
 	else{
 		$teacher_branch="";
 	}
-	$course = new Course($dbConnect->getInstance());
-	$branchData=$course->getCourse("yes", $user_id, 'no',0, 0,null);
+	$branch = new Branch($dbConnect->getInstance());
+	$branchData=$branch->getBranch(0);
 
 	?>
 	<h1>AdminBRANCH Urgent</h1>
 	<?php
 	while($row=$branchData->fetch_assoc())
 	{	
-		$teacher_branch=$row['branchId'];
-		$teacher_branch_name=$row['branchName'];
+		$teacher_branch=$row['id'];
+		$teacher_branch_name=$row['name'];
 		echo"<h3>".$teacher_branch_name."</h3>";
 		$var1="type";
 		$var2="urgent_notice";
@@ -385,7 +388,7 @@
 				?>
 			</article>
 
-			
+
 			<?php
 			echo'<a href="delete_noticeboard.php?delete='.$id.'"><button type=button name=delete id=delete >Delete</button> </a>';
 			echo'<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
