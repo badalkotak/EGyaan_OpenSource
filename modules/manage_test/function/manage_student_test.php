@@ -8,7 +8,7 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_USERNAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
-$student_id = 1; //To Do: Change This
+$student_id = 3; //To Do: Change This
 if(isset($_REQUEST["message"]) && !empty(trim($_REQUEST["message"]))){
     echo $_REQUEST["message"];
 }

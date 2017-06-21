@@ -40,18 +40,11 @@ WHERE eCourse.batch_id = eBatch.id AND eBatch.branch_id = eBranch.id AND eCourse
 AS batchName,eBatch.branch_id AS batchBranchId,eCourse.id AS courseId,eCourse.name AS courseName,eCourse.batch_id 
 AS courseBatchId FROM `egn_course` AS eCourse,`egn_batch` AS eBatch,`egn_branch` AS eBranch 
 WHERE eCourse.batch_id = eBatch.id AND eBatch.branch_id = eBranch.id AND eBatch.name = '$batchName'";
-        } elseif ($teacherStatus == "no" && $teacherId > 0 && $multiQuery == 'yes' && $batchId > 0 && $courseId == 0 && $batchName != null && $branchId > 0) {
+        } elseif ($teacherStatus == "no" && $teacherId > 0 && $multiQuery == 'yes' && $batchId > 0 && $courseId == 0 && $batchName == null && $branchId > 0) {
             $sql = "SELECT DISTINCT c.id,c.name 
-                FROM egn_batch as batch ,egn_course as c ,egn_branch as branch ,egn_teacher_course as tc ,egn_users as u 
-                WHERE 
-                u.role_id = " . $teacherId . " AND 
-                branch.id = " . $branchId . " AND
-                batch.id = " . $batchId . " AND
-                c.branch_id=branch.id AND 
-                batch.branch_id = branch.id AND
-                tc.user_id = u.id AND
-                tc.course_id = c.id
-                ORDER BY c.id";
+                    FROM egn_batch as batch ,egn_course as c ,egn_users as u ,egn_role as r, egn_teacher_course as tc 
+                    WHERE batch.branch_id = " . $branchId . " AND c.batch_id = batch.id AND tc.course_id=c.id AND tc.user_id=u.id AND u.id=" . $teacherId . " AND batch.id = " . $batchId . " AND u.role_id = r.id AND r.is_teacher=1
+                    ORDER BY c.name";
         } else {
             // $sql = "SELECT * FROM `egn_course`";
             $sql = "SELECT eBranch.id AS branchId,eBranch.name AS branchName,eBatch.id AS batchId,eBatch.name 

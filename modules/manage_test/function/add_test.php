@@ -10,7 +10,7 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_USERNAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
-$teacher_id = 1; //To Do: Change This
+$teacher_id = 3; //To Do: Change This
 $test = new Test($dbConnect->getInstance());
 if(isset($_REQUEST["branch_id"])){
     $branch_id = $_REQUEST["branch_id"];
@@ -54,7 +54,7 @@ if($result!=null)
 
 if($branch_id>0){
     $result=$test->getBatch($teacher_id,$branch_id);
-    if($result!=null)
+    if($result!=false)
     {
         ?>
 

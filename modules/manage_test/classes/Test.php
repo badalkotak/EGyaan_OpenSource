@@ -1,6 +1,9 @@
 <?php
 
 include_once("../../../classes/Constants.php");
+include_once("../../manage_course/classes/Course.php");
+include_once("../../manage_batch/classes/Batch.php");
+include_once("../../manage_branch/classes/Branch.php");
 
 class Test
 {
@@ -27,7 +30,7 @@ class Test
                 UNION
                 SELECT t.id,title,total_marks,date_of_test,date_of_result,type,c.name, '1' as status
                 FROM egn_test as t ,egn_course as c
-                WHERE user_id = 1 AND t.course_id = c.id AND t.id IN
+                WHERE user_id = '$id' AND t.course_id = c.id AND t.id IN
                 (SELECT t.id FROM egn_test as t ,egn_test_marks as m WHERE m.test_id = t.id)
                 ORDER BY date_of_test,title,type DESC";
     	$result = $this->connection->query($sql);
@@ -61,60 +64,15 @@ class Test
     }
 
     public function getBranch(){
-        $sql = "SELECT id,name FROM egn_branch ORDER BY id";
-        $result = $this->connection->query($sql);
-        if($result->num_rows > 0)
-        {
-            return $result;
-        }
-        else
-        {
-            return null;
-        }
+        return (new Branch($this->connection))->getBranch(0);
     }
+
     public function getBatch($teacher_id,$branch_id){
-        $sql = "SELECT DISTINCT batch.id,batch.name 
-                FROM egn_batch as batch ,egn_course as c ,egn_branch as branch ,egn_teacher_course as tc ,egn_users as u 
-                WHERE 
-                u.role_id = " . $teacher_id . " AND 
-                branch.id = " . $branch_id . " AND 
-                c.branch_id=branch.id AND 
-                batch.branch_id = branch.id AND
-                tc.user_id = u.id AND
-                tc.course_id = c.id
-                ORDER BY batch.id";
-        $result = $this->connection->query($sql);
-        if($result->num_rows > 0)
-        {
-            return $result;
-        }
-        else
-        {
-            return null;
-        }
+        return (new Batch($this->connection))->getBatch('yes',$branch_id,0,'no',$teacher_id);
     }
 
     public function getCourse($teacher_id,$branch_id,$batch_id){
-        $sql = "SELECT DISTINCT c.id,c.name 
-                FROM egn_batch as batch ,egn_course as c ,egn_branch as branch ,egn_teacher_course as tc ,egn_users as u 
-                WHERE 
-                u.role_id = " . $teacher_id . " AND 
-                branch.id = " . $branch_id . " AND
-                batch.id = " . $batch_id . " AND
-                c.branch_id=branch.id AND 
-                batch.branch_id = branch.id AND
-                tc.user_id = u.id AND
-                tc.course_id = c.id
-                ORDER BY c.id";
-        $result = $this->connection->query($sql);
-        if($result->num_rows > 0)
-        {
-            return $result;
-        }
-        else
-        {
-            return null;
-        }
+        return (new Course($this->connection))->getCourse('no',$teacher_id,'yes',$batch_id,0,null,$branch_id);
     }
 
     public function insertTest($title,$total_marks,$date_of_test,$course_id,$teacher_id,$type_id)
@@ -187,9 +145,9 @@ class Test
     }
 
     public function getStudentList($test_id,$teacher_id){
-        $sql = "SELECT * FROM (SELECT DISTINCT s.id,s.firstname,s.lastname,t.total_marks
-                FROM egn_student as s , egn_test as t ,egn_course as c ,egn_course_reg as cr ,egn_batch as batch ,egn_branch as branch 
-                WHERE batch.branch_id =  branch.id AND s.batch_id = batch.id AND t.course_id = c.id AND c.branch_id = branch.id AND cr.student_id=s.id AND cr.course_id = c.id AND t.id = '$test_id' AND t.user_id='$teacher_id' AND t.type='F') as A
+        $sql = "SELECT * FROM (SELECT DISTINCT s.id,s.firstname,s.lastname,t.total_marks 
+                FROM egn_student as s , egn_test as t ,egn_course as c ,egn_course_reg as cr ,egn_batch as batch
+                WHERE s.batch_id = batch.id AND t.course_id = c.id AND c.batch_id = batch.id AND cr.student_id=s.id AND cr.course_id = c.id AND t.id = '$test_id' AND t.user_id='$teacher_id' AND t.type='F') as A
                 LEFT OUTER JOIN
                 (SELECT DISTINCT student_id,marks
                 FROM egn_test_marks
