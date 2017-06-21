@@ -1,3 +1,9 @@
+<html>
+<head>
+    <title>Delete Course - Student | EGyaan</title>
+</head>
+<body>
+
 <?php
 /**
  * Created by PhpStorm.
@@ -36,9 +42,9 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
             echo "<br><table border='3'>";
             echo "<tr><th>Sr. no.</th><th>Course Name</th><th>Delete</th></tr>";
             while ($row = $getData->fetch_assoc()) {
-                $studentCourseRegistrationId = $row['id'];
-                $studentCourseRegistrationCourseId = $row['course_id'];
-                $courseName = $row['name'];
+                $studentCourseRegistrationId = $row['courseRegId'];
+                $studentCourseRegistrationCourseId = $row['courseRegCourseId'];
+                $courseName = $row['courseName'];
                 echo "<tr><td>" . $i . "</td><td>" . $courseName . "</td><td><form action='delete_student_course.php' method='post'>
                 <input type='hidden' name='studentCourseRegistrationId' value='" . $studentCourseRegistrationId . "'>
                 <input type='submit' value='Delete'></form></td></tr>";
@@ -46,7 +52,7 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
             }
             echo "</table>";
         } else {
-            echo Constants::STATUS_FAILED;
+            echo "No Courses Enrolled";
         }
     } else {
         echo Constants::STATUS_FAILED;
@@ -54,3 +60,8 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
 } else {
     echo Constants::EMPTY_PARAMETERS;
 }
+?>
+
+</body>
+</html>
+

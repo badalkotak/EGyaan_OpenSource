@@ -20,7 +20,7 @@ class StudentCourseRegistration
     public function getStudentCourse($id)
     {
         if ($id > 0) {
-            $sql = "SELECT * FROM `egn_course_reg` AS eCourseReg,`egn_course` AS eCourse 
+            $sql = "SELECT eCourseReg.id AS courseRegId,eCourseReg.student_id AS courseRegStudentId,eCourseReg.course_id AS courseRegCourseId,eCourse.id AS courseId,eCourse.name AS courseName,eCourse.batch_id AS courseBatchId FROM `egn_course_reg` AS eCourseReg,`egn_course` AS eCourse 
 WHERE eCourseReg.course_id = eCourse.id AND eCourseReg.student_id = '" . $id . "'";
         } else {
             $sql = "SELECT * FROM `egn_course_reg`";

@@ -20,7 +20,9 @@ AS courseBatchId,eTeacherCourse.id AS teacherCourseId,eTeacherCourse.user_id
 AS teacherCourseUserId,eTeacherCourse.course_id AS teacherCourseCourseId FROM `egn_teacher_course` AS eTeacherCourse,`egn_course` AS eCourse,`egn_batch` 
 AS eBatch,`egn_branch` AS eBranch WHERE eTeacherCourse.course_id = eCourse.id AND eCourse.batch_id = eBatch.id 
 AND eBatch.branch_id = eBranch.id AND eTeacherCourse.user_id = '$teacherId'";
-        } elseif ($teacherStatus == 'no' && $teacherId == 0 && $multiQuery == 'no' && $batchId == 0 && $courseId > 0 && $batchName == null && $branchId == 0) { //This will give course details in General
+        } elseif ($teacherStatus == 'no' && $teacherId == 0 && $multiQuery == 'no' && $batchId == 0 && $courseId > 0
+            && $batchName == null && $branchId == 0
+        ) { //This will give course details in General
             $sql = "SELECT * FROM `egn_course` WHERE id = '$courseId'";
         } elseif ($teacherStatus == "no" && $teacherId > 0 && $multiQuery == 'no' && $batchId == 0 && $courseId == 0 && $batchName == null && $branchId == 0) { //This will give course details for Student
             $sql = "SELECT * FROM `egn_course_reg` AS cr, `egn_course` AS c WHERE cr.course_id = c.id 

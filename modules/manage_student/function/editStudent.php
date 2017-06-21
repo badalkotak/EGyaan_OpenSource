@@ -95,7 +95,7 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
 
         $batch = new Batch($dbConnect->getInstance());
 
-        $getBatchData = $batch->getBatch('no', 0, $batchId, 'no');
+        $getBatchData = $batch->getBatch('no', 0, $batchId, 'no',0);
         if ($getBatchData != null) {
             while ($row = $getBatchData->fetch_assoc()) {
                 $_branchId = $row['branchId'];
@@ -129,7 +129,7 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
         echo "<div id='new-drop-down' class='hide'>";
         echo "<select id='batch-id' name='batchId'>";
         echo "<option value='-2'>Select Batch</option>";
-        $_getBatchData = $batch->getBatch('yes', $_branchId, 0, 'no');
+        $_getBatchData = $batch->getBatch('yes', $_branchId, 0, 'no', 0);
         if ($_getBatchData != null) {
             while ($row = $_getBatchData->fetch_assoc()) {
                 $__batchId = $row['batchId'];
