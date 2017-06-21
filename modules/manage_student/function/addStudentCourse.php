@@ -42,9 +42,9 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
         $getData = $studentCourseRegistration->getStudentCourse($studentId);
         if ($getData != null) {
             while ($row = $getData->fetch_assoc()) {
-                $studentCourseRegistrationId[] = $row['id'];
-                $studentCourseRegistrationCourseId[] = $row['course_id'];
-                $studentCourseRegCourseName[] = $row['name'];
+                $studentCourseRegistrationId[] = $row['courseRegId'];
+                $studentCourseRegistrationCourseId[] = $row['courseRegCourseId'];
+                $studentCourseRegCourseName[] = $row['courseName'];
             }
             $e = 1;
             echo "<table border='3'>";
@@ -55,39 +55,70 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
             }
             echo "</table>";
         } else {
-            echo Constants::STATUS_FAILED;
+            echo "No Courses Enrolled";
         }
 
 //Student Not Enrolled Courses
-        $getCourseData = $course->getCourse('no', 0, 'yes', $batchId, 0, null);
+        $getCourseData = $course->getCourse('no', 0, 'yes', $batchId, 0, null, 0);
         if ($getCourseData != null) {
             while ($row1 = $getCourseData->fetch_assoc()) {
                 $courseId[] = $row1['courseId'];
                 $courseName[] = $row1['courseName'];
             }
-            echo "<br><br>List of Courses not enrolled by <b>" . $firstName . " " . $lastName . "</b>";
-            echo "<form action='course_reg_student.php' method='post'>";
-            echo "<table border='3'>";
-            echo "<tr><th>Sr. no.</th><th>Course Name</th><th>Apply</th></tr>";
-            $i = 1;
-            for ($j = 0; $j < count($courseId); $j++) {
-//                print_r($courseId[$j]);
-//                print_r($studentCourseRegistrationCourseId[$j]);
-//                echo "<br>";
-                if ($courseId[$j] != $studentCourseRegistrationCourseId[$j]) {
-                    echo "<tr><td>" . $i . "</td><td>" . $courseName[$j] . "</td><td>
-                <input type='checkbox' value='" . $courseId[$j] . "' name='courseCheck[]'></td></tr>";
+            if (!empty($courseId) && !empty($studentCourseRegistrationCourseId)) {
+                $newCourseIdArray = array_merge(array_diff($courseId, $studentCourseRegistrationCourseId));
+                if (count($newCourseIdArray) > 0) {
+                    echo "<br><br>List of Courses not enrolled by <b>" . $firstName . " " . $lastName . "</b>";
+                    echo "<form action='course_reg_student.php' method='post'>";
+                    echo "<table border='3'>";
+                    echo "<tr><th>Sr. no.</th><th>Course Name</th><th>Apply</th></tr>";
+                    $i = 1;
+                    for ($j = 0; $j < count($newCourseIdArray); $j++) {
+                        $newCourseData = $course->getCourse('no', 0, 'no', 0, $newCourseIdArray[$j], null, 0);
+                        if ($newCourseData != null) {
+                            while ($array1 = $newCourseData->fetch_assoc()) {
+                                $newCourseId = $array1['id'];
+                                $newCourseName = $array1['name'];
+                                echo "<tr><td>" . $i . "</td><td>" . $newCourseName . "</td><td>
+                <input type='checkbox' value='" . $newCourseId . "' name='courseCheck[]'></td></tr>";
+                                $i++;
+                            }
+                        } else {
+                            echo Constants::STATUS_FAILED;
+                        }
+                    }
+                    echo "</table>";
+                    echo "<br>";
+                    echo "<input type='hidden' value='" . $studentId . "' name='studentId'>";
+                    echo "<input type='submit' value='Add'>";
+                    echo "</form>";
                 } else {
-                    echo "All Courses Enrolled";
+                    echo "<br><br>All Courses enrolled";
                 }
-                $i++;
+            } else {
+                $getCourseData = $course->getCourse('no', 0, 'yes', $batchId, 0, null, 0);
+                if ($getCourseData != null) {
+                    $z = 1;
+                    echo "<br><br>List of Courses not enrolled by <b>" . $firstName . " " . $lastName . "</b>";
+                    echo "<form action='course_reg_student.php' method='post'>";
+                    echo "<table border='3'>";
+                    echo "<tr><th>Sr. no.</th><th>Course Name</th><th>Apply</th></tr>";
+                    while ($row1 = $getCourseData->fetch_assoc()) {
+                        $courseId = $row1['courseId'];
+                        $courseName = $row1['courseName'];
+                        echo "<tr><td>" . $z . "</td><td>" . $courseName . "</td><td>
+                <input type='checkbox' value='" . $courseId . "' name='courseCheck[]'></td></tr>";
+                        $z++;
+                    }
+                    echo "</table>";
+                    echo "<br>";
+                    echo "<input type='hidden' value='" . $studentId . "' name='studentId'>";
+                    echo "<input type='submit' value='Add'>";
+                    echo "</form>";
+                } else {
+                    echo "<br><br>All Courses enrolled";
+                }
             }
-
-            echo "</table>";
-            echo "<br>";
-            echo "<input type='hidden' value='" . $studentId . "' name='studentId'>";
-            echo "<input type='submit' value='Add'>";
-            echo "</form>";
         } else {
             echo Constants::STATUS_FAILED;
         }

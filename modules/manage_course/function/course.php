@@ -28,7 +28,7 @@
         $batch = new Batch($dbConnect->getInstance());
         $course = new Course($dbConnect->getInstance());
 
-        $getBranchData = $branch->getBranch();
+        $getBranchData = $branch->getBranch(0);
         if ($getBranchData != null) {
             while ($row = $getBranchData->fetch_assoc()) {
                 $branchId = $row['id'];
@@ -50,7 +50,7 @@
 <?php
 if (isset($_REQUEST['branchId'])) {
     $branch_Id = $_REQUEST['branchId'];
-    $getBatchData = $batch->getBatch('yes', $branch_Id, 0, 'no');
+    $getBatchData = $batch->getBatch('yes', $branch_Id, 0, 'no',0);
     if ($branch_Id > 0) {
         echo "<form action='' method='post'>";
         echo "<select name='batchId'>";
