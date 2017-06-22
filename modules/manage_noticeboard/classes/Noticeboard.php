@@ -12,7 +12,7 @@ class Noticeboard
 
     public function getNoticeboard($var1,$type,$var2,$urgent,$var3,$id)
     {
-    	$sql="SELECT * FROM egn_noticeboard where $var1='$type' and $var2='$urgent' and $var3=$id";
+    	$sql="SELECT * FROM egn_noticeboard where $var1='$type' and $var2='$urgent' and $var3='$id'";
     	$result = $this->connection->query($sql);
 
         if($result->num_rows > 0)

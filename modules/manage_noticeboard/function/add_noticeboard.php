@@ -1,7 +1,7 @@
 
 <html>
 <head>
-<script type="text/javascript" src="../../Resource/jquery.min.js">
+<script type="text/javascript" src="../../../Resources/jquery.min.js">
 </script>
 <script type="text/javascript" src="get_branch.js">
 </script>

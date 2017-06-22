@@ -35,7 +35,7 @@ if(isset($_REQUEST['type']))
 	$type=$_REQUEST['type'];
 }
 $user_id=2;
-if($_FILES['file']=="")
+if($_FILES['file']!="")
 {
 	$pass=$_FILES['file'];
 	$target_dir="../uploads/";
