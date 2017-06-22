@@ -9,7 +9,9 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_USERNAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
-$student_id = 3; //To Do: Change This
+
+include("../../../Resources/sessions.php");
+$student_id = $id;
 $test = new StudentTest($dbConnect->getInstance());
 if(isset($_REQUEST["test_id"])){
     if(!$test->checkValidTest($student_id,$_REQUEST["test_id"])) {

@@ -6,7 +6,10 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_USERNAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
-$teacher_id = 3; //To Do: Change This
+
+include("../../../Resources/sessions.php");
+
+$teacher_id = $id;
 $test = new Test($dbConnect->getInstance());
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $test->getStudentList($_POST["test_id"],$teacher_id);
