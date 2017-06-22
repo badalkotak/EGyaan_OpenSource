@@ -9,14 +9,11 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
         Constants::DB_PASSWORD,
         Constants::DB_NAME);
 
-
+if(isset($_REQUEST['title'],$_REQUEST['description'],$_REQUEST['type']))
+{
 $title=mysql_real_escape_string(trim($_REQUEST['title']));
 $description=mysql_real_escape_string(trim($_REQUEST['description']));
-
-if($title!=""  && !empty($description))
-{
-	
-	$type="s";
+$type=mysql_real_escape_string(trim($_REQUEST['type']));
 
 	$suggestion = new Suggestioncomplaint($dbConnect->getInstance());
 	$insertData=$suggestion->insertSuggestioncomplaint($title,$description,$type);
@@ -40,13 +37,13 @@ if($title!=""  && !empty($description))
 	}
 	else
 	{
-		echo "Error in inserting!";
+		echo "location:index.php?errormessage=Error in inserting!";
 	}
 		
 	
 }
 else{
-	header("location:add_suggestion.php?errormessage=Please input all fields");
+	header("location:index.php?errormessage=Please input all fields");
 
 	
 }

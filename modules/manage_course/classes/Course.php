@@ -20,6 +20,7 @@ AS courseBatchId,eTeacherCourse.id AS teacherCourseId,eTeacherCourse.user_id
 AS teacherCourseUserId,eTeacherCourse.course_id AS teacherCourseCourseId FROM `egn_teacher_course` AS eTeacherCourse,`egn_course` AS eCourse,`egn_batch` 
 AS eBatch,`egn_branch` AS eBranch WHERE eTeacherCourse.course_id = eCourse.id AND eCourse.batch_id = eBatch.id 
 AND eBatch.branch_id = eBranch.id AND eTeacherCourse.user_id = '$teacherId'";
+
         } elseif ($teacherStatus == 'no' && $teacherId == 0 && $multiQuery == 'no' && $batchId == 0 && $courseId > 0
             && $batchName == null && $branchId == 0
         ) { //This will give course details in General

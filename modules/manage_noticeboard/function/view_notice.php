@@ -13,7 +13,6 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
         Constants::DB_PASSWORD,
         Constants::DB_NAME);
 ?>
-<h1>URGENT</h1>
 <?php
 $var1=1;
 $var2=1;
@@ -45,8 +44,7 @@ if($selectData)
 
 		
 		<?php
-		echo'
-		<a href="delete_noticeboard.php?delete='.$id.'"><button type=button name=delete id=delete >Delete</button> </a>';
+		echo'<a href="delete_noticeboard.php?delete='.$id.'"><button type=button name=delete id=delete >Delete</button> </a>';
 		echo "<label>Attached File :</label>";echo "<a href=$file>Attached Notice</a>";
 
 	}

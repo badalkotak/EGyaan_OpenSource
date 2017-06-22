@@ -14,36 +14,61 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
         Constants::DB_PASSWORD,
         Constants::DB_NAME);
 
-$role_id=2;
+
+
+$role_id=1;
+if($role_id==1)
+{
 $var1="id";
-$var2="type";
+$var2=1;
 $id=$_REQUEST['id'];
-$type="s";
+$type=1;
 $suggestion = new Suggestioncomplaint($dbConnect->getInstance());
 $selectData=$suggestion->getSuggestioncomplaint($var1,$id,$var2,$type);
-if($selectData && $role_id==1)
+if($selectData !=null)
 {
+	echo'<table>'
 	while($row=$selectData->fetch_assoc())
 	{
 		$title=$row['title'];
 		$description=$row['description'];
 		$id=$row['id'];
-		?>
-		<?php
-		echo$title;
-		?>
-		<article>
-		<?php
-		echo$description;
-		?>
-		</article>
+		$type=$row['type'];
+		if($type=="s")
+		{
+			?><h1>Suggestion</h1><?php
+		}
+		else{
+			?><h1>Complaint</h1><?php
 
-		
-		<?php
-		echo'
-		<a href="delete_suggestion.php?delete='.$id.'"><button type=button name=delete id=delete onclick=del_confirm() >Delete</button> </a>';
+		}
+		?>
+
+				<tr>
+				<td>Title:
+				<?php
+				echo$title;
+				?>
+				</td>
+				</tr>
+				<tr>
+				<td>Description:
+					<?php
+					echo$description;
+					?>
+				</td>
+				</tr>
+				<tr>
+				<td>
+
+				<?php
+				echo'
+				<a href="delete_suggestion_complaint.php?delete='.$id.'"><button type=button name=delete id=delete onclick=del_confirm()>Delete</button> </a></td>';
+				?>
+				</tr>
 	}
 ?>
+	</table>
 	<script>
 		function del_confirm() {
 			var x;
@@ -58,22 +83,7 @@ if($selectData && $role_id==1)
 </script>
 <?php
 }
-else 
-{	
-	while($row=$selectData->fetch_assoc())
-	{
-		$title=$row['title'];
-		$description=$row['description'];
-		$id=$row['id'];
-		?>
-		<?php
-		echo$title;
-		?>
-		<article>
-		<?php
-		echo$description;
 
-}
 }
 ?>
 </article>

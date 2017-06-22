@@ -129,10 +129,12 @@
 //select branch_id from egn_batch where id in (select batch_id from egn_course WHERE id in (select course_id from egn_teacher_course where user_id=3))
 //$sql="Select * from $table1 where $var1=$value1 and $var2=$value2 and  $var3 in ( select $value3 from $table 2 where $var4=$value4 and $var5=$value5 and $var6 in (select $value6 from $table3 where $var7=$value7 and $var8=$value8 ))"
 	$course = new Course($dbConnect->getInstance());
-	$branchData=$course->getCourse("yes", $user_id, 'no',0, 0,null);
+	$branchData=$course->getCourse("yes", $user_id, 'no',0, 0,null,0);
+
 
 	if($branchData!=null)
 	{
+		echo"in";
 		?>
 		<h1>TeacherBRANCH</h1>
 		<?php
@@ -188,7 +190,7 @@
 		$teacher_branch="";
 	}
 	$course = new Course($dbConnect->getInstance());
-	$branchData=$course->getCourse("yes", $user_id, 'no',0, 0,null);
+	$branchData=$course->getCourse("yes", $user_id, 'no',0, 0,null,0);
 	if($branchData!=null)
 	{
 
@@ -286,6 +288,8 @@
 
 
 					<?php
+					echo'<a href="delete_noticeboard.php?delete='.$id.'" onclick=del_confirm()><button type=button name=delete id=delete >Delete</button> </a>';
+
 					echo'
 					<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
 					if($file!=null)
@@ -342,6 +346,7 @@
 
 				
 				<?php
+				echo'<a href="delete_noticeboard.php?delete='.$id.'" onclick=del_confirm()><button type=button name=delete id=delete >Delete</button> </a>';
 
 				echo'
 				<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
@@ -390,7 +395,7 @@
 
 
 			<?php
-			echo'<a href="delete_noticeboard.php?delete='.$id.'"><button type=button name=delete id=delete >Delete</button> </a>';
+			echo'<a href="delete_noticeboard.php?delete='.$id.'" onclick=del_confirm()><button type=button name=delete id=delete >Delete</button> </a>';
 			echo'<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
 			if($file!=null)
 			{
@@ -404,6 +409,18 @@
 	}
 
 	?>
+		<script>
+		function del_confirm() {
+			var x;
+			if (confirm("Do you want to continue") == true) {
+
+			} else {
+				event.preventDefault() ;
+			}
+    //document.getElementById("demo").innerHTML = x;
+}
+
+</script> 
 
 
 
