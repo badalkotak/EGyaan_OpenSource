@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('#batch_list').html("");
     $('#course_list').html("");
-
+    $('#form_input').html("");
     $('body').on('change','#branch_id', function () {
         $('#batch_list').html("");
         $('#course_list').html("");
@@ -37,6 +37,7 @@ $(document).ready(function () {
 
     $('body').on('change','#batch_id', function () {
         $('#course_list').html("");
+        $('#form_input').html("");
         var branch_id = $('#branch_id').val();
         var batch_id = $('#batch_id').val();
         if(batch_id != 0){
@@ -68,6 +69,7 @@ $(document).ready(function () {
     });
 
     $('body').on('change','#course_id', function () {
+        $('#form_input').html("");
         if(course_id != 0){
             var test_form = '<label>Enter Test Title:</label>' +
                             '<input type="text" id="title" name="title" placeholder="Enter test title" required><br>' +
