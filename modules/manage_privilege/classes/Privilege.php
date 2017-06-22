@@ -12,7 +12,7 @@ function __construct($connection)
     	{
             if($role_id==0 && $privilege_id==0)
             {
-    		    $sql = "select * from egn_privilege";
+    		    $sql = "select * from egn_privilege WHERE admin_level='N'";
             }
             else if($role_id!=0 && $privilege_id==0)
             {

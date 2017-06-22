@@ -10,10 +10,33 @@ class TeacherCourse
         $this->connection = $connection;
     }
 
-    public function getTeacherCourse($user_id)
+    public function getTeacherCourse($user_id,$course_id,$id)
     {
-    	$sql="SELECT * FROM egn_teacher_course WHERE user_id='$user_id'";
-    	$result=$this->connection->query($sql);
+        if($user_id > 0 && $course_id > 0 && $id==0)
+        {
+    	   $sql="SELECT * FROM egn_teacher_course WHERE user_id=$user_id && course_id=$course_id";
+    	}
+        else if($user_id == 0 && $course_id > 0 && $id==0)
+        {
+             $sql="SELECT user_id FROM `egn_teacher_course` WHERE `course_id`=".$course_id;
+        }
+        else if($user_id == 0 && $course_id > 0 && $id==0)
+        {
+            $sql="SELECT course_id FROM `egn_teacher_course` WHERE `user_id`=".$user_id;
+        }
+        else if($user_id == 0 && $course_id == 0 && $id > 0)
+        {
+            $sql="SELECT course_id FROM `egn_teacher_course` WHERE id=".$id;
+        }
+        else if($user_id > 0 && $course_id ==0 && $id==0)
+        {
+            $sql="SELECT * FROM egn_teacher_course WHERE user_id='$user_id'";
+        }
+        else
+        {
+            $sql="SELECT * FROM egn_teacher_course";
+        }
+        $result=$this->connection->query($sql);
 
     	if($result->num_rows > 0)
     	{
@@ -51,16 +74,9 @@ class TeacherCourse
     }
     }
 
-    public function deleteTeacherCourse($id,$user_id)
+    public function deleteTeacherCourse($id)
     {
-        if($user_id==0)
-        {
-            $sql="DELETE FROM `egn_teacher_course` WHERE `id`='$id'";            
-        }
-        else
-        {
-            $sql="DELETE FROM `egn_teacher_course` WHERE `user_id`='$user_id'";            
-        }
+    	$sql="DELETE FROM `egn_teacher_course` WHERE `id`='$id'";
     	$delete=$this->connection->query($sql);
 
     	if($delete===true)

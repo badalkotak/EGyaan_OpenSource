@@ -7,9 +7,16 @@ class TimeType
 	{
 		$this->connection=$connection;
 	}
-	public function getTimeType()
+	public function getTimeType($type)
 	{
-		$sql="select * from egn_time_type";
+		if($type > 0)
+		{
+			 $sql="select * from egn_time_type where id=$type";
+		}
+		else
+		{
+			 $sql="select * from egn_time_type";
+		}
 		$result=$this->connection->query($sql);
 		if($result->num_rows > 0)
 		{

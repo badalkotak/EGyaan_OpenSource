@@ -37,7 +37,7 @@ $insert_count=0;
 for($i=1;$i<=$count;$i++)
 {
 	$ci="c".$i;
-	echo $privilege_id=$_REQUEST[$ci];
+	$privilege_id=$_REQUEST[$ci];
 	if($privilege_id!="")
 	{
 		$actual_count++;

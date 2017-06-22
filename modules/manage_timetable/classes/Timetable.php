@@ -7,10 +7,16 @@ class Timetable
 	{
 		$this->connection=$connection;
 	}
-	public function getTimetable($batch_id)
+	public function getTimetable($batch_id,$day_id,$time_id)
 	{
+		if($batch_id == 0 && $day_id > 0 && $time_id > 0)
+		{
+			$sql="SELECT * FROM `egn_timetable` WHERE `day_id`=$day_id && `time_id`=$time_id";
+		}
+		else
+		{
 		$sql="SELECT * FROM egn_timetable WHERE teacher_course_id IN (SELECT id FROM egn_teacher_course WHERE course_id IN (SELECT id FROM egn_course WHERE batch_id='$batch_id'))";
-
+		}	
 		// $sql="select * from egn_timetable";
 		$result=$this->connection->query($sql);
 		if($result->num_rows > 0)
@@ -24,7 +30,7 @@ class Timetable
 	}
 	public function insertTimetable($day_id,$time_id,$teacher_course_id)
 	{
-		 $sql="SELECT * FROM `egn_timetable` WHERE time_id=".$time_id." && day_id=".$day;
+		$sql="SELECT * FROM `egn_timetable` WHERE time_id=".$time_id." && day_id=".$day_id;
         $result = $this->connection->query($sql);
 
         if($result->num_rows == 0)
