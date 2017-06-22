@@ -24,14 +24,14 @@ $course=new Course($dbconnect->getInstance());
 	Downloadable:<input type="checkbox" name="downloadable" value="Yes">
 	
 	<?php
-	$getTeacherCourse=$course->getCourse("yes",$user_id,"no",0,0,null);
+	$getTeacherCourse=$course->getCourse("yes",$user_id,"no",0,0,null,0);
 	if($getTeacherCourse===false)
 	{
-		$result=$course->getCourse("no",0,'no',0,0,null);	
+		$result=$course->getCourse("no",0,'no',0,0,null,0);	
 	}
 	else
 	{
-		$result=$course->getCourse("yes",$user_id,"no",0,0,null);
+		$result=$course->getCourse("yes",$user_id,"no",0,0,null,0);
 	}
 		// $result=$course->getCourse("yes",$id,'no',0,0);
 		echo "Course:<select name='course'>";
@@ -50,14 +50,14 @@ $course=new Course($dbconnect->getInstance());
 
 <?php
 
-	$getTeacherCourse=$course->getCourse("yes",$id,"no",0,0,null);
+	$getTeacherCourse=$course->getCourse("yes",$id,"no",0,0,null,0);
 	if($getTeacherCourse===false)
 	{
-		$courses_result=$course->getCourse("no",0,'no',0,0,null);	
+		$courses_result=$course->getCourse("no",0,'no',0,0,null,0);	
 	}
 	else
 	{
-		$courses_result=$course->getCourse("yes",$id,"no",0,0,null);
+		$courses_result=$course->getCourse("yes",$id,"no",0,0,null,0);
 	}
 
 	echo '<table>

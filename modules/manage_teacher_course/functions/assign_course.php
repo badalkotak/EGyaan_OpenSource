@@ -47,7 +47,7 @@ $user_id=$_REQUEST['user_id'];
 			<?php
 				$course=new Course($dbConnect->getInstance());
 
-				$getCourse=$course->getCourse("yes",$user_id,"no",0,0,null);
+				$getCourse=$course->getCourse("yes",$user_id,"no",0,0,null,0);
 
 				$i=0;
 

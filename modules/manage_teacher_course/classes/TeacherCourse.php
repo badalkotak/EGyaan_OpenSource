@@ -51,9 +51,16 @@ class TeacherCourse
     }
     }
 
-    public function deleteTeacherCourse($id)
+    public function deleteTeacherCourse($id,$user_id)
     {
-    	$sql="DELETE FROM `egn_teacher_course` WHERE `id`='$id'";
+        if($user_id==0)
+        {
+            $sql="DELETE FROM `egn_teacher_course` WHERE `id`='$id'";            
+        }
+        else
+        {
+            $sql="DELETE FROM `egn_teacher_course` WHERE `user_id`='$user_id'";            
+        }
     	$delete=$this->connection->query($sql);
 
     	if($delete===true)

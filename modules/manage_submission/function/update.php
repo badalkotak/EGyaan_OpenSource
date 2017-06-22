@@ -44,14 +44,14 @@ else
 	
 	<?php
 	// $result=$course->getCourse("yes",$user_id,'no');
-	$getTeacherCourse=$course->getCourse("yes",$user_id,"no",0,0,null);
+	$getTeacherCourse=$course->getCourse("yes",$user_id,"no",0,0,null,0);
 	if($getTeacherCourse===false)
 	{
-		$result=$course->getCourse("no",0,'no',0,0,null);	
+		$result=$course->getCourse("no",0,'no',0,0,null,0);	
 	}
 	else
 	{
-		$result=$course->getCourse("yes",$user_id,"no",0,0,null);
+		$result=$course->getCourse("yes",$user_id,"no",0,0,null,0);
 	}
 		echo "Course:<select name='course'>
 		<option value=0>Select</option>";

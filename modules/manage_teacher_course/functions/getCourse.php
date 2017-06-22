@@ -13,7 +13,7 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
 $course=new Course($dbConnect->getInstance());
 
 $batch_id=$_REQUEST['batch_id'];
-$getCourse=$course->getCourse("no",0,"yes",$batch_id,0,null);
+$getCourse=$course->getCourse("no",0,"yes",$batch_id,0,null,0);
 
 $json=array();
 $course_array=array();

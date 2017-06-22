@@ -73,7 +73,7 @@ $user=new User($dbConnect->getInstance());
 
 	
 		<?php
-			$getUsers=$user->getUser();
+			$getUsers=$user->getUser(0);
 			$i=0;
 
 			if($getUsers!=null)
@@ -87,6 +87,8 @@ $user=new User($dbConnect->getInstance());
 		<th>Mobile</th>
 		<th>Role</th>
 		<th>Assign Courses</th>
+		<th>Edit</th>
+		<th>Delete</th>
 	</thead>
 	<tbody>";
 				while($row=$getUsers->fetch_assoc())
@@ -160,6 +162,14 @@ $user=new User($dbConnect->getInstance());
 					{
 						echo "We can assign a course only to a Teacher";
 					}
+					echo "</td>";
+
+					echo "<td>";
+					echo "<form action=edit_user.php method=post><input type=submit name=edit value=$user_id></form>";
+					echo "</td>";
+
+					echo "<td>";
+					echo "<form action=delete_user.php method=post><input type=submit name=delete value=$user_id></form>";
 					echo "</td>";
 
 					echo "</tr>";

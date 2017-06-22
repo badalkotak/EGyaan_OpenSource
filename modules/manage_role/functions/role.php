@@ -106,7 +106,7 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
 					echo "</td>";
 
 					echo "<td>";
-					if($id==Constants::ROLE_STUDENT_ID || $id==Constants::ROLE_PARENT_ID || $id==Constants::ROLE_TEACHER_ID)
+					if($id==Constants::ROLE_STUDENT_ID || $id==Constants::ROLE_PARENT_ID || $id==Constants::ROLE_TEACHER_ID || $id==Constants::ROLE_ADMIN_ID)
 					{
 						echo "Privileges for this role cannot be updated!";
 					}
@@ -117,7 +117,7 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
 					echo "</td>";
 
 					echo "<td>";
-					if($id==Constants::ROLE_STUDENT_ID || $id==Constants::ROLE_PARENT_ID || $id==Constants::ROLE_TEACHER_ID)
+					if($id==Constants::ROLE_STUDENT_ID || $id==Constants::ROLE_PARENT_ID || $id==Constants::ROLE_TEACHER_ID || $id==Constants::ROLE_ADMIN_ID)
 					{
 						echo "Cannot be edited!";
 					}
@@ -128,7 +128,7 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
 					echo "</td>";
 
 					echo "<td>";
-					if($id==Constants::ROLE_STUDENT_ID || $id==Constants::ROLE_PARENT_ID || $id==Constants::ROLE_TEACHER_ID)
+					if($id==Constants::ROLE_STUDENT_ID || $id==Constants::ROLE_PARENT_ID || $id==Constants::ROLE_TEACHER_ID || $id==Constants::ROLE_ADMIN_ID)
 					{
 						echo "Cannot be deleted!";
 					}

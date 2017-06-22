@@ -9,7 +9,7 @@
 	require_once("../../manage_course/classes/Course.php");
 
 
-//include("../../../Resources/sessions.php");
+include("../../../Resources/sessions.php");
 
 
 	$dbConnect = new DBConnect(Constants::SERVER_NAME,
@@ -17,8 +17,8 @@
 		Constants::DB_PASSWORD,
 		Constants::DB_NAME);
 
-	$user_id=3;
-	$email="badalkotak@gmail.com";
+	$user_id=$id;
+	// $email="badalkotak@gmail.com";
 //$role_id=7;
 //student
 

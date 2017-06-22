@@ -10,9 +10,16 @@ class User
         $this->connection = $connection;
     }
 
-    public function getUser()
+    public function getUser($user_id)
     {
-    	$sql="SELECT * FROM egn_users";
+        if($user_id==0)
+        {
+            $sql="SELECT * FROM egn_users";
+        }
+        else
+        {
+            $sql="SELECT * FROM egn_users WHERE id='$user_id'";
+        }
     	$result = $this->connection->query($sql);
 
         if($result->num_rows > 0)
@@ -50,9 +57,9 @@ class User
         }
     }
 
-    public function updateUser($id,$email,$passwd,$role_id,$gender,$mobile,$name)
+    public function updateUser($id,$email,$role_id,$gender,$mobile,$name)
     {
-        $sql="UPDATE `egn_users` SET `email`='$email',`passwd`='$passwd',`role_id`='$role_id',`gender`='$gender',`mobile`='$mobile',`name`='$name' WHERE id='$id'";
+        $sql="UPDATE `egn_users` SET `email`='$email',`role_id`='$role_id',`gender`='$gender',`mobile`='$mobile',`name`='$name' WHERE id='$id'";
         $update=$this->connection->query($sql);
 
         if($update===true)
