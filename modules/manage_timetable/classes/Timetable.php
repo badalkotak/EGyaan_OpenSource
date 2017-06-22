@@ -15,7 +15,7 @@ class Timetable
 		}
 		else
 		{
-		$sql="SELECT * FROM egn_timetable WHERE teacher_course_id IN (SELECT id FROM egn_teacher_course WHERE course_id IN (SELECT id FROM egn_course WHERE batch_id='$batch_id'))";
+		$sql="SELECT * FROM egn_timetable WHERE day_id='$day_id' AND time_id='$time_id' AND teacher_course_id IN (SELECT id FROM egn_teacher_course WHERE course_id IN (SELECT id FROM egn_course WHERE batch_id='$batch_id'))";
 		}	
 		// $sql="select * from egn_timetable";
 		$result=$this->connection->query($sql);

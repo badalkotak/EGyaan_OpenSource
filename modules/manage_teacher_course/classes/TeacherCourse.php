@@ -26,7 +26,7 @@ class TeacherCourse
         }
         else if($user_id == 0 && $course_id == 0 && $id > 0)
         {
-            $sql="SELECT course_id FROM `egn_teacher_course` WHERE id=".$id;
+            $sql="SELECT * FROM `egn_teacher_course` WHERE id=".$id;
         }
         else if($user_id > 0 && $course_id ==0 && $id==0)
         {

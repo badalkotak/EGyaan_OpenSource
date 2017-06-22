@@ -138,8 +138,8 @@ $teacher_course=new TeacherCourse($dbconnect->getInstance());
 
 if(!empty($_REQUEST['course']))
 {
-	 $course_id=$_REQUEST['course'];
-	 $result_userid=$teacher_course->getTeacherCourse(0,$course_id,0);
+	$course_id=$_REQUEST['course'];
+	$result_userid=$teacher_course->getTeacherCourse(0,$course_id,0);
 	echo '<select name="user">
 	<option value="0">select</option>';
 
@@ -147,7 +147,7 @@ if(!empty($_REQUEST['course']))
 	{
 		while($row_userId=$result_userid->fetch_assoc())
 		{
-			 $userId=$row_userId['user_id'];
+			$userId=$row_userId['user_id'];
 			$result_user=$user_obj->getUser($userId);
 			if($result_user!=null)
 			{
@@ -168,7 +168,7 @@ echo '<input type=submit name=submit value=submit>';
 
 <table>
 <tr>
-<th> </th>
+<th>Timing</th>
 <th>Monday</th>
 <th>Tuesday</th>
 <th>Wednesday</th>
@@ -180,131 +180,70 @@ echo '<input type=submit name=submit value=submit>';
 
 <?php
 
-/*$teachercourse=new TeacherCourse($dbconnect->getInstance());
-
-$result=$timetable->getTimeTable($batch_id,0,0);
-if($result != null)
+$getTiming=$timetimetable->getTimeTimetable();
+if($getTiming!=null)
 {
-
-while($row=$result->fetch_assoc())
-{
-	$result_time1=$timetimetable->getTimeTimetable();
-	if($result_time1 != null)
-	{
-		while($row_time1=$result_time1->fetch_assoc())
+		while($row=$getTiming->fetch_assoc())
 		{
-			
-			echo '<tr><td>'.$row_time1['from_time'].'-'.$row_time1['to_time'].'</td>';
-			$time1=$row_time1['id'];
-		
-	$day_id=$row['day_id'];
-	$time_id=$row['time_id'];
-	$teacher_course_id=$row['teacher_course_id'];
-	$result_time=$timetimetable->getTimeTimetable();
-	if($result_time != null)
-	{
-		while($row_time=$result_time->fetch_assoc())
-		{
-			 if($row_time['id']==$time_id)
-			 {
-			 	 $row_time['id'];
-			 	$time_id_timetable=$row_time['id'];
-			 	$from_time=$row_time['from_time'];
-			 	$to_time=$row_time['to_time'];
-			 	$type=$row_time['type'];
-			 	$result_type=$timetype->getTimeType($type);
-			 	if($result_type!=null)
-			 	{
-			 		while($row_type=$result_type->fetch_assoc())
-			 		{
-			 			 $type_name=$row_type['name'];
-			 		}
-			 	}
-			 }
-		}
-	}
-}
-}
-$i=1;
-while($i<8)
-	{
-		if($day_id==$i && $time_id==$time1)
-		{
-			echo '<td>'.$day_id.'</td>';
-		}
-		else
-		{	
-			echo '<td>Available</td>';
-		}
-	$i=$i+1;
-	}
+			$time_id=$row['id'];
+			$from_time=$row['from_time'];
+			$to_time=$row['to_time'];
 
-echo '</tr>';
-}
-}
+			echo "<tr>";
+			echo "<td>";
+			echo $from_time." - ".$to_time;
+			echo "</td>";
 
-
-$result_time=$timetimetable->getTimeTimetable();
-if($result_time != null)
-{
-while($row_time=$result_time->fetch_assoc())
-{
-	 $time_id=$row_time['id'];
-	$time_from=$row_time['from_time'];
-	$time_to=$row_time['to_time'];
-				echo '<td>'.$time_from.'-'.$time_to.'</td>';
-if($result!=null)
-{
-while($i<8)
-{
-
-	while($row=$result->fetch_assoc())
+			for($day=1;$day<=7;$day++)//7 days of week loop
 			{
-
-					
-					if($row['time_id']==$time_id && $row['day_id']==$i)
+				$getLecture=$timetable->getTimetable($batch_id,$day,$time_id);
+				if($getLecture!=null)
+				{
+					while($lectureRow=$getLecture->fetch_assoc())
 					{
-						$result_teacher_course=$teachercourse->getTeacherCourse(0,0,$row['teacher_course_id']);
-						if($result_teacher_course!=null)
-						{
+						$teacher_course_id=$lectureRow['teacher_course_id'];
+						$teacher_course_details=$teacher_course->getTeacherCourse(0,0,$teacher_course_id);
 
-							while($row_teacher_course=$result_teacher_course->fetch_assoc())
+						while($teacherCourseRow=$teacher_course_details->fetch_assoc())
+						{
+							$user_id=$teacherCourseRow['user_id'];
+
+							$get_user_name=$user_obj->getUser($user_id);
+							while($nameRow=$get_user_name->fetch_assoc())
 							{
-								$result_user=$user_obj->getUser($row_teacher_course['user_id']);
-								{
-									if($result_user!=null)
-									{
-										while($row_user=$result_user->fetch_assoc())
-										{
-											echo $user=$row_user['name'];
-										}
-									}
-								}
-								$result_course=$course_obj->getcourse("no",0,"no",0,$row_teacher_course['user_id'],null,0);
-								{
-									if($result_course!=null)
-									{
-										while($row_course=$result_course->fetch_assoc())
-										{
-											$course=$row_course['name'];
-										}
-									}
-								}
+								$user_name=$nameRow['name'];
+							}
+
+							$course_id=$teacherCourseRow['course_id'];
+							$get_course_name=$course_obj->getCourse("no",0,"no",0,$course_id,null,0);
+
+							while($courseRow=$get_course_name->fetch_assoc())
+							{
+								$course_name=$courseRow['name'];
 							}
 						}
-						echo '<td>'.$user.'-'.$course.'</td>';
+
+							echo "<td>";
+							echo $course_name." (".$user_name.")"; 
+							echo "</td>";
 					}
-					else
-					{
-						echo '<td>--Available--</td>';
-					}
+					
+				}
+				else
+				{
+					echo "<td>";
+					echo "</td>";
 				}
 			}
+
+			echo "</tr>";
 		}
-$i=$i+1;
 }
-echo '</tr>';
-}*/
+else
+{
+	echo "Insert timing first";
+	break;
+}
 ?>
 </table>
 </body>
