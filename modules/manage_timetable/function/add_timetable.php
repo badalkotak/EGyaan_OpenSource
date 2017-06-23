@@ -289,7 +289,7 @@ if($getTiming!=null)
 
 							echo "<td>";
 							echo $course_name." (".$user_name.") ".$lectureRow['comment']; 
-							echo "</br><a href=delete_timetable.php?id=".$id." onclick=ConfirmDelete()>Delete</a></td>";
+							echo "</br><a href=delete_timetable.php?id=".$id."&batch=$batch_id&branch=$branch_id onclick=ConfirmDelete()>Delete</a></td>";
 					}
 					
 				}

@@ -11,6 +11,8 @@ $dbconnect=new DBConnect(Constants::SERVER_NAME,
 if(isset($_REQUEST['id']))
 {
 	$id=$_REQUEST['id'];
+	$branch=$_REQUEST['branch'];
+	$batch=$_REQUEST['batch'];
 	$timetable=new Timetable($dbconnect->getInstance());
 	$delete=$timetable->deleteTimeTable($id);
 	if($delete==true)
@@ -18,7 +20,7 @@ if(isset($_REQUEST['id']))
 		$msg=Constants::DELETE_SUCCESS_MSG;
 		echo "<script>
 	alert('$msg');
-	window.location.href='timetable_select_branch_batch.php';
+	window.location.href='add_timetable.php?branch=$branch&batch=$batch';
 	</script>";
 
 	}
@@ -27,7 +29,7 @@ if(isset($_REQUEST['id']))
 		$msg=Constants::DELETE_FAIL_MSG;
 	echo "<script>
 	alert('$msg');
-	window.location.href='timetable_select_branch_batch.php';
+	window.location.href='add_timetable.php?branch=$branch&batch=$batch';
 	</script>";
 
 	}
@@ -36,7 +38,7 @@ else
 {
 	echo "<script>
 	alert('Error');
-		window.location.href='timetable_select_branch_batch.php';
+		window.location.href='add_timetable.php?branch=$branch&batch=$batch';
 	</script>";
 }
 

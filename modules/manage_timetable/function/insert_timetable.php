@@ -52,7 +52,7 @@ else
 	}
 
 	$result_timetable=$timetable->getTimetable($user_id,$batch,$time_id,$day_id);
-	if($result_timetable === false)
+	if($result_timetable == null)
 	{
 		
 		$insert_timetable=$timetable->insertTimeTable($day_id,$time_id,$teacher_course_id,$comment);
