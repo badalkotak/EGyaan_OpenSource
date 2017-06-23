@@ -7,6 +7,7 @@ $(document).ready(function(){
 		$.ajax({
 			method:"POST",
 			url:"get_branch.php",
+			data:"output="+true,
 			dataType:"json",
 
 

@@ -7,8 +7,6 @@
 </script>
 <script type="text/javascript" src="add_noticeboard.js">
 </script>
-<script type="text/javascript" src="add_noticeboard.js">
-</script>
 </head>
 <body>
 <form action="insert_get_noticeboard.php" method="post" enctype="multipart/form-data" id=add_notice>
@@ -18,11 +16,14 @@ require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 include("../../../Resources/sessions.php");
 
-
+if($role_id==Constants::ROLE_ADMIN_ID)
+{
 $dbConnect = new DBConnect(Constants::SERVER_NAME,
         Constants::DB_USERNAME,
         Constants::DB_PASSWORD,
         Constants::DB_NAME);
+
+
 if(isset($_REQUEST['type']) && $_REQUEST['type']=="b")
 {
 	require_once("../../manage_branch/classes/Branch.php");
@@ -87,13 +88,18 @@ file:<input type="file" name="file" id="file" />
 <label><input type="radio" name="type"  value=b />Branch</label>
 <label><input type="radio" name="type"  value=c  />Common</label>
 <div id=branch></div>
-<input type="checkbox" name="u" id="u" value="u" /> Urgent
+<input type="checkbox" name="u" id="u" value="u"  /> Urgent
 <input type=submit value=submit id=add_notice_submit />
 <div id=errormessage>
 </div>
 
 
 <?php
+}
+}
+else{
+	echo Constants::NO_USER_ERR;
+
 }
 ?>
 

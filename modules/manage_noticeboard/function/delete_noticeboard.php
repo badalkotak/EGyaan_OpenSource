@@ -2,9 +2,12 @@
 require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../classes/Noticeboard.php");
+include("../../../Resources/sessions.php");
 
 
 
+if($role_id==Constants::ROLE_ADMIN_ID)
+{
 $dbConnect = new DBConnect(Constants::SERVER_NAME,
         Constants::DB_USERNAME,
         Constants::DB_PASSWORD,
@@ -50,4 +53,9 @@ else{
 	header("location:index.php?errormessage=error");
 
 	
+}
+}
+else{
+	echo Constants::NO_USER_ERR;
+
 }
