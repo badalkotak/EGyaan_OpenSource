@@ -51,12 +51,16 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
             $feesComment = $row['fees_comment'];
             $dateOfAdmission = $row['date_of_admission'];
             $parentMobile = $row['parent_mobile'];
-//            $studentProfilePhoto = $row['student_profile_photo'];
-//            $parentProfilePhoto = $row['parent_profile_photo'];
+            $studentProfilePhoto = $row['student_profile_photo'];
+            $parentProfilePhoto = $row['parent_profile_photo'];
             $batchId = $row['batch_id'];
         }
 
-        echo "<form  action='edit_student.php' method='post'>";
+        echo "<form  action='edit_student.php' method='post' enctype='multipart/form-data'>";
+        echo "<img src='http://localhost/EGyaan_OpenSource/modules/manage_student/images/student/" . $studentProfilePhoto . "' width='75' height='75'><br>";
+        echo "Choose Student Photo : <input type='file' name='studentProfilePhoto'>
+    <label>Max Size of Image is 5MB.</label>
+    <br>";
         echo "<input type='hidden' name='studentId' value='" . $studentId . "'>";
         echo "<input type='text' name='firstName' value='" . $firstName . "'><br>";
         echo "<input type='text' name='lastName' value='" . $lastName . "'><br>";
@@ -80,6 +84,10 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
         }
         echo "</select>";
         echo "<br>";
+        echo "<img src='http://localhost/EGyaan_OpenSource/modules/manage_student/images/parent/" . $parentProfilePhoto . "' width='75' height='75'><br>";
+        echo "Choose Parent Photo : <input type='file' name='parentProfilePhoto'>
+    <label>Max Size of Image is 5MB.</label>
+    <br>";
         echo "<input type='text' name='parentName' value='" . $parentName . "'><br>";
         echo "<input type='email' name='parentEmail' value='" . $parentEmail . "'><br>";
         echo "<input type='text' name='parentPassword' value='" . $parentPassword . "'><br>";
@@ -95,7 +103,7 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
 
         $batch = new Batch($dbConnect->getInstance());
 
-        $getBatchData = $batch->getBatch('no', 0, $batchId, 'no',0);
+        $getBatchData = $batch->getBatch('no', 0, $batchId, 'no', 0);
         if ($getBatchData != null) {
             while ($row = $getBatchData->fetch_assoc()) {
                 $_branchId = $row['branchId'];

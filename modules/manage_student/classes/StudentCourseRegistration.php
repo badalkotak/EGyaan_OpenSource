@@ -63,13 +63,21 @@ VALUES ('$studentId','$courseId')";
         $studentId = $this->connection->real_escape_string($studentId);
         $courseId = $this->connection->real_escape_string($courseId);
 
-        $sql = "UPDATE `egn_course_reg` SET `course_id`='$courseId' WHERE `id`='$id' AND `student_id`='$studentId'";
-        $update = $this->connection->query($sql);
+        $sql = "SELECT * FROM `egn_course_reg` WHERE student_id='$studentId' AND course_id='$courseId'";
+        $result = $this->connection->query($sql);
 
-        if ($update === true) {
-            return true;
+        if ($result->num_rows == 0) {
+            $sql = "UPDATE `egn_course_reg` SET `course_id`='$courseId' WHERE `id`='$id' AND `student_id`='$studentId'";
+            $update = $this->connection->query($sql);
+
+            if ($update === true) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
-            return false;
+            $message = Constants::STATUS_EXISTS;
+            return $message;
         }
     }
 

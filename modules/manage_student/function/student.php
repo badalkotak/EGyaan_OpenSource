@@ -9,7 +9,10 @@
     </style>
 </head>
 <body>
-<form action="insert_student.php" method="post" id="student-form">
+<form action="insert_student.php" method="post" id="student-form" enctype="multipart/form-data">
+    Choose Student Photo : <input type="file" name="studentProfilePhoto">
+    <label>Max Size of Image is 5MB.</label>
+    <br>
     <input type="text" name="firstName" placeholder="Enter First Name"><br>
     <input type="text" name="lastName" placeholder="Enter Last Name"><br>
     <input type="email" name="emailId" placeholder="Enter Email Id"><br>
@@ -21,6 +24,9 @@
         <option value="Female">Female</option>
         <option value="TransGender">TransGender</option>
     </select>
+    <br>
+    Choose Parent Photo : <input type="file" name="parentProfilePhoto">
+    <label>Max Size of Image is 5MB.</label>
     <br>
     <input type="text" name="parentName" placeholder="Enter Parent name"><br>
     <input type="email" name="parentEmail" placeholder="Enter Parent Email"><br>
