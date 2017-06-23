@@ -12,7 +12,7 @@ $timetype=new TimeType($dbconnect->getInstance());
 ?>
 <html>
 <body>
-<form action="add_time_type.php" method="post">
+<form action="insert_time_type.php" method="post">
 <input type="text" name="type">
 <input type="submit" name="submit" value="Submit">
 </form>
@@ -42,8 +42,7 @@ if($result!=null)
  <script type="text/javascript">
       function ConfirmDelete()
       {
-            if (confirm("Are you sure you want to delete?"))
-                 location.href='delete.php';
+           confirm("Are you sure you want to delete it ?")
       }
   </script>
 </body>

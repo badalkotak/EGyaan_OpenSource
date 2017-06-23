@@ -39,6 +39,8 @@ else
 	$user_id=$_REQUEST['user'];
 	$batch=$_REQUEST['batch'];
 	$branch=$_REQUEST['branch'];
+	$comment=$_REQUEST['comment'];
+
 	$teacher_course=new TeacherCourse($dbconnect->getInstance());
 	$result_teacher_course_id=$teacher_course->getTeacherCourse($user_id,$course_id,0);
 	if($result_teacher_course_id != null)
@@ -48,31 +50,51 @@ else
 			$teacher_course_id=$row_teacher_course_id['id'];
 		}
 	}
-		$insert_timetable=$timetable->insertTimeTable($day_id,$time_id,$teacher_course_id);
-	if($insert_timetable === true)
+
+	$result_timetable=$timetable->getTimetable($user_id,$batch,$time_id,$day_id);
+	if($result_timetable === false)
 	{
-		echo $msg=Constants::INSERT_SUCCESS_MSG;
-		echo ("<SCRIPT LANGUAGE='JavaScript'>
-	        window.alert('$msg')
-	        window.location.href='add_timetable.php?branch=$branch&batch=$batch';
-	        </SCRIPT>");
-	}
-	else if($insert_timetable == Constants::STATUS_EXISTS)
-	{
-		echo $msg=$insert_timetable;
-		echo ("<SCRIPT LANGUAGE='JavaScript'>
-	        window.alert('$msg')
-	        window.location.href='add_timetable.php?branch=$branch&batch=$batch';
-	        </SCRIPT>");
+		
+		$insert_timetable=$timetable->insertTimeTable($day_id,$time_id,$teacher_course_id,$comment);
+	
+	
+		if($insert_timetable === true)
+		{
+			echo $msg=Constants::INSERT_SUCCESS_MSG;
+			echo ("<SCRIPT LANGUAGE='JavaScript'>
+		        window.alert('$msg')
+		        window.location.href='add_timetable.php?branch=$branch&batch=$batch';
+		        </SCRIPT>");
+		}
+		else if($insert_timetable == Constants::STATUS_EXISTS)
+		{
+			echo $msg=$insert_timetable;
+			echo ("<SCRIPT LANGUAGE='JavaScript'>
+		        window.alert('$msg')
+		        window.location.href='add_timetable.php?branch=$branch&batch=$batch';
+		        </SCRIPT>");
+		}
+		else
+		{
+			$msg=Constants::INSERT_FAIL_MSG;
+			echo ("<SCRIPT LANGUAGE='JavaScript'>
+		        window.alert('$msg')
+		        window.location.href='add_timetable.php?branch=$branch&batch=$batch';
+		        </SCRIPT>");
+		}
 	}
 	else
 	{
-		$msg=Constants::INSERT_FAIL_MSG;
+		while($row=$result_timetable->fetch_assoc())
+		{
+			$batch_name=$row['batch'];
+			$branch_name=$row['branch'];
+		}
+		$msg="Teacher Busy at ".$batch_name." of ".$branch_name." Branch. ";
 		echo ("<SCRIPT LANGUAGE='JavaScript'>
 	        window.alert('$msg')
 	        window.location.href='add_timetable.php?branch=$branch&batch=$batch';
 	        </SCRIPT>");
 	}
-
 }
 ?>

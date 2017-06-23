@@ -7,11 +7,16 @@ class Timetable
 	{
 		$this->connection=$connection;
 	}
-	public function getTimetable($batch_id,$day_id,$time_id)
+	public function getTimetable($teacher_id,$batch_id,$day_id,$time_id)
 	{
-		if($batch_id == 0 && $day_id > 0 && $time_id > 0)
+		if($teacher_id ==0 && $batch_id == 0 && $day_id > 0 && $time_id > 0)
 		{
 			$sql="SELECT * FROM `egn_timetable` WHERE `day_id`=$day_id && `time_id`=$time_id";
+		}
+		if($teacher_id > 0 && $batch_id > 0 && $day_id > 0 && $time_id > 0)
+		{
+			//$sql="SELECT * FROM `egn_timetable` WHERE `day_id`=$day_id && `time_id`=$time_id && teacher_course_id=".$teacher_id;
+			 $sql="select br.name as branch,ba.name as batch from egn_branch br,egn_batch ba,egn_course c where br.id=ba.branch_id && ba.id=c.batch_id && ba.id<>$batch_id && c.id IN (select course_id from egn_teacher_course where user_id=$teacher_id)";
 		}
 		else
 		{
@@ -28,14 +33,14 @@ class Timetable
 			return null;
 		}
 	}
-	public function insertTimetable($day_id,$time_id,$teacher_course_id)
+	public function insertTimetable($day_id,$time_id,$teacher_course_id,$comment)
 	{
 		$sql="SELECT * FROM `egn_timetable` WHERE time_id=".$time_id." && day_id=".$day_id;
         $result = $this->connection->query($sql);
 
         if($result->num_rows == 0)
         {
-			$sql_insert="INSERT INTO `egn_timetable`(`day_id`, `time_id`, `teacher_course_id`) VALUES (".$day_id.",".$time_id.",".$teacher_course_id.")";
+			$sql_insert="INSERT INTO `egn_timetable`(`day_id`, `time_id`, `teacher_course_id`,`comment`) VALUES (".$day_id.",".$time_id.",".$teacher_course_id.",'".$comment."')";
 			$insert=$this->connection->query($sql_insert);
 			if($insert === true)
 			{

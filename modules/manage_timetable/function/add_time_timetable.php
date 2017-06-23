@@ -69,8 +69,8 @@ if($result!=null)
 <script type="text/javascript">
       function ConfirmDelete()
       {
-            if (confirm("Are you sure you want to delete?"))
-                 location.href='delete.php';
+            confirm("Are you sure you want to delete it ?")
+                 
       }
   </script>
 </body>

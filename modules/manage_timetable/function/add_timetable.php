@@ -21,7 +21,7 @@ $timetable=new Timetable($dbconnect->getInstance());
 $timetimetable=new TimeTimetable($dbconnect->getInstance());
 $timetype=new TimeType($dbconnect->getInstance());
 
-if(empty($_REQUEST['branch']) || empty($_REQUEST['batch']))
+if($_REQUEST['branch']== 0 || $_REQUEST['batch'] == -1)
 {
 	$msg=Constants::EMPTY_PARAMETERS;
 	echo ("<SCRIPT LANGUAGE='JavaScript'>
@@ -169,7 +169,7 @@ $teacher_course=new TeacherCourse($dbconnect->getInstance());
 <body>
 <script src="../../../Resources/jquery.min.js"></script>
 
-<form action="test.php" method="post" id="TT_form">
+<form method="post" id="TT_form">
 	<select name=day id=day>
 		<option value=-1>Select Day</option>
 		<option value=1>Monday</option>
@@ -217,8 +217,8 @@ if($result_course!=null)
 	}
 }
 echo '</select>';
-echo '<input type=hidden name=branch value='.$branch_id.'>
-<input type=hidden name=batch value='.$batch_id.'>';
+echo '<input type=hidden name=branch id=branch value='.$branch_id.'>
+<input type=hidden name=batch id=batch value='.$batch_id.'>';
 
 
 
@@ -227,7 +227,7 @@ echo '<input type=hidden name=branch value='.$branch_id.'>
 </form>
 <div id="teacher_div"></div>
 
-<table>
+<table border="5px">
 <tr>
 <th>Timing</th>
 <th>Monday</th>
@@ -250,6 +250,8 @@ if($getTiming!=null)
 			$from_time=$row['from_time'];
 			$to_time=$row['to_time'];
 
+
+
 			echo "<tr>";
 			echo "<td>";
 			echo $from_time." - ".$to_time;
@@ -257,11 +259,12 @@ if($getTiming!=null)
 
 			for($day=1;$day<=7;$day++)//7 days of week loop
 			{
-				$getLecture=$timetable->getTimetable($batch_id,$day,$time_id);
+				$getLecture=$timetable->getTimetable(0,$batch_id,$day,$time_id);
 				if($getLecture!=null)
 				{
 					while($lectureRow=$getLecture->fetch_assoc())
 					{
+						$id=$lectureRow['id'];
 						$teacher_course_id=$lectureRow['teacher_course_id'];
 						$teacher_course_details=$teacher_course->getTeacherCourse(0,0,$teacher_course_id);
 
@@ -285,8 +288,8 @@ if($getTiming!=null)
 						}
 
 							echo "<td>";
-							echo $course_name." (".$user_name.")"; 
-							echo "</td>";
+							echo $course_name." (".$user_name.") ".$lectureRow['comment']; 
+							echo "</br><a href=delete_timetable.php?id=".$id." onclick=ConfirmDelete()>Delete</a></td>";
 					}
 					
 				}
@@ -316,6 +319,8 @@ else
 			var day=$("#day").val();
 			var time=$("#time").val();
 			var course=$("#course").val();
+			var branch=$("#branch").val();
+			var batch=$("#batch").val();
 
 			if(day==-1 || time==-1 || course==-1)
 			{
@@ -335,12 +340,12 @@ else
 						if (status=="success") 
 						{
 							var count=json.teacher.length;
-							var teacher_dropdown = "<select name=user><option value=-1>Select Teacher</option>"
+							var teacher_dropdown = "<form action=insert_timetable.php method=post><input type=hidden name=day value="+day+"><input type=hidden name=time value="+time+"><input type=hidden name=course value="+course+"><input type=hidden name=branch value="+branch+"><input type=hidden name=batch value="+batch+"><select name=user><option value=-1>Select Teacher</option>"
 							for(var i=0;i<count;i++)
 							{
 								teacher_dropdown = teacher_dropdown + "<option value="+json.teacher[i].id+">"+json.teacher[i].name+"</option>";
 							}
-							teacher_dropdown = teacher_dropdown + "</select>";
+							teacher_dropdown = teacher_dropdown + "</select><input type=text name=comment placeholder=Comment><input type=submit name=submit value=submit></form>";
 
 							$("#teacher_div").html(teacher_dropdown);
 						}
@@ -348,6 +353,16 @@ else
 				});
 			}
 		});
+
+		
+
+
 	});
 </script>
+ <script type="text/javascript">
+      function ConfirmDelete()
+      {
+        confirm("Are you sure you want to delete it ?")
+      }
+  </script>
 </html>
