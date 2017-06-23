@@ -15,7 +15,6 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
 $json=array();
 $branch_array=array();
 $final=array();
-$i=1;
 
 $branch = new Branch($dbConnect->getInstance());
 $selectData = $branch->getBranch(0);
@@ -23,9 +22,7 @@ if($selectData)
 {
     while ($row = $selectData->fetch_assoc()) {
 
-        $branch_array['id']=$row['id'];
-        $branch_array['name']=$row['name'];
-        $json[]=$branch_array;
+        $json[]=$row;
         
 	}
 	$final['status']="success";
@@ -34,5 +31,5 @@ if($selectData)
 	echo json_encode($final);
 }
 else{
-	header("location:add_noticeboard.php?errormessage=no branch added!");
+    header("location:add_noticeboard.php?errormessage=no branch added!");
 }

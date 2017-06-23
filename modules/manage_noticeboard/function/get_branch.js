@@ -1,22 +1,16 @@
 $(document).ready(function(){
-	$("#get_branch").submit(function(event){
+	$("#add_notice").submit(function(event){
 		event.preventDefault();
 	});
-
-	$('#type').on('change', function() {
-		var branch=$("#type").val();
-
-
-		
+	$('input:radio[name=type]').on('change', function() {
+		var branch=$("input:radio[name=type]:checked").val();	
 		$.ajax({
 			method:"POST",
 			url:"get_branch.php",
-			data:"branch="+branch,
 			dataType:"json",
 
 
 			success:function(json){
-
 				var status=json.status;
 				if(status=="success")
 				{	
@@ -26,23 +20,29 @@ $(document).ready(function(){
 
 					}
 					else{
-
-						var x=0;
-						console.log(json.branch.length);
+						if(branch=="b"){
 						var checkbox="";
-
 						for( var i=0; i<json.branch.length;  i++)
 						{
-							checkbox=checkbox + "<input type=checkbox id='select_branch[]' name='select_branch[]' value="+json.branch[i].id+" />"+json.branch[i].name;
+							checkbox=checkbox + "<input type=checkbox id='select_branch[]' name='select_branch[]' value="+json.branch[i].id+"  />"+json.branch[i].name;
 						}		
 						$("#branch").html(checkbox);
+					}
+					else
+					{
+						$("#branch").html("");
+
+					}
+
 
 					}
 				}
-				else
+				else if(status=="failed")
 				{
-					$("#errormessage").text("Something went wrong");
 
+				}
+				else{
+					$("#errormessage").text("Something went wrong");
 				}
 
 
@@ -57,4 +57,5 @@ $(document).ready(function(){
 		});
 		
 	});
+		
 });

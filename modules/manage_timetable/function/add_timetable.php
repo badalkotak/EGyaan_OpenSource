@@ -35,54 +35,158 @@ else
 	$batch_id=$_REQUEST['batch'];
 }
 ?>
-<html>
-<body>
+
 
 <?php
-if(empty($_REQUEST['day']) && empty($_REQUEST['time']) && empty($_REQUEST['course']))
-{
-echo '<form action="add_timetable.php" method="post">';
-}
-else
-{
-	$day_id=$_REQUEST['day'];
-	$time_id=$_REQUEST['time'];
-	$course_id=$_REQUEST['course'];
-	echo '<form action="insert_timetable.php" method="post">';
-}
-$days = array(
-	' ',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-     'Sunday'
-);
-echo '
-<select name="day">
-<option value="0">select</option>';
-$i=1;
-		while($i<=7)
-		{
-			if($i == $day_id)
-			{
-				echo "<option value=".$i." selected>".$days[$i]."</option>";
-			}
-			else
-			{
-				echo "<option value=".$i.">".$days[$i]."</option>";
-			}
-			$i=$i+1;
-		}
+// if(empty($_REQUEST['day']) && empty($_REQUEST['time']) && empty($_REQUEST['course']))
+// {
+// echo '<form action="add_timetable.php" method="post">';
+// }
+// else
+// {
+// 	$day_id=$_REQUEST['day'];
+// 	$time_id=$_REQUEST['time'];
+// 	$course_id=$_REQUEST['course'];
+// 	echo '<form action="insert_timetable.php" id=timetable_form method="post">';
+// }
+// $days = array(
+// 	' ',
+//     'Monday',
+//     'Tuesday',
+//     'Wednesday',
+//     'Thursday',
+//     'Friday',
+//     'Saturday',
+//      'Sunday'
+// );
+// echo '
+// <select name="day">
+// <option value="0">select</option>';
+// $i=1;
+// 		while($i<=7)
+// 		{
+// 			if($i == $day_id)
+// 			{
+// 				echo "<option value=".$i." selected>".$days[$i]."</option>";
+// 			}
+// 			else
+// 			{
+// 				echo "<option value=".$i.">".$days[$i]."</option>";
+// 			}
+// 			$i=$i+1;
+// 		}
 	
-	echo '</select>';
+// 	echo '</select>';
+// $result_time=$timetimetable->getTimeTimetable();
+
+// echo '
+// <select name="time">
+// <option value="0">select</option>';
+// if($result_time!=null)
+// {
+// 	while($row=$result_time->fetch_assoc())
+// 	{
+// 		$result_timetype=$timetype->getTimeType($row['type']);
+		
+// 		if($result_timetype!=null)
+// 		{
+// 			while($row_type=$result_timetype->fetch_assoc())
+// 			{
+// 				if($row['id']==$time_id)
+// 				{
+// 					echo "<option value=".$row['id']." selected>".$row['from_time']."-".$row['to_time']."-".$row_type['name']."</option>";
+// 				}
+// 				else
+// 				{
+// 				echo "<option value=".$row['id'].">".$row['from_time']."-".$row['to_time']."-".$row_type['name']."</option>";
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+// echo '</select>';
+
+$course_obj=new Course($dbconnect->getInstance());
+// $result_course=$course_obj->getCourse("no",0,"yes",$batch_id,0,null,$branch_id);
+
+// echo '
+// <select name="course">
+// <option value="0">select</option>';
+
+// if($result_course!=null)
+// {
+// 	while($row=$result_course->fetch_assoc())
+// 	{
+// 		if($row['id']==$course_id)
+// 		{
+// 			echo "<option value=".$row['id']." selected>".$row['name']."</option>";
+// 		}
+// 		else
+// 		{
+// 			echo "<option value=".$row['id'].">".$row['name']."</option>";
+// 		}
+// 	}
+// }
+// echo '</select>';
+// echo '<input type=hidden name=branch value='.$branch_id.'>
+// <input type=hidden name=batch value='.$batch_id.'>';
+
+$user_obj=new User($dbconnect->getInstance());
+$teacher_course=new TeacherCourse($dbconnect->getInstance());
+
+
+// if(!empty($_REQUEST['course']))
+// {
+// 	$course_id=$_REQUEST['course'];
+// 	$result_userid=$teacher_course->getTeacherCourse(0,$course_id,0);
+// 	echo '<select name="user">
+// 	<option value="0">select</option>';
+
+// 	if($result_userid != null)
+// 	{
+// 		while($row_userId=$result_userid->fetch_assoc())
+// 		{
+// 			$userId=$row_userId['user_id'];
+// 			$result_user=$user_obj->getUser($userId);
+// 			if($result_user!=null)
+// 			{
+// 				while($row_user=$result_user->fetch_assoc())
+// 				{
+
+// 					echo "<option value=".$row_user['id'].">".$row_user['name']."</option>";
+// 				}
+// 			}
+			
+// 		}
+// 	}
+// }
+// echo '</select>';
+// echo '<input type=submit name=submit id=submit value=submit>';
+?>
+<!-- </form> -->
+
+<html>
+<body>
+<script src="../../../Resources/jquery.min.js"></script>
+
+<form action="test.php" method="post" id="TT_form">
+	<select name=day id=day>
+		<option value=-1>Select Day</option>
+		<option value=1>Monday</option>
+		<option value=2>Tuesday</option>
+		<option value=3>Wednesday</option>
+		<option value=4>Thursday</option>
+		<option value=5>Friday</option>
+		<option value=6>Saturday</option>
+		<option value=7>Sunday</option>
+	</select>
+
+<?php
 $result_time=$timetimetable->getTimeTimetable();
 
 echo '
-<select name="time">
-<option value="0">select</option>';
+<select name="time" id=time>
+<option value="-1">Select Time</option>';
 if($result_time!=null)
 {
 	while($row=$result_time->fetch_assoc())
@@ -93,78 +197,35 @@ if($result_time!=null)
 		{
 			while($row_type=$result_timetype->fetch_assoc())
 			{
-				if($row['id']==$time_id)
-				{
-					echo "<option value=".$row['id']." selected>".$row['from_time']."-".$row['to_time']."-".$row_type['name']."</option>";
-				}
-				else
-				{
 				echo "<option value=".$row['id'].">".$row['from_time']."-".$row['to_time']."-".$row_type['name']."</option>";
-				}
 			}
 		}
 	}
 }
-echo '</select>';
+echo "</select>";
 
-$course_obj=new Course($dbconnect->getInstance());
 $result_course=$course_obj->getCourse("no",0,"yes",$batch_id,0,null,$branch_id);
-
 echo '
-<select name="course">
-<option value="0">select</option>';
+<select name="course" id=course>
+<option value="-1">Select Course</option>';
 
 if($result_course!=null)
 {
 	while($row=$result_course->fetch_assoc())
 	{
-		if($row['id']==$course_id)
-		{
-			echo "<option value=".$row['id']." selected>".$row['name']."</option>";
-		}
-		else
-		{
 			echo "<option value=".$row['id'].">".$row['name']."</option>";
-		}
 	}
 }
 echo '</select>';
 echo '<input type=hidden name=branch value='.$branch_id.'>
 <input type=hidden name=batch value='.$batch_id.'>';
 
-$user_obj=new User($dbconnect->getInstance());
-$teacher_course=new TeacherCourse($dbconnect->getInstance());
 
 
-if(!empty($_REQUEST['course']))
-{
-	$course_id=$_REQUEST['course'];
-	$result_userid=$teacher_course->getTeacherCourse(0,$course_id,0);
-	echo '<select name="user">
-	<option value="0">select</option>';
-
-	if($result_userid != null)
-	{
-		while($row_userId=$result_userid->fetch_assoc())
-		{
-			$userId=$row_userId['user_id'];
-			$result_user=$user_obj->getUser($userId);
-			if($result_user!=null)
-			{
-				while($row_user=$result_user->fetch_assoc())
-				{
-
-					echo "<option value=".$row_user['id'].">".$row_user['name']."</option>";
-				}
-			}
-			
-		}
-	}
-}
-echo '</select>';
-echo '<input type=submit name=submit value=submit>';
 ?>
+<input type="submit" id="submit_form">
 </form>
+<div id="teacher_div"></div>
 
 <table>
 <tr>
@@ -247,4 +308,46 @@ else
 ?>
 </table>
 </body>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$("#TT_form").submit(function(event){
+			event.preventDefault();
+			var day=$("#day").val();
+			var time=$("#time").val();
+			var course=$("#course").val();
+
+			if(day==-1 || time==-1 || course==-1)
+			{
+				$("#teacher_div").text("Please input all the fields!");
+			}
+			else
+			{
+				$.ajax({
+					type: "POST",
+					url: "getTeacher.php",
+					data: "course_id="+course,
+					datatype: "json",
+
+					success:function(json)
+					{
+						var status=json.status;
+						if (status=="success") 
+						{
+							var count=json.teacher.length;
+							var teacher_dropdown = "<select name=user><option value=-1>Select Teacher</option>"
+							for(var i=0;i<count;i++)
+							{
+								teacher_dropdown = teacher_dropdown + "<option value="+json.teacher[i].id+">"+json.teacher[i].name+"</option>";
+							}
+							teacher_dropdown = teacher_dropdown + "</select>";
+
+							$("#teacher_div").html(teacher_dropdown);
+						}
+					}
+				});
+			}
+		});
+	});
+</script>
 </html>

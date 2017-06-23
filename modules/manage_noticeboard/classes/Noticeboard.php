@@ -12,7 +12,14 @@ class Noticeboard
 
     public function getNoticeboard($var1,$type,$var2,$urgent,$var3,$id)
     {
+
+
+
     	$sql="SELECT * FROM egn_noticeboard where $var1='$type' and $var2='$urgent' and $var3='$id'";
+// here var1,2,3 are used for columns user can pass any column. If user have only one condn then the user will pass value and column of that condition. rest other will be passed as 1 for both column and value. as 1=1 is always true this query works perfectly.
+        /*SELECT * FROM egn_noticeboard where type='10' and 1='1' and 1='1'
+        Here only type column and its value was required. Therefore all other column and value are passed 1=1
+        */
     	$result = $this->connection->query($sql);
 
         if($result->num_rows > 0)
@@ -29,6 +36,7 @@ class Noticeboard
    public function getNested2($table1,$table2,$var,$var1,$value1,$var2,$value2,$var3,$value3,$var4,$value4,$var5,$value5)
     {
         $sql="Select $var from $table1 where $var1=$value1 and $var2=$value2 and  $var3 in ( select $value3 from $table2 where $var4=$value4 and $var5='$value5')";
+        //Similarly here $table1,2 are for tables in nested query. $var is used for selecting * or particular column. $var1,2,3 are columns and $value1,2,3 are used for value. SIMILARLY all the columns required are passed with correct value and column . Those which are not required are passed as 1 as 1=1 is always true
         $result = $this->connection->query($sql);
 
         if($result->num_rows > 0)

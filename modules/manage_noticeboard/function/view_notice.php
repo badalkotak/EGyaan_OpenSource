@@ -12,8 +12,9 @@
 		Constants::DB_USERNAME,
 		Constants::DB_PASSWORD,
 		Constants::DB_NAME);
+	session_start();
+	$role_id=$_SESSION['role'];
 
-	$role_id=1;
 	?>
 	<?php
 	$var1=1;
@@ -21,8 +22,9 @@
 	$type=1;
 	$urgent=1;
 	$var3="id";
+	if(isset($_REQUEST['id']))
+	{
 	$id=$_REQUEST['id'];
-
 	$noticeboard = new Noticeboard($dbConnect->getInstance());
 	$selectData=$noticeboard->getNoticeboard($var1,$type,$var2,$urgent,$var3,$id);
 	if($selectData)
@@ -68,9 +70,9 @@
 					<?php
 					echo'
 					<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
-					if($role_id==1)
+					if($role_id== Constants::ROLE_ADMIN_ID)
 					{
-						echo'<a href="delete_noticeboard.php?delete='.$id.'" onclick=del_confirm()><button type=button name=delete id=delete >Delete</button> </a>';
+						echo'<a href="delete_noticeboard.php?delete='.$id.'" onclick=del_confirm()><button type=button name=delete id=delete onlclick=del_confirm()>Delete</button> </a>';
 					}
 					if($file!=null)
 					{
@@ -87,6 +89,7 @@
 			else{
 				echo "No urgent notice!";
 			}
+		}
 			?>
 			<script>
 				function del_confirm() {
