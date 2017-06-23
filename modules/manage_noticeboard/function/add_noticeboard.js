@@ -3,6 +3,16 @@ $(document).ready(function(){
 		event.preventDefault();
 	});
 	$('#add_notice_submit').on('click', function() {
+
+				var title=$("#title").val();
+				var type=$("input:radio[name=type]:checked").val();
+				var add_notice=$("#notice").val();
+				if(title=="" || notice=="" || type==undefined || type=="b")
+				{
+						  		$("#errormessage").html("Please input all fields!");
+
+				}
+				else{
 				var fd = new FormData($('#add_notice').get(0));
 				fd.append("output",true);
 				$.ajax({
@@ -38,6 +48,7 @@ $(document).ready(function(){
 
 
 						});
+			}
 
 
 			});
