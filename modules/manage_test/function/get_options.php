@@ -38,8 +38,20 @@ if($select == "batch"){
         }
         $json["status"]=Constants::STATUS_SUCCESS;
         $json["data"]=$data;
+        $json["type"]="specific";
     }else{
-        $json["message"] = "No division to list";
+        $result=$test->getAllCourse("no",0,'no',0,0,null,$branch_id);
+        if($result!=false)
+        {
+            while($row = $result->fetch_assoc()){
+                $data[] = $row;
+            }
+            $json["status"]=Constants::STATUS_SUCCESS;
+            $json["data"]=$data;
+            $json["type"]="unspecific";
+        }else{
+            $json["message"] = "No batch/course to list";
+        }
     }
 }elseif($select == "course"){
     $result=$test->getCourse($teacher_id,$branch_id,$batch_id);
@@ -51,7 +63,7 @@ if($select == "batch"){
         $json["status"]=Constants::STATUS_SUCCESS;
         $json["data"]=$data;
     }else{
-        $json["message"] = "No division to list";
+        $json["message"] = "No course to list";
     }
 }else{
     $json["message"] = "Something went wrong";

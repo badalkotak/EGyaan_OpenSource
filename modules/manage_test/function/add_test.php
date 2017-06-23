@@ -10,6 +10,7 @@
 require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../classes/Test.php");
+require_once("../../manage_course/classes/Course.php");
 $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_USERNAME,
     Constants::DB_PASSWORD,
@@ -18,32 +19,63 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
 include("../../../Resources/sessions.php");
 
 $teacher_id = $id;
+if(isset($_REQUEST["message"]) && !empty(trim($_REQUEST["message"]))){
+    echo '<script>alert("' . $_REQUEST["message"] . '");</script>';
+}
 $test = new Test($dbConnect->getInstance());
+$course=new COurse($dbConnect->getInstance());
 $result=$test->getBranch();
-?>
-<div id="branch_list">
-<?
-if($result!=null)
+$getTeacherCourse=$course->getCourse("yes",$teacher_id,"no",0,0,null,0);
+if($getTeacherCourse===false)
 {
-    ?>
-
-    <select title="Select branch" id="branch_id" name="branch_id" required>
-        <?php
-        echo "<option value='0' selected> Select a Branch </option>";
-        while($row = $result->fetch_assoc()){
-            echo "<option value='" . $row["id"] . "' " . ((($row["id"]) == $branch_id)?"selected":"") . ">" . $row["name"] . "</option>";
+    $result=$course->getCourse("no",0,'no',0,0,null,0);
+    if($result!=null) {
+        ?>
+        <select title="Select course" id="course_id" name="course_id" required>
+        <?
+        echo "<option value='0' selected> Select a Course </option>";
+        while ($row = $result->fetch_assoc()) {
+            echo "<option value='" . $row['courseId'] . "'>" . $row['branchName'] . " - " . $row['batchName'] . " - " . $row['courseName'] . "</option>";
         }
+        ?>
+        </select>
+        <?
+    }else{
+        echo "No Course added yet!!!";
+    }
         ?>
     </select>
     <?
-}else{
-    echo "No Branches added yet!!!";
+}
+else
+{
+    ?>
+    <div id="branch_list">
+    <?
+    if($result!=null)
+    {
+        ?>
+
+        <select title="Select branch" id="branch_id" name="branch_id" required>
+            <?
+            echo "<option value='0' selected> Select a Branch </option>";
+            while($row = $result->fetch_assoc()){
+                echo "<option value='" . $row["id"] . "'>" . $row["name"] . "</option>";
+            }
+            ?>
+        </select>
+        <?
+    }else{
+        echo "No Branches added yet!!!";
+    }
+    ?>
+    </div>
+    <div id="batch_list"></div>
+    <div id="course_list"></div>
+    <?
 }
 ?>
-</div>
-<div id="batch_list"></div>
-<div id="course_list"></div>
-<div id="form_input"></div>
+    <div id="form_input"></div>
 </form>
 </body>
 <script>
