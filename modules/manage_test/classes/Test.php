@@ -75,12 +75,16 @@ class Test
         return (new Course($this->connection))->getCourse('no',$teacher_id,'yes',$batch_id,0,null,$branch_id);
     }
 
+    public function getAllCourse($teacherStatus, $teacherId, $multiQuery, $batchId, $courseId, $batchName, $branchId){
+        return (new Course($this->connection))->getCourse($teacherStatus, $teacherId, $multiQuery, $batchId, $courseId, $batchName, $branchId);
+    }
+
     public function insertTest($title,$total_marks,$date_of_test,$course_id,$teacher_id,$type_id)
     {
         $check_params =$this->checkTestDetails($title,$total_marks,$date_of_test,$course_id,$type_id);
         if($check_params == Constants::STATUS_SUCCESS){
             $sql="INSERT INTO `egn_test` (`id`, `title`, `total_marks`, `date_of_test`, `date_of_result`, `course_id`, `user_id`, `type`) 
-                  SELECT * FROM (SELECT NULL as 'id', '$title', $total_marks , '$date_of_test' , NULL as 'date_of_result', $course_id, $teacher_id ,'" . (($type_id=='online')?("O"):("F")) . "') as temp
+                  SELECT * FROM (SELECT NULL as 'id', '$title' as `title`, $total_marks as `total_marks`, '$date_of_test' as `date_of_test`, NULL as 'date_of_result', $course_id as `course_id`, $teacher_id as `user_id`,'" . (($type_id=='online')?("O"):("F")) . "' as `type`) as temp
                   WHERE NOT EXISTS (
                   SELECT `id`
                   FROM `egn_test`
@@ -92,7 +96,7 @@ class Test
             }
             else
             {
-                return null;
+                return $sql;
             }
         }else{
             return $check_params;
@@ -144,10 +148,10 @@ class Test
         }
     }
 
-    public function getStudentList($test_id,$teacher_id){
+    public function getStudentList($test_id,$teacher_id,$type){
         $sql = "SELECT * FROM (SELECT DISTINCT s.id,s.firstname,s.lastname,t.total_marks 
                 FROM egn_student as s , egn_test as t ,egn_course as c ,egn_course_reg as cr ,egn_batch as batch
-                WHERE s.batch_id = batch.id AND t.course_id = c.id AND c.batch_id = batch.id AND cr.student_id=s.id AND cr.course_id = c.id AND t.id = '$test_id' AND t.user_id='$teacher_id' AND t.type='F') as A
+                WHERE s.batch_id = batch.id AND t.course_id = c.id AND c.batch_id = batch.id AND cr.student_id=s.id AND cr.course_id = c.id AND t.id = '$test_id' AND t.user_id='$teacher_id' AND t.type='$type') as A
                 LEFT OUTER JOIN
                 (SELECT DISTINCT student_id,marks
                 FROM egn_test_marks
@@ -218,6 +222,18 @@ class Test
         }
     }
 
+    public function getTestQuestions($test_id){
+        $sql="  SELECT DISTINCT q.id,question,option1,option2,option3,option4,answer,marks
+                FROM egn_test as t ,egn_test_questions as q
+                WHERE q.test_id=t.id AND t.id='$test_id' AND t.type='O'
+                ORDER BY id";
+        $result = $this->connection->query($sql);
+        if($result->num_rows>0){
+            return $result;
+        }else{
+            return null;
+        }
+    }
 
     public function parentPageRedirect($message){
         header("Location: manage_test.php?message=" . $message);

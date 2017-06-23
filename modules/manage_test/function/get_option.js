@@ -1,19 +1,15 @@
 $(document).ready(function () {
-    $('#batch_list').html("");
-    $('#course_list').html("");
-    $('#form_input').html("");
     $('body').on('change','#branch_id', function () {
         $('#batch_list').html("");
         $('#course_list').html("");
         var branch_id = $('#branch_id').val();
-        console.log(branch_id);
         if(branch_id != 0){
             $.ajax({
                 type: "GET",
                 url: "get_options.php",
                 data: "branch_id="+branch_id+"&select=batch",
                 success: function(json){
-                    if(json.status=="success"){
+                    if(json.status=="success" && json.type=="specific"){
                         var select = '<select title="Select batch" id="batch_id" name="batch_id" required>';
                         select = select + '<option value="0" selected> Select a Batch </option>';
                         for (i = 0; i < json.data.length; i++) {
@@ -21,10 +17,17 @@ $(document).ready(function () {
                         }
                         select = select + '</select>';
                         $("#batch_list").html(select);
+                    }else if(json.status=="success" && json.type=="unspecific"){
+                        var select = '<select title="Select course" id="course_id" name="course_id" required>';
+                        select = select + '<option value="0" selected> Select a Course </option>';
+                        for (i = 0; i < json.data.length; i++) {
+                            select = select + "<option value='" +json.data[i].courseId + "'>" + json.data[i].courseName + "</option>";
+                        }
+                        select = select + '</select>';
+                        $("#course_list").html(select);
                     }else{
                         alert(json.message);
                     }
-
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     alert("Something went wrong");

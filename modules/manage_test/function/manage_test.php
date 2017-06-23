@@ -13,7 +13,7 @@ include("../../../Resources/sessions.php");
 
 $teacher_id = $id;
 if(isset($_REQUEST["message"]) && !empty(trim($_REQUEST["message"]))){
-    echo $_REQUEST["message"];
+    echo '<script>alert("' . $_REQUEST["message"] . '");</script>';
 }
 $test = new Test($dbConnect->getInstance());
 $result=$test->getTestsByTeacher($teacher_id);
@@ -32,6 +32,8 @@ if($result!=null)
             <th>Course name</th>
             <th>Edit Marks</th>
             <th>Delete</th>
+            <th>View Test</th>
+            <th>View Result</th>
         </tr>
         </thead>
         <tbody>
@@ -49,6 +51,8 @@ if($result!=null)
                     <td>' . $row["name"]  . '</td>
                     <td>' . (($row["type"] == 'O')?'NA':(($row["status"] == 0)?'<a href="add_marks_offline_test.php?id=' . $row["id"] . '&action=add">Add</a>':'<a href="add_marks_offline_test.php?id=' . $row["id"] . '&action=edit">Edit</a>')) . '</td>
                     <td><a href="delete_test.php?id=' . $row["id"] . '">Delete</a></td>
+                    <td><a href="view_test.php?id=' . $row["id"] . '&type=' . $row["type"] . '">View</a></td>
+                    <td><a href="view_result.php?id=' . $row["id"] . '&type=' . $row["type"] . '&marks=' . $row["total_marks"] . '">View</a></td>
                   </tr>';
         $i++;
     }

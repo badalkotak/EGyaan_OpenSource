@@ -16,7 +16,7 @@ $teacher_id = $id;
 $test = new Test($dbConnect->getInstance());
 if(isset($_REQUEST["id"]) && isset($_REQUEST["action"])){
     if($test->checkMarksEntered($_REQUEST["id"],$_REQUEST["action"])) {
-        $result = $test->getStudentList($_REQUEST["id"], $teacher_id);
+        $result = $test->getStudentList($_REQUEST["id"], $teacher_id,'F');
         if ($result != null) {
             ?>
             <input type="hidden" name="test_id" value="<? echo $_REQUEST["id"]; ?>">
@@ -33,7 +33,7 @@ if(isset($_REQUEST["id"]) && isset($_REQUEST["action"])){
                 while ($row = $result->fetch_assoc()) {
                     echo '<tr>
                         <td>' . $row["firstname"] . ' ' . $row["lastname"] . '</td>
-                        <td><input type="number" name="' . $row["id"] . '" value="' . (($row["marks"] != NULL) ? $row["marks"] : '0') . '" min="1" max="' . $row["total_marks"] . '" required></td>
+                        <td><input type="number" name="' . $row["id"] . '" value="' . (($row["marks"] != NULL) ? $row["marks"] : '0') . '" min="1" max="' . $row["total_marks"] . '" required> out of ' . $row["total_marks"] . '</td>
                       </tr>';
                 }
                 ?>

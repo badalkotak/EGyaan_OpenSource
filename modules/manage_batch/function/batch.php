@@ -1,13 +1,34 @@
 <html>
-<head>
-    <title>Batches - Add Batch|EGyaan</title>
-</head>
 <body>
-<form action="" method="post">
-    <select name="branchId" id="branchId" required>
-        <option value="-1">Select Branch</option>
+    <?php
+    include("../../../Resources/Dashboard/header.php");
+    ?>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Hello!
+            <small>Indresh Jotangia</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Batch List</li>
+        </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Batches</h3>
+          </div>
+          <div class="box-body">
+            <form action="" method="post">
+                <div class="col-md-6">
+                    <select class="form-control" name="branchId" id="branchId" required>
+                        <option value="-1">Select Branch</option>
 
-        <?php
+                        <?php
         /**
          * Created by PhpStorm.
          * User: fireion
@@ -44,21 +65,20 @@
             echo Constants::STATUS_FAILED;
         }
         ?>
-    </select>
-    <input type="submit" value="Submit">
+    </select></div>
+    <button type="submit" class="btn btn-success" value="Submit"><i class='fa fa-check'></i>Submit</button>
 </form>
-</body>
-</html>
+
 <?php
 //var_dump($_REQUEST['branchId']);
 if (isset($_REQUEST['branchId'])) {
     $branch_Id = $_REQUEST['branchId'];
     if ($branch_Id > 0) {
         echo "<form action='insert_batch.php' method='post'>";
-        echo "<input type='hidden' name='branchId' value='" . $branch_Id . "'>";
-        echo "<input type='text' name='batchName' placeholder='Enter Batch Name'>";
-        echo "<br>";
-        echo "<input type='submit' value='Submit'>";
+        echo "<div class='col-md-6'><input type='hidden' name='branchId' value='" . $branch_Id . "'>";
+        echo "<input type='text' class='form-control' name='batchName' placeholder='Enter Batch Name'></div>";
+        
+        echo "<button type='submit'  class='btn btn-success' value='Submit'><i class='fa fa-check'></i>Submit</button>";
         echo "</form>";
     } else {
         echo "Select valid Branch/Department";
@@ -67,7 +87,7 @@ if (isset($_REQUEST['branchId'])) {
     echo "Select Appropriate Branch/Department";
 }
 
-echo "<br><br><br>List of Batches - ";
+echo "<br><br><h3 class='box-title'>List of Batches</h3>";
 $getBatchData = $branch->getBranch(0);
 //var_dump($getBatchData);
 if ($getBatchData != null) {
@@ -76,11 +96,11 @@ if ($getBatchData != null) {
         $branch_name[] = htmlentities($array['name'], ENT_QUOTES);
     }
     for ($i = 0; $i < count($branch_id); $i++) {
-        echo "<br><br>" . $branch_name[$i];
+        echo "<br><h3 class=box-title'>" . $branch_name[$i]."</h3>";
         $getBatchData = $batch->getBatch('yes', $branch_id[$i], 0, 'no', 0);
         if ($getBatchData != null) {
             $id = 1;
-            echo "<table border='3'>";
+            echo "<table class='table table-bordered table-hover'>";
             echo "<tr><th>Sr. no.</th><th>Batch Name</th><th>Edit</th><th>Delete</th></tr>";
 
             while ($row = $getBatchData->fetch_assoc()) {
@@ -88,19 +108,35 @@ if ($getBatchData != null) {
                 $batchTableName = htmlentities($row['batchName'], ENT_QUOTES);
 
                 echo "<tr><td>" . $id . "</td><td>" . $batchTableName . "</td><td><form action='editBatch.php' method='post'>
-        <input type='hidden' name='branchId' value='" . $branch_id[$i] . "'><input type='hidden' name='batchId' value='" . $batchTableId . "'>
-        <input type='submit' value='Edit'></form></td>
-        <td><form action='delete_batch.php' method='post'><input type='hidden' name='branchId' value='" . $branch_id[$i] . "'>
-        <input type='hidden' name='batchId' value='" . $batchTableId . "'><input type='submit' value='Delete'></form>
-        </td></tr>";
+                <input type='hidden' name='branchId' value='" . $branch_id[$i] . "'><input type='hidden' name='batchId' value='" . $batchTableId . "'>
+                <button type='submit' class='btn btn-primary' value='Edit'><i class='fa fa-pencil'></i>Edit</button></form></td>
+                <td><form action='delete_batch.php' method='post'><input type='hidden' name='branchId' value='" . $branch_id[$i] . "'>
+                    <input type='hidden' name='batchId' value='" . $batchTableId . "'><button type='submit' class='btn btn-danger' value='Delete'>Delete<i class='fa fa-trash'></i></button></form>
+                </td></tr>";
                 $id++;
             }
             echo "</table>";
         } else {
-            echo "<br><br>No Records found";
+            echo "<br><br><h4 class='box-title'>No Records found</h4>";
         }
     }
 } else {
     echo Constants::STATUS_FAILED;
 }
 ?>
+</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->
+</section>
+</div>
+<?php
+include("../../../Resources/Dashboard/footer.php");
+
+?>
+</body>
+</html>
