@@ -11,7 +11,7 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
 
 $role_id=$_REQUEST['assign'];
 
-if($role_id==Constants::ROLE_STUDENT_ID || $id==Constants::ROLE_PARENT_ID || $id==Constants::ROLE_TEACHER_ID)
+if($role_id==Constants::ROLE_STUDENT_ID || $role_id==Constants::ROLE_PARENT_ID || $role_id==Constants::ROLE_TEACHER_ID)
 {
 	echo "<script>alert('You cannot change the privileges for Role: Student, Teacher, Parent!');window.location.href='role.php';</script>";
 }
