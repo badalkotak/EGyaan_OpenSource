@@ -32,7 +32,7 @@ class Suggestioncomplaint
         if($title != "" && $description!= "")
         {
             $insert_sql="INSERT INTO `egn_suggestion_complaint`(`title`,`description`,`type`) VALUES ('$title','$description','$type')";
-            var_dump($insert_sql);
+            // var_dump($insert_sql);
             $insert=$this->connection->query($insert_sql);
             if($insert === true)
             {
@@ -44,7 +44,7 @@ class Suggestioncomplaint
             }
         }
         else{
-            return true;
+            return false;
         }
 
         
