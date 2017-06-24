@@ -14,7 +14,9 @@
 		Constants::DB_PASSWORD,
 		Constants::DB_NAME);
 
-$email="badalkotak@gmail.com"; // Later to be sent from the app
+// $email=$_REQUEST['email']; // Later to be sent from the app
+
+$email="badalkotak@gmail.com";
 $user=new User($dbConnect->getInstance());
 $user_id=$user->getUserId($email);
 
