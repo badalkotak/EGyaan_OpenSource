@@ -53,12 +53,12 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
         }
 
         //        var_dump($studentProfilePhoto);
-        echo "<img src='http://localhost/EGyaan_OpenSource/modules/manage_student/images/student/" . $studentProfilePhoto . "' width='75' height='75'><br>";
+        echo "<img src='../images/student/" . $studentProfilePhoto . "' width='75' height='75'><br>";
         echo $firstName . " " . $lastName . "<br>";
         echo $email . "<br>";
         echo $mobile . "<br>";
         echo $gender . "<br>";
-        echo "<img src='http://localhost/EGyaan_OpenSource/modules/manage_student/images/parent/" . $parentProfilePhoto . "' width='75' height='75'><br>";
+        echo "<img src='../images/parent/" . $parentProfilePhoto . "' width='75' height='75'><br>";
         echo $parentName . "<br>";
         echo $parentEmail . "<br>";
         echo $totalFees . "<br>";

@@ -57,7 +57,7 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
         }
 
         echo "<form  action='edit_student.php' method='post' enctype='multipart/form-data'>";
-        echo "<img src='http://localhost/EGyaan_OpenSource/modules/manage_student/images/student/" . $studentProfilePhoto . "' width='75' height='75'><br>";
+        echo "<img src='../images/student/" . $studentProfilePhoto . "' width='75' height='75'><br>";
         echo "Choose Student Photo : <input type='file' name='studentProfilePhoto'>
     <label>Max Size of Image is 5MB.</label>
     <br>";
@@ -84,7 +84,7 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
         }
         echo "</select>";
         echo "<br>";
-        echo "<img src='http://localhost/EGyaan_OpenSource/modules/manage_student/images/parent/" . $parentProfilePhoto . "' width='75' height='75'><br>";
+        echo "<img src='../images/parent/" . $parentProfilePhoto . "' width='75' height='75'><br>";
         echo "Choose Parent Photo : <input type='file' name='parentProfilePhoto'>
     <label>Max Size of Image is 5MB.</label>
     <br>";
