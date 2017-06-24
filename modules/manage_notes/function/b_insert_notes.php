@@ -13,7 +13,7 @@ $user_id=$_SESSION["id"];
 if(empty($_REQUEST['title']) || empty($_REQUEST['course']))
 {
 	$msg=Constants::EMPTY_PARAMETERS;
-	echo ("<SCRIPT LANGUAGE='JavaScript'>
+	echo("<SCRIPT LANGUAGE='JavaScript'>
         window.alert('$msg')
         window.location.href='insert_page.php';
         </SCRIPT>");
@@ -40,7 +40,7 @@ $FileType = pathinfo($target_file,PATHINFO_EXTENSION);
 // Check if file already exists
 if (file_exists($target_file)) {
 				echo "<script>
-				alert('Sorry, file already exists.');
+				alert('Sorry, file already exists');
 				window.location.href='insert_page.php';
 				</script>";
     $uploadOk = 0;
@@ -49,7 +49,7 @@ if (file_exists($target_file)) {
 if($FileType != "doc" && $FileType != "pdf" && $FileType != "odt"
 && $FileType != "docx" && $FileType != "ppt" ) {
 				echo "<script>
-				alert('Sorry, only PDF,DOC,DOCX,ODT,PPT files are allowed.');
+				alert('Sorry, only PDF,DOC,DOCX,ODT,PPT files are allowed');
 				window.location.href='insert_page.php';
 				</script>";
     $uploadOk = 0;
@@ -57,7 +57,7 @@ if($FileType != "doc" && $FileType != "pdf" && $FileType != "odt"
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
 				echo "<script>
-				alert('Sorry, your file was not uploaded.');
+				alert('Sorry, your file was not uploaded');
 				window.location.href='insert_page.php';
 				</script>";
 // if everything is ok, try to upload file
@@ -98,10 +98,4 @@ if ($uploadOk == 0) {
     }
        
 }
-
-
-
-
-
-
 ?>
