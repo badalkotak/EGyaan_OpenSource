@@ -96,7 +96,7 @@ class Test
             }
             else
             {
-                return $sql;
+                return false;
             }
         }else{
             return $check_params;

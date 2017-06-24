@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $option4 = $_POST["option" . $x . "_4"];
             $total_marks = $total_marks - $marks;
             $question_input_check = $test->checkQuestionDetails($question, $option1, $option2, $option3, $option4, $answer, $marks);
-            if ($question_input_check == Constants::STATUS_SUCCESS && $total_marks >= 0) {
+            if ($question_input_check == true && $total_marks >= 0) {
                 $question_query = $question_query . $test->createQuestionQuery($question, $option1, $option2, $option3, $option4, $answer, $marks, $test_id);
             } else {
                 $error_flag = 1;

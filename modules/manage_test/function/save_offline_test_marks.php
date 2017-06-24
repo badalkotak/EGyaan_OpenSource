@@ -12,7 +12,7 @@ include("../../../Resources/sessions.php");
 $teacher_id = $id;
 $test = new Test($dbConnect->getInstance());
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-    $result = $test->getStudentList($_POST["test_id"],$teacher_id);
+    $result = $test->getStudentList($_POST["test_id"],$teacher_id,'F');
     $marks_query = "";
     if($result != null){
         while($row = $result->fetch_assoc()){
