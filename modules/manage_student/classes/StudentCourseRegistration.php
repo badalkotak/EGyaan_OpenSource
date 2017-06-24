@@ -63,10 +63,10 @@ VALUES ('$studentId','$courseId')";
         $studentId = $this->connection->real_escape_string($studentId);
         $courseId = $this->connection->real_escape_string($courseId);
 
-        $sql = "SELECT * FROM `egn_course_reg` WHERE student_id='$studentId' AND course_id='$courseId'";
-        $result = $this->connection->query($sql);
-
-        if ($result->num_rows == 0) {
+//        $sql = "SELECT * FROM `egn_course_reg` WHERE student_id='$studentId' AND course_id='$courseId'";
+//        $result = $this->connection->query($sql);
+//
+//        if ($result->num_rows == 0) {
             $sql = "UPDATE `egn_course_reg` SET `course_id`='$courseId' WHERE `id`='$id' AND `student_id`='$studentId'";
             $update = $this->connection->query($sql);
 
@@ -75,10 +75,10 @@ VALUES ('$studentId','$courseId')";
             } else {
                 return false;
             }
-        } else {
-            $message = Constants::STATUS_EXISTS;
-            return $message;
-        }
+//        } else {
+//            $message = Constants::STATUS_EXISTS;
+//            return $message;
+//        }
     }
 
     public function deleteStudentCourse($id)

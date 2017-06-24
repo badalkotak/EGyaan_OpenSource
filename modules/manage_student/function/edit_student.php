@@ -62,7 +62,7 @@ if (isset($_REQUEST['studentId']) && isset($_REQUEST['firstName']) && isset($_RE
             $parentProfileName = $row['parent_profile_photo'];
         }
     } else {
-        echo Constants::STATUS_FAILED."1";
+        echo Constants::STATUS_FAILED . "1";
     }
 
 
@@ -140,11 +140,12 @@ if (isset($_REQUEST['studentId']) && isset($_REQUEST['firstName']) && isset($_RE
         $parentName, $parentEmail, $totalFees, $feesPaid, $feesComment, $dateOfSubmission,
         $parentMobile, $studentProfilePhoto, $parentProfilePhoto, $batchId);
 
+//    var_dump($insertData);
     if ($insertData == 'true') {
         echo Constants::STATUS_SUCCESS;
 //        header('Location:student.php');
     } else {
-        echo Constants::STATUS_FAILED."2";
+        echo Constants::STATUS_FAILED . "2";
     }
 } else {
     echo Constants::EMPTY_PARAMETERS;

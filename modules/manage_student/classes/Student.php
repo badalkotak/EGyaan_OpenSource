@@ -101,10 +101,10 @@ class Student
         $batch_id = $this->connection->real_escape_string($batch_id);
 
 
-        $sql = "SELECT * FROM `egn_student` WHERE email='$email'";
-        $result = $this->connection->query($sql);
-//        var_dump($result->num_rows);
-        if ($result->num_rows == 0) {
+//        $sql = "SELECT * FROM `egn_student` WHERE email='$email'";
+//        $result = $this->connection->query($sql);
+////        var_dump($result->num_rows);
+//        if ($result->num_rows == 0) {
             $sql = "UPDATE `egn_student` SET `firstname`='$firstname',`lastname`='$lastname',
 `email`='$email',`mobile`='$mobile',`gender`='$gender',`parent_name`='$parent_name',
 `parent_email`='$parent_email',`total_fees`='$total_fees',`fees_paid`='$fees_paid',
@@ -118,10 +118,10 @@ class Student
             } else {
                 return false;
             }
-        } else {
-            $message = Constants::STATUS_EXISTS;
-            return $message;
-        }
+//        } else {
+//            $message = Constants::STATUS_EXISTS;
+//            return $message;
+//        }
     }
 
     public function deleteStudent($id)
