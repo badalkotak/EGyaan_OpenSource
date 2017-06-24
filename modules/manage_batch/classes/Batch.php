@@ -29,7 +29,9 @@ FROM `egn_batch` AS eBatch,`egn_branch` AS eBranch WHERE eBatch.branch_id = eBra
 FROM `egn_batch` AS eBatch,`egn_branch` AS eBranch WHERE eBatch.branch_id = eBranch.id AND eBatch.branch_id='" . $branchId . "'";
         } elseif ($multiQuery == 'no' && $branchId == 0 && $batchId == 0 && $distinct == 'yes') {
             $sql = "SELECT DISTINCT name FROM `egn_batch`";
-        } else {
+        }elseif ($multiQuery == 'no' && $branchId == 0 && $batchId > 0 && $distinct == 'no') {
+            $sql = "SELECT * FROM `egn_batch` WHERE id='$batch_id'";
+        }else {
 //            return false;
             $sql = "SELECT * FROM `egn_batch`";
         }
