@@ -211,7 +211,19 @@
 <script src="../../../Resources/AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="../../../Resources/AdminLTE-2.3.11/bootstrap/js/bootstrap.min.js"></script>
-
+<!-- InputMask -->
+<script src="../../../Resources/AdminLTE-2.3.11/plugins/input-mask/jquery.inputmask.js"></script>
+<!-- date-range-picker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="../../../Resources/AdminLTE-2.3.11/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap datepicker -->
+<script src="../../../Resources/AdminLTE-2.3.11/plugins/datepicker/bootstrap-datepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="../../../Resources/AdminLTE-2.3.11/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+<!-- bootstrap time picker -->
+<script src="../../../Resources/AdminLTE-2.3.11/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<!-- iCheck 1.0.1 -->
+<script src="../../../Resources/AdminLTE-2.3.11/plugins/iCheck/icheck.min.js"></script>
 <!-- SlimScroll -->
 <script src="../../../Resources/AdminLTE-2.3.11/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->

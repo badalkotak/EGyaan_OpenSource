@@ -12,7 +12,8 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     
-    
+    <!-- Bootstrap time Picker -->
+  <link rel="stylesheet" href="../../../Resources/AdminLTE-2.3.11/plugins/timepicker/bootstrap-timepicker.min.css"> 
     
     <!-- DataTables -->
   <link rel="stylesheet" href="../../../Resources/AdminLTE-2.3.11/plugins/datatables/dataTables.bootstrap.css">
