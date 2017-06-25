@@ -23,7 +23,6 @@
               <h3 class="box-title">Branches</h3>
             </div>
             <div class="box-body">
-              <div class="table-container1">
                 <form action="insert_branch.php" method="post">
                   <div class="col-md-6">
                     <input type="text" class="form-control" name="branch_name" placeholder="Enter Branch Name"></div>
@@ -53,8 +52,10 @@ $result = $branch->getBranch(0);
 
 if ($result != null) {
   $i = 0;
-  echo "<table class='table table-bordered table-hover'>";
-  echo "<tr><th>Sr No.</th><th>Name</th><th>Edit</th><th>Delete</th></tr>";
+  echo '<div class="table-container1">';
+  echo "<table class='table table-bordered table-hover example2'>";
+  echo "<thead><tr><th>Sr No.</th><th>Name</th><th>Edit</th><th>Delete</th></tr></thead>";
+  echo "<tbody>";
   while ($row = $result->fetch_assoc()) {
     $id = $row['id'];
     $name = htmlentities($row['name'], ENT_QUOTES);
@@ -84,12 +85,14 @@ if ($result != null) {
     <button type='submit' class='btn btn-danger' value='Delete'>Delete<i class='fa fa-trash'></i></button></form>";
     echo "</td>";
   }
+  echo "</tbody>";
   echo "</table>";
+  echo "</div>";
 } else {
   echo "No Records Found";
 }
 ?>
-</div>
+<!-- </div> -->
 </div>
 <!-- /.box-body -->
 </div>

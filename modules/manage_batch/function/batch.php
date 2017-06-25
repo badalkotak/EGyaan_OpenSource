@@ -100,8 +100,8 @@ if ($getBatchData != null) {
         $getBatchData = $batch->getBatch('yes', $branch_id[$i], 0, 'no', 0);
         if ($getBatchData != null) {
             $id = 1;
-            echo "<table class='table table-bordered table-hover'>";
-            echo "<tr><th>Sr. no.</th><th>Batch Name</th><th>Edit</th><th>Delete</th></tr>";
+            echo "<table class='table table-bordered table-hover example2'>";
+            echo "<thead><tr><th>Sr. no.</th><th>Batch Name</th><th>Edit</th><th>Delete</th></tr></thead><tbody>";
 
             while ($row = $getBatchData->fetch_assoc()) {
                 $batchTableId = $row['batchId'];
@@ -115,7 +115,7 @@ if ($getBatchData != null) {
                 </td></tr>";
                 $id++;
             }
-            echo "</table>";
+            echo "</tbody></table>";
         } else {
             echo "<br><br><h4 class='box-title'>No Records found</h4>";
         }
