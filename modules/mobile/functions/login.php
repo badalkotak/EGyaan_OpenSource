@@ -20,8 +20,11 @@ $batch=new Batch($dbconnect->getInstance());
 $details=array();
 $final=array();
 
-$email="badalkotak@gmail.com";
-$passwd="bk123";
+// $email="badalkotak@gmail.com";
+// $passwd="bk123";
+
+$email=$_REQUEST['username'];
+$passwd=$_REQUEST['password'];
 
 $checkLogin=$login->checkLogin($email,$passwd);
 
@@ -70,5 +73,5 @@ else
 }
 
 header("Content-Type: application/json");
-echo json_encode($final);
+echo "[".json_encode($final)."]";
 ?>
