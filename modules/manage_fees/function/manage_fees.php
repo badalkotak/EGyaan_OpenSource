@@ -16,13 +16,10 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-              <h1>
-                Hello!
-                <small>Indresh Jotangia</small>
-            </h1>
+              <br>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Manage Fees</li>
+                <li class="active"><b>Manage Fees</b></li>
             </ol>
         </section>
 
@@ -46,7 +43,7 @@ if($result!=null)
           </div>
           <div class="box-body">
             <div class="table-container1">
-                <table class="table table-bordered table-hover">
+                <table class="table table-bordered table-hover example2">
                     <thead>
                         <tr>
                             <th>Sr No.</th>
@@ -70,9 +67,9 @@ if($result!=null)
                             $pending_fees = $row["total_fees"] - $row["fees_paid"];
                             $input_fees ='<input type="number" id="fees_add_input_' . $row["id"] . '" value="0" min=1 max=' . $pending_fees . '>
                             <br><br>
-                            <button type="button" class="btn btn-primary" onclick="add_fees(' . $row["id"] . ',' . $pending_fees . ')"><i class="fa fa-plus"></i>Add fees</button>';
+                            <button type="button" class="btn btn-primary" onclick="add_fees(' . $row["id"] . ',' . $pending_fees . ')"><i class="fa fa-plus"></i>&nbspAdd fees</button>';
                             $refund_fees ='<input type="number" id="fees_refund_input_' . $row["id"] . '" value="0" min=1 max=' . $row["fees_paid"] . '><br><br>
-                            <button type="button" class="btn btn-warning" onclick="refund_fees(' . $row["id"] . ',' . $row["fees_paid"] . ')"><i class="fa fa-exchange"></i>Refund</button>';
+                            <button type="button" class="btn btn-warning" onclick="refund_fees(' . $row["id"] . ',' . $row["fees_paid"] . ')"><i class="fa fa-exchange"></i>&nbspRefund</button>';
                             echo '  <tr id =' . $row["id"] . '>
                             <td>' . $i . '</td>
                             <td>' . $row["firstname"] . ' ' . $row["lastname"] . '</td>

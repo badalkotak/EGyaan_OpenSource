@@ -6,13 +6,10 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Hello!
-        <small>Indresh Jotangia</small>
-      </h1>
+      <br>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Branch List</li>
+        <li class="active"><b>Branch List</b></li>
       </ol>
     </section>
     <section class="content">
@@ -27,7 +24,7 @@
                   <div class="col-md-6">
                     <input type="text" class="form-control" name="branch_name" placeholder="Enter Branch Name"></div>
                     
-                    <button type="submit" class="btn btn-success" value="Submit"><i class="fa fa-check"></i>Submit</button>
+                    <button type="submit" class="btn btn-success" value="Submit"><i class="fa fa-check"></i>&nbspSubmit</button>
                   </form>
 
                   <?php
@@ -77,12 +74,12 @@ if ($result != null) {
 
     echo "<td>";
     echo "<form action='editBranch.php' method='post'><input type='hidden' value='$id' name='edit'>
-    <button type='submit' class='btn btn-primary' value='Edit'><i class='fa fa-pencil'></i>Edit</button></form>";
+    <button type='submit' class='btn btn-primary' value='Edit'><i class='fa fa-pencil'></i>&nbspEdit</button></form>";
     echo "</td>";
 
     echo "<td>";
     echo "<form action='delete_branch.php' method='post'><input type='hidden' value='$id' name='delete'>
-    <button type='submit' class='btn btn-danger' value='Delete'>Delete<i class='fa fa-trash'></i></button></form>";
+    <button type='submit' class='btn btn-danger' value='Delete'><i class='fa fa-trash'></i>&nbspDelete</button></form>";
     echo "</td>";
   }
   echo "</tbody>";
