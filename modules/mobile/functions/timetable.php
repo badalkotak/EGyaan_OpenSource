@@ -42,6 +42,7 @@ if($getTime!=null)
 			$lecture['time']=$from_time.' - '.$to_time;
 			$lecture['teacher']="--";
 			$lecture['course']="Break";
+			$lecture['comment']="--";
 		}
 		else
 		{
@@ -53,6 +54,11 @@ if($getTime!=null)
 			{
 				$lecture['day_id']=$day_id;
 				$lecture['time']=$from_time.' - '.$to_time;
+				$comment=$row['comment'];
+				if($comment=="")
+				{
+					$comment="--";
+				}
 				$teacher_course_id=$row['teacher_course_id'];
 
 				$teacher_course_details=$teacher_course->getTeacherCourse(0,0,$teacher_course_id);
@@ -77,6 +83,7 @@ if($getTime!=null)
 
 				$lecture['teacher']=$user_name;
 				$lecture['course']=$course_name;
+				$lecture['comment']=$comment;
 			}
 		}
 		else
@@ -85,6 +92,7 @@ if($getTime!=null)
 			$lecture['time']=$from_time.' - '.$to_time;
 			$lecture['teacher']="--";
 			$lecture['course']="--";
+			$lecture['comment']="--";
 		}
 		}
 
