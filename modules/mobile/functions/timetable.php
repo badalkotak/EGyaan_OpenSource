@@ -12,8 +12,8 @@ $dbconnect=new DBConnect(Constants::SERVER_NAME,
 						Constants::DB_PASSWORD,
 						Constants::DB_NAME);
 
-$batch_id=2; // to be sent from local database of app $_REQUEST['batch_id']
-$day_id=1; // to be sent from the app $_REQUEST['day_id']
+$batch_id=$_REQUEST['batch_id']; // to be sent from local database of app $_REQUEST['batch_id']
+$day_id=$_REQUEST['day_id']; // to be sent from the app $_REQUEST['day_id']
 
 $json=array();
 $lecture=array();
@@ -32,14 +32,27 @@ if($getTime!=null)
 	while($timeRow=$getTime->fetch_assoc())
 	{
 		$time_id=$timeRow['id'];
-		$getLecture=$timetable->getTimetable(0,$batch_id,$day_id,$time_id);
+		$type=$timeRow['type'];
+		$from_time=$timeRow['from_time'];
+		$to_time=$timeRow['to_time'];
+
+		if($type==Constants::BREAK_ID_TT)
+		{
+			$lecture['day_id']=$day_id;
+			$lecture['time']=$from_time.' - '.$to_time;
+			$lecture['teacher']="--";
+			$lecture['course']="Break";
+		}
+		else
+		{
+			$getLecture=$timetable->getTimetable(0,$batch_id,$day_id,$time_id);
 
 		if($getLecture!=null)
 		{
 			while($row=$getLecture->fetch_assoc())
 			{
 				$lecture['day_id']=$day_id;
-				$lecture['time_id']=$time_id;
+				$lecture['time']=$from_time.' - '.$to_time;
 				$teacher_course_id=$row['teacher_course_id'];
 
 				$teacher_course_details=$teacher_course->getTeacherCourse(0,0,$teacher_course_id);
@@ -69,9 +82,10 @@ if($getTime!=null)
 		else
 		{
 			$lecture['day_id']=$day_id;
-			$lecture['time_id']=$time_id;
-			$lecture['teacher']=null;
-			$lecture['course']=null;
+			$lecture['time']=$from_time.' - '.$to_time;
+			$lecture['teacher']="--";
+			$lecture['course']="--";
+		}
 		}
 
 		$json[]=$lecture;
@@ -86,5 +100,6 @@ else
 }
 
 header("Content-Type: application/json");
-echo json_encode($final);
+echo "[".json_encode($final)."]";
+// echo json_encode($final);
 ?>

@@ -30,4 +30,5 @@ class Constants
     const COURSE_ASSIGN_SUCCESS = "Course assigned Successfully!";
     const COURSE_ASSIGN_FAIL = "Problem in assigning Course!";
     const NO_BRANCH_ERR = "No branch found!";
+    const BREAK_ID_TT = 2;
 }
