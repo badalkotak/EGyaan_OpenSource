@@ -50,6 +50,7 @@ if($checkLogin!=null)
 		$details['gender']=$row['gender'];
 		$details['mobile']=$row['mobile'];
 		$details['student_profile_photo']=$row['student_profile_photo'];
+		$details['parent_profile_photo']=$row['parent_profile_photo'];
 		$batch_id=$row['batch_id'];
 		$details['batch_id']=$batch_id;
 		$getBranchId=$batch->getBatch("no",0,$batch_id,"no",0);
