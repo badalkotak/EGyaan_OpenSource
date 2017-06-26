@@ -27,7 +27,7 @@ $courses_result=$course->getCourse('no',$user_id,'no',0,0,null,0);
             <h1>Hello!<small>User</small></h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
-                <li class="active"><b>Syllabus</b></li>
+                <li class="active"><b>List Of Syllabus</b></li>
             </ol>
         </section>
 
@@ -38,43 +38,41 @@ $courses_result=$course->getCourse('no',$user_id,'no',0,0,null,0);
                     <!--start of Table box-->
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">Syllabus</h3>
+                            <h3 class="box-title">List Of Syllabus:</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <div class="table-container1">
-                                <table id="example2" class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Sr No</th>
-                                            <th>Course</th>
-                                            <th>File</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        if($courses_result!=null)
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No</th>
+                                        <th>Course</th>
+                                        <th>File</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    if($courses_result!=null)
+                                    {
+                                        while($rowCourses=$courses_result->fetch_assoc())
                                         {
-                                            while($rowCourses=$courses_result->fetch_assoc())
-                                            {
-                                                $result=$syllabus->getSyllabus($rowCourses['course_id']);
-                                                if($result!=null)
-                                                {	
-                                                    $no=1;
-                                                    while($row=$result->fetch_assoc())
-                                                    {
-                                                        echo '<tr><td>'.$no.'</td><td>'.$rowCourses['name'].'</td>';
-                                                        echo '<td><a href='.$row['file'].'><span class="fa fa-file-pdf-o fa-lg "></span></a></td>';
-                                                        echo '</tr>';
-                                                        $no=$no+1;
-                                                    }
+                                            $result=$syllabus->getSyllabus($rowCourses['course_id']);
+                                            if($result!=null)
+                                            {	
+                                                $no=1;
+                                                while($row=$result->fetch_assoc())
+                                                {
+                                                    echo '<tr><td>'.$no.'</td><td>'.$rowCourses['name'].'</td>';
+                                                    echo '<td><a href='.$row['file'].'><span class="fa fa-file-pdf-o fa-lg "></span></a></td>';
+                                                    echo '</tr>';
+                                                    $no=$no+1;
                                                 }
-                                            }	
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                            }
+                                        }	
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
                         </div>
                         <!-- /.box-body -->
                     </div>

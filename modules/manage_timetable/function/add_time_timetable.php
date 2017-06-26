@@ -23,7 +23,7 @@ $timetimetable=new TimeTimetable($dbconnect->getInstance());
             <h1>Hello!<small>User</small></h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
-                <li class="active"><b>Add Time</b></li>
+                <li class="active"><b>Insert Time</b></li>
             </ol>
         </section>
 
