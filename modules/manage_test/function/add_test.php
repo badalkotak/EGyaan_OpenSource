@@ -32,39 +32,39 @@ if($getTeacherCourse===false)
     if($result!=null) {
         ?>
         <select title="Select course" id="course_id" name="course_id" required>
-        <?
+        <?php
         echo "<option value='0' selected> Select a Course </option>";
         while ($row = $result->fetch_assoc()) {
             echo "<option value='" . $row['courseId'] . "'>" . $row['branchName'] . " - " . $row['batchName'] . " - " . $row['courseName'] . "</option>";
         }
         ?>
         </select>
-        <?
+        <?php
     }else{
         echo "No Course added yet!!!";
     }
         ?>
     </select>
-    <?
+    <?php
 }
 else
 {
     ?>
     <div id="branch_list">
-    <?
+    <?php
     if($result!=null)
     {
         ?>
 
         <select title="Select branch" id="branch_id" name="branch_id" required>
-            <?
+            <?php
             echo "<option value='0' selected> Select a Branch </option>";
             while($row = $result->fetch_assoc()){
                 echo "<option value='" . $row["id"] . "'>" . $row["name"] . "</option>";
             }
             ?>
         </select>
-        <?
+        <?php
     }else{
         echo "No Branches added yet!!!";
     }
@@ -72,7 +72,7 @@ else
     </div>
     <div id="batch_list"></div>
     <div id="course_list"></div>
-    <?
+    <?php
 }
 ?>
     <div id="form_input"></div>

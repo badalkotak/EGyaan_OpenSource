@@ -59,7 +59,7 @@ if($result!=null)
     ?>
         </tbody>
     </table>
-    <?
+    <?php
 }
 else
 {

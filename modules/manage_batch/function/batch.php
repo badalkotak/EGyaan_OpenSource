@@ -6,13 +6,10 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-            Hello!
-            <small>Indresh Jotangia</small>
-        </h1>
+          <br>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Batch List</li>
+            <li class="active"><b>Batch List</b></li>
         </ol>
     </section>
     <section class="content">
@@ -66,7 +63,7 @@
         }
         ?>
     </select></div>
-    <button type="submit" class="btn btn-success" value="Submit"><i class='fa fa-check'></i>Submit</button>
+    <button type="submit" class="btn btn-success" value="Submit"><i class='fa fa-check'></i>&nbspSubmit</button>
 </form>
 
 <?php
@@ -78,7 +75,7 @@ if (isset($_REQUEST['branchId'])) {
         echo "<div class='col-md-6'><input type='hidden' name='branchId' value='" . $branch_Id . "'>";
         echo "<input type='text' class='form-control' name='batchName' placeholder='Enter Batch Name'></div>";
         
-        echo "<button type='submit'  class='btn btn-success' value='Submit'><i class='fa fa-check'></i>Submit</button>";
+        echo "<button type='submit'  class='btn btn-success' value='Submit'><i class='fa fa-check'></i>&nbspSubmit</button>";
         echo "</form>";
     } else {
         echo "Select valid Branch/Department";
@@ -109,9 +106,9 @@ if ($getBatchData != null) {
 
                 echo "<tr><td>" . $id . "</td><td>" . $batchTableName . "</td><td><form action='editBatch.php' method='post'>
                 <input type='hidden' name='branchId' value='" . $branch_id[$i] . "'><input type='hidden' name='batchId' value='" . $batchTableId . "'>
-                <button type='submit' class='btn btn-primary' value='Edit'><i class='fa fa-pencil'></i>Edit</button></form></td>
+                <button type='submit' class='btn btn-primary' value='Edit'><i class='fa fa-pencil'></i>&nbspEdit</button></form></td>
                 <td><form action='delete_batch.php' method='post'><input type='hidden' name='branchId' value='" . $branch_id[$i] . "'>
-                    <input type='hidden' name='batchId' value='" . $batchTableId . "'><button type='submit' class='btn btn-danger' value='Delete'>Delete<i class='fa fa-trash'></i></button></form>
+                    <input type='hidden' name='batchId' value='" . $batchTableId . "'><button type='submit' class='btn btn-danger' value='Delete'><i class='fa fa-trash'></i>&nbspDelete</button></form>
                 </td></tr>";
                 $id++;
             }

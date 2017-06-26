@@ -49,8 +49,7 @@ $timetype=new TimeType($dbconnect->getInstance());
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
-                             <h4>List Of Notes:</h4>
-                            <div class="table-container1">
+                             <h4>List Of Time Types:</h4>
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
@@ -76,7 +75,6 @@ $timetype=new TimeType($dbconnect->getInstance());
                                         ?>
                                     </tbody>
                                 </table>
-                            </div>
                         </div>
                     </div>
                     <!-- /.row -->

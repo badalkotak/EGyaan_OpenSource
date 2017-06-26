@@ -70,7 +70,7 @@ $course=new Course($dbconnect->getInstance());
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-success" name="submit"><span class="fa fa-check"></span>Add</button>
+                                    <button type="submit" class="btn btn-success" name="submit"><span class="fa fa-check"></span>Submit</button>
                                 </div>
                             </form>
                         </div>

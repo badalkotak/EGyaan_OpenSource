@@ -28,7 +28,7 @@ $course=new Course($dbconnect->getInstance());
             <h1>Hello!<small>User</small></h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
-                <li class="active">Notes</li>
+                <li class="active"><b>Insert Notes</b></li>
             </ol>
         </section>
 
@@ -84,7 +84,7 @@ $course=new Course($dbconnect->getInstance());
                                         Downloadable
                                     </label>
                                 </div>
-                                <button type="submit" class="btn btn-success" name="submit"><span class="fa fa-check"></span>Add</button>
+                                <button type="submit" class="btn btn-success" name="submit"><span class="fa fa-check"></span>Submit</button>
                             </form>
                         </div>
                         <?php

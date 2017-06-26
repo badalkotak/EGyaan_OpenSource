@@ -19,7 +19,6 @@ $notes=new Notes($dbconnect->getInstance());
 $course=new Course($dbconnect->getInstance());
 $courses_result=$course->getCourse('no',$user_id,'no',0,0,null,0);
 ?>
-<body>
 <!-- =============================================== -->
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -28,7 +27,7 @@ $courses_result=$course->getCourse('no',$user_id,'no',0,0,null,0);
             <h1>Hello!<small>User</small></h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
-                <li class="active">Notes</li>
+                <li class="active"><b>List Of Notes</b></li>
             </ol>
         </section>
 
@@ -39,7 +38,7 @@ $courses_result=$course->getCourse('no',$user_id,'no',0,0,null,0);
                     <!--start of Table box-->
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">Notes</h3>
+                            <h3 class="box-title">List Of Notes:</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
