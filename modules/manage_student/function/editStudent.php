@@ -1,9 +1,33 @@
+<!DOCTYPE html>
 <html>
 <head>
+    <?php
+    include "../../../Resources/Dashboard/header.php"
+    ?>
     <title>Edit Student Information | EGyaan</title>
     <script type="text/javascript" src="../../../Resources/jQuery/jquery-3.2.1.js"></script>
 </head>
 <body>
+<div class="wrapper">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <br>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="editDeleteStudent.php">&nbspEdit Student</a></li>
+                <li class="active"><b>Edit Student Details</b></li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Edit Student Details</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
 <?php
 /**
  * Created by PhpStorm.
@@ -56,18 +80,24 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
             $batchId = $row['batch_id'];
         }
 
-        echo "<form  action='edit_student.php' method='post' enctype='multipart/form-data'>";
-        echo "<img src='../images/student/" . $studentProfilePhoto . "' width='75' height='75'><br>";
-        echo "Choose Student Photo : <input type='file' name='studentProfilePhoto'>
+        echo "<form role='form' action='edit_student.php' method='post' enctype='multipart/form-data'>";
+        echo "<img src='../images/student/" . $studentProfilePhoto . "' width='75' height='75'><br><br>";
+        echo "Choose Student Photo : <input type='file' class='form-control' name='studentProfilePhoto'>
     <label>Max Size of Image is 5MB.</label>
     <br>";
         echo "<input type='hidden' name='studentId' value='" . $studentId . "'>";
-        echo "<input type='text' name='firstName' value='" . $firstName . "'><br>";
-        echo "<input type='text' name='lastName' value='" . $lastName . "'><br>";
-        echo "<input type='email' name='emailId' value='" . $email . "'><br>";
-        echo "<input type='text' name='studentPassword' value='" . $studentPassword . "'><br>";
-        echo "<input type='number' name='mobile' value='" . $mobile . "'><br>";
-        echo "<select name='gender'>";
+        echo "<label>Firstname:</label><br>";
+        echo "<input type='text' class='form-control' name='firstName' value='" . $firstName . "'><br>";
+        echo "<label>Lastname:</label><br>";
+        echo "<input type='text' class='form-control' name='lastName' value='" . $lastName . "'><br>";
+        echo "<label>Email:</label><br>";
+        echo "<input type='email' class='form-control' name='emailId' value='" . $email . "'><br>";
+        echo "<label>Password:</label><br>";
+        echo "<input type='text' class='form-control' name='studentPassword' value='" . $studentPassword . "'><br>";
+        echo "<label>Mobile No.:</label><br>";
+        echo "<input type='number' class='form-control' name='mobile' value='" . $mobile . "'><br>";
+        echo "<label>Gender:</label><br>";
+        echo "<select name='gender' class='form-control'>";
         echo "<option value='-1'>Select Gender</option>";
         if ($gender == 'M') {
             echo "<option value='Male' selected>Male</option>";
@@ -83,22 +113,32 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
             echo "<option value='TransGender' selected>TransGender</option>";
         }
         echo "</select>";
-        echo "<br>";
-        echo "<img src='../images/parent/" . $parentProfilePhoto . "' width='75' height='75'><br>";
-        echo "Choose Parent Photo : <input type='file' name='parentProfilePhoto'>
+        echo "<hr>";
+        echo "<h4>Parent Details</h4>";
+        echo "<img src='../images/parent/" . $parentProfilePhoto . "' width='75' height='75'><br><br>";
+        echo "Choose Parent Photo : <input type='file' class='form-control' name='parentProfilePhoto'>
     <label>Max Size of Image is 5MB.</label>
     <br>";
-        echo "<input type='text' name='parentName' value='" . $parentName . "'><br>";
-        echo "<input type='email' name='parentEmail' value='" . $parentEmail . "'><br>";
-        echo "<input type='text' name='parentPassword' value='" . $parentPassword . "'><br>";
-        echo "<input type='number' name='totalFees' value='" . $totalFees . "'><br>";
-        echo "<input type='number' name='feesPaid' value='" . $feesPaid . "'><br>";
-        echo "<textarea name='feesComment'>" . $feesComment . "</textarea><br>";
-        echo "<input type='date' name='dateOfAdmission' value='" . $dateOfAdmission . "'><br>";
-        echo "<input type='number' name='parentMobile' value='" . $parentMobile . "'><br>";
+        echo "<label>Firstname:</label><br>";
+        echo "<input type='text' class='form-control' name='parentName' value='" . $parentName . "'><br>";
+        echo "<label>Email:</label><br>";
+        echo "<input type='email' class='form-control' name='parentEmail' value='" . $parentEmail . "'><br>";
+        echo "<label>Password:</label><br>";
+        echo "<input type='text' class='form-control' name='parentPassword' value='" . $parentPassword . "'><br>";
+        echo "<label>Total Fees:</label><br>";
+        echo "<input type='number' class='form-control' name='totalFees' value='" . $totalFees . "'><br>";
+        echo "<label>Fees Paid:</label><br>";
+        echo "<input type='number' class='form-control' name='feesPaid' value='" . $feesPaid . "'><br>";
+        echo "<label>Fees Comment:</label><br>";
+        echo "<textarea name='feesComment' class='form-control'>" . $feesComment . "</textarea><br>";
+        echo "<label>Date Of Admission:</label><br>";
+        echo "<input type='date' class='form-control' name='dateOfAdmission' value='" . $dateOfAdmission . "'><br>";
+        echo "<label>Mobile No.:</label><br>";
+        echo "<input type='number' class='form-control' name='parentMobile' value='" . $parentMobile . "'><br>";
 //        echo $batchName . "<br>";
 //        echo "<input type='hidden' name='batchId' value='" . $batchId . "'>";
-        echo "<select name='branchId' id='branch-id'>";
+        echo "<label>Branch:</label><br>";
+        echo "<select name='branchId' id='branch-id' class='form-control'>";
         echo "<option value='-1'>Select Branch</option>";
 
         $batch = new Batch($dbConnect->getInstance());
@@ -135,7 +175,8 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
         echo "<br>";
 
         echo "<div id='new-drop-down' class='hide'>";
-        echo "<select id='batch-id' name='batchId'>";
+        echo "<label>Batch:</label><br>";
+        echo "<select id='batch-id' name='batchId' class='form-control'>";
         echo "<option value='-2'>Select Batch</option>";
         $_getBatchData = $batch->getBatch('yes', $_branchId, 0, 'no', 0);
         if ($_getBatchData != null) {
@@ -154,8 +195,7 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
         }
         echo "</select>";
         echo "</div>";
-
-        echo "<input type='submit' value='Update'>";
+        echo "<button type='submit' class='btn btn-success' value='Update'>Update</button>";
         echo "</form>";
     } else {
         echo Constants::STATUS_FAILED;
@@ -164,6 +204,13 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
     echo Constants::EMPTY_PARAMETERS;
 }
 ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -200,6 +247,8 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
         });
     });
 </script>
-
+<?php
+include "../../../Resources/Dashboard/footer.php"
+?>
 </body>
 </html>

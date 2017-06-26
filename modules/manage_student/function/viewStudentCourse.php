@@ -1,8 +1,32 @@
+<!DOCTYPE html>
 <html>
 <head>
+    <?php
+    include "../../../Resources/Dashboard/header.php"
+    ?>
     <title>View Course - Student | EGyaan</title>
 </head>
 <body>
+<div class="wrapper">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <br>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="editDeleteCourse.php">&nbspEdit Course</a></li>
+                <li class="active"><b>Course Details</b></li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Student Details</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
 
 <?php
 /**
@@ -39,16 +63,16 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
         $getData = $studentCourseRegistration->getStudentCourse($studentId);
         if ($getData != null) {
             $i = 1;
-            echo "<br><table border='3'>";
-            echo "<tr><th>Sr. no.</th><th>Course Name</th></tr>";
+            echo "<br><table class='table table-bordered table-hover example2'>";
+            echo "<thead><tr><th>Sr. no.</th><th>Course Name</th></tr></thead>";
             while ($row = $getData->fetch_assoc()) {
                 $studentCourseRegistrationId = $row['courseRegId'];
                 $studentCourseRegistrationCourseId = $row['courseRegCourseId'];
                 $courseName = $row['courseName'];
-                echo "<tr><td>" . $i . "</td><td>" . $courseName . "</td></tr>";
+                echo "<tbody><tr><td>" . $i . "</td><td>" . $courseName . "</td></tr>";
                 $i++;
             }
-            echo "</table>";
+            echo "</tbody></table>";
         } else {
             echo "No Courses Enrolled";
         }
@@ -59,5 +83,16 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
     echo Constants::EMPTY_PARAMETERS;
 }
 ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<?php
+include "../../../Resources/Dashboard/footer.php"
+?>
+
 </body>
 </html>

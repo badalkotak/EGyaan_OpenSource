@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     
     <!-- Bootstrap time Picker -->
-  <link rel="stylesheet" href="../../../Resources/AdminLTE-2.3.11/plugins/timepicker/bootstrap-timepicker.min.css"> 
+  <link rel="stylesheet" href="../../../Resources/AdminLTE-2.3.11/plugins/timepicker/bootstrap-timepicker.min.css">
     
     <!-- DataTables -->
   <link rel="stylesheet" href="../../../Resources/AdminLTE-2.3.11/plugins/datatables/dataTables.bootstrap.css">
@@ -45,7 +45,7 @@
     <!-- Logo -->
     <a href="../../../Resources/AdminLTE-2.3.11/index2.html" class="logo">
 <!--       mini logo for sidebar mini 50x50 pixels -->
-       <span class="logo-mini"><img src="../../../Resources/images/E_logo_transparent_small.png"></span> 
+       <span class="logo-mini"><img src="../../../Resources/images/E_logo_transparent_small.png"></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><img src="../../../Resources/images/EGYAAN_logo_transparent_small.png"></span>
     </a>

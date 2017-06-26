@@ -1,5 +1,9 @@
+<!DOCTYPE html>
 <html>
 <head>
+    <?php
+    include "../../../Resources/Dashboard/header.php"
+    ?>
     <title>Select Branch and Batch - Student Course | EGyaan</title>
     <script type="text/javascript" src="../../../Resources/jQuery/jquery-3.2.1.js"></script>
 
@@ -11,52 +15,80 @@
 
 </head>
 <body>
-<form action="editDeleteCourse.php" method="post">
-    <select id="branch-id" name="branchId">
-        <option value="-2">Select Branch</option>
-        <?php
-        /**
-         * Created by PhpStorm.
-         * User: fireion
-         * Date: 20/6/17
-         * Time: 1:17 PM
-         */
-        require_once("../../../classes/Constants.php");
-        require_once("../../../classes/DBConnect.php");
-        require_once("../../manage_branch/classes/Branch.php");
-        require_once("../../manage_batch/classes/Batch.php");
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <br>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Select Course</li>
+            </ol>
+        </section>
+        <section class="content">
 
-        $dbConnect = new DBConnect(Constants::SERVER_NAME,
-            Constants::DB_USERNAME,
-            Constants::DB_PASSWORD,
-            Constants::DB_NAME);
+            <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Select Course</h3>
+                    </div>
+                    <form role="form" action="editDeleteCourse.php" method="post">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <select id="branch-id" name="branchId" class="form-control">
+                                    <option value="-2">Select Branch</option>
+                                    <?php
+                                    /**
+                                     * Created by PhpStorm.
+                                     * User: fireion
+                                     * Date: 20/6/17
+                                     * Time: 1:17 PM
+                                     */
+                                    require_once("../../../classes/Constants.php");
+                                    require_once("../../../classes/DBConnect.php");
+                                    require_once("../../manage_branch/classes/Branch.php");
+                                    require_once("../../manage_batch/classes/Batch.php");
 
-        $branch = new Branch($dbConnect->getInstance());
-        $batch = new Batch($dbConnect->getInstance());
+                                    $dbConnect = new DBConnect(Constants::SERVER_NAME,
+                                        Constants::DB_USERNAME,
+                                        Constants::DB_PASSWORD,
+                                        Constants::DB_NAME);
 
-        $getBranchData = $branch->getBranch(0);
-        if ($getBranchData != null) {
-            while ($row = $getBranchData->fetch_assoc()) {
-                $branchId = $row['id'];
-                $branchName = $row['name'];
+                                    $branch = new Branch($dbConnect->getInstance());
+                                    $batch = new Batch($dbConnect->getInstance());
 
-                echo "<option value='" . $branchId . "'>" . $branchName . "</option>";
-            }
-        } else {
-            echo Constants::STATUS_FAILED;
-        }
-        ?>
+                                    $getBranchData = $branch->getBranch(0);
+                                    if ($getBranchData != null) {
+                                        while ($row = $getBranchData->fetch_assoc()) {
+                                            $branchId = $row['id'];
+                                            $branchName = $row['name'];
 
-    </select>
-    <div id="new-drop-down" class="hide">
-        <select name="batchId" id="batch-id">
-            <!--            <option value="-3">Select Batch</option>-->
-        </select>
+                                            echo "<option value='" . $branchId . "'>" . $branchName . "</option>";
+                                        }
+                                    } else {
+                                        echo Constants::STATUS_FAILED;
+                                    }
+                                    ?>
+
+                                </select>
+                            </div>
+                            <div id="new-drop-down" class="hide">
+                                <div class="form-group">
+                                    <select name="batchId" id="batch-id" class="form-control">
+                                        <!--            <option value="-3">Select Batch</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <button class="btn btn-success" type="submit" value="Submit"><i class="fa fa-check"></i>&nbspSubmit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+        </section>
     </div>
-    <br>
-    <br>
-    <input type="submit" value="Submit">
-</form>
+</div>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -93,6 +125,10 @@
         });
     });
 </script>
+<?php
+include "../../../Resources/Dashboard/footer.php";
+?>
+
 
 </body>
 </html>

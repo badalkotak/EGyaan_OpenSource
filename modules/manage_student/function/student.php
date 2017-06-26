@@ -1,6 +1,9 @@
 <html>
+<?php
+include "../../../Resources/Dashboard/header.php";
+?>
 <head>
-    <title>Student - Add Students|EGyaan</title>
+    <title>Add Student | EGyaan</title>
     <script type="text/javascript" src="../../../Resources/jQuery/jquery-3.2.1.js"></script>
     <style>
         div.hide {
@@ -8,81 +11,173 @@
         }
     </style>
 </head>
-<body>
-<form action="insert_student.php" method="post" id="student-form" enctype="multipart/form-data">
-    Choose Student Photo : <input type="file" name="studentProfilePhoto">
-    <label>Max Size of Image is 5MB.</label>
-    <br>
-    <input type="text" name="firstName" placeholder="Enter First Name"><br>
-    <input type="text" name="lastName" placeholder="Enter Last Name"><br>
-    <input type="email" name="emailId" placeholder="Enter Email Id"><br>
-    <!-- <input type="password" name="studentPassword" placeholder="Enter Student Password"><br> -->
-    <input type="number" name="mobile" placeholder="Enter Mobile Number"><br>
-    <select name="gender">
-        <option value="-1">Select Gender</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="TransGender">TransGender</option>
-    </select>
-    <br>
-    Choose Parent Photo : <input type="file" name="parentProfilePhoto">
-    <label>Max Size of Image is 5MB.</label>
-    <br>
-    <input type="text" name="parentName" placeholder="Enter Parent name"><br>
-    <input type="email" name="parentEmail" placeholder="Enter Parent Email"><br>
-    <!-- <input type="password" name="parentPassword" placeholder="Enter Parent Password"><br> -->
-    <input type="number" name="totalFees" placeholder="Enter Total Fees"><br>
-    <input type="number" name="feesPaid" placeholder="Enter Fees Paid"><br>
-    <textarea name="feesComment" placeholder="Enter Fees Comment"></textarea><br>
-    <input type="date" name="dateOfAdmission" placeholder="Enter Date of Admission"><br>
-    <input type="number" name="parentMobile" placeholder="Enter parent Phone Number"><br>
-    <select id="branch-id">
-        <option value="-2">Select Branch</option>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header"><br>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active"><b>Add Student</b></li>
+            </ol>
+        </section>
+        <section class="content">
 
-        <?php
-        /**
-         * Created by PhpStorm.
-         * User: fireion
-         * Date: 9/6/17
-         * Time: 4:45 PM
-         */
+            <!-- Default box -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <!--<div class="box-header with-border">
+                            <h3 class="box-title">Add Student</h3>
+                        </div>-->
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Add Students</h3>
+                        </div>
+                        <form role="form" action="insert_student.php" method="post" id="student-form"
+                              enctype="multipart/form-data">
+                            <div class="box-body">
+                                <h4>Student Details</h4>
+                                <div class="form-group">
+                                    Choose Student Photo : <input type="file" class="form-control"
+                                                                  name="studentProfilePhoto">
+                                    <label>Max Size of Image is 5MB.</label>
+                                </div>
+                                <div class="form-group">
+                                    <label>Firstname</label>
+                                    <input type="text" class="form-control" name="firstName"
+                                           placeholder="Enter First Name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Lastname</label>
+                                    <input type="text" class="form-control" name="lastName"
+                                           placeholder="Enter Last Name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email-Id</label>
+                                    <input type="email" class="form-control" name="emailId"
+                                           placeholder="Enter Email Id">
+                                </div>
+                                <!-- <input type="password" name="studentPassword" placeholder="Enter Student Password"><br> -->
+                                <div class="form-group">
+                                    <label>Mobile No.</label>
+                                    <input type="number" class="form-control" name="mobile"
+                                           placeholder="Enter Mobile Number">
+                                </div>
+                                <div class="form-group">
+                                    <label>Gender</label>
+                                    <select name="gender" class="form-control">
+                                        <option value="-1">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="TransGender">TransGender</option>
+                                    </select>
+                                </div>
+                                <hr>
+                                <h4>Parent Details</h4>
+                                <div class="form-group">
+                                    Choose Parent Photo : <input type="file" class="form-control"
+                                                                 name="parentProfilePhoto">
+                                    <label>Max Size of Image is 5MB.</label>
+                                </div>
+                                <div class="form-group">
+                                    <label>Parent Name</label>
+                                    <input type="text" class="form-control" name="parentName"
+                                           placeholder="Enter Parent name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Parent Email-id</label>
+                                    <input type="email" class="form-control" name="parentEmail"
+                                           placeholder="Enter Parent Email">
+                                </div>
+                                <div class="form-group">
+                                    <label>Total Fees</label>
+                                    <input type="number" class="form-control" name="totalFees"
+                                           placeholder="Enter Total Fees">
+                                </div>
+                                <div class="form-group">
+                                    <label>Fees Paid</label>
+                                    <input type="number" class="form-control" name="feesPaid"
+                                           placeholder="Enter Fees Paid">
+                                </div>
+                                <div class="form-group">
+                                    <label>Fees Comment</label>
+                                    <textarea class="form-control" name="feesComment"
+                                              placeholder="Enter Fees Comment"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Date Of Admission</label>
+                                    <input type="date" class="form-control" name="dateOfAdmission"
+                                           placeholder="Enter Date of Admission">
+                                </div>
+                                <div class="form-group">
+                                    <label>Parent Phone No.</label>
+                                    <input type="number" class="form-control" name="parentMobile"
+                                           placeholder="Enter parent Phone Number">
+                                </div>
+                                <div class="form-group">
+                                    <label>Branch</label>
+                                    <select class="form-control" id="branch-id">
+                                        <option value="-2">Select Branch</option>
 
-        require_once("../../../classes/Constants.php");
-        require_once("../../../classes/DBConnect.php");
-        require_once("../../manage_branch/classes/Branch.php");
-        require_once("../../manage_batch/classes/Batch.php");
+                                        <?php
+                                        /**
+                                         * Created by PhpStorm.
+                                         * User: fireion
+                                         * Date: 9/6/17
+                                         * Time: 4:45 PM
+                                         */
 
-        $dbConnect = new DBConnect(Constants::SERVER_NAME,
-            Constants::DB_USERNAME,
-            Constants::DB_PASSWORD,
-            Constants::DB_NAME);
+                                        require_once("../../../classes/Constants.php");
+                                        require_once("../../../classes/DBConnect.php");
+                                        require_once("../../manage_branch/classes/Branch.php");
+                                        require_once("../../manage_batch/classes/Batch.php");
 
-        $branch = new Branch($dbConnect->getInstance());
+                                        $dbConnect = new DBConnect(Constants::SERVER_NAME,
+                                            Constants::DB_USERNAME,
+                                            Constants::DB_PASSWORD,
+                                            Constants::DB_NAME);
 
-        $getData = $branch->getBranch(0);
+                                        $branch = new Branch($dbConnect->getInstance());
 
-        if ($getData != null) {
-            while ($row = $getData->fetch_assoc()) {
-                $branchId = $row['id'];
-                $branchName = $row['name'];
+                                        $getData = $branch->getBranch(0);
 
-                echo "<option value='$branchId'>" . $branchName . "</option>";
-            }
-        } else {
-            echo Constants::STATUS_FAILED;
-        }
-        ?>
-    </select>
-    <div id="new-drop-down" class="hide">
-        <select name="batchId" id="batch-id">
-            <!--            <option value="-3">Select Batch</option>-->
-        </select>
+                                        if ($getData != null) {
+                                            while ($row = $getData->fetch_assoc()) {
+                                                $branchId = $row['id'];
+                                                $branchName = $row['name'];
+
+                                                echo "<option value='$branchId'>" . $branchName . "</option>";
+                                            }
+                                        } else {
+                                            echo Constants::STATUS_FAILED;
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div id="new-drop-down" class="hide">
+                                    <select class="form-control" name="batchId" id="batch-id">
+                                        <!--            <option value="-3">Select Batch</option>-->
+                                    </select>
+                                </div>
+                                <br>
+                                <br>
+                                <div class="box-footer col-md">
+                                    <button type="submit" value="Submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+        </section>
     </div>
-    <br>
-    <br>
-    <input type="submit" value="Submit">
-</form>
-
+</div>
+<SCRIPT>
+    $(":file").filestyle({size: "sm"});
+</SCRIPT>
 <script type="text/javascript">
     $(document).ready(function () {
 //        $("#student-form").submit(function (event) {
@@ -122,5 +217,8 @@
         });
     });
 </script>
+<?php
+include("../../../Resources/Dashboard/footer.php");
+?>
 </body>
 </html>
