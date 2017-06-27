@@ -12,9 +12,32 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
 
 <html>
 <head>
-	<title>View Privileges</title>
+    <?php
+    include "../../../Resources/Dashboard/header.php"
+    ?>
+	<title>View Privileges | EGyaan</title>
 </head>
 <body>
+<div class="wrapper">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <br>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="role.php">Manage Roles</a></li>
+                <li class="active"><b>View Privileges</b></li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">View Privileges</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
 	<?php
 		$privilege=new Privilege($dbConnect->getInstance());
 
@@ -62,5 +85,15 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
 			echo "Nothing to show!";
 		}
 	?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<?php
+include "../../../Resources/Dashboard/footer.php";
+?>
 </body>
 </html>

@@ -30,10 +30,12 @@ if($getDetails!=null)
 }
 ?>
 
-<!DOCTYPE html>
 <html>
 <head>
-	<title>Edit User</title>
+    <?php
+    include "../../../Resources/Dashboard/header.php"
+    ?>
+	<title>Edit User | EGyaan</title>
 <script src="../../../Resources/jquery.min.js"></script>
 	<script>
 		
@@ -58,24 +60,46 @@ if($getDetails!=null)
 </script>
 </head>
 <body>
-	<form action="update_user.php" method="post">
+<div class="wrapper">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <br>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="user.php">Manage Users</a></li>
+                <li class="active"><b>Edit User</b></li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Manage User</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+	<form role="form" action="update_user.php" method="post">
 	<?php
-		echo "<input type=text name=name id=name placeholder='Full Name' value='$name'><br><br>";
+		echo "<div class='form-group'>
+        <label>Full Name</label><input type=text class='form-control' name=name id=name value='$name'></div>";
 
 		if($gender=="M")
 		{
-			echo '<input type="radio" name="gender" id="gender_M" value="M" checked="checked">Male
-		<input type="radio" name="gender" id="gender_F" value="F">Female<br><br>';
+			echo '<div class="form-group">
+        <label>Gender</label><br><input type="radio" class="flat" name="gender" id="gender_M" value="M" checked="checked">Male
+		<input type="radio" class="flat" name="gender" id="gender_F" value="F">Female</div>';
 		}
 		else
 		{
-			echo '<input type="radio" name="gender" id="gender_M" value="M">Male
-		<input type="radio" name="gender" id="gender_F" value="F" checked="checked">Female<br><br>';
+			echo '<div class="form-group"><label>Gender</label><input type="radio" class="flat" name="gender" id="gender_M" value="M">Male
+		<input type="radio" class="flat" name="gender" id="gender_F" value="F" checked="checked">Female<br><br>';
 		}
 		
-		echo "<input type=email name=email id=email placeholder=Email value='$email'><br><br>";
-		echo "<input type=text name=mobile placeholder=Mobile id=mobile value='$mobile'><br><br>";
-		echo '<select name="role_id" id="role_id">
+		echo "<div class='form-group'><label>Email-Id</label><input class='form-control' type=email name=email id=email value='$email'></div>";
+		echo "<div class='form-group'><label>Mobile No.</label><input class='form-control' type=text name=mobile id=mobile value='$mobile'></div>";
+		echo '<div class="form-group"><label>Role</label><select class="form-control" name="role_id" id="role_id">
 		<option value="-1">Select Role</option>';
 			$getRoles=$role->getRole();
 
@@ -92,10 +116,11 @@ if($getDetails!=null)
 						echo "<option value='$id'>$role_name</option>";
 				}
 			}
+			echo "</select></div>";
 		?>
-		</select><br><br>
+
 		<?php
-			echo "<input type=submit value='$user_id' name=submit id=submit><br><br>";
+			echo "<button class='btn btn-success' type=submit value='$user_id' name=submit id=submit><i class='fa fa-check'></i>&nbspUpdate</button>";
 		?>
 		<div id="user_err"></div>
 	</form>

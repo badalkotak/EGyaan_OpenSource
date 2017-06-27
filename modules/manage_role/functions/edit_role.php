@@ -1,3 +1,31 @@
+<html>
+<head>
+    <?php
+    include "../../../Resources/Dashboard/header.php"
+    ?>
+    <title>Edit Roles | EGyaan</title>
+</head>
+<body>
+<div class="wrapper">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <br>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="role.php">Manage Roles</a></li>
+                <li class="active"><b>Edit Roles</b></li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Edit Roles</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
 <?php
 require_once("../../../classes/DBConnect.php");
 require_once("../../../classes/Constants.php");
@@ -35,7 +63,7 @@ if($getRole!=null)
 		}
 	}
 
-	echo "<form action=update_role.php method=post><input type=text value='$role_name' id=role_name name=role_name><br><div id=role_err></div><br>Is Teacher: $isTeacher<br><input type=submit value=$role_id name=edit id=submit></form>";
+	echo "<form role='form' action=update_role.php method=post><div class='form-group'><label>Role Name</label><input type=text class='form-control' value='$role_name' id=role_name name=role_name></div><br><div id=role_err></div><div class='form-group'><label>Is Teacher : $isTeacher</label></div><button class='btn btn-primary' type=submit value=$role_id name=edit id=submit><i class='fa fa-pencil'></i>&nbsp;Edit</button></form>";
 }
 else
 {
@@ -67,3 +95,15 @@ else
 
 });
 		</script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<?php
+include "../../../Resources/Dashboard/footer.php"
+?>
+</body>
+</html>

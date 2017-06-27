@@ -1,3 +1,31 @@
+<html>
+<head>
+    <?php
+    include "../../../Resources/Dashboard/header.php"
+    ?>
+    <title>Assign Roles | EGyaan</title>
+</head>
+<body>
+<div class="wrapper">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <br>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="role.php">Manage Roles</a></li>
+                <li class="active"><b>Assign Roles</b></li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Assign Roles</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
 <?php
 require_once("../../../classes/DBConnect.php");
 require_once("../../../classes/Constants.php");
@@ -19,11 +47,10 @@ if($role_id==Constants::ROLE_STUDENT_ID || $role_id==Constants::ROLE_PARENT_ID |
 $privilege = new Privilege($dbConnect->getInstance());
 
 $getPrivileges=$privilege->getPrivilege(0,0);
-echo "Assign Privilege:<br>";
 if($getPrivileges!=null)
 {
 	$i=0;
-	echo "<form action=assign_privilege_role.php method=post>";
+	echo "<form role='form' action=assign_privilege_role.php method=post>";
 	while($row=$getPrivileges->fetch_assoc())
 	{
 		$privilege_id=$row['id'];
@@ -34,14 +61,27 @@ if($getPrivileges!=null)
 
 		if($checkPrivilegeRole!=null)
 		{
-			echo "<input type=checkbox name=c$i value='$privilege_id' checked> $privilege_name<br>";
+			echo "<div class='form-group'><input type=checkbox name=c$i value='$privilege_id' checked> $privilege_name</div>";
 		}
 		else
 		{
-			echo "<input type=checkbox name=c$i value='$privilege_id'> $privilege_name<br>";
+			echo "<div class='form-group'><input type=checkbox name=c$i value='$privilege_id'> $privilege_name</div>";
 		}
 	}
-	echo "<input type=submit value=$role_id name=role_id>";
+	echo "<button class='btn btn-success' type=submit value=$role_id name=role_id><i class='fa fa-check'></i>&nbsp;Assign</button>";
 	echo "</form>";
 }
 ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<?php
+include "../../../Resources/Dashboard/footer.php";
+?>
+</body>
+</html>
+

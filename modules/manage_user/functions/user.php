@@ -15,7 +15,10 @@ $user=new User($dbConnect->getInstance());
 
 <html>
 <head>
-<title>Manage Users</title>
+    <?php
+    include "../../../Resources/Dashboard/header.php"
+    ?>
+<title>Manage Users | EGyaan</title>
 
 <script src="../../../Resources/jquery.min.js"></script>
 <script>
@@ -42,15 +45,47 @@ $user=new User($dbConnect->getInstance());
 
 </head>
 <body>
-	Manage Users:<br><br>
+<div class="wrapper">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <br>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active"><b>Manage Users</b></li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Manage User</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
 
-	<form action=add_user.php method=post>
-		<input type="text" name="name" id="name" placeholder="Full Name"><br><br>
-		<input type="radio" name="gender" id="gender_M" value="M" checked="checked">Male
-		<input type="radio" name="gender" id="gender_F" value="F">Female<br><br>
-		<input type="email" name="email" id="email" placeholder="Email"><br><br>
-		<input type="text" name="mobile" placeholder="Mobile" id="mobile"><br><br>
-		<select name="role_id" id="role_id">
+	<form class="role" action=add_user.php method=post>
+        <div class="form-group">
+        <label>Full Name</label>
+		<input type="text" class="form-control" name="name" id="name">
+        </div>
+        <div class="form-group">
+        <label>Gender</label><br>
+        <input type="radio" class="flat" name="gender" id="gender_M" value="M" checked="checked">Male
+		<input type="radio" class="flat" name="gender" id="gender_F" value="F">Female
+        </div>
+        <div class="form-group">
+        <label>Email-Id</label>
+		<input type="email" class="form-control" name="email" id="email">
+        </div>
+        <div class="form-group">
+        <label>Mobile No.</label>
+		<input type="text" class="form-control" name="mobile" id="mobile">
+        </div>
+        <div class="form-group">
+        <label>Role</label>
+		<select name="role_id" class="form-control" id="role_id">
 		<option value="-1">Select Role</option>
 		<?php
 			$getRoles=$role->getRole();
@@ -66,10 +101,11 @@ $user=new User($dbConnect->getInstance());
 				}
 			}
 		?>
-		</select><br><br>
-		<input type="submit" value="Add Student" id="submit"><br><br>
+		</select>
+        </div>
+        <button type="submit" class="btn btn-primary" value="Add Student" id="submit"><i class="fa fa-plus"></i>&nbspAdd</button>
 		<div id="user_err"></div>
-	</form>
+	</form><hr>
 
 	
 		<?php
@@ -78,7 +114,10 @@ $user=new User($dbConnect->getInstance());
 
 			if($getUsers!=null)
 			{
-				echo "<table>
+			    echo "<div class='box-header'>
+                            <h3 class='box-title'><b>Users</b></h3>
+                        </div>";
+				echo "<table class='table table-bordered table-hover example2'>
 	<thead>
 		<th>Sr No.</th>
 		<th>Name</th>
@@ -156,7 +195,7 @@ $user=new User($dbConnect->getInstance());
 					echo "<td>";
 					if($role_id==Constants::ROLE_TEACHER_ID)
 					{
-						echo "<form action=../../manage_teacher_course/functions/assign_course.php method=post><input type=submit name=user_id value=$user_id></form>";
+						echo "<form role='form' action=../../manage_teacher_course/functions/assign_course.php method=post><button class='btn btn-default' type=submit name=user_id value=$user_id>$user_id</button></form>";
 					}
 					else
 					{
@@ -165,11 +204,11 @@ $user=new User($dbConnect->getInstance());
 					echo "</td>";
 
 					echo "<td>";
-					echo "<form action=edit_user.php method=post><input type=submit name=edit value=$user_id></form>";
+					echo "<form role='form' action=edit_user.php method=post><button class='btn btn-primary' type=submit name=edit value=$user_id><i class='fa fa-pencil'></i>&nbspEdit</button></form>";
 					echo "</td>";
 
 					echo "<td>";
-					echo "<form action=delete_user.php method=post><input type=submit name=delete value=$user_id></form>";
+					echo "<form action=delete_user.php method=post><button class='btn btn-danger' type=submit name=delete value=$user_id><i class='fa fa-trash'></i>&nbspDelete</button></form>";
 					echo "</td>";
 
 					echo "</tr>";
@@ -183,6 +222,15 @@ $user=new User($dbConnect->getInstance());
 				echo "No users added yet";
 			}
 		?>
-	
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<?php
+include "../../../Resources/Dashboard/footer.php"
+?>
 </body>
 </html>

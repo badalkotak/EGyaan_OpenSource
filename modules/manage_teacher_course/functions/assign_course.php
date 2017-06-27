@@ -16,14 +16,37 @@ $user_id=$_REQUEST['user_id'];
 
 <html>
 <head>
+    <?php
+    include "../../../Resources/Dashboard/header.php"
+    ?>
 	<title>Assign Course</title>
 	<script src="../../../Resources/jquery.min.js"></script>
 </head>
 <body>
-	Assign Course:<br><br>
-
-	<form action="add_teacher_course.php" method="post">
-		<select name="branch" id="branch">
+<div class="wrapper">
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <br>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="../../manage_user/functions/user.php">Manage Users</a></li>
+                <li class="active"><b>Assign Course</b></li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Assign Course</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+	<form role="form" action="add_teacher_course.php" method="post">
+		<div class="form-group">
+            <label>Branch</label>
+        <select class="form-control" name="branch" id="branch">
 		<option value=-1>Select Branch</option>
 		<?php
 			$branch=new Branch($dbConnect->getInstance());
@@ -41,8 +64,8 @@ $user_id=$_REQUEST['user_id'];
 			}
 		?>
 		</select>
+        </div>
 	</form>
-	<br>
 	<div id="batch_div"></div>
 			<?php
 				$course=new Course($dbConnect->getInstance());
@@ -53,7 +76,10 @@ $user_id=$_REQUEST['user_id'];
 
 				if($getCourse!=false)
 				{
-					echo "<table>
+                    echo "<hr><div class='box-header'>
+                            <h3 class='box-title'><b>Courses</b></h3>
+                        </div>";
+				    echo "<table class='table table-bordered table-hover example2'>
 							<thead>
 								<th>Sr No.</th>
 								<th>Branch</th>
@@ -91,7 +117,7 @@ $user_id=$_REQUEST['user_id'];
 						echo "</td>";
 
 						echo "<td>";
-						echo "<form action=delete_teacher_course.php method=post><input type=submit value=$courseId name=courseId></form>";
+						echo "<form action=delete_teacher_course.php method=post><button class='btn btn-danger' type=submit value=$courseId name=courseId><i class='fa fa-trash'></i>&nbsp;Delete</button></form>";
 						echo "</td>";
 
 						echo "</tr>";
@@ -105,7 +131,14 @@ $user_id=$_REQUEST['user_id'];
 					echo "No courses assigned yet!";
 				}
 			?>
-</body>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
 
 <script>
 $(document).ready(function(){
@@ -127,14 +160,14 @@ $(document).ready(function(){
 				{
 					var status=json.status;
 					var count=json.batch.length;
-					var batch_dropdown="<input type=radio hidden value="+user_id+" id=user_id><select name=batch id=batch><option value=-1>Select Batch</option>";
+					var batch_dropdown="<input type=radio hidden value="+user_id+" id=user_id><div class='form-group'><label>Batch</label><select class='form-control' name=batch id=batch><option value=-1>Select Batch</option>";
 
 					for(var i=0;i<count;i++)
 					{
 						batch_dropdown = batch_dropdown + "<option value="+json.batch[i].id+">"+json.batch[i].name+"</option>";
 					}
 
-					batch_dropdown = batch_dropdown + "</select><br><br><div id=course_div></div><script type=text/javascript src='getBatch.js'></ script>";
+					batch_dropdown = batch_dropdown + "</select></div><div id=course_div></div><script type=text/javascript src='getBatch.js'></ script>";
 
 					$("#batch_div").html(batch_dropdown);
 				}
@@ -169,4 +202,8 @@ $(document).ready(function(){
 </script>
 	<script src=getBatch.js></script>
 	<script src=checkCourse.js></script>
+<?php
+include "../../../Resources/Dashboard/footer.php";
+?>
+</body>
 </html>
