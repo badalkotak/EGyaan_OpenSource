@@ -2,6 +2,7 @@
 <html>
 <?php
 include("../../../Resources/sessions.php");
+include("../../../Resources/Dashboard/header.php");
 $user_id=$_SESSION['id'];
 require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");

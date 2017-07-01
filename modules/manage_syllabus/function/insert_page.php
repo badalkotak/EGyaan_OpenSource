@@ -116,7 +116,7 @@ $course=new Course($dbconnect->getInstance());
                                                     {
                                                         echo '<tr><td>'.$no.'</td><td>'.$rowCourses['branchName'].'</td><td>'.$rowCourses['batchName'].'</td><td>'.$rowCourses['courseName'].'</td>';
                                                         echo '<td><a href='.$row['file'].'><span class="fa fa-file-pdf-o fa-lg "></span></a></td>';
-                                                        echo '<td><a href=delete.php?id='.$row['id'].'&file='.$row['file'].' onclick="return confirmation()">Delete</a></td></form></tr>';
+                                                        echo '<td><a href=delete.php?id='.$row['id'].'&file='.$row['file'].' onclick="return confirmation()" class="btn btn-danger"><span class="fa fa-trash"></span> Delete</a></td></form></tr>';
                                                         $no=$no+1;
                                                     }
                                                 }
