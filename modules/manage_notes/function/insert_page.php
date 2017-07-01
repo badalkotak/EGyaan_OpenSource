@@ -3,7 +3,6 @@
 <?php
 include("../../../Resources/sessions.php");
 include("../../../Resources/Dashboard/header.php");
-include("privilege.php");
 
 $user_id=$_SESSION['id'];
 require_once("../../../classes/Constants.php");
@@ -42,11 +41,6 @@ $course=new Course($dbconnect->getInstance());
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="row">
-                    <?php
-                    //check add privilege
-                    if($add===true)
-                    {
-                    ?>
                         <div class="col-md-6">
                             <form method="post" action="insert_notes.php" enctype="multipart/form-data"> 
                                 <div class="form-group">
@@ -93,10 +87,6 @@ $course=new Course($dbconnect->getInstance());
                                 <button type="submit" class="btn btn-success" name="submit"><span class="fa fa-check"></span>Submit</button>
                             </form>
                         </div>
-                        <?
-                        }
-                        ?>
-
                         <?php
                         $getTeacherCourse=$course->getCourse("yes",$id,"no",0,0,null,0);
                         if($getTeacherCourse===false)
@@ -123,10 +113,7 @@ $course=new Course($dbconnect->getInstance());
                                             <th>Course</th>
                                             <th>Title</th>
                                             <th>File</th>
-                                            <?php
-                                            if($delete===true)
-                                            echo "<th>Delete</th>"
-                                            ?>
+                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -149,12 +136,9 @@ $course=new Course($dbconnect->getInstance());
                                                         <td>'.$rowCourses['courseName'].'</td>';
                                                         echo '<td>'.$row['title'].'</td>';
                                                         echo '<td><a href='.$row['file'].'><span class="fa fa-file-pdf-o fa-lg "></span></a></td>';
-                                                        if($delete===true)
-                                                        {
-                                                            echo '<td><a href=delete.php?id='.$row['id'].'&file='.$row['file'].' onclick="return confirmation()" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span> Delete</a>
-                                                        </td></form>';
-                                                        }
-                                                        echo '</tr>';
+                                                        echo '<td><a href=delete.php?id='.$row['id'].'&file='.$row['file'].' onclick="return confirmation()" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span> Delete</a>
+                                                        </td></form>
+                                                        </tr>';
                                                         $no=$no+1;
                                                     }
                                                 }

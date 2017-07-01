@@ -1,12 +1,5 @@
 <?php
-include("../../../Resources/sessions.php");
-include("privilege.php");
-
-if($delete!=true)
-{
-	echo "<script>alert('You dont have this privilege!');window.location.href='../../login/functions/logout.php'</script>";
-}
-
+session_start();
 require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../classes/Notes.php");
