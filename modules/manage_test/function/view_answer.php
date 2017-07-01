@@ -79,16 +79,16 @@ $test = new StudentTest($dbConnect->getInstance());
                                                         '<div class="col-md-6">'.
                                                             '<span class=' . (($row["answer"] == 4)?('"fa fa-check" style="color:green;font-weight:bold">'):((($row["option_id"] == 4)?('"fa fa-close" style="color:red;font-weight:bold">'):('"">')))) . '4) ' . $row["option4"] . '</span>'.
                                                         '</div>'.
-                                                    '</div>'.
-                                                '</div>'.
-                                            '</div>';
+                                                    '</div><hr>';
                                                 $i++;
                                                 if($row["answer"] == $row["option_id"]){
                                                     $total_marks += $row["marks"];
                                                 }
                                             }
-                                            echo '<div class="box-footer">'.
+                                            echo '<div class="row">'.
+                                                    '<div class="col-md-12">'.
                                                         '<h4>Marks Obtained : ' . $total_marks . ' out of ' . $_REQUEST["marks"].'</h4>'.
+                                                    '</div>'.
                                                 '</div>';
                                         } else {
                                             $test->parentRedirect("Error processing the request");
@@ -100,6 +100,8 @@ $test = new StudentTest($dbConnect->getInstance());
                                     $test->parentRedirect("Error processing the request");
                                 }
                                 ?>
+                            </div>
+                        </div>
                     </div>
                     <!--end of Table box-->
                 </div>

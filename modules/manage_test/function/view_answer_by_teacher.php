@@ -66,27 +66,27 @@ $test = new Test($dbConnect->getInstance());
                                                     '</div>';
                                                 echo '<div class="row">'.
                                                         '<div class="col-md-6">'.
-                                                            '<span class=' . (($row["answer"] == 1)?('"fa fa-check" style="color:green;font-weight:bold">'):((($row["option_id"] == 1)?('"fa fa-close" style="color:green;font-weight:bold">'):('"">')))) . '1) ' . $row["option1"] . '</span>' .
+                                                            '<span class=' . (($row["answer"] == 1)?('"fa fa-check" style="color:green;font-weight:bold">'):((($row["option_id"] == 1)?('"fa fa-close" style="color:red;font-weight:bold">'):('"">')))) . '1) ' . $row["option1"] . '</span>' .
                                                         '</div>'.
                                                         '<div class="col-md-6">'.
-                                                            '<span class=' . (($row["answer"] == 2)?('"fa fa-check" style="color:green;font-weight:bold">'):((($row["option_id"] == 2)?('"fa fa-close" style="color:green;font-weight:bold">'):('"">')))) . '2) ' . $row["option2"] . '</span>&nbsp;&nbsp;&nbsp;' .
+                                                            '<span class=' . (($row["answer"] == 2)?('"fa fa-check" style="color:green;font-weight:bold">'):((($row["option_id"] == 2)?('"fa fa-close" style="color:red;font-weight:bold">'):('"">')))) . '2) ' . $row["option2"] . '</span>&nbsp;&nbsp;&nbsp;' .
                                                         '</div>'.
                                                         '<div class="col-md-6">'.
-                                                            '<span class=' . (($row["answer"] == 3)?('"fa fa-check" style="color:green;font-weight:bold">'):((($row["option_id"] == 3)?('"fa fa-close" style="color:green;font-weight:bold">'):('"">')))) . '3) ' . $row["option3"] . '</span>&nbsp;&nbsp;&nbsp;' .
+                                                            '<span class=' . (($row["answer"] == 3)?('"fa fa-check" style="color:green;font-weight:bold">'):((($row["option_id"] == 3)?('"fa fa-close" style="color:red;font-weight:bold">'):('"">')))) . '3) ' . $row["option3"] . '</span>&nbsp;&nbsp;&nbsp;' .
                                                         '</div>'.
                                                         '<div class="col-md-6">'.
-                                                            '<span class=' . (($row["answer"] == 4)?('"fa fa-check" style="color:green;font-weight:bold">'):((($row["option_id"] == 4)?('"fa fa-close" style="color:green;font-weight:bold">'):('"">')))) . '4) ' . $row["option4"] . '</span>'.
+                                                            '<span class=' . (($row["answer"] == 4)?('"fa fa-check" style="color:green;font-weight:bold">'):((($row["option_id"] == 4)?('"fa fa-close" style="color:red;font-weight:bold">'):('"">')))) . '4) ' . $row["option4"] . '</span>'.
                                                         '</div>'.
-                                                    '</div>'.
-                                                '</div>'.//end of col-md-8
-                                            '</div>';//end of box-body
+                                                    '</div><hr>';
                                                 $i++;
                                                 if($row["answer"] == $row["option_id"]){
                                                     $total_marks += $row["marks"];
                                                 }
                                             }
-                                            echo '<div class="box-footer">'.
+                                            echo '<div class="row">'.
+                                                    '<div class="col-md-12">'.
                                                         '<h4>Marks Obtained : ' . $total_marks . ' out of ' . $_REQUEST["marks"].'</h4>'.
+                                                    '</div>'.
                                                 '</div>';
                                         } else {
                                             $test->parentPageRedirect("Error processing the request");
@@ -98,6 +98,8 @@ $test = new Test($dbConnect->getInstance());
                                     $test->parentPageRedirect("Error processing the request");
                                 }
                                 ?>
+                            </div>
+                        </div>
                             
                     </div>
                     <!--end of Table box-->

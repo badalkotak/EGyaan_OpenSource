@@ -82,15 +82,16 @@ $test = new Test($dbConnect->getInstance());
                                                         '<div class="col-md-6">'.
                                                             '<span class=' . (($row["answer"] == 4)?('"fa fa-check" style="color:green;font-weight:bold">'):('"">')) . '4) ' . $row["option4"] . '</span>'.
                                                         '</div>'.
-                                                    '</div>'.
-                                                '</div>'.
-                                                '</div>';
+                                                    '</div><hr>';
+                                                
                                                     
                                                 $i++;
                                                 $total_marks += $row["marks"];
                                             }
-                                            echo '<div class="box-footer">'.
+                                            echo '<div class="row">'.
+                                                    '<div class="col-md-12">'.
                                                         '<h4>Total marks : ' . $total_marks.'</h4>'.
+                                                    '</div>'.
                                                 '</div>';
                                         }else{
                                             ob_clean();
@@ -105,6 +106,8 @@ $test = new Test($dbConnect->getInstance());
                                     $test->parentPageRedirect("Error processing request");
                                 }
                                 ?>
+                            </div>
+                        </div>
                     </div>
                     <!--end of Table box-->
                 </div>

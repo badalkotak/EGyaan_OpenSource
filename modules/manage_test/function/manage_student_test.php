@@ -74,7 +74,7 @@ $result=$test->getTests($student_id);
                                                     <td>' . $row["name"]  . '</td>
                                                     <td>' . $row["marks"] . '</td>
                                                     <td>' .  $row["total_marks"]  . '</td>
-                                                    <td>' . (($row["type"] == 'O')?(($row["marks"]=="-")?'<a href="give_test.php?test_id=' . $row["id"] . '">Start</a>':'Submitted'):'NA') . '</td> 
+                                                    <td>' . (($row["type"] == 'O')?(($row["marks"]=="-")?'<a href="give_test.php?test_id=' . $row["id"] . '" class="btn btn-success btn-sm">Start</a>':'Submitted'):'NA') . '</td> 
                                                     <td>' . (($row["type"] == 'O')?(($row["marks"]=="-")?'-':'<a
                                                     class="btn btn-primary btn-sm" href="view_answer.php?test_id=' . $row["id"] . '&marks=' .  $row["total_marks"]  . '"><span class="fa fa-table"></span> View</a>'):'NA') . '</td> 
                                                   </tr>';
