@@ -2,6 +2,13 @@
 <html>
 <?php
 include("../../../Resources/sessions.php");
+include("privilege.php");
+
+if($add!=true)
+{
+    $message=Constants::NO_PRIVILEGE;
+    echo "<script>alert('$message');window.location.href='../../login/functions/logout.php'</script>";
+}
 include("../../../Resources/Dashboard/header.php");
     
 require_once("../../../classes/Constants.php");

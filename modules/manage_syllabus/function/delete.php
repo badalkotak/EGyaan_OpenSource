@@ -1,5 +1,13 @@
 <?php
-session_start();
+include("../../../Resources/sessions.php");
+include("privilege.php");
+
+if($delete!=true)
+{
+	$message=Constants::NO_PRIVILEGE;
+	echo "<script>alert('$message');window.location.href='../../login/functions/logout.php'</script>";
+}
+
 require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../classes/Syllabus.php");

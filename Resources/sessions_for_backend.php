@@ -1,6 +1,5 @@
 <?php
-include("no_javascript_message.php");
-// error_reporting(0);
+error_reporting(0);
 session_start();
 
 if(!isset($_SESSION['email']) || !isset($_SESSION['id']) || !isset($_SESSION['role']))

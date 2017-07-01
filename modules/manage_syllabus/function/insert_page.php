@@ -2,8 +2,10 @@
 <html>
 <?php
 include("../../../Resources/sessions.php");
+include("privilege.php");
 include("../../../Resources/Dashboard/header.php");
-$user_id=$_SESSION['id'];
+$user_id=$id;
+
 require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../classes/Syllabus.php");
@@ -38,6 +40,10 @@ $course=new Course($dbconnect->getInstance());
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="row">
+                    <?php
+                    if($add===true)
+                    {
+                    ?>
                         <div class="col-md-6">
                             <form method="post" action="insert_syllabus.php" enctype="multipart/form-data">
                                 <div class="form-group">
@@ -74,6 +80,9 @@ $course=new Course($dbconnect->getInstance());
                                 </div>
                             </form>
                         </div>
+                        <?
+                            }
+                        ?>
                         <?php
                         $getTeacherCourse=$course->getCourse("yes",$user_id,"no",0,0,null,0);
                         if($getTeacherCourse===false)
@@ -99,7 +108,12 @@ $course=new Course($dbconnect->getInstance());
                                             <th>Batch</th>
                                             <th>Course</th>
                                             <th>File</th>
-                                            <th>Delete</th>
+                                            <?php
+                                            if($delete===true)
+                                            {
+                                                echo "<th>Delete</th>";
+                                            }
+                                            ?>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -116,6 +130,7 @@ $course=new Course($dbconnect->getInstance());
                                                     {
                                                         echo '<tr><td>'.$no.'</td><td>'.$rowCourses['branchName'].'</td><td>'.$rowCourses['batchName'].'</td><td>'.$rowCourses['courseName'].'</td>';
                                                         echo '<td><a href='.$row['file'].'><span class="fa fa-file-pdf-o fa-lg "></span></a></td>';
+                                                        if($delete===true)
                                                         echo '<td><a href=delete.php?id='.$row['id'].'&file='.$row['file'].' onclick="return confirmation()" class="btn btn-danger"><span class="fa fa-trash"></span> Delete</a></td></form></tr>';
                                                         $no=$no+1;
                                                     }

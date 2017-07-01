@@ -11,9 +11,9 @@ $dbconnect=new DBConnect(Constants::SERVER_NAME,
 
 $privilege=new Privilege($dbconnect->getInstance());
 
-$add_id=Constants::NOTES_ADD_ID;
-$delete_id=Constants::NOTES_DELETE_ID;
-$view_id=Constants::NOTES_VIEW_ID;
+$add_id=Constants::SYLLABUS_ADD_ID;
+$delete_id=Constants::SYLLABUS_DELETE_ID;
+$view_id=Constants::SYLLABUS_VIEW_ID;
 
 $add=$privilege->checkPrivilege($id,$add_id,$email);
 $delete=$privilege->checkPrivilege($id,$delete_id,$email);

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?php
+include("privilege.php");
 include("../../../Resources/sessions.php");
 include("../../../Resources/Dashboard/header.php");
 
@@ -57,10 +58,20 @@ $result=$test->getTestsByTeacher($teacher_id);
                                             <th>Date of Result</th>
                                             <th>Type</th>
                                             <th>Course name</th>
-                                            <th>Add Marks</th>
-                                            <th>Delete</th>
                                             <th>View Test</th>
-                                            <th>View Result</th>
+                                            <?php
+                                            if($result_add_id===true)
+                                                echo "<th>Add Marks</th>";
+                                            ?>
+                                            <?
+                                            if($result_view_id===true)
+                                                echo "<th>View Result</th>";
+                                            ?>
+                                            <?
+                                            if($delete===true)
+                                                echo "<th>Delete</th>";
+                                            ?>
+                                            
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -76,11 +87,14 @@ $result=$test->getTestsByTeacher($teacher_id);
                                                             <td>' . $row["date_of_result"]  . '</td>
                                                             <td>' . (($row["type"] == 'O')?'Online':'Offline') . '</td>
                                                             <td>' . $row["name"]  . '</td>
-                                                            <td>' . (($row["type"] == 'O')?'NA':(($row["status"] == 0)?'<a class="btn btn-primary btn-sm" href="add_marks_offline_test.php?id=' . $row["id"] . '&action=add"><span class="fa fa-plus"></span> Add</a>':'<a  class="btn btn-primary btn-sm" href="add_marks_offline_test.php?id=' . $row["id"] . '&action=edit"><span class="fa fa-pencil"></span> Edit</a>')) . '</td>
-                                                            <td><a class="btn btn-danger btn-sm" href="delete_test.php?id=' . $row["id"] . '"><span class="fa fa-trash"></span> Delete</a></td>
-                                                            <td><a class="btn btn-primary btn-sm" href="view_test.php?id=' . $row["id"] . '&type=' . $row["type"] . '"><span class="fa fa-table"></span> View</a></td>
-                                                            <td><a class="btn btn-primary btn-sm" href="view_result.php?id=' . $row["id"] . '&type=' . $row["type"] . '&marks=' . $row["total_marks"] . '"><span class="fa fa-table"></span> View</a></td>
-                                                          </tr>';
+                                                            <td><a class="btn btn-primary btn-sm" href="view_test.php?id=' . $row["id"] . '&type=' . $row["type"] . '"><span class="fa fa-table"></span> View</a></td>';
+                                                            if($delete===true)
+                                                            echo '<td><a class="btn btn-danger btn-sm" href="delete_test.php?id=' . $row["id"] . '"><span class="fa fa-trash"></span> Delete</a></td>';
+                                                            if($result_add_id===true)
+                                                            echo '<td>' . (($row["type"] == 'O')?'NA':(($row["status"] == 0)?'<a class="btn btn-primary btn-sm" href="add_marks_offline_test.php?id=' . $row["id"] . '&action=add"><span class="fa fa-plus"></span> Add</a>':'<a  class="btn btn-primary btn-sm" href="add_marks_offline_test.php?id=' . $row["id"] . '&action=edit"><span class="fa fa-pencil"></span> Edit</a>')) . '</td>';
+                                                            if($result_view_id===true)
+                                                            echo '<td><a class="btn btn-primary btn-sm" href="view_result.php?id=' . $row["id"] . '&type=' . $row["type"] . '&marks=' . $row["total_marks"] . '"><span class="fa fa-table"></span> View</a></td>';
+                                                          echo '</tr>';
                                                 $i++;
                                             }
                                             ?>
@@ -94,7 +108,10 @@ $result=$test->getTestsByTeacher($teacher_id);
                                 }
                                 ?>        
                             </div>
-                            <a href="add_test.php" class="btn btn-primary">Add Test</a>
+                            <?php
+                            if($add===true)
+                            echo "<a href=add_test.php class='btn btn-primary'>Add Test</a>";
+                        ?>
                         </div>
                         <!-- /.box-body -->
                     </div>
