@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
+<body>
 <?php
+ob_start();
 include("../../../Resources/sessions.php");
 include("../../../Resources/Dashboard/header.php");
 
@@ -43,6 +45,7 @@ $test = new Test($dbConnect->getInstance());
                                 if(isset($_REQUEST["id"]) && isset($_REQUEST["type"])){
                                     if($_REQUEST["type"] == 'F'){
                                         if(file_exists("offline_test/" . $_REQUEST["id"] . ".pdf")){
+                                            ob_clean();
                                             header("Location: offline_test/" . $_REQUEST["id"] . ".pdf");
                                         }else{
                                             $test->parentPageRedirect("Error processing request");
@@ -90,12 +93,15 @@ $test = new Test($dbConnect->getInstance());
                                                         '<h4>Total marks : ' . $total_marks.'</h4>'.
                                                 '</div>';
                                         }else{
+                                            ob_clean();
                                             $test->parentPageRedirect("Error processing request");
                                         }
                                     }else{
+                                        ob_clean();
                                         $test->parentPageRedirect("Error processing request");
                                     }
                                 }else{
+                                    ob_clean();
                                     $test->parentPageRedirect("Error processing request");
                                 }
                                 ?>

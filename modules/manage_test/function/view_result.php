@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?php
+ob_start();
 include("../../../Resources/sessions.php");
 include("../../../Resources/Dashboard/header.php");
 require_once("../../../classes/Constants.php");
@@ -10,7 +11,7 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_USERNAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
-    
+
 $teacher_id = $id;
 $test = new Test($dbConnect->getInstance());
 ?>
@@ -67,12 +68,15 @@ $test = new Test($dbConnect->getInstance());
                                             </table>
                                             <?
                                         } else {
+                                            ob_clean();
                                             $test->parentPageRedirect("Error processing request");
                                         }
                                     }else{
+                                        ob_clean();
                                         $test->parentPageRedirect("Marks not entered/Error processing request");
                                     }
                                 }else{
+                                    ob_clean();
                                     $test->parentPageRedirect("Error processing request");
                                 }
                                 ?>
