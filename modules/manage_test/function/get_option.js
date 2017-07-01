@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     $('body').on('change','#branch_id', function () {
         $('#batch_list').html("");
         $('#course_list').html("");
@@ -10,21 +11,23 @@ $(document).ready(function () {
                 data: "branch_id="+branch_id+"&select=batch",
                 success: function(json){
                     if(json.status=="success" && json.type=="specific"){
-                        var select = '<select title="Select batch" id="batch_id" name="batch_id" required>';
-                        select = select + '<option value="0" selected> Select a Batch </option>';
+                        var select = '<div class="form-group"><select title="Select batch" class="form-control select2" id="batch_id" name="batch_id" required>';
+                        select = select + '<option value="0" selected disabled> Select a Batch </option>';
                         for (i = 0; i < json.data.length; i++) {
                             select = select + "<option value='" +json.data[i].id + "'>" + json.data[i].name + "</option>";
                         }
-                        select = select + '</select>';
+                        select = select + '</select></div>';
                         $("#batch_list").html(select);
+                        $(".select2").select2();
                     }else if(json.status=="success" && json.type=="unspecific"){
-                        var select = '<select title="Select course" id="course_id" name="course_id" required>';
-                        select = select + '<option value="0" selected> Select a Course </option>';
+                        var select = '<div class="form-group"><select title="Select course" class="form-control select2" id="course_id" name="course_id" required>';
+                        select = select + '<option value="0" selected disabled> Select a Course </option>';
                         for (i = 0; i < json.data.length; i++) {
                             select = select + "<option value='" +json.data[i].courseId + "'>" + json.data[i].courseName + "</option>";
                         }
-                        select = select + '</select>';
+                        select = select + '</select></div>';
                         $("#course_list").html(select);
+                        $(".select2").select2();
                     }else{
                         alert(json.message);
                     }
@@ -50,13 +53,14 @@ $(document).ready(function () {
                 data: "branch_id="+branch_id+"&batch_id="+batch_id+"&select=course",
                 success: function(json){
                     if(json.status=="success"){
-                        var select = '<select title="Select course" id="course_id" name="course_id" required>';
-                        select = select + '<option value="0" selected> Select a Course </option>';
+                        var select = '<div class="form-group"><select title="Select course" class="form-control select2" id="course_id" name="course_id" required>';
+                        select = select + '<option value="0" selected disabled> Select a Course </option>';
                         for (i = 0; i < json.data.length; i++) {
                             select = select + "<option value='" +json.data[i].id + "'>" + json.data[i].name + "</option>";
                         }
-                        select = select + '</select>';
+                        select = select + '</select></div>';
                         $("#course_list").html(select);
+                        $(".select2").select2();
                     }else{
                         alert(json.message);
                     }
@@ -74,22 +78,43 @@ $(document).ready(function () {
     $('body').on('change','#course_id', function () {
         $('#form_input').html("");
         if(course_id != 0){
-            var test_form = '<label>Enter Test Title:</label>' +
-                            '<input type="text" id="title" name="title" placeholder="Enter test title" required><br>' +
-                            '<label>Enter Marks:</label>' +
-                            '<input type="number" min=1 id="marks" name="marks" placeholder="Enter marks here" required><br>' +
-                            '<label for="date">Date of test:</label>' +
-                            '<input type="date" id="date" name="date" value="' + new Date() + '" required><br>' +
-                            '<label>Type of test:</label>' +
-                            '<input type="radio" id="online" name="type" value="online" onchange="changeAction()" checked required><label for="online">Online</label>' +
-                            '<input type="radio" id="offline" name="type" value="offline" onchange="changeAction()" required><label for="offline">Offline</label><br>' +
-                            '<button formaction="add_questions.php" formmethod="post" id="test_button" name="test_button" type="submit">Next</button>';
+            var test_form = '<div class="form-group">' + 
+                                '<input type="text" class="form-control" id="title" name="title" placeholder="Enter test title" required>' + 
+                            '</div>' +
+                            '<div class="form-group">' + 
+                                '<input type="number" class="form-control" min=1 id="marks" name="marks" placeholder="Enter marks here" required>' + 
+                            '</div>' +
+                            '<div class="form-group">' + 
+                                '<div class="input-group">' +
+                                    '<input type="text" class="form-control" id="date" placeholder="Date Of Test" name="date" value="' + new Date() + '" required>' + 
+                                    '<div class="input-group-addon">' + 
+                                        '<i class="fa fa-calendar"></i>' +
+                                    '</div>' + 
+                                '</div>' + 
+                            '</div>' +
+                            '<div class="form-group">' + 
+                                '<label>Type of test:</label>' + 
+                                '<div class="radio">' + 
+                                    '<label for="online">' + 
+                                        '<input type="radio" id="online" name="type" value="online" onchange="changeAction()" checked required> Online' + 
+                                    '</label>' + 
+                                '</div>' +
+                                '<div class="radio">' + 
+                                    '<label for="offline">' + 
+                                        '<input type="radio" id="offline" name="type" value="offline" onchange="changeAction()" required> Offline' + 
+                                    '</label>' + 
+                                '</div>' +
+                            '</div>' +
+                            '<button formaction="add_questions.php" formmethod="post" id="test_button" name="test_button" type="submit" class="btn btn-success">Next <span class="fa fa-angle-right"></span></button>';
             $('#form_input').html(test_form);
             var now = new Date();
             var day = ("0" + now.getDate()).slice(-2);
             var month = ("0" + (now.getMonth() + 1)).slice(-2);
             var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
             $('#date').val(today);
+            $('.datepicker').datepicker({
+                autoclose: true
+            });
         }else{
             alert("Please select a course");
         }

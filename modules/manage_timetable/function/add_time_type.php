@@ -68,7 +68,7 @@ $timetype=new TimeType($dbconnect->getInstance());
                                             {
                                                 echo '<tr><td>'.$i.'</td>
                                                 <td>'.$row['name'].'</td>
-                                                <td><a href=delete_time_type.php?id='.$row['id'].' onclick="ConfirmDelete()" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span>Delete</a></td></tr>';
+                                                <td><a href=delete_time_type.php?id='.$row['id'].' onclick="return confirmation()" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span>Delete</a></td></tr>';
                                                 $i=$i+1;
                                             }
                                         }
@@ -89,11 +89,11 @@ $timetype=new TimeType($dbconnect->getInstance());
     <?php
     include("../../../Resources/Dashboard/footer.php");
     ?>
-    <script type="text/javascript">
-        function ConfirmDelete()
-        {
-            confirm("Are you sure you want to delete it ?")
-        }
-    </script>
+   
     </body>
+     <script type="text/javascript">
+    function confirmation() {
+      return confirm("Are you sure you want to delete it ?")
+    }
+</script>
 </html>

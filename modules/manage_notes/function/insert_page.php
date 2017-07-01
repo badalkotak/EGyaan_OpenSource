@@ -150,10 +150,10 @@ $course=new Course($dbconnect->getInstance());
                                                         echo '<td>'.$row['title'].'</td>';
                                                         echo '<td><a href='.$row['file'].'><span class="fa fa-file-pdf-o fa-lg "></span></a></td>';
                                                         if($delete===true)
-                                                        echo '<td><form action=delete.php method=post><input type=hidden 
-                                                        name=file value='.$row['file'].'><input type=hidden name=id 
-                                                        alue='.$row['id'].'><button type=submit name=delete class="btn btn-danger btn-sm"><span class="fa fa-trash"></span>Delete</button>
+                                                        {
+                                                            echo '<td><a href=delete.php?id='.$row['id'].'&file='.$row['file'].' onclick="return confirmation()" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span> Delete</a>
                                                         </td></form>';
+                                                        }
                                                         echo '</tr>';
                                                         $no=$no+1;
                                                     }
@@ -182,4 +182,9 @@ $course=new Course($dbconnect->getInstance());
     include("../../../Resources/Dashboard/footer.php");
     ?>
     </body>
+   <script type="text/javascript">
+    function confirmation() {
+      return confirm("Are you sure you want to delete it ?")
+    }
+</script>
 </html>

@@ -321,7 +321,7 @@ $teacher_course=new TeacherCourse($dbconnect->getInstance());
                                                             }
                                                             echo "<td  style='background:#f2f2f2'>";
                                                             echo $course_name." (".$user_name.") ".$lectureRow['comment']; 
-                                                            echo "</br><a href=delete_timetable.php?id=".$id."&batch=$batch_id&branch=$branch_id onclick=ConfirmDelete() class='btn btn-danger btn-sm'><span class='fa fa-trash'></span>Delete</a></td>";
+                                                            echo "</br><a href=delete_timetable.php?id=".$id."&batch=$batch_id&branch=$branch_id onclick='return confirmation()' class='btn btn-danger btn-sm'><span class='fa fa-trash'></span>Delete</a></td>";
                                                         }
                                                     }
                                                     else
@@ -399,11 +399,11 @@ $teacher_course=new TeacherCourse($dbconnect->getInstance());
         });
     });
     </script>
-    <script type="text/javascript">
-        function ConfirmDelete()
-        {
-            confirm("Are you sure you want to delete it ?")
-        }
-    </script>
+    
     </body>
+     <script type="text/javascript">
+    function confirmation() {
+      return confirm("Are you sure you want to delete it ?")
+    }
+</script>
 </html>

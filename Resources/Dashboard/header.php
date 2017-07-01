@@ -44,7 +44,7 @@
 <!--       mini logo for sidebar mini 50x50 pixels -->
        <span class="logo-mini"><img src="../../../Resources/images/E_logo_transparent_small.png"></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><img src="../../../Resources/images/EGYAAN_logo_transparent_small.png"></span>
+      <span class="logo-lg"><img src="../../../Resources/images/EGYAAN_logo_transparent_small_white.png"></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
