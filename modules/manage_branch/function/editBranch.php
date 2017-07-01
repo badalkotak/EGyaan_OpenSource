@@ -5,7 +5,7 @@
  * Date: 4/6/17
  * Time: 5:49 PM
  */
-
+include("../../../Resources/sessions.php");
 include("../../../Resources/Dashboard/header.php");
 
 require_once("../../../classes/Constants.php");

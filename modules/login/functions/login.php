@@ -62,3 +62,9 @@ $(document).ready(function(){
 });
 
 </script>
+
+<noscript>
+<div style='font-family: sans-serif; color:white; position: fixed; bottom:0; right:0; background:red; padding: 0 20px'>
+<p>JavaScript is Disabled. For Best Experience, Enable JavasScript and Login!</p>
+</div>
+</noscript>

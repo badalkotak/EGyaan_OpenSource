@@ -1,4 +1,6 @@
 <?php
+include("../../../Resources/sessions.php");
+
 require_once("../../../classes/DBConnect.php");
 require_once("../../../classes/Constants.php");
 require_once("../classes/User.php");
@@ -195,7 +197,7 @@ $user=new User($dbConnect->getInstance());
 					echo "<td>";
 					if($role_id==Constants::ROLE_TEACHER_ID)
 					{
-						echo "<form role='form' action=../../manage_teacher_course/functions/assign_course.php method=post><button class='btn btn-default' type=submit name=user_id value=$user_id>$user_id</button></form>";
+						echo "<form role='form' action=../../manage_teacher_course/functions/assign_course.php method=post><button class='btn btn-default' type=submit name=user_id value=$user_id>Assign</button></form>";
 					}
 					else
 					{

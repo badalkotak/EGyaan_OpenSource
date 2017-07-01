@@ -1,6 +1,7 @@
 <html>
 <head>
     <?php
+    include("../../../Resources/sessions.php");
     include "../../../Resources/Dashboard/header.php"
     ?>
     <title>Edit Roles | EGyaan</title>

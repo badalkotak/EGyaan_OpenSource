@@ -31,4 +31,28 @@ class Constants
     const COURSE_ASSIGN_FAIL = "Problem in assigning Course!";
     const NO_BRANCH_ERR = "No branch found!";
     const BREAK_ID_TT = 2;
+
+    const NOTES_ADD_ID = 1;
+    const NOTES_VIEW_ID = 2;
+    const NOTES_DELETE_ID = 3;
+
+    const TEST_ADD_ID = 8;
+    const TEST_VIEW_ID = 9;
+    const TEST_DELETE_ID = 10;
+    
+    const RESULT_ADD_ID = 12;
+    const RESULT_VIEW_ID = 11;
+    const RESULT_DELETE_ID = 13;
+
+    const TIMETABLE_ADD_ID = 14;
+    const TIMETABLE_VIEW_ID = 15;
+    const TIMETABLE_DELETE_ID = 38;
+
+    const SYLLABUS_ADD_ID = 16;
+    const SYLLABUS_VIEW_ID = 17;
+    const SYLLABUS_DELETE_ID = 18;
+
+    const NOTICE_ADD_ID = 24;
+    const NOTICE_VIEW_ID = 25;
+    const NOTICE_DELETE_ID = 26;
 }
