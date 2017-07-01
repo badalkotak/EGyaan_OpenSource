@@ -126,7 +126,7 @@ $timetimetable=new TimeTimetable($dbconnect->getInstance());
                                                     }
                                                 }
                                                 echo '<td>'.$time_type.'</td>
-                                                <td><a href=delete_time_timetable.php?id='.$row['id'].' onclick="ConfirmDelete()" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span>Delete</a></td></tr>';
+                                                <td><a href=delete_time_timetable.php?id='.$row['id'].' onclick="return ConfirmDelete()" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span>Delete</a></td></tr>';
                                                 $i=$i+1;
                                             }
                                         }
@@ -151,7 +151,7 @@ $timetimetable=new TimeTimetable($dbconnect->getInstance());
     <script type="text/javascript">
         function ConfirmDelete()
         {
-            confirm("Are you sure you want to delete it ?")
+            return confirm("Are you sure you want to delete it ?")
         }
         $(function () {
             //Timepicker
