@@ -1,3 +1,72 @@
+<?php
+error_reporting(0);
+                    session_start();
+                    $user_id=$_SESSION['id'];
+                    $role_id=$_SESSION['role'];
+
+                    require_once("../../../classes/DBConnect.php");
+                    require_once("../../manage_user/classes/User.php");
+                    require_once("../../manage_batch/classes/Batch.php");
+                    require_once("../../manage_student/classes/Student.php");
+                    require_once("../../../classes/Constants.php");
+
+                    $dbConnect = new DBConnect(Constants::SERVER_NAME,
+    											Constants::DB_USERNAME,
+    											Constants::DB_PASSWORD,
+    											Constants::DB_NAME);
+
+                    if($role_id==Constants::ROLE_STUDENT_ID || $role_id==Constants::ROLE_PARENT_ID)
+                    {
+                    	$student=new Student($dbConnect->getInstance());
+                    	$batch=new Batch($dbConnect->getInstance());
+                    	$getStudentDetails=$student->getStudent($user_id,0);
+
+                    	while($row=$getStudentDetails->fetch_assoc())
+                    	{
+                    		if($role_id==Constants::ROLE_STUDENT_ID)
+                    		{
+                    			$firstname=$row['firstname'];
+                    			$lastname=$row['lastname'];
+                    			$profile=$row['student_profile_photo'];
+                    		}
+                    		else
+                    		{
+                    			$firstname=$row['parent_name'];
+                    			$lastname=$row['lastname'];
+                    			$profile=$row['parent_profile_photo'];
+                    		}
+                    			
+                    			$batch_id=$row['batch_id'];
+                    			$display_name=$firstname." ".$lastname;
+
+                    			$getBatch=$batch->getBatch("no",0,$batch_id,"no",0);
+                    			while($batchRow=$getBatch->fetch_assoc())
+                    			{
+                    				$batch_name=$batchRow['batchName'];
+                    				$branch_name=$batchRow['branchName'];
+                    			}	
+                    	}
+                    }
+                    else
+                    {
+                    	if($role_id===Constants::ROLE_ADMIN_ID)
+                    	{
+                    		$display_name="Admin";
+                    	}
+                    	else
+                    	{
+                    		$user=new User($dbConnect->getInstance());
+                    		$getUserDetails=$user->getUser($user_id);
+
+                    		while($row=$getUserDetails->fetch_assoc())
+                    		{
+                    			$display_name=$row['name'];
+                    			$batch_name="";
+                    			$branch_name="";
+                    		}
+                    	}
+                    }
+                    ?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -78,7 +147,7 @@
                                         <li><!-- start message -->
                                             <a href="#">
                                                 <div class="pull-left">
-                                                    <img src="../../../Resources/images/boy.png" class="img-circle" alt="User Image">
+                                                    <!-- <img src="../../../Resources/images/boy.png" class="img-circle" alt="User Image"> -->
                                                 </div>
                                                 <h4>
                                                     Support Team
@@ -118,30 +187,53 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="../../../Resources/images/boy.png" class="user-image" alt="User Image">
-                                <span class="hidden-xs">User</span>
+                            <?php
+                            if($profile!=null)
+                            {
+                            	echo "<img src='../../manage_student/images/student/$profile' class=user-image alt='User Image'>";
+                            }
+                            else
+                            {
+                            	echo "<img src='../../../Resources/images/boy.png' class=user-image alt='User Image'>";
+                            }
+                            echo "<span class=hidden-xs>$display_name</span>";
+                            ?>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="../../../Resources/images/boy.png" class="img-circle" alt="User Image">
+                                <?php
+                                if($profile!=null)
+                            		{
+                            			echo "<img src='../../manage_student/images/student/$profile' class=img-circle alt='User Image'>";
+                            		}
+                           			else
+                            		{
+                            			echo "<img src='../../../Resources/images/boy.png' class=img-circle alt='User Image'>";
+                            		}
+                                ?>
                                     <p>
-                                        User - Department
-                                        <small>Year 2017-2018</small>
+                                    <?
+                                    	if($batch_name!="")
+                                    	{
+                                    		echo "$display_name - $branch_name";
+                                    	}
+                                    	else
+                                    	{
+                                    		echo "$display_name";
+                                    	}
+                                        
+                                    ?>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
                                 <li class="user-body">
                                     <div class="row">
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">A Batch</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">TE-D</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">19</a>
-                                        </div>
+                                    <?
+                                        echo '<div class="col-xs-12 text-center">';
+                                            echo "$batch_name";
+                                        echo '</div>';
+                                        ?>
                                     </div>
                                     <!-- /.row -->
                                 </li>
@@ -151,7 +243,7 @@
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -174,11 +266,22 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="../../../Resources/images/boy.png" class="img-circle" alt="User Image">
+                        <?
+                        if($profile!=null)
+                            		{
+                            			echo "<img src='../../manage_student/images/student/$profile' class=img-circle alt='User Image'>";
+                            		}
+                           			else
+                            		{
+                            			echo "<img src='../../../Resources/images/boy.png' class=img-circle alt='User Image'>";
+                            		}
+                        ?>
                     </div>
                     <div class="pull-left info">
-                        <p>User</p>
-                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <?
+                    echo "<p>$display_name</p>";
+                    ?>
+                        <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> -->
                     </div>
                 </div>
                         <!-- search form -->
@@ -197,7 +300,7 @@
                 <ul class="sidebar-menu">
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="treeview">
-                        <a href="#">
+                        <a href="../../login/functions/Dashboard.php">
                             <i class="fa fa-home"></i> <span>Home</span>
                         </a>
                     </li>

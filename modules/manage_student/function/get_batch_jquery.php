@@ -5,7 +5,7 @@
  * Date: 9/6/17
  * Time: 7:14 PM
  */
-include("../../../Resources/sessions.php");
+include("../../../Resources/sessions_for_backend.php");
 
 require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");

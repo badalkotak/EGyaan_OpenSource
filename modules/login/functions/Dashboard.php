@@ -1,5 +1,31 @@
-<?php
-include("../../../Resources/sessions.php");
+<html>
+<body>
+    <?php
+    error_reporting(0);
+    include("../../../Resources/sessions.php");
+    include("../../../Resources/Dashboard/header.php");
+    ?>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <br>
+        <!-- <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active"><b>Batch List</b></li>
+        </ol> -->
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Dashboard</h3>
+          </div>
+          <div class="box-body">
+          <div class="row">
+          <?php
+          $i=0;
+            include("../../../Resources/sessions.php");
 // include("../../../Resources/no_javascript_message.php");
 
 require_once("../../../classes/DBConnect.php");
@@ -17,15 +43,60 @@ $getDashboard=$privilege->getDashboardPrivilege($role_id);
 
 if($getDashboard!=null)
 {
-	while($row=$getDashboard->fetch_assoc())
-	{
-		$privilege_folder=$row['folder'];
-		$dashboard_name=$row['dashboard_name'];
-		echo "<a href=../../$privilege_folder><img src=../../$privilege_folder/icon.png></img><br>$dashboard_name<br></a>";
-	}
-}
-?>
+    while($row=$getDashboard->fetch_assoc())
+    {
+        $i++;
+        $privilege_folder=$row['folder'];
+        $dashboard_name=$row['dashboard_name'];
+        if($dashboard_name=="Result")
+        {
+          $i--;
+          continue;
+        }
+        // <!-- echo "<a href=../../$privilege_folder><img src=../../$privilege_folder/icon.png></img><br>$dashboard_name<br></a>"; -->
+        echo "<div class='col-md-3 col-sm=6 col-xs-6'>
+              <center><a href='../../$privilege_folder'><image src='../../$privilege_folder/icon.png' height=100 width=88><br><h4>$dashboard_name</h4>
+          </a></center>
+            </div>";
 
-<br>
-<br>
-<a href="logout.php">Logout</a>
+            if($i==4)
+            {
+                $i=0;
+                echo "</div><hr><div class='row'>";
+            }
+    }
+}
+            
+          ?>
+
+</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->
+</section>
+</div>
+<?php
+include("../../../Resources/Dashboard/footer.php");
+
+?>
+</body>
+    <style>
+a:link {
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+
+/* mouse over link */
+a:hover {
+    color: #f39c12;
+}
+</style>
+</html>
