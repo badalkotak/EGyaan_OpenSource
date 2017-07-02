@@ -5,6 +5,8 @@
  * Date: 28/12/16
  * Time: 11:45 AM
  */
+include("../../Resources/sessions.php");
+
 require_once "../../classes/DBConnect.php";
 require_once "../../classes/Constants.php";
 
@@ -19,16 +21,16 @@ function redirect($url)
     header("Location: " . $url);
 }
 
-session_start();
-if(!isset($_SESSION["role"]) || !isset($_SESSION["id"])){
-    redirect("../../login.php");
-}
+// session_start();
+// if(!isset($_SESSION["role"]) || !isset($_SESSION["id"])){
+//     redirect("../../login/functions/login.php");
+// }
 
-if($_SESSION["role"] != Constants::ROLE_STUDENT_ID && $_SESSION["role"] != Constants::ROLE_TEACHER_ID){
-    session_unset();
-    session_destroy();
-    redirect("../../login.php?status=" . Constants::STATUS_FAILED . "&message=" . "Invalid Access. You Have Been Logged Out");
-}
+// if($_SESSION["role"] != Constants::ROLE_STUDENT_ID && $_SESSION["role"] != Constants::ROLE_TEACHER_ID){
+//     session_unset();
+//     session_destroy();
+//     redirect("../../login.php?status=" . Constants::STATUS_FAILED . "&message=" . "Invalid Access. You Have Been Logged Out");
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
