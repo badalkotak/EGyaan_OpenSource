@@ -2,6 +2,7 @@
 <html>
 <?php
 include("../../../Resources/sessions.php");
+include("privilege.php");
 include("../../../Resources/Dashboard/header.php");
 
 $user_id=$_SESSION['id'];
@@ -41,6 +42,10 @@ $course=new Course($dbconnect->getInstance());
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="row">
+                    <?php
+                    if($add===true)
+                    {
+                        ?>
                         <div class="col-md-6">
                             <form method="post" action="insert_notes.php" enctype="multipart/form-data"> 
                                 <div class="form-group">
@@ -87,6 +92,9 @@ $course=new Course($dbconnect->getInstance());
                                 <button type="submit" class="btn btn-success" name="submit"><span class="fa fa-check"></span>Submit</button>
                             </form>
                         </div>
+                        <?
+                        }
+                        ?>
                         <?php
                         $getTeacherCourse=$course->getCourse("yes",$id,"no",0,0,null,0);
                         if($getTeacherCourse===false)
@@ -113,7 +121,10 @@ $course=new Course($dbconnect->getInstance());
                                             <th>Course</th>
                                             <th>Title</th>
                                             <th>File</th>
-                                            <th>Delete</th>
+                                            <?php
+                                            if($delete===true)
+                                                echo "<th>Delete</th>";
+                                            ?>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -136,11 +147,11 @@ $course=new Course($dbconnect->getInstance());
                                                         <td>'.$rowCourses['courseName'].'</td>';
                                                         echo '<td>'.$row['title'].'</td>';
                                                         echo '<td><a href='.$row['file'].'><span class="fa fa-file-pdf-o fa-lg "></span></a></td>';
-                                                        echo '<td><form action=delete.php method=post><input type=hidden 
-                                                        name=file value='.$row['file'].'><input type=hidden name=id 
-                                                        alue='.$row['id'].'><button type=submit name=delete class="btn btn-danger btn-sm"><span class="fa fa-trash"></span>Delete</button>
-                                                        </td></form>
-                                                        </tr>';
+
+                                                        if($delete===true)
+                                                        echo '<td><a href=delete.php?id='.$row['id'].'&file='.$row['file'].' onclick="return confirmation()" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span> Delete</a>
+                                                        </td></form>';
+                                                        echo '</tr>';
                                                         $no=$no+1;
                                                     }
                                                 }
@@ -168,4 +179,9 @@ $course=new Course($dbconnect->getInstance());
     include("../../../Resources/Dashboard/footer.php");
     ?>
     </body>
+   <script type="text/javascript">
+    function confirmation() {
+      return confirm("Are you sure you want to delete it ?")
+    }
+</script>
 </html>

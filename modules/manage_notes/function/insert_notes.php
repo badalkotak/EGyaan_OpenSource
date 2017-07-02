@@ -1,5 +1,13 @@
 <?php
-session_start();
+include("../../../Resources/sessions.php");
+include("privilege.php");
+
+if($add!=true)
+{
+	$message=Constants::NO_PRIVILEGE;
+	echo "<script>alert('$message');window.location.href='../../login/functions/logout.php'</script>";
+}
+
 require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../classes/Notes.php");
@@ -9,7 +17,7 @@ $dbconnect=new DBConnect(Constants::SERVER_NAME,
 						Constants::DB_PASSWORD,
 						Constants::DB_NAME);
 
-$user_id=$_SESSION["id"];
+$user_id=$id;
 if(empty($_REQUEST['title']) || empty($_REQUEST['course']))
 {
 	$msg=Constants::EMPTY_PARAMETERS;

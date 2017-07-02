@@ -8,7 +8,7 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
 
-include("../../../Resources/sessions.php");
+include("../../../Resources/sessions_for_backend.php");
 
 $teacher_id = $id;
 $test = new Test($dbConnect->getInstance());

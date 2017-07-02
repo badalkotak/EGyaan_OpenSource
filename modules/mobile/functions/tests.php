@@ -8,7 +8,8 @@ $dbconnect=new DBConnect(Constants::SERVER_NAME,
 						Constants::DB_PASSWORD,
 						Constants::DB_NAME);
 
-$user_id=3;
+// $user_id=3;
+$user_id=$_REQUEST['user_id'];
 
 $studentTests=new StudentTest($dbconnect->getInstance());
 
@@ -40,5 +41,5 @@ else
 }
 
 header("Content-Type: application/json");
-echo json_encode($final);
+echo "[".json_encode($final)."]";
 ?>

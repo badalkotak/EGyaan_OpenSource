@@ -5,6 +5,8 @@
  * Date: 4/6/17
  * Time: 7:31 PM
  */
+include("../../../Resources/sessions.php");
+
 require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../classes/Batch.php");

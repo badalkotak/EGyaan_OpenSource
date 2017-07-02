@@ -9,7 +9,8 @@ $dbconnect=new DBConnect(Constants::SERVER_NAME,
 						Constants::DB_PASSWORD,
 						Constants::DB_NAME);
 
-$course_id=1; // To be sent via app
+// $course_id=1; // To be sent via app
+$course_id=$_REQUEST['course_id'];
 
 $notes=new Notes($dbconnect->getInstance());
 
@@ -39,5 +40,5 @@ else
 }
 
 header("Content-Type: application/json");
-echo json_encode($final);
+echo "[".json_encode($final)."]";
 ?>

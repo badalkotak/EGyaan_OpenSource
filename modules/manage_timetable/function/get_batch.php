@@ -1,9 +1,11 @@
 <?php
-include("../../../Resources/sessions.php");
-$user_id=$_SESSION['id'];
+// session_start();
+// $user_id=$_SESSION['id'];
 require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../../manage_batch/classes/Batch.php");
+include("../../../Resources/sessions_for_backend.php");
+$user_id=$id;
 
 $dbconnect=new DBConnect(Constants::SERVER_NAME,
 						Constants::DB_USERNAME,

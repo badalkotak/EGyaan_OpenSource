@@ -1,6 +1,7 @@
 <html>
 <body>
   <?php
+  include("../../../Resources/sessions.php");
   include("../../../Resources/Dashboard/header.php");
   ?>
   <div class="content-wrapper">

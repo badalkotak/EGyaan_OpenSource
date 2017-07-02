@@ -2,6 +2,7 @@
 <html>
 <head>
     <?php
+    include("../../../Resources/sessions.php");
     include "../../../Resources/Dashboard/header.php"
     ?>
     <title>Student Information - Detailed View | EGyaan</title>

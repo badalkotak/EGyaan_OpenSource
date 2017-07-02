@@ -14,9 +14,9 @@
 		Constants::DB_PASSWORD,
 		Constants::DB_NAME);
 
-// $email=$_REQUEST['email']; // Later to be sent from the app
+$email=$_REQUEST['email']; // Later to be sent from the app
 
-$email="badalkotak@gmail.com";
+// $email="badalkotak@gmail.com";
 $user=new User($dbConnect->getInstance());
 $user_id=$user->getUserId($email);
 
@@ -75,5 +75,5 @@ if($selectData!=null)
 
 header("Content-Type: application/json");
 
-	echo json_encode($final);
+	echo "[".json_encode($final)."]";
 }

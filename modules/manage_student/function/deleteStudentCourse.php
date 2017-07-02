@@ -11,6 +11,7 @@
  * Date: 20/6/17
  * Time: 6:15 PM
  */
+include("../../../Resources/sessions.php");
 
 require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");

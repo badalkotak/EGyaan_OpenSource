@@ -8,6 +8,13 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_NAME);
 
 include("../../../Resources/sessions.php");
+include("privilege.php");
+
+if($result_add_id!=true)
+{
+    $message=Constants::NO_PRIVILEGE;
+    echo "<script>alert('$message');window.location.href='../../login/functions/logout.php'</script>";
+}
 
 $student_id =$id;
 $test = new StudentTest($dbConnect->getInstance());

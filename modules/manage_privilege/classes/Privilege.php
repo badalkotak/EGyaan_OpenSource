@@ -100,6 +100,66 @@ function __construct($connection)
                 return null;
             }
         }
+
+        public function checkPrivilege($user_id,$privilege_id,$email)
+    {
+        $sql="SELECT role_id FROM egn_users WHERE id='$user_id'";
+        $result=$this->connection->query($sql);
+
+        //get the role id for the given user
+        if($result->num_rows == 0)
+        {
+            //It means the user_id is either a student or a parent
+            $checkStudent="SELECT email,parent_email FROM egn_student WHERE id='$user_id'";
+            $checkStudentResult=$this->connection->query($checkStudent);
+
+            if($checkStudentResult->num_rows > 0)
+            {
+                while($row=$checkStudentResult->fetch_assoc())
+                {
+                    $student_email=$row['email'];
+                    $parent_email=$row['parent_email'];
+                }
+
+                if($email===$student_email)
+                {
+                    $role_id=Constants::ROLE_STUDENT_ID;
+                }
+
+                else if($email===$parent_email)
+                {
+                    $role_id=Constants::ROLE_PARENT_ID;
+                }
+            }
+
+            else
+            {
+                return Constants::NO_USER_ERR; 
+            }
+        }
+
+        else
+        {
+            while($row=$result->fetch_assoc())
+            {
+                $role_id=$row['role_id'];
+            }
+        }
+
+        //Now check if the privilege is permitted to the above role_id
+        $checkPrivilege="SELECT id FROM egn_role_privilege WHERE role_id='$role_id' AND privilege_id='$privilege_id'";
+        $checkPrivilegeResult=$this->connection->query($checkPrivilege);
+
+        if($checkPrivilegeResult->num_rows === 0)
+        {
+            return false;
+        }
+
+        else
+        {
+            return true;
+        }
+    }
 }
 
 ?>

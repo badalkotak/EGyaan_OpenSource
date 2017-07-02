@@ -1,5 +1,6 @@
 <html>
 <?php
+include("../../../Resources/sessions.php");
 include "../../../Resources/Dashboard/header.php";
 ?>
 <head>

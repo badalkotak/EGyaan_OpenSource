@@ -1,5 +1,6 @@
 <?php
 include("../../../Resources/sessions.php");
+// include("../../../Resources/no_javascript_message.php");
 
 require_once("../../../classes/DBConnect.php");
 require_once("../../../classes/Constants.php");
