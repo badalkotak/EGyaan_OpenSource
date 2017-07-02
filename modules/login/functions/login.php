@@ -1,24 +1,5 @@
-<!-- <<<<<<< HEAD
-<html>
-<head>
-  <title>Login</title>
-  <script src="../../../Resources/jquery.min.js"></script>
-</head>
-<body>
-  <center><h1><b><u>Welcome to EGyaan!!</u></b></h1></center><br><br>
-  <center>
-    <form action="" method="post" id="login">
-      <input type="text" name="email" id="email" placeholder="Enter Email ID"><br><br>
-      <input type="password" name="passwd" id="passwd" placeholder="Enter Password"><br><br>
-      <input type="submit" value="Login" id="submit">
-      <div id="error"></div>
-    </form>
-  </center>
-</body>
-</html>
-======= -->
 <!DOCTYPE html>
-<html >
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Login | EGyaan</title>
@@ -42,7 +23,8 @@
 </head>
 <body>
 <div class="login-form">
-    <h1>EGyaan</h1>
+    <center><image src="../../../Resources/images/EGYAAN_logo_transparent_small.png"></image></center>
+    <br>
 		<form action="" method="post" id="login">
             <div class="form-group ">
 			<input type="text" name="email" id="email" class="form-control" placeholder="Username/Email ">
@@ -53,15 +35,11 @@
                 <i class="fa fa-lock"></i>
             </div>
             <div id="error" style="color: #07C57F"></div>
-            <a class="link" href="#">Lost your password?</a>
+            <!-- <a class="link" href="#">Lost your password?</a> -->
             <button type="submit" class="log-btn" value="Login" id="submit" >Log in</button>
 		</form>
 </div>
 <script src='../../../Resources/AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js'></script>
-
-<!--<script src="../../../Resources/AdminLTE-2.3.11/dist/js/login.js"></script>-->
-<!-- >>>>>>> 7588d4c67a65ce89188a99a92c87b5c44fe53b0f -->
-
 <script>
 
 $(document).ready(function(){
