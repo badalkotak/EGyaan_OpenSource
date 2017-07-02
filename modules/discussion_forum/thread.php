@@ -24,11 +24,11 @@ if (!isset($_SESSION["id"], $_SESSION["role"])) {
     redirect("../../login.php");
 }
 
-if ($_SESSION["role"] != Constants::ROLE_STUDENT_ID && $_SESSION["role"] != Constants::ROLE_TEACHER_ID) {
-    session_unset();
-    session_destroy();
-    redirect("../../login.php?status=" . Constants::STATUS_FAILED . "&message=" . "Invalid Access. You Have Been Logged Out");
-}
+// if ($_SESSION["role"] != Constants::ROLE_STUDENT_ID && $_SESSION["role"] != Constants::ROLE_TEACHER_ID) {
+//     session_unset();
+//     session_destroy();
+//     redirect("../../login.php?status=" . Constants::STATUS_FAILED . "&message=" . "Invalid Access. You Have Been Logged Out");
+// }
 
 if (!isset($_REQUEST["id"])) {
     redirect("forum.php");

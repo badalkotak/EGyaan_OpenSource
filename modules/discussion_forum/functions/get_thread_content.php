@@ -48,11 +48,11 @@ if(!$security->validate_token($_SESSION["user_id"], $_SESSION["user_type"], $_SE
     output(Constants::STATUS_FAILED, "Invalid Session");
 }
 
-if($_SESSION["user_type"] != Constants::USER_TYPE_STUDENT && $_SESSION["user_type"] != Constants::USER_TYPE_TEACHER){
-    session_unset();
-    session_destroy();
-    redirect("../../login.php?status=" . Constants::STATUS_FAILED . "&message=" . "Invalid Access. You Have Been Logged Out");
-}
+// if($_SESSION["user_type"] != Constants::USER_TYPE_STUDENT && $_SESSION["user_type"] != Constants::USER_TYPE_TEACHER){
+//     session_unset();
+//     session_destroy();
+//     redirect("../../login.php?status=" . Constants::STATUS_FAILED . "&message=" . "Invalid Access. You Have Been Logged Out");
+// }
 
 function jsonReply($status, $content=null){
     $json = array();
