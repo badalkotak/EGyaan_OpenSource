@@ -52,10 +52,6 @@ h1 {
     -webkit-border-radius: 4px;
     border-radius: 4px;
 }
-.form-control:focus, .form-control:focus + .fa {
-    border-color: #10CE88;
-    color: #10CE88;
-}
 
 .form-group .fa {
     position: absolute;
@@ -76,7 +72,7 @@ h1 {
 }
 
 .log-btn {
-    background: #0AC986;
+    background: #FFA737;
     dispaly: inline-block;
     width: 100%;
     font-size: 16px;
