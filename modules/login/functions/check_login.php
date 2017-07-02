@@ -24,7 +24,7 @@ if($checkLogin!=null)
 
 	if($getUserId!=Constants::NO_USER_ERR)
 	{
-		$createSession=$login->createSession($email,$getUserId,$checkLogin);
+		$login->createSession($email,$getUserId,$checkLogin);
 		$json['login']=Constants::STATUS_SUCCESS;
 	}
 	else
