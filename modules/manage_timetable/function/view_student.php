@@ -4,7 +4,7 @@
 include("../../../Resources/sessions.php");
 include("../../../Resources/Dashboard/header.php");
 
-$user_id=$_SESSION['id'];
+$user_id=$id;
 require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../classes/Timetable.php");

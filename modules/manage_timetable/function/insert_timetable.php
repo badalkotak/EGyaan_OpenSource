@@ -1,6 +1,12 @@
 <?php
 include("../../../Resources/sessions.php");
-$user_id=$_SESSION['id'];
+include("privilege.php");
+if($add!=true)
+{
+    $message=Constants::NO_PRIVILEGE;
+    echo "<script>alert('$message');window.location.href='../../login/functions/logout.php'</script>";
+}
+$user_id=$id;
 require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../classes/Timetable.php");

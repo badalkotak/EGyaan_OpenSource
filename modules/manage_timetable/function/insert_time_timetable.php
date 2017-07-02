@@ -1,6 +1,6 @@
 <?php
 include("../../../Resources/sessions.php");
-$user_id=$_SESSION['id'];
+$user_id=$id;
 require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../classes/TimeTimetable.php");

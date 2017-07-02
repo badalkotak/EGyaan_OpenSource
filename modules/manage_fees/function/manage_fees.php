@@ -2,6 +2,12 @@
 <body>
     <?php
     include("../../../Resources/sessions.php");
+    include("privilege.php");
+if($fee!=true)
+{
+    $message=Constants::NO_PRIVILEGE;
+    echo "<script>alert('$message');window.location.href='../../login/functions/logout.php'</script>";
+}
     include("../../../Resources/Dashboard/header.php");
     ?>
     <?php

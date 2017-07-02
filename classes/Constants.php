@@ -56,5 +56,7 @@ class Constants
     const NOTICE_VIEW_ID = 25;
     const NOTICE_DELETE_ID = 26;
 
+    const MANAGE_FEES_ID = 37;
+
     const NO_PRIVILEGE = "You dont have the prilige to perform this operation!";
 }
