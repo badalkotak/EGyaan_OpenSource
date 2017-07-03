@@ -16,6 +16,15 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
 
+function jsonOutput($status, $message)
+{
+    $json = array();
+    $json["statusMsg"] = $status;
+    $json["Msg"] = $message;
+
+    echo json_encode($json);
+}
+
 if (isset($_REQUEST['delete']) && !empty(trim($_REQUEST['delete']))) {
     $branchId = $_REQUEST['delete'];
 
@@ -25,11 +34,14 @@ if (isset($_REQUEST['delete']) && !empty(trim($_REQUEST['delete']))) {
 
     if ($deleteData == true) {
 //        header('Location:branch.php');
-        echo "Branch " . Constants::STATUS_SUCCESS . "fully deleted";
+//        echo "Branch " . Constants::STATUS_SUCCESS . "fully deleted";
+        jsonOutput(Constants::STATUS_SUCCESS, "Branch " . Constants::STATUS_SUCCESS . "fully deleted");
     } else {
-        echo Constants::STATUS_FAILED . " to delete branch";
+//        echo Constants::STATUS_FAILED . " to delete branch";
+        jsonOutput(Constants::STATUS_FAILED, Constants::STATUS_FAILED . " to delete branch");
     }
 
 } else {
-    echo Constants::EMPTY_PARAMETERS;
+//    echo Constants::EMPTY_PARAMETERS;
+    jsonOutput(Constants::EMPTY_PARAMETERS, Constants::EMPTY_PARAMETERS . " found");
 }

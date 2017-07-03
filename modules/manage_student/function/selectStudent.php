@@ -29,61 +29,62 @@
         <section class="content">
 
             <!-- Default box -->
-                <div class="box">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Select Students</h3>
-                    </div>
-                    <form role="form" action="editDeleteStudent.php" method="post">
-                        <div class="box-body">
-                            <div class="form-group">
-                                <select class="form-control" id="branch-id" name="branchId">
-                                    <option value="-2">Select Branch</option>
-                                    <?php
-                                    /**
-                                     * Created by PhpStorm.
-                                     * User: fireion
-                                     * Date: 19/6/17
-                                     * Time: 2:13 PM
-                                     */
-                                    require_once("../../../classes/Constants.php");
-                                    require_once("../../../classes/DBConnect.php");
-                                    require_once("../../manage_branch/classes/Branch.php");
-                                    require_once("../../manage_batch/classes/Batch.php");
-
-                                    $dbConnect = new DBConnect(Constants::SERVER_NAME,
-                                        Constants::DB_USERNAME,
-                                        Constants::DB_PASSWORD,
-                                        Constants::DB_NAME);
-
-                                    $branch = new Branch($dbConnect->getInstance());
-                                    $batch = new Batch($dbConnect->getInstance());
-
-                                    $getBranchData = $branch->getBranch(0);
-                                    if ($getBranchData != null) {
-                                        while ($row = $getBranchData->fetch_assoc()) {
-                                            $branchId = $row['id'];
-                                            $branchName = $row['name'];
-
-                                            echo "<option value='" . $branchId . "'>" . $branchName . "</option>";
-                                        }
-                                    } else {
-                                        echo Constants::STATUS_FAILED;
-                                    }
-                                    ?>
-
-                                </select><br>
-                                <div id="new-drop-down" class="hide">
-                                    <select class="form-control" name="batchId" id="batch-id">
-                                        <!--            <option value="-3">Select Batch</option>-->
-                                    </select>
-                                </div>
-                                <br>
-                                <br>
-                                <div class="box-footer">
-                                    <button type="submit" value="Submit" class="btn btn-success"><i class="fa fa-check"></i>&nbspSubmit</button>
-                                </div>
-                    </form>
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Select Students</h3>
                 </div>
+                <form role="form" action="editDeleteStudent.php" method="post">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <select class="form-control" id="branch-id" name="branchId">
+                                <option value="-2">Select Branch</option>
+                                <?php
+                                /**
+                                 * Created by PhpStorm.
+                                 * User: fireion
+                                 * Date: 19/6/17
+                                 * Time: 2:13 PM
+                                 */
+                                require_once("../../../classes/Constants.php");
+                                require_once("../../../classes/DBConnect.php");
+                                require_once("../../manage_branch/classes/Branch.php");
+                                require_once("../../manage_batch/classes/Batch.php");
+
+                                $dbConnect = new DBConnect(Constants::SERVER_NAME,
+                                    Constants::DB_USERNAME,
+                                    Constants::DB_PASSWORD,
+                                    Constants::DB_NAME);
+
+                                $branch = new Branch($dbConnect->getInstance());
+                                $batch = new Batch($dbConnect->getInstance());
+
+                                $getBranchData = $branch->getBranch(0);
+                                if ($getBranchData != null) {
+                                    while ($row = $getBranchData->fetch_assoc()) {
+                                        $branchId = $row['id'];
+                                        $branchName = $row['name'];
+
+                                        echo "<option value='" . $branchId . "'>" . $branchName . "</option>";
+                                    }
+                                } else {
+                                    echo Constants::STATUS_FAILED;
+                                }
+                                ?>
+
+                            </select><br>
+                            <div id="new-drop-down" class="hide">
+                                <select class="form-control" name="batchId" id="batch-id">
+                                    <!--            <option value="-3">Select Batch</option>-->
+                                </select>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="box-footer">
+                                <button type="submit" value="Submit" class="btn btn-success"><i class="fa fa-check"></i>&nbspSubmit
+                                </button>
+                            </div>
+                </form>
+            </div>
     </div>
     </section>
 </div>

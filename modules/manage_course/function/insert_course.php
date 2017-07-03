@@ -27,13 +27,17 @@ if (isset($_REQUEST['courseName']) && isset($_REQUEST['batch_id']) && !empty(tri
     $insertData = $course->insertCourse($courseName, $batchId);
 
     if ($insertData == 'true') {
-        echo "Course " . Constants::STATUS_SUCCESS . "fully inserted";
+        echo "<script>alert('Course " . Constants::STATUS_SUCCESS . "fully inserted');
+        window.location.href='course.php';</script>";
 //        header('Location:course.php');
     } elseif ($insertData == Constants::STATUS_EXISTS) {
-        echo "Course Name " . Constants::STATUS_EXISTS;
+        echo "<script>alert('Course Name " . Constants::STATUS_EXISTS . "');
+        window.location.href='course.php';</script>";
     } else {
-        echo Constants::STATUS_FAILED . " to insert course";
+        echo "<script>alert('" . Constants::STATUS_FAILED . " to insert course');
+        window.location.href='course.php';</script>";
     }
 } else {
-    echo Constants::EMPTY_PARAMETERS;
+    echo "<script>alert('" . Constants::EMPTY_PARAMETERS . "');
+    window.location.href='course.php';</script>";
 }

@@ -29,24 +29,17 @@ if (isset($_REQUEST['batchName']) && isset($_REQUEST['branchId']) && !empty(trim
 //    var_dump($insertData);
 
     if ($insertData == "true") {
-        echo "Batch " . Constants::STATUS_SUCCESS . "fully inserted<br>";
-//        header('Location: batch.php');
-//        echo "List of Department - Branches<br>";
-//        $result = $branch->getBranch();
-//        if ($result != null) {
-//            while ($row = $result->fetch_assoc()) {
-//                echo $name = $row['name'];
-//                echo "<br>";
-//            }
-//        } else {
-//            echo "No Records Found";
-//        }
+        echo "<script>alert('Batch " . Constants::STATUS_SUCCESS . "fully inserted');
+        window.location.href = 'batch.php';</script>";
     } elseif ($insertData == Constants::STATUS_EXISTS) {
-        echo "Batch Name " . Constants::STATUS_EXISTS;
+        echo "<script>alert('Batch Name " . Constants::STATUS_EXISTS . "');
+        window.location.href = 'batch.php';</script>";
     } else {
-        echo Constants::STATUS_FAILED . " to insert batch";
+        echo "<script>alert('" . Constants::STATUS_FAILED . " to insert batch');
+        window.location.href = 'batch.php';<script>";
     }
 
 } else {
-    echo Constants::EMPTY_PARAMETERS;
+    echo "<script>alert('" . Constants::EMPTY_PARAMETERS . "');
+    window.location.href = 'batch.php';</script>";
 }

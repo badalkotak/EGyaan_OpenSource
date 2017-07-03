@@ -30,63 +30,63 @@
         <section class="content">
 
             <!-- Default box -->
-                <div class="box">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Select Course</h3>
-                    </div>
-                    <form role="form" action="editDeleteCourse.php" method="post">
-                        <div class="box-body">
-                            <div class="form-group">
-                                <select id="branch-id" name="branchId" class="form-control">
-                                    <option value="-2">Select Branch</option>
-                                    <?php
-                                    /**
-                                     * Created by PhpStorm.
-                                     * User: fireion
-                                     * Date: 20/6/17
-                                     * Time: 1:17 PM
-                                     */
-                                    require_once("../../../classes/Constants.php");
-                                    require_once("../../../classes/DBConnect.php");
-                                    require_once("../../manage_branch/classes/Branch.php");
-                                    require_once("../../manage_batch/classes/Batch.php");
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Select Course</h3>
+                </div>
+                <form role="form" action="editDeleteCourse.php" method="post">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <select id="branch-id" name="branchId" class="form-control">
+                                <option value="-2">Select Branch</option>
+                                <?php
+                                /**
+                                 * Created by PhpStorm.
+                                 * User: fireion
+                                 * Date: 20/6/17
+                                 * Time: 1:17 PM
+                                 */
+                                require_once("../../../classes/Constants.php");
+                                require_once("../../../classes/DBConnect.php");
+                                require_once("../../manage_branch/classes/Branch.php");
+                                require_once("../../manage_batch/classes/Batch.php");
 
-                                    $dbConnect = new DBConnect(Constants::SERVER_NAME,
-                                        Constants::DB_USERNAME,
-                                        Constants::DB_PASSWORD,
-                                        Constants::DB_NAME);
+                                $dbConnect = new DBConnect(Constants::SERVER_NAME,
+                                    Constants::DB_USERNAME,
+                                    Constants::DB_PASSWORD,
+                                    Constants::DB_NAME);
 
-                                    $branch = new Branch($dbConnect->getInstance());
-                                    $batch = new Batch($dbConnect->getInstance());
+                                $branch = new Branch($dbConnect->getInstance());
+                                $batch = new Batch($dbConnect->getInstance());
 
-                                    $getBranchData = $branch->getBranch(0);
-                                    if ($getBranchData != null) {
-                                        while ($row = $getBranchData->fetch_assoc()) {
-                                            $branchId = $row['id'];
-                                            $branchName = $row['name'];
+                                $getBranchData = $branch->getBranch(0);
+                                if ($getBranchData != null) {
+                                    while ($row = $getBranchData->fetch_assoc()) {
+                                        $branchId = $row['id'];
+                                        $branchName = $row['name'];
 
-                                            echo "<option value='" . $branchId . "'>" . $branchName . "</option>";
-                                        }
-                                    } else {
-                                        echo Constants::STATUS_FAILED;
+                                        echo "<option value='" . $branchId . "'>" . $branchName . "</option>";
                                     }
-                                    ?>
+                                } else {
+                                    echo Constants::STATUS_FAILED;
+                                }
+                                ?>
 
+                            </select>
+                        </div>
+                        <div id="new-drop-down" class="hide">
+                            <div class="form-group">
+                                <select name="batchId" id="batch-id" class="form-control">
+                                    <!--            <option value="-3">Select Batch</option>-->
                                 </select>
                             </div>
-                            <div id="new-drop-down" class="hide">
-                                <div class="form-group">
-                                    <select name="batchId" id="batch-id" class="form-control">
-                                        <!--            <option value="-3">Select Batch</option>-->
-                                    </select>
-                                </div>
-                            </div>
-                            <br>
-                            <button class="btn btn-success" type="submit" value="Submit"><i class="fa fa-check"></i>&nbspSubmit
-                            </button>
                         </div>
-                    </form>
-                </div>
+                        <br>
+                        <button class="btn btn-success" type="submit" value="Submit"><i class="fa fa-check"></i>&nbspSubmit
+                        </button>
+                    </div>
+                </form>
+            </div>
         </section>
     </div>
 </div>

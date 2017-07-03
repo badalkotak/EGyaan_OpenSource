@@ -136,14 +136,17 @@ if (isset($_REQUEST['firstName']) && isset($_REQUEST['lastName']) && isset($_REQ
         $parentMobile, $studentProfilePhoto, $parentProfilePhoto, $batchId);
 
     if ($insertData > 0) {
-        echo $insertData;
-        echo Constants::STATUS_SUCCESS;
+//        echo $insertData;
+//        echo Constants::STATUS_SUCCESS;
         header('Location:courseRegistrationStudent.php?studentId=' . $insertData . '&batchId=' . $batchId);
     } elseif ($insertData == Constants::STATUS_EXISTS) {
-        echo "Student " . Constants::STATUS_EXISTS;
+        echo "<script>alert('Student " . Constants::STATUS_EXISTS . "');
+        window.location.href='student.php';</script>";
     } else {
-        echo Constants::STATUS_FAILED;
+        echo "<script>alert('" . Constants::STATUS_FAILED . " to add student');
+        window.location.href='student.php';</script>";
     }
 } else {
-    echo Constants::EMPTY_PARAMETERS;
+    echo "<script>alert('" . Constants::EMPTY_PARAMETERS . " found');
+    window.location.href='student.php';</script>";
 }

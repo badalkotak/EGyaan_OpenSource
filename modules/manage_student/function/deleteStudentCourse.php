@@ -1,6 +1,7 @@
 <html>
 <head>
     <title>Delete Course - Student | EGyaan</title>
+    <script type="text/javascript" src="../../../Resources/jQuery/jquery-3.2.1.js"></script>
 </head>
 <body>
 
@@ -46,14 +47,15 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
                 $studentCourseRegistrationId = $row['courseRegId'];
                 $studentCourseRegistrationCourseId = $row['courseRegCourseId'];
                 $courseName = $row['courseName'];
-                echo "<tr><td>" . $i . "</td><td>" . $courseName . "</td><td><form action='delete_student_course.php' method='post'>
-                <input type='hidden' name='studentCourseRegistrationId' value='" . $studentCourseRegistrationId . "'>
-                <input type='submit' value='Delete'></form></td></tr>";
+                echo "<tr><td>" . $i . "</td><td>" . $courseName . "</td>
+                
+                <td><button type='submit' id='" . $studentCourseRegistrationId . "' class='delete-branch-button' value='Delete'>
+                Delete</button></td></tr>";
                 $i++;
             }
             echo "</table>";
         } else {
-            echo "No Courses Enrolled";
+            echo "No Courses Enrolled ";
         }
     } else {
         echo Constants::STATUS_FAILED;
@@ -62,6 +64,41 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
     echo Constants::EMPTY_PARAMETERS;
 }
 ?>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".delete-branch-button").click(function (event) {
+            event.preventDefault();
+            var id = $(this).attr("id");
+//            console.log(id);
+            var result = confirm('<?php echo Constants::DELETE_CONFIRMATION?>');
+            if (result) {
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "delete_student_course.php",
+                        data: "studentCourseRegistrationId=" + id,
+//                        dataType:  "json ",
+                        success: function (json) {
+                            var parsedJson = jQuery.parseJSON(json);
+                            if (parsedJson.statusMsg == "<?php echo Constants::STATUS_SUCCESS?>") {
+                                alert(parsedJson.Msg);
+                                location.reload();
+                            } else {
+                                alert(parsedJson.Msg);
+                                location.reload();
+                            }
+                        },
+                        error: function (a, b, c) {
+                            console.log("Error ");
+                        }
+                    });
+            } else {
+                return false;
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
