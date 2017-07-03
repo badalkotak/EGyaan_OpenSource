@@ -25,7 +25,7 @@ $(document).ready(function(){
 						var checkbox="";
 						for( var i=0; i<json.branch.length;  i++)
 						{
-							checkbox=checkbox + "<input type=checkbox id='select_branch[]' name='select_branch[]' value="+json.branch[i].id+"  />"+json.branch[i].name;
+							checkbox=checkbox + "<label class='col-md-6' for=select_branch[]><input type=checkbox id='select_branch[]' name='select_branch[]' value="+json.branch[i].id+"  />&nbsp;"+json.branch[i].name+"</label>";
 						}		
 						$("#branch").html(checkbox);
 					}

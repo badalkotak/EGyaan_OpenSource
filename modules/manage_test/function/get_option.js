@@ -86,7 +86,7 @@ $(document).ready(function () {
                             '</div>' +
                             '<div class="form-group">' + 
                                 '<div class="input-group">' +
-                                    '<input type="text" class="form-control" id="date" placeholder="Date Of Test" name="date" value="' + new Date() + '" required>' + 
+                                    '<input type="date" class="form-control datepicker" id="date" placeholder="Date Of Test" name="date" value="' + new Date() + '" required>' + 
                                     '<div class="input-group-addon">' + 
                                         '<i class="fa fa-calendar"></i>' +
                                     '</div>' + 

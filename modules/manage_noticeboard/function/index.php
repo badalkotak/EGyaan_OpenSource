@@ -1,98 +1,164 @@
+<!DOCTYPE html>
 <html>
-<body>
+<?php
+include("../../../Resources/sessions.php");
+include("../../../Resources/Dashboard/header.php");
+    
+require_once("../../../classes/Constants.php");
+require_once("../../../classes/DBConnect.php");
+require_once("../classes/Noticeboard.php");
+require_once("../../manage_branch/classes/Branch.php");
+require_once("../../manage_course/classes/Course.php");
+    
+$dbConnect = new DBConnect(Constants::SERVER_NAME,
+    Constants::DB_USERNAME,
+    Constants::DB_PASSWORD,
+    Constants::DB_NAME);
 
-	<?php
-	require_once("../../../classes/Constants.php");
-	require_once("../../../classes/DBConnect.php");
-	require_once("../classes/Noticeboard.php");
-	require_once("../../manage_branch/classes/Branch.php");
-	require_once("../../manage_course/classes/Course.php");
-	include("../../../Resources/sessions.php");
-
-
-
-
-	$dbConnect = new DBConnect(Constants::SERVER_NAME,
-		Constants::DB_USERNAME,
-		Constants::DB_PASSWORD,
-		Constants::DB_NAME);
-
-	$user_id=$id;
-	// $email="badalkotak@gmail.com";
+$user_id=$id;
+// $email="badalkotak@gmail.com";
 //$role_id=7;
 //student
 
 //select branch_id from egn_batch where id in (select batch_id from egn_student where email="badalkotak@gmail.com")
+?>
+<!-- =============================================== -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>Hello!<small>User</small></h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                <li class="active"><b>Noticeboard</b></li>
+            </ol>
+        </section>
 
-	if($role_id==Constants::ROLE_STUDENT_ID){
-		$noticeboard = new Noticeboard($dbConnect->getInstance());
-		$selectData=$noticeboard->getNested2("egn_batch","egn_student","branch_id",1,1,1,1,"id","batch_id",1,1,"email",$email);
-		if($selectData!=null)
-		{	
-			?>
-			<h1>BRANCH Student</h1>
-			<?php
-			while($row=$selectData->fetch_assoc())
-			{
-				$student_branch=$row['branch_id'];
-				$var1="type";
-				$var2=1;
-				$var3=1;
-				$urgent=1;
-				$id=1;
+        <!-- Main content -->
+        <section class="content">
+            <h2 class="page-header">Notice</h2>
+            <div class="row"><!--start of row1-->
+                <div class="col-md-6">
+                    <div class="box collapsed-box box-warning">
+                        <div class="box-header with-border">
+                            <div class="user-block">                        
+                                <h4>Jonathan Burke Jr.</h4>
+                                <p class="text-justify">Shared publicly - 7:30 PM Today</p>
+<!--                                <hr>-->
+<!--
+                                <p class="text-justify">Far far away, behind the word mountains, far from the
+                                    countries Vokalia and
+                                    Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at</p>
+                                <p class="text-justify">the coast of the Semantics, a large language ocean.
+                                    A small river named Duden flows by their place and supplies
+                                    it with the necessary regelialia. It is a paradisematic
+                                    country, in which roasted parts of sentences fly into
+                                    your mouth.
+                                </p>
+-->
+                                <button type='button' class='btn btn-default btn-box-tool' data-widget='collapse'>Read      More <span class='fa fa-ellipsis-h'></span>
+                                </button>
+                                <button type="button" class="btn btn-default btn-box-tool">
+                                    <i class="fa fa-paperclip"></i> Attached Notice 
+                                </button>
+                                
+                                    <h4 class="alert-message pull-right"><i class="icon fa fa-exclamation-triangle"></i><b>Urgent Notice</b></h4>
+                                
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <p class="text-justify">Far far away, behind the word mountains, far from the
+                                countries Vokalia and Consonantia, there live the blind
+                                texts. Separated they live in Bookmarksgrove right at
+                            </p>
+                            <p class="text-justify">the coast of the Semantics, a large language ocean.
+                                A small river named Duden flows by their place and supplies
+                                it with the necessary regelialia. It is a paradisematic
+                                country, in which roasted parts of sentences fly into
+                                your mouth.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end of row1-->
+                
+            <?php
+            if($role_id==Constants::ROLE_STUDENT_ID)
+            {
+                $noticeboard = new Noticeboard($dbConnect->getInstance());
+                $selectData=$noticeboard->getNested2("egn_batch","egn_student","branch_id",1,1,1,1,"id","batch_id",1,1,"email",$email);
+                if($selectData!=null)
+                {	
+            ?>
+            <h2 class="page-header">Branch Student</h2>
+            <div class="row"><!--start of row2-->
+            <?php
+                    while($row=$selectData->fetch_assoc())
+                    {
+                        $student_branch=$row['branch_id'];
+                        $var1="type";
+                        $var2=1;
+                        $var3=1;
+                        $urgent=1;
+                        $id=1;
 
-				$selData=$noticeboard->getNoticeboard($var1,$student_branch,$var2,$urgent,$var3,$id);
-				if($selData!=null)
-				{
-					echo'<table>';
-
-					while($row=$selData->fetch_assoc())
-					{
-						$title=$row['title'];
-						$notice=$row['notice'];
-						$id=$row['id'];
-						$file=$row['file'];
-						$urgent=$row['urgent_notice'];
-
-
-						?>
-						<tr>
-							<td>Title:
-								<?php
-								echo$title;
-								?>
-							</td>
-						</tr>
-						<tr>
-							<td>Description
-
-								<?php
-								echo$notice;
-								?>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<?php
-								echo'
-								<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
-								if($file!=null)
-								{
-									echo "<label>Attached File :</label>";echo "<a href=$file>Attached Notice</a>";
-								}
-								echo'</td><td>';
-								if($urgent=="u"){
-									echo"urgent";
-								}
-								echo'</td></tr>';
+                        $selData=$noticeboard->getNoticeboard($var1,$student_branch,$var2,$urgent,$var3,$id);
+                        if($selData!=null)
+                        {
+                            
+                            while($row=$selData->fetch_assoc())
+                            {
+                                $title=$row['title'];
+                                $notice=$row['notice'];
+                                $id=$row['id'];
+                                $file=$row['file'];
+                                $urgent=$row['urgent_notice'];
+            ?>
+            <div class="col-md-6">
+            <div class="box box-warning collapsed-box">
+            <div class="box-header with-border">
+            <div class="user-block">
+            <h4>Title :
+                <?php
+                    echo $title;
+                ?>
+            </h4>
+            
+            <?php
+//                                        echo '<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id>read more..</button> </a>';
+                                        
+                                        echo "<button type='button' class='btn btn-default btn-box-tool' data-widget='collapse'>Read More <span class='fa fa-ellipsis-h'></span>
+                                </button>";
+                                        
+                                        if($file!=null)
+                                        {
+                                            echo "<a href=$file class='btn btn-default btn-box-tool'>
+                                    <i class='fa fa-paperclip'></i> Attached Notice</a>";
+                                        }
+                                        if($urgent=="u")
+                                        {
+                                            echo '<h4 class="alert-message pull-right"><i class="icon fa fa-exclamation-triangle"></i><b>Urgent Notice</b></h4>';
+                                        }
+                                echo'</div>
+                                        </div>
+                                        <div class="box-body">
+                                            <h4>Description :</h4>
+                                            <p class="text-justify">'.                          
+                                                    $notice.
+                                            '</p>
+                                        </div>
+                                    </div>
+                                </div>';
 							}
-							echo'</table>';
+							
 						}
 						else
 						{
-							echo "No BRANCH notice!";
+							echo '<div class="col-md-12"><h4>No Branch Notice!</h4></div>';
 						}	
+                        
 					}
+                    echo '</div>';//end of row2
 				}
 				else{
 					$student_branch="";
@@ -108,13 +174,15 @@
 				if($branchData!=null)
 				{
 					?>
-					<h1>TeacherBRANCH</h1>
+					<h2 class="page-header">Teacher Branch</h2>
+                    
 					<?php
 					while($row=$branchData->fetch_assoc())
 					{	
 						$teacher_branch=$row['branchId'];
 						$teacher_branch_name=$row['branchName'];
-						echo"<h3>".$teacher_branch_name."</h3>";
+						echo"<h4 class='page-header'>".$teacher_branch_name."</h4>";
+                        echo '<div class="row">';//start of row3
 						$var1="type";
 						$var2=1;
 						$var3=1;
@@ -125,7 +193,7 @@
 						$selectData=$noticeboard->getNoticeboard($var1,$teacher_branch,$var2,$urgent,$var3,$id);
 						if($selectData)
 						{
-							echo'<table>';
+							
 							while($row=$selectData->fetch_assoc())
 							{
 								$title=$row['title'];
@@ -135,42 +203,51 @@
 								$urgent=$row['urgent_notice'];
 
 								?>
-								<tr>
-									<td>Title:
+                                    <div class="col-md-6">
+                                    <div class="box box-warning collapsed-box">
+                                    <div class="box-header with-border">
+                                    <div class="user-block">
+									<h4>Title :
 										<?php
-										echo$title;
+										echo $title;
 										?>
-									</td>
-								</tr>
-								<tr>
-									<td>Description
-
+									</h4>
 										<?php
-										echo$notice;
-										?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<?php
-										echo'
-										<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
+//										echo'
+//										<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
+                                
+                                        echo "<button type='button' class='btn btn-default btn-box-tool' data-widget='collapse'>Read More <span class='fa fa-ellipsis-h'></span>
+                                        </button>";
+                                
+                                
 										if($file!=null)
 										{
-											echo "<label>Attached File :</label>";echo "<a href=$file>Attached Notice</a>";
+											echo "<a href=$file class='btn btn-default btn-box-tool'>
+                                    <i class='fa fa-paperclip'></i> Attached Notice</a>";
 										}
-										echo'</td><td>';
 										if($urgent=="u"){
-											echo"urgent";
+											echo '<h4 class="alert-message pull-right"><i class="icon fa fa-exclamation-triangle"></i><b>Urgent Notice</b></h4>';
 										}
-										echo'</td></tr>';
+                                        echo'</div>
+                                                </div>
+                                                    <div class="box-body">
+                                                        <h4>Description :</h4>
+                                                        <p class="text-justify">'.                       
+                                                                $notice.
+                                                        '</p>
+                                                    </div>
+                                                </div>
+                                            </div>';
 									}
-									echo'</table>';
+									
+                                    
 								}
 								else{
-									echo "No BRANCH notice!";
+									echo "<div class='col-md-12'><h4>No Branch Notice!</h4></div>";
 								}
+                            echo '</div>';//end of row3
 							}
+                    
 						}
 						else{
 							$teacher_branch="";
@@ -185,13 +262,15 @@
 						if($branchData!=null)
 						{
 							?>
-							<h1>AdminBRANCH</h1>
+							<h2 class="page-header">Admin Branch</h2>
+                            
 							<?php
 							while($row=$branchData->fetch_assoc())
 							{	
 								$teacher_branch=$row['id'];
 								$teacher_branch_name=$row['name'];
-								echo"<h3>".$teacher_branch_name."</h3>";
+								echo"<h4>".$teacher_branch_name."</h4>";
+                                echo '<div class="row">';//start of row4
 								$var1="type";
 								$var2=1;
 								$var3=1;
@@ -203,7 +282,7 @@
 								$selectData=$noticeboard->getNoticeboard($var1,$teacher_branch,$var2,$urgent,$var3,$id);
 								if($selectData)
 								{
-									echo'<table>';
+									
 									while($row=$selectData->fetch_assoc())
 									{
 										$title=$row['title'];
@@ -214,53 +293,57 @@
 
 
 										?>
-										<tr>
-											<td>Title:
+                                    <div class="col-md-6">
+                                    <div class="box box-warning collapsed-box">
+                                    <div class="box-header with-border">
+                                    <div class="user-block">
+											<h4>Title :
 												<?php
-												echo$title;
+												echo $title;
 												?>
-											</td>
-										</tr>
-										<tr>
-											<td>Description
-
+											</h4>
 												<?php
-												echo$notice;
-												?>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<?php
-												echo'
-												<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
+//												echo'
+//												<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
+                                        
+                                                echo "<button type='button' class='btn btn-default btn-box-tool' data-widget='collapse'>Read      More <span class='fa fa-ellipsis-h'></span></button>&nbsp;";
 
-												echo'<a href="delete_noticeboard.php?delete='.$id.'" onclick=del_confirm()><button type=button name=delete id=delete >Delete</button> </a>';
+												echo'<a href="delete_noticeboard.php?delete='.$id.'" onclick=del_confirm()><button type=button name=delete id=delete  class="btn btn-default btn-box-tool btn-sm"><span class="fa fa-trash"></span>Delete</button> </a>';
 												if($file!=null)
 												{
-													echo "<label>Attached File :</label>";echo "<a href=$file>Attached Notice</a>";
+													echo "<a href=$file class='btn btn-default btn-box-tool'>
+                                    <i class='fa fa-paperclip'></i> Attached Notice</a>";
 												}
-												echo'</td><td>';
 												if($urgent=="u"){
-													echo"urgent";
+													echo '<h4 class="alert-message pull-right"><i class="icon fa fa-exclamation-triangle"></i><b>Urgent Notice</b></h4>';
 												}
-												echo'</td></tr>';
-											}
-											echo'</table>';
+                                            echo'</div>
+                                                </div>
+                                                    <div class="box-body">
+                                                        <h4>Description :</h4>
+                                                        <p class="text-justify">'.                       
+                                                                $notice.
+                                                        '</p>
+                                                    </div>
+                                                </div>
+                                            </div>';
+                                            }
+											
 										}
 										else{
-											echo "No BRANCH notice!";
+											echo "<div class='col-md-12'><h4>No Branch Notice!</h4></div>";
 										}
+                                    echo '</div>';//end of row4
 									}
+                            
 								}
 								else{
 									$teacher_branch="";
 								}
 							}
-
 							?>
-
-							<h1>COMMON</h1>
+							<h2 class="page-header">Common Notice</h2>
+                            <div class="row"><!--start of row5-->
 							<?php
 							$var1="type";
 							$var2=1;
@@ -268,14 +351,11 @@
 							$type="c";
 							$urgent=1;
 							$id=1;
-
-
-
+                                                
 							$noticeboard = new Noticeboard($dbConnect->getInstance());
 							$selectData=$noticeboard->getNoticeboard($var1,$type,$var2,$urgent,$var3,$id);
 							if($selectData)
-							{
-								echo'<table>';
+                            {
 								while($row=$selectData->fetch_assoc())
 								{
 									$title=$row['title'];
@@ -285,57 +365,59 @@
 									$urgent=$row['urgent_notice'];
 
 									?>
-									<tr>
-										<td>Title:
+                                    <div class="col-md-6">
+                                    <div class="box box-warning collapsed-box">
+                                    <div class="box-header with-border">
+                                    <div class="user-block">
+										<h4>Title :
 											<?php
-											echo$title;
+											echo $title;
 											?>
-										</td>
-									</tr>
-									<tr>
-										<td>Description
-
+										</h4>
+										
 											<?php
-											echo$notice;
-											?>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<?php
-											echo'
-											<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
+//											echo'
+//											<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
+                                    
+                                            echo "<button type='button' class='btn btn-default btn-box-tool' data-widget='collapse'>Read      More <span class='fa fa-ellipsis-h'></span>
+                                            </button>&nbsp;";
+                                    
 											if($role_id==Constants::ROLE_ADMIN_ID){
-												echo'<a href="delete_noticeboard.php?delete='.$id.'" onclick=del_confirm()><button type=button name=delete id=delete >Delete</button> </a>';
+												echo'<a href="delete_noticeboard.php?delete='.$id.'" onclick=del_confirm()><button type=button name=delete id=delete class="btn btn-default btn-box-tool btn-sm"><span class="fa fa-trash"></span> Delete</button> </a>';
 											}
 											if($file!=null)
 											{
-												echo "<label>Attached File :</label>";echo "<a href=$file>Attached Notice</a>";
+												echo "<a href=$file class='btn btn-default btn-box-tool'>
+                                    <i class='fa fa-paperclip'></i> Attached Notice</a>";
 											}
-											echo'</td><td>';
 											if($urgent=="u"){
-												echo"urgent";
+												echo '<h4 class="alert-message pull-right"><i class="icon fa fa-exclamation-triangle"></i><b>Urgent Notice</b></h4>';   
 											}
-											echo'</td></tr>';
+                                            echo'</div>
+                                                </div>
+                                                    <div class="box-body">
+                                                        <h4>Description :</h4>
+                                                        <p class="text-justify">'.                       
+                                                                $notice.
+                                                        '</p>
+                                                    </div>
+                                                </div>
+                                            </div>';
 										}
-										echo'</table>';
+										
 									}
 									else{
-										echo "No common notice!";
+										echo "<div class='col-md-12'><h4>No Common Notice!</h4></div>";
 									}
-
+                                    echo '</div>';//end of row5
 									?>
-									<script>
-										function del_confirm() {
-											var x;
-											if (confirm("Do you want to continue") == true) {
-
-											} else {
-												event.preventDefault() ;
-											}
-//document.getElementById("demo").innerHTML = x;
-}
-
-</script> 
-
-
+            
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+<?php
+    include("../../../Resources/Dashboard/footer.php");
+?>
+    </body>
+</html>

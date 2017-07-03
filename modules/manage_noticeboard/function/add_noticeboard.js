@@ -9,7 +9,7 @@ $(document).ready(function(){
 				var add_notice=$("#notice").val();
 				if(title=="" || notice=="" || type==undefined || type=="b")
 				{
-						  		$("#errormessage").html("Please input all fields!");
+						  		$("#errormessage").html("<label class='alert-message'><span class='fa fa-exclamation-triangle'></span> Please input all fields</label>");
 
 				}
 				else{
