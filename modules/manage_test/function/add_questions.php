@@ -130,7 +130,7 @@ $test = new Test($dbConnect->getInstance());
                                             header("Location: add_test.php?message=" . $message);
                                         }
                                     }else{
-                                        $test->parentPageRedirect("Error processing request");
+                                        echo $test->parentPageRedirect("Error processing request");
                                     }
                                     ?>
                                     </form>

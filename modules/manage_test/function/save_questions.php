@@ -45,23 +45,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         if ($error_flag != 1) {
             if ($test->insertQuestion($question_query)) {
-                $test->parentPageRedirect("Test added successfully");
+                echo $test->parentPageRedirect("Test added successfully");
             } else {
                 $test->deleteTest($test_id, $teacher_id); //Deleted all records related to test_id
-                $test->parentPageRedirect("Error while processing"); //Error while inserting questions into database
+                echo $test->parentPageRedirect("Error while processing"); //Error while inserting questions into database
             }
         } else {
             $test->deleteTest($test_id, $teacher_id);
-            $test->parentPageRedirect("Error while processing");
+            echo $test->parentPageRedirect("Error while processing");
         }
     } else {
         if ($test_id == null) {
-            $test->parentPageRedirect("Error while processing"); //Error generated while inserting test details
+            echo $test->parentPageRedirect("Error while processing"); //Error generated while inserting test details
         } else {
-            $test->parentPageRedirect($test_id); //Duplicate test entry
+            echo $test->parentPageRedirect($test_id); //Duplicate test entry
         }
     }
 }else{
-    $test->parentPageRedirect("Error while processing");
+    echo $test->parentPageRedirect("Error while processing");
 }
 ?>

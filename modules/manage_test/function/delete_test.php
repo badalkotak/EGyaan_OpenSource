@@ -20,14 +20,14 @@ $teacher_id = $id;
 $test = new Test($dbConnect->getInstance());
 if(isset($_REQUEST["id"])){
     if($test->deleteTest($_REQUEST["id"],$teacher_id)){
-        $test->parentPageRedirect("Test deleted successfully");
+        echo $test->parentPageRedirect("Test deleted successfully");
         if(file_exists("offline_test/" . $_REQUEST["id"] . ".pdf")){
             unlink("offline_test/" . $_REQUEST["id"] . ".pdf");
         }else{
         }
     }else{
-        $test->parentPageRedirect("Error while deleting test");
+        echo $test->parentPageRedirect("Error while deleting test");
     }
 }else{
-    $test->parentPageRedirect("Error while deleting test");
+    echo $test->parentPageRedirect("Error while deleting test");
 }

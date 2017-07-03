@@ -80,13 +80,13 @@ $test = new Test($dbConnect->getInstance());
                                 <button type="submit" class="btn btn-success"><span class="fa fa-check"></span> Save</button>
                                                 <?
                                             } else {
-                                                $test->parentPageRedirect("Error processing request");
+                                                echo $test->parentPageRedirect("Error processing request");
                                             }
                                         }else{
-                                            $test->parentPageRedirect("Error processing request");
+                                            echo $test->parentPageRedirect("Error processing request");
                                         }
                                     }else{
-                                        $test->parentPageRedirect("Error processing request");
+                                        echo $test->parentPageRedirect("Error processing request");
                                     }
                                     ?>
                                     

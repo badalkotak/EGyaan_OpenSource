@@ -96,13 +96,13 @@ $test = new Test($dbConnect->getInstance());
                                                     '</div>'.
                                                 '</div>';
                                         } else {
-                                            $test->parentPageRedirect("Error processing the request");
+                                            echo $test->parentPageRedirect("Error processing the request");
                                         }
                                     }else{
-                                        $test->parentPageRedirect("Error processing the request");
+                                        echo $test->parentPageRedirect("Error processing the request");
                                     }
                                 }else{
-                                    $test->parentPageRedirect("Error processing the request");
+                                    echo $test->parentPageRedirect("Error processing the request");
                                 }
                                 ?>
                             </div>

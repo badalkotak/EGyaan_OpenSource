@@ -30,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     $marks_query = $marks_query . $test->createUpdateMarksQuery($row["id"],$_POST["test_id"],$_POST[$row["id"]]);
                 }
             }else{
-                $test->parentPageRedirect("Marks should be greater than or equal to zero");
+                echo $test->parentPageRedirect("Marks should be greater than or equal to zero");
             }
         }
         if($_POST["action"] == "add"){
@@ -39,14 +39,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $status = $test->updateMarks($marks_query);
         }
         if ($status) {
-            $test->parentPageRedirect("Marks updated successfully");
+            echo $test->parentPageRedirect("Marks updated successfully");
         } else {
-            $test->parentPageRedirect("Error processing the request");
+            echo $test->parentPageRedirect("Error processing the request");
         }
     }else{
-        $test->parentPageRedirect("Error processing request");
+        echo $test->parentPageRedirect("Error processing request");
     }
 }else{
-    $test->parentPageRedirect("Error processing request");
+    echo $test->parentPageRedirect("Error processing request");
 }
 ?>

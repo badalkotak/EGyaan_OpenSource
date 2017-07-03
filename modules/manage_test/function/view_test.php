@@ -48,7 +48,8 @@ $test = new Test($dbConnect->getInstance());
                                             ob_clean();
                                             header("Location: offline_test/" . $_REQUEST["id"] . ".pdf");
                                         }else{
-                                            $test->parentPageRedirect("Error processing request");
+                                            ob_clean();
+                                            echo $test->parentPageRedirect("Error processing request");
                                         }
                                     }elseif($_REQUEST["type"] == 'O'){
                                         $result = $test->getTestQuestions($_REQUEST["id"]);
@@ -95,15 +96,15 @@ $test = new Test($dbConnect->getInstance());
                                                 '</div>';
                                         }else{
                                             ob_clean();
-                                            $test->parentPageRedirect("Error processing request");
+                                            echo $test->parentPageRedirect("Error processing request");
                                         }
                                     }else{
                                         ob_clean();
-                                        $test->parentPageRedirect("Error processing request");
+                                        echo $test->parentPageRedirect("Error processing request");
                                     }
                                 }else{
                                     ob_clean();
-                                    $test->parentPageRedirect("Error processing request");
+                                    echo $test->parentPageRedirect("Error processing request");
                                 }
                                 ?>
                             </div>

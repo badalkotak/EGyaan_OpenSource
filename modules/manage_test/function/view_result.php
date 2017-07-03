@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <?php
-ob_start();
 include("../../../Resources/sessions.php");
 include("../../../Resources/Dashboard/header.php");
 require_once("../../../classes/Constants.php");
@@ -68,16 +67,13 @@ $test = new Test($dbConnect->getInstance());
                                             </table>
                                             <?
                                         } else {
-                                            ob_clean();
-                                            $test->parentPageRedirect("Error processing request");
+                                            echo $test->parentPageRedirect("Error processing request");
                                         }
                                     }else{
-                                        ob_clean();
-                                        $test->parentPageRedirect("Marks not entered/Error processing request");
+                                        echo $test->parentPageRedirect("Marks not entered/Error processing request");
                                     }
                                 }else{
-                                    ob_clean();
-                                    $test->parentPageRedirect("Error processing request");
+                                    echo $test->parentPageRedirect("Error processing request");
                                 }
                                 ?>
                                 

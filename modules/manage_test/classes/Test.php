@@ -236,7 +236,8 @@ class Test
     }
 
     public function parentPageRedirect($message){
-        header("Location: manage_test.php?message=" . $message);
+        //header("Location: manage_test.php?message=" . $message);
+        return "<script>alert('" .  $message . "');window.location.href='manage_test.php'</script>";
     }
 }
 ?>

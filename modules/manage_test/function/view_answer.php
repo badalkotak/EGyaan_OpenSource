@@ -91,13 +91,13 @@ $test = new StudentTest($dbConnect->getInstance());
                                                     '</div>'.
                                                 '</div>';
                                         } else {
-                                            $test->parentRedirect("Error processing the request");
+                                            echo $test->parentRedirect("Error processing the request");
                                         }
                                     }else{
-                                        $test->parentRedirect("Error processing the request");
+                                        echo $test->parentRedirect("Error processing the request");
                                     }
                                 }else{
-                                    $test->parentRedirect("Error processing the request");
+                                    echo $test->parentRedirect("Error processing the request");
                                 }
                                 ?>
                             </div>

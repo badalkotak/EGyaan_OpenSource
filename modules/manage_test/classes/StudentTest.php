@@ -141,7 +141,8 @@ class StudentTest
     }
 
     public function parentRedirect($message){
-        header("location: manage_student_test.php?message=" . $message);
+        //header("location: manage_student_test.php?message=" . $message);
+        return "<script>alert('" .  $message . "');window.location.href='manage_student_test.php'</script>";
     }
 
 }

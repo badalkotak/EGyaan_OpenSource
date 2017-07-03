@@ -35,17 +35,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             if ($test->insertMarks($student_id, $_POST["test_id"], $marks_obtained) && $test->insertAnswers($answer_query)) {
-                $test->parentRedirect("Your answers are submitted successfully");
+                echo $test->parentRedirect("Your answers are submitted successfully");
             } else {
                 $test->deleteEntries($student_id, $_POST["test_id"]);
-                $test->parentRedirect("Error processing the request");
+                echo $test->parentRedirect("Error processing the request");
             }
         } else {
-            $test->parentRedirect("Error processing the request");
+            echo $test->parentRedirect("Error processing the request");
         }
     } else {
-        $test->parentRedirect("Error processing the request");
+        echo $test->parentRedirect("Error processing the request");
     }
 }else{
-    $test->parentRedirect("Error processing the request");
+    echo $test->parentRedirect("Error processing the request");
 }

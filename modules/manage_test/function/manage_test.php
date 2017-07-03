@@ -60,16 +60,12 @@ $result=$test->getTestsByTeacher($teacher_id);
                                             <th>Course name</th>
                                             <th>View Test</th>
                                             <?php
-                                            if($result_add_id===true)
-                                                echo "<th>Add Marks</th>";
-                                            ?>
-                                            <?
-                                            if($result_view_id===true)
-                                                echo "<th>View Result</th>";
-                                            ?>
-                                            <?
                                             if($delete===true)
                                                 echo "<th>Delete</th>";
+                                            if($result_add_id===true)
+                                                echo "<th>Add Marks</th>";
+                                            if($result_view_id===true)
+                                                echo "<th>View Result</th>";
                                             ?>
                                             
                                         </tr>

@@ -88,13 +88,13 @@ $test = new StudentTest($dbConnect->getInstance());
                                                 }
                                                 echo '<div class="row"><center><button type="submit" class="btn btn-success"><span class="fa fa-check"></span>Submit</button></center></div>';
                                             } else {
-                                                $test->parentRedirect("Error processing the request");
+                                                echo $test->parentRedirect("Error processing the request");
                                             }
                                         }else{
-                                            $test->parentRedirect("Error processing the request");
+                                            echo $test->parentRedirect("Error processing the request");
                                         }
                                     }else{
-                                        $test->parentRedirect("Error processing the request");
+                                        echo $test->parentRedirect("Error processing the request");
                                     }
                                     ?>
                                 </form>
