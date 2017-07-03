@@ -1,46 +1,41 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Login | EGyaan</title>
-        <link rel="stylesheet prefetch" href="../../../Resources/AdminLTE-2.3.11/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
-
-        <link rel="stylesheet" href="../../../Resources/AdminLTE-2.3.11/dist/css/style.css">
-	<script src="../../../Resources/jquery.min.js"></script>
-    <style>
-        .form-control{
-            border: 1px solid #FFA737;
-        }
-        .form-control:focus, .form-control:focus + .fa {
-            border-color: #FFA737;
-            color: #FFA737;
-        }
-        .log-btn {
-            background: #FFA737;
-        }
-    </style>
-
-</head>
-<body>
-<div class="login-form">
-    <center><image src="../../../Resources/images/EGYAAN_logo_transparent_small.png"></image></center>
-    <br>
-		<form action="" method="post" id="login">
-            <div class="form-group ">
-			<input type="text" name="email" id="email" class="form-control" placeholder="Username/Email ">
-                <i class="fa fa-user"></i>
-            </div>
-            <div class="form-group">
-			<input type="password" name="passwd" class="form-control" id="passwd" placeholder="Password">
-                <i class="fa fa-lock"></i>
-            </div>
-            <div id="error" style="color: #07C57F"></div>
-            <!-- <a class="link" href="#">Lost your password?</a> -->
-            <button type="submit" class="log-btn" value="Login" id="submit" >Log in</button>
-		</form>
-</div>
-<script src='../../../Resources/AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js'></script>
-<script>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Login | EGyaan</title>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="stylesheet" href="../../../Resources/AdminLTE-2.3.11/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../../../Resources/AdminLTE-2.3.11/dist/css/login.css">
+    </head>
+    <body>
+        <div class="container ">
+            <div class="form-registration login-form col-md-4 col-md-offset-4 clearfix">
+                <div class="form-group">
+                    <center><img src="../../../Resources/images/EGYAAN_logo_transparent_small.png"></center>
+                </div>                
+                <form action="" method="post" id="login">
+                    <div class="form-group">
+                        <input type="text" name="email" id="email" class="form-control" placeholder="Username/Email ">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="passwd" class="form-control" id="passwd" placeholder="Password">
+                        <i class="fa fa-lock"></i>
+                    </div>
+                    <div style="color:#f56954" id="error"></div>
+                    <!-- <a class="link" href="#">Lost your password?</a> -->
+                    <div class="form-group">
+                        <button type="submit" class="log-btn" style="width:100%" value="Login" id="submit" >Log in</button>
+                    </div>    
+            </form>
+        </div>
+        <script src='../../../Resources/AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js'>
+        </script>
+        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+        <script src="../../../Resources/AdminLTE-2.3.11/bootstrap/js/bootstrap.min.js"></script>
+        <script>
 
 $(document).ready(function(){
 
@@ -54,7 +49,9 @@ $(document).ready(function(){
 
     if(email=="" || passwd=="")
     {
-      $("#error").text("Please input all the fields!");
+        var alert_icon = document.createElement('i');
+        alert_icon.setAttribute('class', 'fa fa-exclamation-triangle');
+      $("#error").html(alert_icon).append("Please input all the fields!");
     }
 
     else
@@ -76,7 +73,9 @@ $(document).ready(function(){
         }
         else
         {
-          $("#error").text("Invalid Username/Password!");
+            var alert_icon = document.createElement('i');
+            alert_icon.setAttribute('class', 'fa fa-exclamation-triangle');
+            $("#error").html(alert_icon).append("Invalid Username/Password!");
         }
       }
       });
@@ -89,7 +88,7 @@ $(document).ready(function(){
 </html>
 
 <noscript>
-<div style='font-family: sans-serif; color:white; position: fixed; bottom:0; right:0; background:red; padding: 0 20px'>
-<p>JavaScript is Disabled. For Best Experience, Enable JavasScript and Login!</p>
+<div class="row pull-right" style='color:white; position: fixed; bottom:0; right:0; background:#d33724; padding: 0 20px; border-radius: 4px'>
+<h5>JavaScript is Disabled. For Best Experience, Enable JavaScript and Login!</h5>
 </div>
 </noscript>
