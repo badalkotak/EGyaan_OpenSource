@@ -58,5 +58,5 @@ class Constants
 
     const MANAGE_FEES_ID = 37;
 
-    const NO_PRIVILEGE = "You dont have the prilige to perform this operation!";
+    const NO_PRIVILEGE = "You dont have the privilige to perform this operation!";
 }
