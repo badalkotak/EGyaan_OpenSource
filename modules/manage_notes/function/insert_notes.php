@@ -1,5 +1,7 @@
+<html>
+    <link rel="stylesheet" href="../../../Resources/AdminLTE-2.3.11/bootstrap/css/bootstrap.min.css">
 <?php
-include("../../../Resources/sessions.php");
+//include("../../../Resources/sessions.php");
 include("privilege.php");
 
 if($add!=true)
@@ -48,7 +50,7 @@ $FileType = pathinfo($target_file,PATHINFO_EXTENSION);
 // Check if file already exists
 if (file_exists($target_file)) {
 				echo "<script>
-				alert('Sorry, file already exists.');
+				alert('<h4 class='alert-message'><i class='fa fa-exclamation-triangle'></i>Sorry, file already exists.</h4>');
 				window.location.href='insert_page.php';
 				</script>";
     $uploadOk = 0;
@@ -57,7 +59,7 @@ if (file_exists($target_file)) {
 if($FileType != "doc" && $FileType != "pdf" && $FileType != "odt"
 && $FileType != "docx" && $FileType != "ppt" ) {
 				echo "<script>
-				alert('Sorry, only PDF,DOC,DOCX,ODT,PPT files are allowed.');
+				alert('<h4 class='alert-message'><i class='fa fa-exclamation-triangle'></i>Sorry, only PDF,DOC,DOCX,ODT,PPT files are allowed.</h4>');
 				window.location.href='insert_page.php';
 				</script>";
     $uploadOk = 0;
@@ -65,7 +67,7 @@ if($FileType != "doc" && $FileType != "pdf" && $FileType != "odt"
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
 				echo "<script>
-				alert('Sorry, your file was not uploaded.');
+				alert('<h4 class=\'alert-message\'><i class=\'fa fa-exclamation-triangle\'></i>Sorry, your file was not uploaded.</h4>');
 				window.location.href='insert_page.php';
 				</script>";
 // if everything is ok, try to upload file
@@ -113,3 +115,5 @@ if ($uploadOk == 0) {
 
 
 ?>
+    
+</html>

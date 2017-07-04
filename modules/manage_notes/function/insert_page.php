@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?php
-include("../../../Resources/sessions.php");
+//include("../../../Resources/sessions.php");
 include("privilege.php");
 include("../../../Resources/Dashboard/header.php");
 
@@ -20,7 +20,7 @@ $dbconnect=new DBConnect(Constants::SERVER_NAME,
 $notes=new Notes($dbconnect->getInstance());
 $course=new Course($dbconnect->getInstance());
 ?>
-<body>
+
 <!-- =============================================== -->
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

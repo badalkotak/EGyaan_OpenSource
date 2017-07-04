@@ -4,6 +4,7 @@
 
 .text-justify{
     text-align: justify;
+    text-justify: auto;
 }
 
 .table-container1{
