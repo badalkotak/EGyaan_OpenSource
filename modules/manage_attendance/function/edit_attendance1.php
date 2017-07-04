@@ -6,19 +6,19 @@
      * Created by PhpStorm.
      * User: akash
      * Date: 3/7/17
-     * Time: 10:30 AM
+     * Time: 7:13 PM
      */
     include("../../../Resources/sessions.php");
     include "../../../Resources/Dashboard/header.php"
     ?>
 
-    <script type="text/javascript" src="../../../Resources/jQuery/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="../../../Resources/jQuery/jquery-3.2.1.js"></script>
 
-    <style>
-        div.hide {
-            display: none;
-        }
-    </style>
+<style>
+    div.hide {
+        display: none;
+    }
+</style>
 
 </head>
 <body>
@@ -39,7 +39,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Select Batch and Branch</h3>
                 </div>
-                <form role="form" action="manage_attendance2.php" method="post">
+                <form role="form" action="edit_attendance2.php" method="post">
                     <div class="box-body">
                         <div class="form-group">
                             <select class="form-control" id="branch-id" name="branchId">
@@ -131,3 +131,4 @@ include("../../../Resources/Dashboard/footer.php");
 ?>
 </body>
 </html>
+
