@@ -31,16 +31,20 @@ if (isset($_REQUEST['courseCheck']) && isset($_REQUEST['studentId']) && !empty(t
         if ($insertData == true) {
             $flag = true;
         } elseif ($insertData == Constants::STATUS_EXISTS) {
-            echo "Course for student " . Constants::STATUS_EXISTS;
+            echo "<script>alert('Course for student " . Constants::STATUS_EXISTS . "');
+            window.location.href='selectStudentForCourse.php';</script>";
         } else {
             $flag = false;
         }
     }
     if ($flag == true) {
-        echo Constants::STATUS_SUCCESS;
+        echo "<script>alert('" . Constants::STATUS_SUCCESS . "fully added');
+        window.location.href='selectStudentForCourse.php';</script>";
     } else {
-        echo Constants::STATUS_FAILED;
+        echo "<script>alert('" . Constants::STATUS_FAILED . " to add');
+        window.location.href='selectStudentForCourse.php';</script>";
     }
 } else {
-    echo Constants::EMPTY_PARAMETERS;
+    echo "<script>alert('" . Constants::EMPTY_PARAMETERS . " found');
+        window.location.href='selectStudentForCourse.php';</script>";
 }

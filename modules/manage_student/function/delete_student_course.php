@@ -17,6 +17,16 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
 
+function jsonOutput($status, $message)
+{
+    $json = array();
+    $json["statusMsg"] = $status;
+    $json["Msg"] = $message;
+
+    echo json_encode($json);
+}
+
+
 if (isset($_REQUEST['studentCourseRegistrationId']) && !empty(trim($_REQUEST['studentCourseRegistrationId']))) {
     $studentCourseRegistrationId = $_REQUEST['studentCourseRegistrationId'];
 
@@ -25,11 +35,10 @@ if (isset($_REQUEST['studentCourseRegistrationId']) && !empty(trim($_REQUEST['st
     $deleteData = $studentCourseReg->deleteStudentCourse($studentCourseRegistrationId);
 
     if ($deleteData === true) {
-        echo "Student Course " . Constants::STATUS_SUCCESS . "fully deleted";
-//        header('Location:student.php');
+        jsonOutput(Constants::STATUS_SUCCESS, "Student Course " . Constants::STATUS_SUCCESS . "fully deleted");
     } else {
-        echo Constants::STATUS_FAILED . " to delete student course";
+        jsonOutput(Constants::STATUS_SUCCESS, Constants::STATUS_FAILED . " to delete student course");
     }
 } else {
-    echo Constants::EMPTY_PARAMETERS;
+    jsonOutput(Constants::STATUS_SUCCESS, Constants::EMPTY_PARAMETERS . " found");
 }

@@ -63,7 +63,8 @@ if (isset($_REQUEST['studentId']) && isset($_REQUEST['firstName']) && isset($_RE
             $parentProfileName = $row['parent_profile_photo'];
         }
     } else {
-        echo Constants::STATUS_FAILED . "1";
+        echo "<script>alert('" . Constants::STATUS_FAILED . " to get profile pictures');
+        window.location.href='selectStudent.php';</script>";
     }
 
 
@@ -90,10 +91,12 @@ if (isset($_REQUEST['studentId']) && isset($_REQUEST['firstName']) && isset($_RE
                 unlink($upload_student_dir . $studentProfileName);
                 move_uploaded_file($tmp_student_dir, $upload_student_dir . $studentProfilePhoto);
             } else {
-                echo Constants::FILE_SIZE_LARGE;
+                echo "<script>alert('" . Constants::FILE_SIZE_LARGE . "');
+                window.location.href='selectStudent.php';</script>";
             }
         } else {
-            echo Constants::FILE_EXTENSION_WRONG;
+            echo "<script>alert('" . Constants::FILE_EXTENSION_WRONG . "');
+            window.location.href='selectStudent.php';</script>";
         }
 
 //    echo $studentImgFile . " " . $tmp_student_dir . " " . $img_student_size;
@@ -127,10 +130,12 @@ if (isset($_REQUEST['studentId']) && isset($_REQUEST['firstName']) && isset($_RE
                 unlink($upload_parent_dir . $parentProfileName);
                 move_uploaded_file($tmp_parent_dir, $upload_parent_dir . $parentProfilePhoto);
             } else {
-                echo Constants::FILE_SIZE_LARGE;
+                echo "<script>alert('" . Constants::FILE_SIZE_LARGE . "');
+                window.location.href='selectStudent.php';</script>";
             }
         } else {
-            echo Constants::FILE_EXTENSION_WRONG;
+            echo "<script>alert('" . Constants::FILE_EXTENSION_WRONG . "');
+            window.location.href='selectStudent.php';</script>";
         }
         //End Parent upload Photo
     } else {
@@ -143,11 +148,13 @@ if (isset($_REQUEST['studentId']) && isset($_REQUEST['firstName']) && isset($_RE
 
 //    var_dump($insertData);
     if ($insertData == 'true') {
-        echo Constants::STATUS_SUCCESS;
-//        header('Location:student.php');
+        echo "<script>alert('Student information " . Constants::STATUS_SUCCESS . "fully updated');
+        window.location.href='selectStudent.php';</script>";
     } else {
-        echo Constants::STATUS_FAILED . "2";
+        echo "<script>alert('" . Constants::STATUS_FAILED . "');
+        window.location.href='selectStudent.php';</script>";
     }
 } else {
-    echo Constants::EMPTY_PARAMETERS;
+    echo "<script>alert('" . Constants::EMPTY_PARAMETERS . "');
+    window.location.href='selectStudent.php';</script>";
 }

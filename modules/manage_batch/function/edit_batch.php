@@ -28,11 +28,13 @@ if (isset($_REQUEST['batchId']) && isset($_REQUEST['batchName']) && isset($_REQU
     $updateData = $batch->updateBatch($batchId, $batchName, $branchId);
 
     if ($updateData == true) {
-        echo "Batch " . Constants::STATUS_SUCCESS . "fully updated";
-//        header('Location:batch.php');
+        echo "<script>alert('Batch " . Constants::STATUS_SUCCESS . "fully updated');
+        window.location.href = 'batch.php';</script>";
     } else {
-        echo Constants::STATUS_FAILED . " to update batch";
+        echo "<script>alert('" . Constants::STATUS_FAILED . " to update batch');
+        window.location.href = 'batch.php';</script>";
     }
 } else {
-    echo Constants::EMPTY_PARAMETERS;
+    echo "<script>alert('" . Constants::EMPTY_PARAMETERS . "');
+    window.location.href = 'batch.php';</script>";
 }

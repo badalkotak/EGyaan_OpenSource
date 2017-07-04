@@ -56,7 +56,7 @@
 
                                 if ($getData != false) {
                                     $id = 1;
-                                        echo "<table class='table table-bordered table-hover example2'>";
+                                    echo "<table class='table table-bordered table-hover example2'>";
                                     echo "<thead><tr><th>Sr. no.</th><th>Student Name</th><th>View</th><th>Add</th><th>Delete</th></tr></thead>";
                                     while ($row = $getData->fetch_assoc()) {
                                         $studentId = $row['id'];

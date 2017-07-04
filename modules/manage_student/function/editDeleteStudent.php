@@ -6,6 +6,7 @@
     include "../../../Resources/Dashboard/header.php"
     ?>
     <title>View - Delete | EGyaan</title>
+    <script type="text/javascript" src="../../../Resources/jQuery/jquery-3.2.1.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -66,20 +67,24 @@
 
                                         echo "<tbody><tr><td>" . $id . "</td><td>" . $studentFirstName . " " . $studentLastName . "</td><td>
         <form action='viewStudent.php' method='post'><input type='hidden' name='studentId' value='" . $studentId . "'>
-        <button type='submit' class='btn btn-success' value='View'><i class='fa fa-eye'></i>&nbspView</form></td><td><form action='editStudent.php' method='post'>
+        <button type='submit' class='btn btn-success' value='View'><i class='fa fa-eye'></i>&nbspView</form></td>
+        
+        <td><form action='editStudent.php' method='post'>
         <input type='hidden' name='studentId' value='" . $studentId . "'><button type='submit' class='btn btn-primary' value='Edit'><i class='fa fa-pencil'></i>&nbspEdit</form></td>
-        <td><form action='delete_student.php' method='post'><input type='hidden' name='studentId' value='" . $studentId . "'>
-        <button type='submit' value='Delete' class='btn btn-danger'><i class='fa fa-trash'></i>&nbspDelete</form></td></tr>";
+        
+        <td><button type='submit' id='" . $studentId . "' value='Delete' class='btn btn-danger delete-branch-button'><i class='fa fa-trash'>
+        </i>&nbspDelete</button></td></tr>";
                                         $id++;
-
                                     }
                                 } elseif ($getData == false) {
-                                    echo Constants::STATUS_FAILED;
+                                    echo "<script>alert('" . Constants::STATUS_FAILED . "');
+                                    window.location.href='student.html';</script>";
                                 } else {
-                                    echo "No Records Found!";
+                                    echo "No Records Found! ";
                                 }
                             } else {
-                                echo Constants::EMPTY_PARAMETERS;
+                                echo "<script>alert('" . Constants::EMPTY_PARAMETERS . "');
+                                window.location.href='student.html';</script>";
                             }
                             echo "</tbody></table>";
                             ?>
@@ -90,6 +95,41 @@
         </section>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".delete-branch-button").click(function (event) {
+            event.preventDefault();
+            var id = $(this).attr("id");
+//            console.log(id);
+            var result = confirm('<?php echo Constants::DELETE_CONFIRMATION?>');
+            if (result) {
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "delete_student.php",
+                        data: "studentId=" + id,
+//                        dataType:  "json ",
+                        success: function (json) {
+                            var parsedJson = jQuery.parseJSON(json);
+                            if (parsedJson.statusMsg == "<?php echo Constants::STATUS_SUCCESS?>") {
+                                alert(parsedJson.Msg);
+                                location.reload();
+                            } else {
+                                alert(parsedJson.Msg);
+                                location.reload();
+                            }
+                        },
+                        error: function (a, b, c) {
+                            console.log("Error ");
+                        }
+                    });
+            } else {
+                return false;
+            }
+        });
+    });
+</script>
 <?php
 include "../../../Resources/Dashboard/footer.php"
 ?>

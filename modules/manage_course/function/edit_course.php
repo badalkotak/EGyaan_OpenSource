@@ -29,11 +29,13 @@ if (isset($_REQUEST['courseId']) && isset($_REQUEST['courseName']) && isset($_RE
     $updateData = $course->updateCourse($courseId, $courseName, $batchId);
 
     if ($updateData == true) {
-        echo "Course " . Constants::STATUS_SUCCESS . "fully updated";
-//        header('Location:course.php');
+        echo "<script>alert('Course " . Constants::STATUS_SUCCESS . "fully updated');
+        window.location.href='course.php';</script>";
     } else {
-        echo Constants::STATUS_FAILED . " to update course";
+        echo "<script>alert('" . Constants::STATUS_FAILED . " to update course');
+        window.location.href='course.php';</script>";
     }
 } else {
-    echo Constants::EMPTY_PARAMETERS;
+    echo "<script>alert('" . Constants::EMPTY_PARAMETERS . "');
+    window.location.href='course.php';</script>";
 }

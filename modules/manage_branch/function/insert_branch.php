@@ -19,15 +19,17 @@ if (isset($_REQUEST['branch_name']) && !empty(trim($_REQUEST['branch_name']))) {
 //    var_dump($insertData);
 
     if ($insertData == "true") {
-        echo "Branch " . Constants::STATUS_SUCCESS . "fully inserted<br>";
-//        echo "<script>alert('Branch " . Constants::STATUS_SUCCESS . "fully inserted');</script>";
-//        header('Location: branch.php');
+        echo "<script>alert('Branch " . Constants::STATUS_SUCCESS . "fully inserted');
+        window.location.href='branch.php';</script>";
     } elseif ($insertData == Constants::STATUS_EXISTS) {
-        echo "Branch Name " . Constants::STATUS_EXISTS;
+        echo "<script>alert('Branch Name " . Constants::STATUS_EXISTS . "');
+        window.location.href='branch.php';</script>";
     } else {
-        echo Constants::STATUS_FAILED . " to add branch";
+        echo "<script>alert('" . Constants::STATUS_FAILED . " to add branch');
+        window.location.href='branch.php';</script>";
     }
 
 } else {
-    echo Constants::EMPTY_PARAMETERS;
+    echo "<script>alert('" . Constants::EMPTY_PARAMETERS . "');
+    window.location.href='branch.php';</script>";
 }

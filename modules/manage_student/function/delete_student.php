@@ -17,6 +17,16 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
 
+function jsonOutput($status, $message)
+{
+    $json = array();
+    $json["statusMsg"] = $status;
+    $json["Msg"] = $message;
+
+    echo json_encode($json);
+}
+
+
 if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
     $studentId = $_REQUEST['studentId'];
 
@@ -29,7 +39,8 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
             $parentProfileName = $row['parent_profile_photo'];
         }
     } else {
-        echo Constants::STATUS_FAILED . " while fetching student details.";
+        echo "<script>alert('" . Constants::STATUS_FAILED . " while fetching student details.');
+        window.location.href='editDeleteStudent.php';</script>";
     }
 
     $deleteData = $student->deleteStudent($studentId);
@@ -39,11 +50,10 @@ if (isset($_REQUEST['studentId']) && !empty(trim($_REQUEST['studentId']))) {
         unlink("../images/student/" . $studentProfileName);
         unlink("../images/parent/" . $parentProfileName);
 
-        echo "Student " . Constants::STATUS_SUCCESS . "fully deleted";
-//        header('Location:student.php');
+        jsonOutput(Constants::STATUS_SUCCESS, "Student " . Constants::STATUS_SUCCESS . "fully deleted");
     } else {
-        echo Constants::STATUS_FAILED . " to delete student";
+        jsonOutput(Constants::STATUS_SUCCESS, Constants::STATUS_FAILED . " to delete student");
     }
 } else {
-    echo Constants::EMPTY_PARAMETERS;
+    jsonOutput(Constants::STATUS_SUCCESS, Constants::EMPTY_PARAMETERS . " found");
 }

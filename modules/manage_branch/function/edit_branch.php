@@ -28,11 +28,14 @@ if (isset($_REQUEST['branchName']) && isset($_REQUEST['branchId']) && !empty(tri
 
     if ($editData == true) {
 //        header('Location:branch.php');
-        echo "Branch " . Constants::STATUS_SUCCESS . "fully updated";
+        echo "<script>alert('Branch " . Constants::STATUS_SUCCESS . "fully updated');
+        window.location.href = 'branch.php'</script>";
     } else {
-        echo Constants::STATUS_FAILED . " to update branch";
+        echo "<script>alert('" . Constants::STATUS_FAILED . " to update branch');
+        window.location.href = 'branch.php';</script>";
     }
 
 } else {
-    echo Constants::EMPTY_PARAMETERS;
+    echo "<script>alert('" . Constants::EMPTY_PARAMETERS . "');
+        window.location.href = 'branch.php';</script>";
 }
