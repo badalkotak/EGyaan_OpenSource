@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <?php
-include("../../../Resources/sessions.php");
 include("privilege.php");
 include("../../../Resources/Dashboard/header.php");
 $user_id=$id;
@@ -26,7 +25,7 @@ $course=new Course($dbconnect->getInstance());
         <section class="content-header">
             <h1>Hello!<small>User</small></h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
                 <li class="active"><b>Insert Syllabus</b></li>
             </ol>
         </section>
@@ -131,7 +130,7 @@ $course=new Course($dbconnect->getInstance());
                                                         echo '<tr><td>'.$no.'</td><td>'.$rowCourses['branchName'].'</td><td>'.$rowCourses['batchName'].'</td><td>'.$rowCourses['courseName'].'</td>';
                                                         echo '<td><a href='.$row['file'].'><span class="fa fa-file-pdf-o fa-lg "></span></a></td>';
                                                         if($delete===true)
-                                                        echo '<td><a href=delete.php?id='.$row['id'].'&file='.$row['file'].' onclick="return confirmation()" class="btn btn-danger"><span class="fa fa-trash"></span> Delete</a></td></form></tr>';
+                                                        echo '<td><a href=delete.php?id='.$row['id'].'&file='.$row['file'].' onclick="return confirmation()" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span> Delete</a></td></form></tr>';
                                                         $no=$no+1;
                                                     }
                                                 }

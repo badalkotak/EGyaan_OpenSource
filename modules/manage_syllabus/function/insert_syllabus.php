@@ -1,5 +1,4 @@
 <?php
-include("../../../Resources/sessions.php");
 include("privilege.php");
 
 if($add!=true)
