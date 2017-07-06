@@ -28,7 +28,7 @@ $course=new Course($dbconnect->getInstance());
         <section class="content-header">
             <h1>Hello!<small>User</small></h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
                 <li class="active"><b>Insert Notes</b></li>
             </ol>
         </section>
@@ -66,7 +66,7 @@ $course=new Course($dbconnect->getInstance());
                                 ?>
                                 <div class="form-group">
                                     <select name='course'  class="form-control select2" style="width: 100%;">
-                                        <option value="0" selected="selected">Select Course</option>
+                                        <option value="0" selected="selected" disabled>Select Course</option>
                                         <?php 
                                         if($result!=null)
                                         {
