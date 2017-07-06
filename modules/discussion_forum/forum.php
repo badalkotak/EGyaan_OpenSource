@@ -5,9 +5,9 @@
  * Date: 28/12/16
  * Time: 11:45 AM
  */
-include("../../Resources/sessions.php");
 require_once "../../classes/DBConnect.php";
 require_once "../../classes/Constants.php";
+include("../../Resources/sessions.php");
 $dbconnect = new DBConnect(Constants::SERVER_NAME,
                            Constants::DB_USERNAME,
                            Constants::DB_PASSWORD,
