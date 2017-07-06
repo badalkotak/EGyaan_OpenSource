@@ -31,7 +31,7 @@ $user_id=$_REQUEST['user_id'];
         <section class="content-header">
             <br>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i> Home</a></li>
                 <li><a href="../../manage_user/functions/user.php">Manage Users</a></li>
                 <li class="active"><b>Assign Course</b></li>
             </ol>
@@ -40,7 +40,7 @@ $user_id=$_REQUEST['user_id'];
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box">
-                        <div class="box-header">
+                        <div class="box-header with-border">
                             <h3 class="box-title">Assign Course</h3>
                         </div>
                         <!-- /.box-header -->

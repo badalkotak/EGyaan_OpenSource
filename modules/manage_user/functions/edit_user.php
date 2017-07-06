@@ -68,7 +68,7 @@ if($getDetails!=null)
         <section class="content-header">
             <br>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i> Home</a></li>
                 <li><a href="user.php">Manage Users</a></li>
                 <li class="active"><b>Edit User</b></li>
             </ol>
@@ -77,7 +77,7 @@ if($getDetails!=null)
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box">
-                        <div class="box-header">
+                        <div class="box-header with-border">
                             <h3 class="box-title">Manage User</h3>
                         </div>
                         <!-- /.box-header -->
