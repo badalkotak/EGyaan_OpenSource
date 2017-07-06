@@ -33,8 +33,8 @@ $batch=new Batch($dbconnect->getInstance());
         <section class="content-header">
             <h1>Hello!<small>User</small></h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
-                <li class="active"><b>TimeTable Select  Branch Batch</b></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
+                <li class="active"><b>Select Branch And Batch</b></li>
             </ol>
         </section>
 
@@ -42,7 +42,7 @@ $batch=new Batch($dbconnect->getInstance());
         <section class="content">
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <h3 class="box-title">TimeTable Select  Branch Batch</h3>
+                    <h3 class="box-title">Select Branch And Batch</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -149,7 +149,7 @@ $batch=new Batch($dbconnect->getInstance());
                                                     {
                                                         var count=json.batch.length;
 
-                                                        var batch_dropdown = "<form action=add_timetable.php method=post><input type=hidden name=branch value="+branch+"><div class='form-group'><select name=batch  class='form-control select2' style='width: 100%;'><option value=-1 selected=selected>Select batch</option>"
+                                                        var batch_dropdown = "<form action=add_timetable.php method=post><input type=hidden name=branch value="+branch+"><div class='form-group'><select name=batch  class='form-control select2' style='width: 100%;'><option value=-1 selected=selected disabled>Select batch</option>"
                                                         for(var i=0;i<count;i++)
                                                         {
                                                             batch_dropdown = batch_dropdown + "<option value="+json.batch[i].id+">"+json.batch[i].name+"</option>";

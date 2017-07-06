@@ -46,7 +46,7 @@ if($result_get_student_batch!=null)
         <section class="content-header">
             <h1>Hello!<small>User</small></h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
                 <li class="active"><b>Timetable</b></li>
             </ol>
         </section>
@@ -57,7 +57,7 @@ if($result_get_student_batch!=null)
                 <div class="col-xs-12">
                     <!--start of Table box-->
                     <div class="box">
-                        <div class="box-header">
+                        <div class="box-header with-border">
                             <h3 class="box-title">Timetable</h3>
                         </div>
                         <!-- /.box-header -->
