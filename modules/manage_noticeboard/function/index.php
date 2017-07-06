@@ -29,7 +29,7 @@ $user_id=$id;
         <section class="content-header">
             <h1>Hello!<small>User</small></h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
                 <li class="active"><b>Noticeboard</b></li>
             </ol>
         </section>
@@ -82,7 +82,7 @@ $user_id=$id;
 //                                        echo '<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id>read more..</button> </a>';
                                         
                                         echo "<button type='button' class='btn btn-default btn-box-tool' data-widget='collapse'>Read More <span class='fa fa-ellipsis-h'></span>
-                                </button>";
+                                </button>&nbsp;";
                                         
                                         if($file!=null)
                                         {
@@ -171,7 +171,7 @@ $user_id=$id;
 //										<a href="view_notice.php?id='.$id.'"><button type=button name=id id=id >read more..</button> </a>';
                                 
                                         echo "<button type='button' class='btn btn-default btn-box-tool' data-widget='collapse'>Read More <span class='fa fa-ellipsis-h'></span>
-                                        </button>";
+                                        </button>&nbsp;";
                                 
                                 
 										if($file!=null)

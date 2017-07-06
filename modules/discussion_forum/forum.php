@@ -144,7 +144,6 @@ function redirect($url)
 <html lang="en">
     <?php
     error_reporting();
-    session_start();
     $user_id=$_SESSION['id'];
     $role_id=$_SESSION['role'];
     require_once("../../classes/DBConnect.php");
