@@ -1,7 +1,6 @@
 <html>
 <body>
     <?php
-    include("../../../Resources/sessions.php");
     include("privilege.php");
 if($fee!=true)
 {
@@ -25,7 +24,7 @@ if($fee!=true)
             <section class="content-header">
               <br>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i> Home</a></li>
                 <li class="active"><b>Manage Fees</b></li>
             </ol>
         </section>
