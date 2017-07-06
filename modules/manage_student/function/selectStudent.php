@@ -22,7 +22,7 @@
         <section class="content-header">
             <br>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i> Home</a></li>
                 <li class="active">Select Student</li>
             </ol>
         </section>

@@ -13,7 +13,7 @@ include "../../../Resources/Dashboard/header.php";
         <section class="content-header">
             <br>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i> Home</a></li>
                 <li><b>Edit Course</b></li>
                 <li class="active"><b>Add Course</b></li>
             </ol>

@@ -18,7 +18,7 @@ include "../../../Resources/Dashboard/header.php";
         <!-- Content Header (Page header) -->
         <section class="content-header"><br>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i> Home</a></li>
                 <li class="active"><b>Add Student</b></li>
             </ol>
         </section>
@@ -32,7 +32,7 @@ include "../../../Resources/Dashboard/header.php";
                             <h3 class="box-title">Add Student</h3>
                         </div>-->
                         <div class="box-header with-border">
-                            <h3 class="box-title">Add Students</h3>
+                            <h3 class="box-title">Add Student</h3>
                         </div>
                         <form role="form" action="insert_student.php" method="post" id="student-form"
                               enctype="multipart/form-data">
@@ -66,7 +66,7 @@ include "../../../Resources/Dashboard/header.php";
                                 </div>
                                 <div class="form-group">
                                     <label>Gender</label>
-                                    <select name="gender" class="form-control">
+                                    <select name="gender" class="form-control select2">
                                         <option value="-1">Select Gender</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
@@ -117,7 +117,7 @@ include "../../../Resources/Dashboard/header.php";
                                 </div>
                                 <div class="form-group">
                                     <label>Branch</label>
-                                    <select class="form-control" id="branch-id">
+                                    <select class="form-control select2" id="branch-id">
                                         <option value="-2">Select Branch</option>
 
                                         <?php
@@ -156,14 +156,14 @@ include "../../../Resources/Dashboard/header.php";
                                     </select>
                                 </div>
                                 <div id="new-drop-down" class="hide">
-                                    <select class="form-control" name="batchId" id="batch-id">
+                                    <select class="form-control select2" name="batchId" id="batch-id">
                                         <!--            <option value="-3">Select Batch</option>-->
                                     </select>
                                 </div>
                                 <br>
                                 <br>
                                 <div class="box-footer col-md">
-                                    <button type="submit" value="Submit" class="btn btn-success">Submit</button>
+                                    <button type="submit" value="Submit" class="btn btn-success"><i class="fa fa-check  "></i>&nbsp;Submit</button>
                                 </div>
                             </div>
                         </form>

@@ -14,7 +14,10 @@
         <section class="content-header">
             <br>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="student.php">Add Student</a></li>
+                <li><a href="courseRegistrationStudent.php">Course Registration</a></li>
+                <li><a href="courseRegistrationStudent.php">Select Course</a></li>
                 <li class="active"><b>Edit Course</b></li>
             </ol>
         </section>

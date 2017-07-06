@@ -15,8 +15,8 @@
         <section class="content-header">
             <br>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="editDeleteStudent.php">&nbspEdit Student</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i> Home</a></li>
+                <li><a href="editDeleteStudent.php">&nbsp;Edit Student</a></li>
                 <li class="active"><b>Edit Student Details</b></li>
             </ol>
         </section>

@@ -23,8 +23,10 @@
         <section class="content-header">
             <br>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Select Course</li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="student.php">Add Student</a></li>
+                <li><a href="courseRegistrationStudent.php">Course Registration</a></li>
+                <li class="active"><b>Select Course</b></li>
             </ol>
         </section>
         <section class="content">
@@ -37,7 +39,7 @@
                 <form role="form" action="editDeleteCourse.php" method="post">
                     <div class="box-body">
                         <div class="form-group">
-                            <select id="branch-id" name="branchId" class="form-control">
+                            <select id="branch-id" name="branchId" class="form-control select2">
                                 <option value="-2">Select Branch</option>
                                 <?php
                                 /**
