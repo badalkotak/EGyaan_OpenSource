@@ -52,7 +52,7 @@ if (isset($_REQUEST['edit']) && !empty(trim($_REQUEST['edit']))) {
     <section class="content-header">
       <br>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="branch.php">Branch List</a></li>
         <li class="active"><b>Edit Branch</b></li>
       </ol>
