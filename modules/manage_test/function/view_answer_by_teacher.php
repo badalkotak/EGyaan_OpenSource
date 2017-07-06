@@ -2,7 +2,6 @@
 <html>
     
 <?php
-include("../../../Resources/sessions.php");
 include("privilege.php");
 
 if($result_view_id!=true)
@@ -31,7 +30,9 @@ $test = new Test($dbConnect->getInstance());
         <section class="content-header">
             <h1>Hello!<small>User</small></h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="manage_test.php">List Of Test</a></li>
+                <li><a href="view_result.php">Result</a></li>
                 <li class="active"><b>View Answer</b></li>
             </ol>
         </section>
@@ -42,9 +43,9 @@ $test = new Test($dbConnect->getInstance());
                 <div class="col-xs-12">
                     <!--start of Table box-->
                     <div class="box box-default">
-                        <div class="box-header">
+                        <div class="box-header with-border">
                             <h3 class="box-title">View Answer:</h3>
-                            <hr>
+                    
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">

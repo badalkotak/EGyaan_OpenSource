@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <?php
-include("../../../Resources/sessions.php");
 include("privilege.php");
 
 if($add!=true)
@@ -30,7 +29,9 @@ $test = new Test($dbConnect->getInstance());
         <section class="content-header">
             <h1>Hello!<small>User</small></h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="manage_test.php">List Of Test</a></li>
+                <li><a href="add_test.php">Add Test</a></li>
                 <li class="active"><b>Add Questions</b></li>
             </ol>
         </section>

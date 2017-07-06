@@ -21,7 +21,8 @@ $test = new Test($dbConnect->getInstance());
         <section class="content-header">
             <h1>Hello!<small>User</small></h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="manage_test.php">List of Test</a></li>
                 <li class="active"><b>Result</b></li>
             </ol>
         </section>
@@ -32,7 +33,7 @@ $test = new Test($dbConnect->getInstance());
                 <div class="col-xs-12">
                     <!--start of Table box-->
                     <div class="box">
-                        <div class="box-header">
+                        <div class="box-header with-border">
                             <h3 class="box-title">Result:</h3>
                         </div>
                         <!-- /.box-header -->
@@ -55,7 +56,7 @@ $test = new Test($dbConnect->getInstance());
                                                 <tbody>
                                                 <?
                                                 while ($row = $result->fetch_assoc()) {
-                                                    $answer_page = '<td><a class="btn btn-primary" href="view_answer_by_teacher.php?student_id=' . $row["id"] . '&test_id=' . $_REQUEST["id"] . '&marks='. $_REQUEST["marks"] . '"><span class="fa fa-table"></span> View</a></td>';
+                                                    $answer_page = '<td><a class="btn btn-primary btn-sm" href="view_answer_by_teacher.php?student_id=' . $row["id"] . '&test_id=' . $_REQUEST["id"] . '&marks='. $_REQUEST["marks"] . '"><span class="fa fa-eye"></span> View</a></td>';
                                                     echo '<tr>
                                                     <td>' . $row["firstname"] . ' ' . $row["lastname"] . '</td>
                                                     <td>' . $row["marks"] . ' out of  ' . $row["total_marks"] . '</td>'

@@ -27,7 +27,7 @@ $result=$test->getTests($student_id);
         <section class="content-header">
             <h1>Hello!<small>User</small></h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
                 <li class="active"><b>List Of Test</b></li>
             </ol>
         </section>
@@ -38,7 +38,7 @@ $result=$test->getTests($student_id);
                 <div class="col-xs-12">
                     <!--start of Table box-->
                     <div class="box">
-                        <div class="box-header">
+                        <div class="box-header with-border">
                             <h3 class="box-title">List Of Test:</h3>
                         </div>
                         <!-- /.box-header -->
@@ -77,7 +77,7 @@ $result=$test->getTests($student_id);
                                                     <td>' .  $row["total_marks"]  . '</td>
                                                     <td>' . (($row["type"] == 'O')?(($row["marks"]=="-")?'<a href="give_test.php?test_id=' . $row["id"] . '" class="btn btn-success btn-sm">Start</a>':'Submitted'):'NA') . '</td> 
                                                     <td>' . (($row["type"] == 'O')?(($row["marks"]=="-")?'-':'<a
-                                                    class="btn btn-primary btn-sm" href="view_answer.php?test_id=' . $row["id"] . '&marks=' .  $row["total_marks"]  . '"><span class="fa fa-table"></span> View</a>'):'NA') . '</td> 
+                                                    class="btn btn-primary btn-sm" href="view_answer.php?test_id=' . $row["id"] . '&marks=' .  $row["total_marks"]  . '"><span class="fa fa-eye"></span> View</a>'):'NA') . '</td> 
                                                   </tr>';
                                             $i++;
                                         }

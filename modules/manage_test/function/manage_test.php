@@ -2,7 +2,6 @@
 <html>
 <?php
 include("privilege.php");
-include("../../../Resources/sessions.php");
 include("../../../Resources/Dashboard/header.php");
 
 require_once("../../../classes/Constants.php");
@@ -27,7 +26,7 @@ $result=$test->getTestsByTeacher($teacher_id);
         <section class="content-header">
             <h1>Hello!<small>User</small></h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
                 <li class="active"><b>List Of Test</b></li>
             </ol>
         </section>
@@ -38,7 +37,7 @@ $result=$test->getTestsByTeacher($teacher_id);
                 <div class="col-xs-12">
                     <!--start of Table box-->
                     <div class="box">
-                        <div class="box-header">
+                        <div class="box-header with-border">
                             <h3 class="box-title">List Of Test:</h3>
                         </div>
                         <!-- /.box-header -->
@@ -106,7 +105,7 @@ $result=$test->getTestsByTeacher($teacher_id);
                             </div>
                             <?php
                             if($add===true)
-                            echo "<a href=add_test.php class='btn btn-primary'>Add Test</a>";
+                            echo "<a href=add_test.php class='btn btn-primary'><i class='fa fa-plus'></i>&nbsp;Add Test</a>";
                         ?>
                         </div>
                         <!-- /.box-body -->

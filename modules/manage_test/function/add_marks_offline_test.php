@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <?php
-include("../../../Resources/sessions.php");
 include("privilege.php");
 
 if($result_add_id!=true)
@@ -29,7 +28,8 @@ $test = new Test($dbConnect->getInstance());
         <section class="content-header">
             <h1>Hello!<small>User</small></h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="manage_test.php">List Of Test</a></li>
                 <li class="active"><b>Insert Marks</b></li>
             </ol>
         </section>
@@ -46,7 +46,6 @@ $test = new Test($dbConnect->getInstance());
                         <!-- /.box-header -->
                         <div class="box-body">
                             <form action="save_offline_test_marks.php" method="post">
-                                <div class="table-container1">
                                     <?php
                                     if(isset($_REQUEST["id"]) && isset($_REQUEST["action"]))
                                     {
@@ -76,7 +75,6 @@ $test = new Test($dbConnect->getInstance());
                                                     ?>
                                                     </tbody>
                                                 </table>
-                                </div>
                                 <button type="submit" class="btn btn-success"><span class="fa fa-check"></span> Save</button>
                                                 <?
                                             } else {

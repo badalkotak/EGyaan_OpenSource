@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?php
-include("../../../Resources/sessions.php");
-include("privilege.php");
+    include("privilege.php");
 
 if($add!=true)
 {
@@ -39,7 +38,8 @@ $getTeacherCourse=$course->getCourse("yes",$teacher_id,"no",0,0,null,0);
         <section class="content-header">
             <h1>Hello!<small>User</small></h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="manage_test.php">List Of Test</a></li>
                 <li class="active"><b>Add Test</b></li>
             </ol>
         </section>
