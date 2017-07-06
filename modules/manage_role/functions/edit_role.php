@@ -13,7 +13,7 @@
         <section class="content-header">
             <br>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i> Home</a></li>
                 <li><a href="role.php">Manage Roles</a></li>
                 <li class="active"><b>Edit Roles</b></li>
             </ol>
@@ -64,7 +64,7 @@ if($getRole!=null)
 		}
 	}
 
-	echo "<form role='form' action=update_role.php method=post><div class='form-group'><label>Role Name</label><input type=text class='form-control' value='$role_name' id=role_name name=role_name></div><br><div id=role_err></div><div class='form-group'><label>Is Teacher : $isTeacher</label></div><button class='btn btn-primary' type=submit value=$role_id name=edit id=submit><i class='fa fa-pencil'></i>&nbsp;Edit</button></form>";
+	echo "<form role='form' action=update_role.php method=post><div class='form-group'><label>Role Name</label><input type=text class='form-control' value='$role_name' id=role_name name=role_name></div><br><div id=role_err></div><div class='form-group'><label>Is Teacher : $isTeacher</label></div><button class='btn btn-primary' type=submit value=$role_id name=edit id=submit><i class='fa fa-pencil'></i>&nbsp;Update</button></form>";
 }
 else
 {

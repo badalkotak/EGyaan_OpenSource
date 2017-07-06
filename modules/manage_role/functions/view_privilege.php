@@ -26,7 +26,7 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
         <section class="content-header">
             <br>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i> Home</a></li>
                 <li><a href="role.php">Manage Roles</a></li>
                 <li class="active"><b>View Privileges</b></li>
             </ol>

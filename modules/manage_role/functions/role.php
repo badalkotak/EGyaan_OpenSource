@@ -57,7 +57,7 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
         <section class="content-header">
             <br>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i> Home</a></li>
                 <li class="active"><b>Manage Roles</b></li>
             </ol>
         </section>
@@ -65,7 +65,7 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box">
-                        <div class="box-header">
+                        <div class="box-header with-border">
                             <h3 class="box-title">Manage Roles</h3>
                         </div>
                         <!-- /.box-header -->
