@@ -35,53 +35,7 @@ $user_id=$id;
         </section>
 
         <!-- Main content -->
-        <section class="content">
-            <h2 class="page-header">Notice</h2>
-            <div class="row"><!--start of row1-->
-                <div class="col-md-6">
-                    <div class="box collapsed-box box-warning">
-                        <div class="box-header with-border">
-                            <div class="user-block">                        
-                                <h4>Jonathan Burke Jr.</h4>
-                                <p class="text-justify">Shared publicly - 7:30 PM Today</p>
-<!--                                <hr>-->
-<!--
-                                <p class="text-justify">Far far away, behind the word mountains, far from the
-                                    countries Vokalia and
-                                    Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at</p>
-                                <p class="text-justify">the coast of the Semantics, a large language ocean.
-                                    A small river named Duden flows by their place and supplies
-                                    it with the necessary regelialia. It is a paradisematic
-                                    country, in which roasted parts of sentences fly into
-                                    your mouth.
-                                </p>
--->
-                                <button type='button' class='btn btn-default btn-box-tool' data-widget='collapse'>Read      More <span class='fa fa-ellipsis-h'></span>
-                                </button>
-                                <button type="button" class="btn btn-default btn-box-tool">
-                                    <i class="fa fa-paperclip"></i> Attached Notice 
-                                </button>
-                                
-                                    <h4 class="alert-message pull-right"><i class="icon fa fa-exclamation-triangle"></i><b>Urgent Notice</b></h4>
-                                
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <p class="text-justify">Far far away, behind the word mountains, far from the
-                                countries Vokalia and Consonantia, there live the blind
-                                texts. Separated they live in Bookmarksgrove right at
-                            </p>
-                            <p class="text-justify">the coast of the Semantics, a large language ocean.
-                                A small river named Duden flows by their place and supplies
-                                it with the necessary regelialia. It is a paradisematic
-                                country, in which roasted parts of sentences fly into
-                                your mouth.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div><!--end of row1-->
-                
+        <section class="content"> 
             <?php
             if($role_id==Constants::ROLE_STUDENT_ID)
             {
