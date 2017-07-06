@@ -9,9 +9,9 @@
         <section class="content-header">
          <br>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i> Home</a></li>
             <li><a href="course.php">Course List</a></li>
-            <li class="active"><b>Edit Course<b></li>
+            <li class="active"><b>Edit Course</b>b></li>
         </ol>
     </section>
     <section class="content">

@@ -12,8 +12,8 @@ include("../../../Resources/Dashboard/header.php");
     <section class="content-header">
         <br>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Course List</li>
+            <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i> Home</a></li>
+            <li class="active"><b>Course List</b></li>
         </ol>
     </section>
     <section class="content">
