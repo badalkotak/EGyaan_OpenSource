@@ -33,7 +33,7 @@ class Notifications
 
 	    //Close request
 	    curl_close($ch);
-	    return $response;
+	    // return $response;
     }
 }
 ?>

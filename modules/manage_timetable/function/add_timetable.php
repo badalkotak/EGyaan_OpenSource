@@ -231,6 +231,8 @@ $teacher_course=new TeacherCourse($dbconnect->getInstance());
                                     </tbody>
                                 </table>
                             </div>
+
+                            <a href="save.php" class='btn btn-success btn-sm'></span>Save</a>
                         </div>
                     </div>
                     <!-- /.row -->
