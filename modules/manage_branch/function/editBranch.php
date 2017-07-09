@@ -111,7 +111,7 @@ if (isset($_REQUEST['edit']) && !empty(trim($_REQUEST['edit']))) {
     <section class="content-header">
       <br>
       <ol class="breadcrumb">
-        <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i> Home</a></li>
         <li><a href="branch.php">Branch List</a></li>
         <li class="active"><b>Edit Branch</b></li>
       </ol>
@@ -130,7 +130,7 @@ if (isset($_REQUEST['edit']) && !empty(trim($_REQUEST['edit']))) {
                   
                   <input type="text" class="form-control" name="branchName" value="<?php echo $branchName; ?>"></div>
                   
-                  <button type="submit" class="btn btn-success" value="Update">Update<i class='fa fa-check'></i></button>
+                  <button type="submit" class="btn btn-success" value="Update"><i class='fa fa-check'></i>&nbsp;Update</button>
                 </form>
               </div>
               <!-- /.box-body -->

@@ -84,7 +84,7 @@ include("../../../Resources/Dashboard/header.php");
                     <div class="box-body">
                         <form action="" method="post">
                             <div class="col-md-6">
-                                <select class="form-control" name="branchId">
+                                <select class="form-control select2" name="branchId">
                                     <option value="-1">Select Branch</option>
                                     <?php
                                     /**
@@ -125,7 +125,7 @@ include("../../../Resources/Dashboard/header.php");
                                     }
                                     ?>
                                 </select></div>
-                            <button type="submit" class="btn btn-success" value="Submit"><i class='fa fa-check'></i>&nbspSubmit
+                            <button type="submit" class="btn btn-success" value="Submit"><i class='fa fa-check'></i>&nbsp;Submit
                             </button>
                         </form>
                         <?php
@@ -134,7 +134,7 @@ include("../../../Resources/Dashboard/header.php");
                             $getBatchData = $batch->getBatch('yes', $branch_Id, 0, 'no', 0);
                             if ($branch_Id > 0) {
                                 echo "<form action='' method='post'>";
-                                echo "<div class='col-md-6'><select class='form-control' name='batchId'>";
+                                echo "<div class='col-md-6'><select class='form-control select2' name='batchId'>";
                                 echo "<option value='-2'>Select Batch</option>";
                                 if ($getBatchData == true) {
                                     while ($array = $getBatchData->fetch_assoc()) {
@@ -152,7 +152,7 @@ include("../../../Resources/Dashboard/header.php");
                                 }
                                 echo "</select></div>";
                                 echo "<input type='hidden' name='branchId' value='" . $branch_Id . "'>";
-                                echo "<button type='submit' class='btn btn-success' value='Submit'><i class='fa fa-check'></i>&nbspSubmit</button>";
+                                echo "<button type='submit' class='btn btn-success' value='Submit'><i class='fa fa-check'></i>&nbsp;Submit</button>";
                                 echo "</form>";
 
                                 if (isset($_REQUEST['branchId']) && isset($_REQUEST['batchId'])) {
@@ -194,8 +194,8 @@ include("../../../Resources/Dashboard/header.php");
                                 $getCourseData = $course->getCourse('no', 0, 'yes', 0, 0, $dbConnect->getInstance()->real_escape_string($_batchName[$i]), 0);
                                 if ($getCourseData != false) {
                                     $id = 1;
-                                    echo "<table class='table table-bordered table-hover'>";
-                                    echo "<tr><th>Sr. no.</th><th>Branch Name</th><th>Course Name</th><th>Edit</th><th>Delete</th></tr>";
+                                    echo "<div class='table-container1'><table  class='table table-bordered table-hover'>";
+                                    echo "<thead><tr><th>Sr No</th><th>Branch Name</th><th>Course Name</th><th>Edit</th><th>Delete</th></tr></thead><tbody>";
                                     while ($rowData = $getCourseData->fetch_assoc()) {
                                         $_branchId = $rowData['branchId'];
                                         $_branchName = htmlentities($rowData['branchName'], ENT_QUOTES);
@@ -206,13 +206,13 @@ include("../../../Resources/Dashboard/header.php");
                 <td><form action='editCourse.php' method='post'><input type='hidden' name='branchId' value='" . $_branchId . "'>
                     <input type='hidden' name='batchId' value='" . $_batchId . "'>
                     <input type='hidden' name='courseId' value='" . $_courseId . "'>
-                    <button type='submit' class='btn btn-primary' value='Edit'><i class='fa fa-pencil'></i>&nbspEdit</button></form></td>
+                    <button type='submit' class='btn btn-primary btn-sm' value='Edit'><i class='fa fa-pencil'></i>&nbsp;Edit</button></form></td>
                     
-                    <td><button type='submit' id='" . $_courseId . "' class='btn btn-danger delete-branch-button' value='Delete'><i class='fa fa-trash'></i>&nbspDelete</button>
-                    </td></tr> ";
+                    <td><button type='submit' id='" . $_courseId . "' class='btn btn-danger btn-sm delete-branch-button' value='Delete'><i class='fa fa-trash'></i>&nbsp;Delete</button>
+                    </td></tr>";
                                         $id++;
                                     }
-                                    echo "</table><br> ";
+                                    echo "</tbody></table></div>";
                                 } else {
                                     echo "<h4 class='box-title'>No Records Found</h4><br><br> ";
                                 }

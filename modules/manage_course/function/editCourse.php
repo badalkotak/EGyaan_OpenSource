@@ -70,7 +70,7 @@
         <ol class="breadcrumb">
             <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i> Home</a></li>
             <li><a href="course.php">Course List</a></li>
-            <li class="active"><b>Edit Course</b>b></li>
+            <li class="active"><b>Edit Course</b></li>
         </ol>
     </section>
     <section class="content">

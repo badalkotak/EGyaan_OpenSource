@@ -92,58 +92,62 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box">
-                        <div class="box-header">
+                        <div class="box-header with-border">
                             <h3 class="box-title">View Privileges</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-	<?php
-		$privilege=new Privilege($dbConnect->getInstance());
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <?php
+                                        $privilege=new Privilege($dbConnect->getInstance());
 
-		$role_id=$_REQUEST['view'];
-		$role=new Role($dbConnect->getInstance());
+                                        $role_id=$_REQUEST['view'];
+                                        $role=new Role($dbConnect->getInstance());
 
-		$getRoleName=$role->getRole();
-		if($getRoleName!=null)
-		{
-			while($row=$getRoleName->fetch_assoc())
-			{
-				$id=$row['id'];
-				if($id==$role_id)
-				{
-					$role_name=$row['name'];break;
-				}
-			}
+                                        $getRoleName=$role->getRole();
+                                        if($getRoleName!=null)
+                                        {
+                                            while($row=$getRoleName->fetch_assoc())
+                                            {
+                                                $id=$row['id'];
+                                                if($id==$role_id)
+                                                {
+                                                    $role_name=$row['name'];break;
+                                                }
+                                            }
 
-			echo "Privilege List:$role_name<br><br>";
-		}
+                                            echo "<h4>Privilege List : $role_name</h5>";
+                                        }
 
-		$getPrivilegeRole=$privilege->getPrivilegeRole($role_id);
+                                        $getPrivilegeRole=$privilege->getPrivilegeRole($role_id);
 
-		if($getPrivilegeRole!=null)
-		{
-			while($row=$getPrivilegeRole->fetch_assoc())
-			{
-				$privilege_id=$row['privilege_id'];
+                                        if($getPrivilegeRole!=null)
+                                        {
+                                            while($row=$getPrivilegeRole->fetch_assoc())
+                                            {
+                                                $privilege_id=$row['privilege_id'];
 
-			$getPrivilegeName=$privilege->getPrivilege(0,0);
-			while($privilegeRow=$getPrivilegeName->fetch_assoc())
-			{
-				$id=$privilegeRow['id'];
-				if($id==$privilege_id)
-				{
-					$privilege_name=$privilegeRow['name'];
-					echo $privilege_name."<br>";
-				}
-			}
+                                            $getPrivilegeName=$privilege->getPrivilege(0,0);
+                                            while($privilegeRow=$getPrivilegeName->fetch_assoc())
+                                            {
+                                                $id=$privilegeRow['id'];
+                                                if($id==$privilege_id)
+                                                {
+                                                    $privilege_name=$privilegeRow['name'];
+                                                    echo "<div class='col-md-12'>".$privilege_name."</div>";
+                                                }
+                                            }
 
-			}
-		}
-		else
-		{
-			echo "Nothing to show!";
-		}
-	?>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            echo "<h5>Nothing to show!</h5>";
+                                        }
+                                    ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -139,49 +139,64 @@ if($getDetails!=null)
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-	<form role="form" action="update_user.php" method="post">
-	<?php
-		echo "<div class='form-group'>
-        <label>Full Name</label><input type=text class='form-control' name=name id=name value='$name'></div>";
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form role="form" action="update_user.php" method="post">
+                                    <?php
+                                        echo "<div class='form-group'>
+                                        <label>Full Name</label><input type=text class='form-control' name=name id=name value='$name'></div>";
 
-		if($gender=="M")
-		{
-			echo '<div class="form-group">
-        <label>Gender</label><br><input type="radio" class="flat" name="gender" id="gender_M" value="M" checked="checked">Male
-		<input type="radio" class="flat" name="gender" id="gender_F" value="F">Female</div>';
-		}
-		else
-		{
-			echo '<div class="form-group"><label>Gender</label><input type="radio" class="flat" name="gender" id="gender_M" value="M">Male
-		<input type="radio" class="flat" name="gender" id="gender_F" value="F" checked="checked">Female<br><br>';
-		}
-		
-		echo "<div class='form-group'><label>Email-Id</label><input class='form-control' type=email name=email id=email value='$email'></div>";
-		echo "<div class='form-group'><label>Mobile No.</label><input class='form-control' type=text name=mobile id=mobile value='$mobile'></div>";
-		echo '<div class="form-group"><label>Role</label><select class="form-control" name="role_id" id="role_id">
-		<option value="-1">Select Role</option>';
-			$getRoles=$role->getRole();
+                                        if($gender=="M")
+                                        {
+                                            echo '<div class="form-group">
+                                        <label>Gender</label><br><input type="radio" class="flat" name="gender" id="gender_M" value="M" checked="checked">Male
+                                        <input type="radio" class="flat" name="gender" id="gender_F" value="F">Female</div>';
+                                        }
+                                        else
+                                        {
+                                            echo '<div class="form-group"><label>Gender:</label><label><input type="radio" class="flat" name="gender" id="gender_M" value="M">&nbsp;Male</label>
+                                        <label><input type="radio" class="flat" name="gender" id="gender_F" value="F" checked="checked">&nbsp;Female</label>';
+                                        }
 
-			if($getRoles!=null)
-			{
-				while($row=$getRoles->fetch_assoc())
-				{
-					$id=$row['id'];
-					$role_name=$row['name'];
+                                        echo "<div class='form-group'><label>Email-Id</label><input class='form-control' type=email name=email id=email value='$email'></div>";
+                                        echo "<div class='form-group'><label>Mobile No.</label><input class='form-control' type=text name=mobile id=mobile value='$mobile'></div>";
+                                        echo '<div class="form-group"><label>Role</label><select class="form-control select2" name="role_id" id="role_id">
+                                        <option value="-1" selected disabled>Select Role</option>';
+                                            $getRoles=$role->getRole();
 
-					if($role_id==$id)
-						echo "<option value='$id' selected>$role_name</option>";
-					else
-						echo "<option value='$id'>$role_name</option>";
-				}
-			}
-			echo "</select></div>";
-		?>
+                                            if($getRoles!=null)
+                                            {
+                                                while($row=$getRoles->fetch_assoc())
+                                                {
+                                                    $id=$row['id'];
+                                                    $role_name=$row['name'];
 
-		<?php
-			echo "<button class='btn btn-success' type=submit value='$user_id' name=submit id=submit><i class='fa fa-check'></i>&nbspUpdate</button>";
-		?>
-		<div id="user_err"></div>
-	</form>
+                                                    if($role_id==$id)
+                                                        echo "<option value='$id' selected>$role_name</option>";
+                                                    else
+                                                        echo "<option value='$id'>$role_name</option>";
+                                                }
+                                            }
+                                            echo "</select></div>";
+
+                                        ?>
+
+                                        <?php
+                                            echo "<button class='btn btn-success' type=submit value='$user_id' name=submit id=submit><i class='fa fa-check'></i>&nbspUpdate</button>";
+                                        ?>
+                                        <div id="user_err"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <?php
+include "../../../Resources/Dashboard/footer.php"
+?>
 </body>
 </html>
