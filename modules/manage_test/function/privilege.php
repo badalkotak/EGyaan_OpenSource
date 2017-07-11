@@ -1,7 +1,7 @@
 <?php
 include("../../../Resources/sessions.php");
-include("../../../classes/Constants.php");
-include("../../../classes/DBConnect.php");
+require_once("../../../classes/Constants.php");
+require_once("../../../classes/DBConnect.php");
 require_once("../../manage_privilege/classes/Privilege.php");
 
 $dbconnect=new DBConnect(Constants::SERVER_NAME,
