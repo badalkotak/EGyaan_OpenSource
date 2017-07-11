@@ -1,7 +1,6 @@
 <html>
 <body>
     <?php
-    include("../../../Resources/sessions.php");
     include("privilege.php");
 if($fee!=true)
 {
@@ -19,13 +18,72 @@ if($fee!=true)
         Constants::DB_PASSWORD,
         Constants::DB_NAME);
         ?>
+    
+    <!--START OF SIDEBAR===========================================================================================================-->
+    <!-- Left side column. contains the sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <?
+                        if($profile!=null)
+                            		{
+                            			echo "<img src='../../manage_student/images/student/$profile' class=img-circle alt='User Image'>";
+                            		}
+                           			else
+                            		{
+                            			echo "<img src='../../../Resources/images/boy.png' class=img-circle alt='User Image'>";
+                            		}
+                        ?>
+                    </div>
+                    <div class="pull-left info">
+                    <?
+                    echo "<p>$display_name</p>";
+                    ?>
+                        <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> -->
+                    </div>
+                </div>
+                        <!-- search form -->
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+                <!-- /.search form -->
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="treeview">
+                        <a href="../../login/functions/Dashboard.php">
+                            <i class="fa fa-home"></i> <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-gears"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+    
+<!--END OF SIDEBAR=============================================================================================================-->
 
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
               <br>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i> Home</a></li>
                 <li class="active"><b>Manage Fees</b></li>
             </ol>
         </section>
@@ -74,9 +132,9 @@ if($result!=null)
                             $pending_fees = $row["total_fees"] - $row["fees_paid"];
                             $input_fees ='<input type="number" id="fees_add_input_' . $row["id"] . '" value="0" min=1 max=' . $pending_fees . '>
                             <br><br>
-                            <button type="button" class="btn btn-primary" onclick="add_fees(' . $row["id"] . ',' . $pending_fees . ')"><i class="fa fa-plus"></i>&nbspAdd fees</button>';
+                            <button type="button" class="btn btn-primary btn-sm" onclick="add_fees(' . $row["id"] . ',' . $pending_fees . ')"><i class="fa fa-plus"></i>&nbspAdd fees</button>';
                             $refund_fees ='<input type="number" id="fees_refund_input_' . $row["id"] . '" value="0" min=1 max=' . $row["fees_paid"] . '><br><br>
-                            <button type="button" class="btn btn-warning" onclick="refund_fees(' . $row["id"] . ',' . $row["fees_paid"] . ')"><i class="fa fa-exchange"></i>&nbspRefund</button>';
+                            <button type="button" class="btn btn-warning btn-sm" onclick="refund_fees(' . $row["id"] . ',' . $row["fees_paid"] . ')"><i class="fa fa-exchange"></i>&nbspRefund</button>';
                             echo '  <tr id =' . $row["id"] . '>
                             <td>' . $i . '</td>
                             <td>' . $row["firstname"] . ' ' . $row["lastname"] . '</td>

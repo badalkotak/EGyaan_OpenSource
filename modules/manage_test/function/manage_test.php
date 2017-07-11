@@ -2,7 +2,6 @@
 <html>
 <?php
 include("privilege.php");
-include("../../../Resources/sessions.php");
 include("../../../Resources/Dashboard/header.php");
 
 require_once("../../../classes/Constants.php");
@@ -20,6 +19,66 @@ if(isset($_REQUEST["message"]) && !empty(trim($_REQUEST["message"]))){
 $test = new Test($dbConnect->getInstance());
 $result=$test->getTestsByTeacher($teacher_id);
 ?>
+    
+    <!--START OF SIDEBAR===========================================================================================================-->
+    <!-- Left side column. contains the sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <?
+                        if($profile!=null)
+                            		{
+                            			echo "<img src='../../manage_student/images/student/$profile' class=img-circle alt='User Image'>";
+                            		}
+                           			else
+                            		{
+                            			echo "<img src='../../../Resources/images/boy.png' class=img-circle alt='User Image'>";
+                            		}
+                        ?>
+                    </div>
+                    <div class="pull-left info">
+                    <?
+                    echo "<p>$display_name</p>";
+                    ?>
+                        <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> -->
+                    </div>
+                </div>
+                        <!-- search form -->
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+                <!-- /.search form -->
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="treeview">
+                        <a href="../../login/functions/Dashboard.php">
+                            <i class="fa fa-home"></i> <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-gears"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+    
+<!--END OF SIDEBAR=============================================================================================================-->
+    
 <!-- =============================================== -->
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -27,7 +86,7 @@ $result=$test->getTestsByTeacher($teacher_id);
         <section class="content-header">
             <h1>Hello!<small>User</small></h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
                 <li class="active"><b>List Of Test</b></li>
             </ol>
         </section>
@@ -38,7 +97,7 @@ $result=$test->getTestsByTeacher($teacher_id);
                 <div class="col-xs-12">
                     <!--start of Table box-->
                     <div class="box">
-                        <div class="box-header">
+                        <div class="box-header with-border">
                             <h3 class="box-title">List Of Test:</h3>
                         </div>
                         <!-- /.box-header -->
@@ -106,7 +165,7 @@ $result=$test->getTestsByTeacher($teacher_id);
                             </div>
                             <?php
                             if($add===true)
-                            echo "<a href=add_test.php class='btn btn-primary'>Add Test</a>";
+                            echo "<a href=add_test.php class='btn btn-primary'><i class='fa fa-plus'></i>&nbsp;Add Test</a>";
                         ?>
                         </div>
                         <!-- /.box-body -->

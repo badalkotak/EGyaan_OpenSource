@@ -11,7 +11,7 @@
     </head>
     <body>
         <div class="container ">
-            <div class="form-registration login-form col-md-4 col-md-offset-4 clearfix">
+            <div class="form-registration login-form col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 clearfix">
                 <div class="form-group">
                     <center><img src="../../../Resources/images/EGYAAN_logo_transparent_small.png"></center>
                 </div>                

@@ -47,13 +47,71 @@ $user=new User($dbConnect->getInstance());
 
 </head>
 <body>
-<div class="wrapper">
+    <!--START OF SIDEBAR===========================================================================================================-->
+    <!-- Left side column. contains the sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <?
+                        if($profile!=null)
+                            		{
+                            			echo "<img src='../../manage_student/images/student/$profile' class=img-circle alt='User Image'>";
+                            		}
+                           			else
+                            		{
+                            			echo "<img src='../../../Resources/images/boy.png' class=img-circle alt='User Image'>";
+                            		}
+                        ?>
+                    </div>
+                    <div class="pull-left info">
+                    <?
+                    echo "<p>$display_name</p>";
+                    ?>
+                        <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> -->
+                    </div>
+                </div>
+                        <!-- search form -->
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+                <!-- /.search form -->
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="treeview">
+                        <a href="../../login/functions/Dashboard.php">
+                            <i class="fa fa-home"></i> <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-gears"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+    
+<!--END OF SIDEBAR=============================================================================================================-->
+    
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <br>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i> Home</a></li>
                 <li class="active"><b>Manage Users</b></li>
             </ol>
         </section>
@@ -61,176 +119,177 @@ $user=new User($dbConnect->getInstance());
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box">
-                        <div class="box-header">
+                        <div class="box-header with-border">
                             <h3 class="box-title">Manage User</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form class="role" action=add_user.php method=post>
+                                        <div class="form-group">
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="Enter Full Name">
+                                        </div>
+                                        <div class="form-group">
+                                        <label>Gender :</label><br>
+                                            <label><input type="radio" class="flat" name="gender" id="gender_M" value="M" checked="checked">&nbsp;Male</label>
+                                            <label><input type="radio" class="flat" name="gender" id="gender_F" value="F">&nbsp;Female</label>
+                                        </div>
+                                        <div class="form-group">
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email ID">
+                                        </div>
+                                        <div class="form-group">
+                                        <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Enter Mobile Number">
+                                        </div>
+                                        <div class="form-group">
+                                        <select name="role_id" class="form-control select2" id="role_id">
+                                        <option value="-1" selected disabled>Select Role</option>
+                                        <?php
+                                            $getRoles=$role->getRole();
 
-	<form class="role" action=add_user.php method=post>
-        <div class="form-group">
-        <label>Full Name</label>
-		<input type="text" class="form-control" name="name" id="name">
-        </div>
-        <div class="form-group">
-        <label>Gender</label><br>
-        <input type="radio" class="flat" name="gender" id="gender_M" value="M" checked="checked">Male
-		<input type="radio" class="flat" name="gender" id="gender_F" value="F">Female
-        </div>
-        <div class="form-group">
-        <label>Email-Id</label>
-		<input type="email" class="form-control" name="email" id="email">
-        </div>
-        <div class="form-group">
-        <label>Mobile No.</label>
-		<input type="text" class="form-control" name="mobile" id="mobile">
-        </div>
-        <div class="form-group">
-        <label>Role</label>
-		<select name="role_id" class="form-control" id="role_id">
-		<option value="-1">Select Role</option>
-		<?php
-			$getRoles=$role->getRole();
+                                            if($getRoles!=null)
+                                            {
+                                                while($row=$getRoles->fetch_assoc())
+                                                {
+                                                    $id=$row['id'];
+                                                    $role_name=$row['name'];
 
-			if($getRoles!=null)
-			{
-				while($row=$getRoles->fetch_assoc())
-				{
-					$id=$row['id'];
-					$role_name=$row['name'];
+                                                    echo "<option value='$id'>$role_name</option>";
+                                                }
+                                            }
+                                        ?>
+                                        </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary" value="Add Student" id="submit"><i class="fa fa-plus"></i>&nbsp;Add</button>
+                                        <div id="user_err"></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <?php
+                                        $getUsers=$user->getUser(0);
+                                        $i=0;
 
-					echo "<option value='$id'>$role_name</option>";
-				}
-			}
-		?>
-		</select>
-        </div>
-        <button type="submit" class="btn btn-primary" value="Add Student" id="submit"><i class="fa fa-plus"></i>&nbspAdd</button>
-		<div id="user_err"></div>
-	</form><hr>
+                                        if($getUsers!=null)
+                                        {
+                                            echo "<div class='box-header'>
+                                                        <h3 class='box-title'>Users:</h3>
+                                                    </div>";
+                                            echo "<div class='table-container1'><table class='table table-bordered table-hover example2'>
+                                <thead>
+                                    <th>Sr No</th>
+                                    <th>Name</th>
+                                    <th>Gender</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Role</th>
+                                    <th>Assign Courses</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </thead>
+                                <tbody>";
+                                            while($row=$getUsers->fetch_assoc())
+                                            {
+                                                $i++;
+                                                $user_id=$row['id'];
+                                                $name=$row['name'];
+                                                $gender=$row['gender'];
+                                                if($gender=="M")
+                                                {	
+                                                    $gender="Male";
+                                                }
+                                                else
+                                                {
+                                                    $gender="Female";
+                                                }
+                                                $email=$row['email'];
+                                                $mobile=$row['mobile'];
+                                                $role_id=$row['role_id'];
 
-	
-		<?php
-			$getUsers=$user->getUser(0);
-			$i=0;
+                                                $getRole=$role->getRole();
+                                                if($getRole!=null)
+                                                {
+                                                    while($roleRow=$getRole->fetch_assoc())
+                                                    {
+                                                        $id=$roleRow['id'];
+                                                        if($id==$role_id)
+                                                        {
+                                                            $role_name=$roleRow['name'];
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    $role_name="No role";
+                                                }
 
-			if($getUsers!=null)
-			{
-			    echo "<div class='box-header'>
-                            <h3 class='box-title'><b>Users</b></h3>
-                        </div>";
-				echo "<table class='table table-bordered table-hover example2'>
-	<thead>
-		<th>Sr No.</th>
-		<th>Name</th>
-		<th>Gender</th>
-		<th>Email</th>
-		<th>Mobile</th>
-		<th>Role</th>
-		<th>Assign Courses</th>
-		<th>Edit</th>
-		<th>Delete</th>
-	</thead>
-	<tbody>";
-				while($row=$getUsers->fetch_assoc())
-				{
-					$i++;
-					$user_id=$row['id'];
-					$name=$row['name'];
-					$gender=$row['gender'];
-					if($gender=="M")
-					{	
-						$gender="Male";
-					}
-					else
-					{
-						$gender="Female";
-					}
-					$email=$row['email'];
-					$mobile=$row['mobile'];
-					$role_id=$row['role_id'];
+                                                echo "<tr>";
 
-					$getRole=$role->getRole();
-					if($getRole!=null)
-					{
-						while($roleRow=$getRole->fetch_assoc())
-						{
-							$id=$roleRow['id'];
-							if($id==$role_id)
-							{
-								$role_name=$roleRow['name'];
-								break;
-							}
-						}
-					}
-					else
-					{
-						$role_name="No role";
-					}
+                                                echo "<td>";
+                                                echo $i;
+                                                echo "</td>";
 
-					echo "<tr>";
+                                                echo "<td>";
+                                                echo $name;
+                                                echo "</td>";
 
-					echo "<td>";
-					echo $i;
-					echo "</td>";
+                                                echo "<td>";
+                                                echo $gender;
+                                                echo "</td>";
 
-					echo "<td>";
-					echo $name;
-					echo "</td>";
+                                                echo "<td>";
+                                                echo $email;
+                                                echo "</td>";
 
-					echo "<td>";
-					echo $gender;
-					echo "</td>";
+                                                echo "<td>";
+                                                echo $mobile;
+                                                echo "</td>";
 
-					echo "<td>";
-					echo $email;
-					echo "</td>";
+                                                echo "<td>";
+                                                echo $role_name;
+                                                echo "</td>";
 
-					echo "<td>";
-					echo $mobile;
-					echo "</td>";
+                                                echo "<td>";
+                                                if($role_id==Constants::ROLE_TEACHER_ID)
+                                                {
+                                                    echo "<form role='form' action=../../manage_teacher_course/functions/assign_course.php method=post><button class='btn btn-default btn-sm' type=submit name=user_id value=$user_id>&nbsp;Assign</button></form>";
+                                                }
+                                                else
+                                                {
+                                                    echo "We can assign a course only to a Teacher";
+                                                }
+                                                echo "</td>";
 
-					echo "<td>";
-					echo $role_name;
-					echo "</td>";
+                                                echo "<td>";
+                                                echo "<form role='form' action=edit_user.php method=post><button class='btn btn-primary btn-sm' type=submit name=edit value=$user_id><i class='fa fa-pencil'></i>&nbsp;Edit</button></form>";
+                                                echo "</td>";
 
-					echo "<td>";
-					if($role_id==Constants::ROLE_TEACHER_ID)
-					{
-						echo "<form role='form' action=../../manage_teacher_course/functions/assign_course.php method=post><button class='btn btn-default' type=submit name=user_id value=$user_id>Assign</button></form>";
-					}
-					else
-					{
-						echo "We can assign a course only to a Teacher";
-					}
-					echo "</td>";
+                                                echo "<td>";
+                                                echo "<form action=delete_user.php method=post><button class='btn btn-danger btn-sm' type=submit name=delete value=$user_id><i class='fa fa-trash'></i>&nbsp;Delete</button></form>";
+                                                echo "</td>";
 
-					echo "<td>";
-					echo "<form role='form' action=edit_user.php method=post><button class='btn btn-primary' type=submit name=edit value=$user_id><i class='fa fa-pencil'></i>&nbspEdit</button></form>";
-					echo "</td>";
+                                                echo "</tr>";
+                                            }
 
-					echo "<td>";
-					echo "<form action=delete_user.php method=post><button class='btn btn-danger' type=submit name=delete value=$user_id><i class='fa fa-trash'></i>&nbspDelete</button></form>";
-					echo "</td>";
-
-					echo "</tr>";
-				}
-
-				echo "</tbody>
-	</table>";
-			}
-			else
-			{
-				echo "No users added yet";
-			}
-		?>
+                                            echo "</tbody>
+                                </table></div>";
+                                        }
+                                        else
+                                        {
+                                            echo "No users added yet";
+                                        }
+                                    ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </div>
-</div>
 <?php
 include "../../../Resources/Dashboard/footer.php"
 ?>

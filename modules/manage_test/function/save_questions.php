@@ -9,7 +9,6 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
 
-include("../../../Resources/sessions.php");
 include("privilege.php");
 
 if($add!=true)
