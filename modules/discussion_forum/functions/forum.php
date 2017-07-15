@@ -5,73 +5,137 @@
  * Date: 28/12/16
  * Time: 11:45 AM
  */
-require_once "../../classes/DBConnect.php";
-require_once "../../classes/Constants.php";
-
+require_once "../../../classes/DBConnect.php";
+require_once "../../../classes/Constants.php";
+include("../../../Resources/sessions.php");
 $dbconnect = new DBConnect(Constants::SERVER_NAME,
-    Constants::DB_USERNAME,
-    Constants::DB_PASSWORD,
-    Constants::DB_NAME);
+                           Constants::DB_USERNAME,
+                           Constants::DB_PASSWORD,
+                           Constants::DB_NAME);
 $connection = $dbconnect->getInstance();
 
+function getTeacherCourse($connection, $teacherStatus, $teacherId, $multiQuery, $batchId, $courseId, $batchName, $branchId)
+{
+    if ($teacherStatus == "yes" && $teacherId > 0 && $multiQuery == 'no' && $batchId == 0 && $courseId == 0 && $batchName == null && $branchId == 0) { //This will give course details for Teacher
+        $sql = "SELECT eBranch.id AS branchId,eBranch.name AS branchName,eBatch.id AS batchId,eBatch.name 
+        AS batchName,eBatch.branch_id AS batchBranchId,eCourse.id AS courseId,eCourse.name AS courseName,eCourse.batch_id 
+        AS courseBatchId,eTeacherCourse.id AS teacherCourseId,eTeacherCourse.user_id 
+        AS teacherCourseUserId,eTeacherCourse.course_id AS teacherCourseCourseId FROM `egn_teacher_course` 
+        AS eTeacherCourse,`egn_course` AS eCourse,`egn_batch` 
+        AS eBatch,`egn_branch` AS eBranch WHERE eTeacherCourse.course_id = eCourse.id AND eCourse.batch_id = eBatch.id 
+        AND eBatch.branch_id = eBranch.id AND eTeacherCourse.user_id = '$teacherId'";
+    }
+    elseif ($teacherStatus == 'no' && $teacherId == 0 && $multiQuery == 'no' && $batchId == 0 && $courseId > 0
+            && $batchName == null && $branchId == 0)
+    { //This will give course details in General
+        $sql = "SELECT * FROM `egn_course` WHERE id = '$courseId'";
+    }
+    elseif ($teacherStatus == "no" && $teacherId > 0 && $multiQuery == 'no' && $batchId == 0 && $courseId == 0 && $batchName == null && $branchId == 0)
+    { //This will give course details for Student
+        $sql = "SELECT * FROM `egn_course_reg` AS cr, `egn_course` AS c WHERE cr.course_id = c.id 
+        AND student_id='$teacherId'";
+    }
+    elseif ($teacherStatus == "no" && $teacherId == 0 && $multiQuery == 'yes' && $batchId == 0 && $courseId == 0 && $batchName == null && $branchId == 0)
+    {
+        $sql = "SELECT eBranch.id AS branchId,eBranch.name AS branchName,eBatch.id AS batchId,eBatch.name 
+        AS batchName,eBatch.branch_id AS batchBranchId,eCourse.id AS courseId,eCourse.name AS courseName,eCourse.batch_id 
+        AS courseBatchId FROM `egn_course` AS eCourse,`egn_batch` AS eBatch,`egn_branch` AS eBranch 
+        WHERE eCourse.batch_id = eBatch.id AND eBatch.branch_id = eBranch.id";
+    }
+    elseif ($teacherStatus == "no" && $teacherId == 0 && $multiQuery == 'yes' && $batchId > 0 && $courseId == 0 && $batchName == null && $branchId == 0)
+    {
+        $sql = "SELECT eBranch.id AS branchId,eBranch.name AS branchName,eBatch.id AS batchId,eBatch.name 
+        AS batchName,eBatch.branch_id AS batchBranchId,eCourse.id AS courseId,eCourse.name AS courseName,eCourse.batch_id 
+        AS courseBatchId FROM `egn_course` AS eCourse,`egn_batch` AS eBatch,`egn_branch` AS eBranch 
+        WHERE eCourse.batch_id = eBatch.id AND eBatch.branch_id = eBranch.id AND eCourse.batch_id = '$batchId'";
+    }
+    elseif ($teacherStatus == "no" && $teacherId == 0 && $multiQuery == 'yes' && $batchId == 0 && $courseId == 0 && $batchName != null && $branchId == 0)
+    {
+        $sql = "SELECT eBranch.id AS branchId,eBranch.name AS branchName,eBatch.id AS batchId,eBatch.name 
+        AS batchName,eBatch.branch_id AS batchBranchId,eCourse.id AS courseId,eCourse.name AS courseName,eCourse.batch_id 
+        AS courseBatchId FROM `egn_course` AS eCourse,`egn_batch` AS eBatch,`egn_branch` AS eBranch 
+        WHERE eCourse.batch_id = eBatch.id AND eBatch.branch_id = eBranch.id AND eBatch.name = '$batchName'";
+    }
+    elseif ($teacherStatus == "no" && $teacherId > 0 && $multiQuery == 'yes' && $batchId > 0 && $courseId == 0 && $batchName == null && $branchId > 0)
+    {
+        $sql = "SELECT DISTINCT c.id,c.name 
+        FROM egn_batch as batch ,egn_course as c ,egn_users as u ,egn_role as r, egn_teacher_course as tc 
+        WHERE batch.branch_id = " . $branchId . " AND c.batch_id = batch.id AND tc.course_id=c.id AND tc.user_id=u.id AND u.id=" . $teacherId . " AND batch.id = " . $batchId . " AND u.role_id = r.id AND r.is_teacher=1
+        ORDER BY c.name";
+    }
+    else
+    {
+        // $sql = "SELECT * FROM `egn_course`";
+        $sql = "SELECT eBranch.id AS branchId,eBranch.name AS branchName,eBatch.id AS batchId,eBatch.name 
+        AS batchName,eBatch.branch_id AS batchBranchId,eCourse.id AS courseId,eCourse.name AS courseName,eCourse.batch_id 
+        AS courseBatchId FROM `egn_course` AS eCourse,`egn_batch` AS eBatch,`egn_branch` AS eBranch 
+        WHERE eCourse.batch_id = eBatch.id AND eBatch.branch_id = eBranch.id";
+    }
+    $result = $connection->query($sql);
+    //        var_dump($result);
+    if ($result->num_rows > 0)
+    {
+        return $result;
+    }
+    else
+    {
+        return false;
+    }
+}
+function getStudentCourse($connection, $id)
+{
+    if ($id > 0) {
+        $sql = "SELECT eCourseReg.id AS courseRegId,eCourseReg.student_id AS courseRegStudentId,eCourseReg.course_id AS courseRegCourseId,eCourse.id AS courseId,eCourse.name AS courseName,eCourse.batch_id AS courseBatchId FROM `egn_course_reg` AS eCourseReg,`egn_course` AS eCourse 
+        WHERE eCourseReg.course_id = eCourse.id AND eCourseReg.student_id = '" . $id . "'";
+    }
+    else {
+        $sql = "SELECT * FROM `egn_course_reg`";
+    }
+    $result = $connection->query($sql);
+    
+    if ($result->num_rows > 0) {
+        return $result;
+    }
+    else {
+        return false;
+    }
+}
+$courses_name = array();
+$courses_id = array();
+if($_SESSION["role"] == Constants::ROLE_TEACHER_ID) {
+    $courses = getTeacherCourse($connection, "yes", $_SESSION["id"], "no", 0, 0, null, 0);
+    
+    while($row = $courses->fetch_assoc()){
+        $courses_name[] = $row["courseName"] . " - " . $row["batchName"] . " - " . $row["branchName"];
+        $courses_id[] = $row["courseId"];
+    }
+}
+else{
+    $courses = getStudentCourse($connection, $_SESSION["id"]);
+    while($row = $courses->fetch_assoc()){
+        $courses_name[] = $row["courseName"];
+        $courses_id[] = $row["courseId"];
+    }
+    //    print_r($courses_name);
+}
 function redirect($url)
 {
     header("Location: " . $url);
 }
 
-session_start();
-if (!isset($_SESSION["id"], $_SESSION["role"])) {
-    redirect("../../login.php");
-}
+// session_start();
+// if(!isset($_SESSION["role"]) || !isset($_SESSION["id"])){
+//     redirect("../../login/functions/login.php");
+// }
 
-// if ($_SESSION["role"] != Constants::ROLE_STUDENT_ID && $_SESSION["role"] != Constants::ROLE_TEACHER_ID) {
+// if($_SESSION["role"] != Constants::ROLE_STUDENT_ID && $_SESSION["role"] != Constants::ROLE_TEACHER_ID){
 //     session_unset();
 //     session_destroy();
 //     redirect("../../login.php?status=" . Constants::STATUS_FAILED . "&message=" . "Invalid Access. You Have Been Logged Out");
 // }
 
-if (!isset($_REQUEST["id"])) {
-    redirect("forum.php");
-}
-
-$sql_select_thread = "select * from egn_forum_threads where id=" . $_REQUEST["id"];
-//echo $sql_select_thread;
-$result_replies = $connection->query($sql_select_thread);
-$row = $result_replies->fetch_assoc();
-if ($row["student_id"] != null) {
-    $sql_info = "select * from egn_student where id=" . $row["student_id"];
-    $result_info = $connection->query($sql_info);
-    if ($result_info->num_rows > 0) {
-        $row_temp_2 = $result_info->fetch_assoc();
-        $author_info = "By " . $row_temp_2["firstname"] . " " . $row_temp_2["lastname"] . "(Student)";
-    } else {
-        $author_info = "By A Student";
-    }
-} else if ($row["teacher_id"] != null) {
-    $sql_info = "select * from egn_teacher where id=" . $row["teacher_id"];
-    $result_info = $connection->query($sql_info);
-    if ($result_info->num_rows > 0) {
-        $row_temp_2 = $result_info->fetch_assoc();
-        $author_info = "By " . $row_temp_2["firstname"] . " " . $row_temp_2["lastname"] . "(Teacher)";
-    } else {
-        $author_info = "By A Teacher";
-    }
-} else {
-    $author_info = "By Anonymous";
-}
-if ($row["course_id"] != null) {
-    $sql_info = "select * from egn_course where id=" . $row["course_id"];
-    $result_info = $connection->query($sql_info);
-    if ($result_info->num_rows > 0) {
-        $row_temp_2 = $result_info->fetch_assoc();
-        $course_info = "In " . $row_temp_2["name"] . "(Course)";
-    } else {
-        $course_info = "In General Discussions";
-    }
-} else {
-    $course_info = "In General Discussions";
-}
 ?>
+
 
 
 <!--START OF HEADER.PHP CODE==============================================================================================================-->
@@ -80,14 +144,13 @@ if ($row["course_id"] != null) {
 <html lang="en">
     <?php
     error_reporting();
-    session_start();
     $user_id=$_SESSION['id'];
     $role_id=$_SESSION['role'];
-    require_once("../../classes/DBConnect.php");
-    require_once("../manage_user/classes/User.php");
-    require_once("../manage_batch/classes/Batch.php");
-    require_once("../manage_student/classes/Student.php");
-    require_once("../../classes/Constants.php");
+    require_once("../../../classes/DBConnect.php");
+    require_once("../../manage_user/classes/User.php");
+    require_once("../../manage_batch/classes/Batch.php");
+    require_once("../../manage_student/classes/Student.php");
+    require_once("../../../classes/Constants.php");
     
     $dbConnect = new DBConnect(Constants::SERVER_NAME,
                                Constants::DB_USERNAME,
@@ -153,14 +216,16 @@ if ($row["course_id"] != null) {
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
-        <link rel="stylesheet" href="../../Resources/AdminLTE-2.3.11/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../../Resources/AdminLTE-2.3.11/bootstrap/css/bootstrap.min.css">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
         
+        <!-- Select2 -->
+        <link rel="stylesheet" href="../../../Resources/AdminLTE-2.3.11/plugins/select2/select2.min.css">
         <!-- Theme style -->
-        <link rel="stylesheet" href="../../Resources/AdminLTE-2.3.11/dist/css/AdminLTE.min.css">
+        <link rel="stylesheet" href="../../../Resources/AdminLTE-2.3.11/dist/css/AdminLTE.min.css">
         <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
-        <link rel="stylesheet" href="../../Resources/AdminLTE-2.3.11/dist/css/skins/_all-skins.min.css">
+        <link rel="stylesheet" href="../../../Resources/AdminLTE-2.3.11/dist/css/skins/_all-skins.min.css">
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -174,11 +239,11 @@ if ($row["course_id"] != null) {
         <div class="wrapper">
             <header class="main-header">
                 <!-- Logo -->
-                <a href="../../Resources/AdminLTE-2.3.11/index2.html" class="logo">
+                <a href="../../../Resources/AdminLTE-2.3.11/index2.html" class="logo">
                     <!--mini logo for sidebar mini 50x50 pixels -->
-                    <span class="logo-mini"><img src="../../Resources/images/E_logo_transparent_small.png"></span>
+                    <span class="logo-mini"><img src="../../../Resources/images/E_logo_transparent_small.png"></span>
                     <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg"><img src="../../Resources/images/EGYAAN_logo_transparent_small_white.png"></span>
+                    <span class="logo-lg"><img src="../../../Resources/images/EGYAAN_logo_transparent_small_white.png"></span>
                 </a>
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top">
@@ -252,12 +317,12 @@ if ($row["course_id"] != null) {
                                                 <?php
                                                 if($profile!=null)
                                                 {
-                                                    echo "<img src='../manage_student/images/student/$profile' 
+                                                    echo "<img src='../../manage_student/images/student/$profile' 
                                                     class=user-image alt='User Image'>";
                                                 }
                                                 else
                                                 {
-                                                    echo "<img src='../../Resources/images/boy.png' class=user-image alt='User Image'>";
+                                                    echo "<img src='../../../Resources/images/boy.png' class=user-image alt='User Image'>";
                                                 }
                                                 echo "<span class=hidden-xs>$display_name</span>";
                                                 ?>
@@ -268,11 +333,11 @@ if ($row["course_id"] != null) {
                                                     <?php
                                                     if($profile!=null)
                                                     {
-                                                        echo "<img src='../manage_student/images/student/$profile' class=img-circle alt='User Image'>";
+                                                        echo "<img src='../../manage_student/images/student/$profile' class=img-circle alt='User Image'>";
                                                     }
                                                     else
                                                     {
-                                                        echo "<img src='../../Resources/images/boy.png' class=img-circle alt='User Image'>";
+                                                        echo "<img src='../../../Resources/images/boy.png' class=img-circle alt='User Image'>";
                                                     }
                                                     ?>
                                                     <p>
@@ -305,7 +370,7 @@ if ($row["course_id"] != null) {
                                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                                     </div>
                                                     <div class="pull-right">
-                                                        <a href="../login/functions/logout.php" class="btn btn-default btn-flat">Sign out</a>
+                                                        <a href="../../login/functions/logout.php" class="btn btn-default btn-flat">Sign out</a>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -331,11 +396,11 @@ if ($row["course_id"] != null) {
                                         <?
                                         if($profile!=null)
                                         {
-                                            echo "<img src='../manage_student/images/student/$profile' class=img-circle alt='User Image'>";
+                                            echo "<img src='../../manage_student/images/student/$profile' class=img-circle alt='User Image'>";
                                         }
                                         else
                                         {
-                                            echo "<img src='../../Resources/images/boy.png' class=img-circle alt='User Image'>";
+                                            echo "<img src='../../../Resources/images/boy.png' class=img-circle alt='User Image'>";
                                         }
                                         ?>
                                     </div>
@@ -362,7 +427,7 @@ if ($row["course_id"] != null) {
                                 <ul class="sidebar-menu">
                                     <li class="header">MAIN NAVIGATION</li>
                                     <li class="treeview">
-                                        <a href="../login/functions/Dashboard.php">
+                                        <a href="../../login/functions/Dashboard.php">
                                             <i class="fa fa-home"></i> <span>Home</span>
                                         </a>
                                     </li>
@@ -397,246 +462,217 @@ if ($row["course_id"] != null) {
                                     <div class="col-md-12">
                                         <!--start of Table box-->
                                         <div class="box">
-                                            
+                                            <div class="box-header">
+                                                <h3 class="box-title">Add Forum:</h3>
+                                            </div>
+                                            <!-- /.box-header -->
                                             <div class="box-body">
 
 <!--=============================================================================================================-->
+                                                
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <form id="add_thread" method="post" action="add_thread.php">
+                                                            <div class="form-group">
+                                                                <input class="form-control" id="title" type="text" placeholder="Enter Thread Title" name="title"/>
+                                                            </div>
 
-                                                <div class="row" id="message">
-                                                    <noscript>
-                                                        <?php
-                                                        if (isset($_REQUEST["status"], $_REQUEST["message"])) {
-                                                            if ($_REQUEST["status"] == "success") {
-                                                                echo "<p style='color:green'>" . $_REQUEST["message"] . "</p>";
-                                                            } else {
-                                                                echo "<p style='color:red'>" . $_REQUEST["message"] . "</p>";
-                                                            }
-                                                        }
-                                                        ?>
-                                                    </noscript>
-                                                    <?php
-                                                    if (isset($_REQUEST["status"]) && isset($_REQUEST["message"])) {
-                                                        if ($_REQUEST["status"] == "success") {
-                                                            echo "<script type='text/javascript'>
-                                                            $(document).ready(function() {
-                                                            new PNotify({
-                                                            title: 'Success',
-                                                            type: 'success',
-                                                            text: '" . $_REQUEST["message"] . "',
-                                                            nonblock: {
-                                                            nonblock: false
-                                                            },
-                                                            styling: 'bootstrap3',
-                                                            hide: true,
-                                                            before_close: function(PNotify) {
-                                                            PNotify.update({
-                                                                title: PNotify.options.title + ' - Enjoy your Stay',
-                                                                before_close: null
-                                                            });
-
-                                                            PNotify.queueRemove();
-
-                                                            return false;
-                                                            }
-                                                        });
-                                                    });
-                                                </script>";
-                                                        }
-                                                        else
-                                                        {
-                                                            echo "<script type='text/javascript'>
-                                                            $(document).ready(function() {
-                                                            new PNotify({
-                                                            title: 'Ohh No! Failure',
-                                                            type: 'error',
-                                                            text: '" . $_REQUEST["message"] . "',
-                                                            nonblock: {
-                                                                nonblock: false
-                                                            },
-                                                            styling: 'bootstrap3',
-                                                            hide: true,
-                                                            before_close: function(PNotify) {
-                                                            PNotify.update({
-                                                                title: PNotify.options.title + ' - Enjoy your Stay',
-                                                                before_close: null
-                                                            });
-
-                                                            PNotify.queueRemove();
-
-                                                            return false;
-                                                            }
-                                                        });
-                                                    });
-                                                </script>";
-                                                        }
-                                                    }
-                                                    ?>
-                                                </div>
-
-                                                <div class="box">
-                                                    <div class="box-header bg-yellow">
-                                                        <h3 class="" style="margin:0px;padding:10px; border-radius:4px;"><?php echo $row["title"]; ?></h3>
-                                                    </div>
-
-                                                    <div class="box-body">
-                                                        <p class="text-justify"><?php echo $row["description"]; ?></p>
-                                                    </div>
-
-                                                    <div class="box-footer">
-                                                        <span><?php echo $author_info; ?></span>
-                                                        <span><?php echo $course_info; ?></span>
+                                                            <div class="form-group">
+                                                                <textarea class="form-control" style="resize: vertical;" id="description" placeholder="Enter Thread Description..." name="description"></textarea>
+                                                            </div>
+                                                            
+                                                            <input id="student_id" type="hidden" name="student_id" value="<?php echo $_SESSION["role"] == Constants::ROLE_STUDENT_ID ? $_SESSION["id"] : "null"; ?>"/>
+                                                            
+                                                            <input id="teacher_id" type="hidden" name="teacher_id" value="<?php echo $_SESSION["role"] == Constants::ROLE_TEACHER_ID ? $_SESSION["id"] : "null"; ?>"/>
+                                                            
+                                                            <div class="form-group">
+                                                                <select class="form-control select2" name="course_id" id="course_id">
+                                                                    <option selected disabled>Select Course</option>
+                                                                    <option value="null">None</option>
+                                                                    <?php
+                                                                    $i = 0;
+                                                                    foreach ($courses_id as &$id) {
+                                                                        echo "<option value=".$id.">".$courses_name[$i]."</option>";
+                                                                        $i++;
+                                                                    }
+                                                                    ?>
+                                                                </select>
+                                                            </div>
+                                                            
+                                                            <div class="form-group">
+                                                                <button class="btn btn-success" id="submit" type="submit"><span class="fa fa-check"></span>&nbsp;Add Thread</button>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
-<!--//////////////////////////////////////////////////////////////////////////////////////////REPLIES START-->
-
-                                                <?php
-                                                $sql_replies = "select * from (select f1.id as reply_id, f2.student_id as parent_reply_student_id, f2.teacher_id as parent_reply_teacher_id, f2.id as parent_reply_id, f2.description as parent_reply, f1.student_id, f1.teacher_id, f1.description as reply, f1.timestamp from egn_forum_thread_replies as f1, egn_forum_thread_replies as f2 where f2.id = f1.parent_reply_id and f1.thread_id = f2.thread_id and f1.thread_id = " . $_REQUEST["id"] . " union select id as reply_id, parent_reply_id as parent_reply_student_id, parent_reply_id as parent_reply_teacher_id, parent_reply_id, parent_reply_id as parent_reply, student_id, teacher_id, description as reply, timestamp from egn_forum_thread_replies where thread_id = " . $_REQUEST["id"] . " and parent_reply_id is null) as t1 order by t1.timestamp desc";
-                                                //echo $sql_replies;
-                                                $result_replies = $connection->query($sql_replies);
-                                                if ($result_replies->num_rows > 0) {
-                                                    while ($row = $result_replies->fetch_assoc()) {
-                                                        if ($row["student_id"] != null) {
-                                                            $sql_info = "select * from egn_student where id=" . $row["student_id"];
-                                                            $result_info = $connection->query($sql_info);
-                                                            if ($result_info->num_rows > 0) {
-                                                                $row_temp_2 = $result_info->fetch_assoc();
-                                                                $author_info = "By " . $row_temp_2["firstname"] . " " . $row_temp_2["lastname"] . "(Student)";
-                                                            }
-                                                            else
-                                                            {
-                                                                $author_info = "By A Student";
-                                                            }
-                                                        }
-                                                        else if ($row["teacher_id"] != null)
-                                                        {
-                                                            $sql_info = "select * from egn_teacher where id=" . $row["teacher_id"];
-                                                            $result_info = $connection->query($sql_info);
-                                                            if ($result_info->num_rows > 0) {   
-                                                                $row_temp_2 = $result_info->fetch_assoc();
-                                                                $author_info = "By " . $row_temp_2["firstname"] . " " . $row_temp_2["lastname"] . "(Teacher)";
-                                                            }
-                                                            else
-                                                            {
-                                                                $author_info = "By A Teacher";
-                                                            }
-                                                        }
-                                                        else 
-                                                        {   
-                                                            $author_info = "By Anonymous";
-                                                        }
-
-                                                        echo "<div id='each_reply' class='well col-md-12' style='padding: 5px 10px 10px 10px;'>" .
-                                                        "<h4>" . $author_info . "</h4>";
-                                                        if ($row["parent_reply"] != null) {
-                                                            echo "<div class='col-md-offset-1 col-md-11' id='parent_reply' style='border-radius:4px; border: 1px solid #e3e3e3;padding: 5px 15px;background: #e3e3e3;'>";
-                                                            if ($row["parent_reply_student_id"] != null) {
-                                                                $sql_info = "select * from egn_student where id=" . $row["parent_reply_student_id"];
-                                                                $result_info = $connection->query($sql_info);
-                                                                if ($result_info->num_rows > 0) {
-                                                                    $row_temp_2 = $result_info->fetch_assoc();
-                                                                    $author_info = "By " . $row_temp_2["firstname"] . " " . $row_temp_2["lastname"] . "(Student)";
+                                                <hr>
+                                                <h2>Discussion Threads:</h2>
+                                                <div class="row">
+                                                        <div class="col-md-12" id="message">
+                                                            <noscript>
+                                                                <?php
+                                                                if (isset($_REQUEST["status"], $_REQUEST["message"])) {
+                                                                    if ($_REQUEST["status"] == "success") {
+                                                                        echo "<p style='color:green'>" . $_REQUEST["message"] . "</p>";
+                                                                    } 
+                                                                    else 
+                                                                    {
+                                                                        echo "<p style='color:red'>" . $_REQUEST["message"] . "</p>";
+                                                                    }
+                                                                }
+                                                                ?>
+                                                            </noscript>
+                                                            <?php
+                                                            if (isset($_REQUEST["status"]) && isset($_REQUEST["message"])) {
+                                                                if ($_REQUEST["status"] == "success") {
+                                                                    echo "<script type='text/javascript'>
+                                                                    $(document).ready(function() {
+                                                                    new PNotify({
+                                                                    title: 'Success',
+                                                                    type: 'success',
+                                                                    text: '" . $_REQUEST["message"] . "',
+                                                                    nonblock: {
+                                                                    nonblock: false
+                                                                    },
+                                                                    styling: 'bootstrap3',
+                                                                    hide: true,
+                                                                    before_close: function(PNotify) {
+                                                                    PNotify.update({
+                                                                    title: PNotify.options.title + ' - Enjoy your Stay',
+                                                                    before_close: null
+                                                                    });
+                                                                    PNotify.queueRemove();
+                                                                    return false;
+                                                                    }
+                                                                    });
+                                                                    });
+                                                                    </script>";
                                                                 }
                                                                 else
                                                                 {
-                                                                    $author_info = "By A Student";
+                                                                    echo "<script type='text/javascript'>
+                                                                    $(document).ready(function() {
+                                                                    new PNotify({
+                                                                    title: 'Ohh No! Failure',
+                                                                    type: 'error',
+                                                                    text: '" . $_REQUEST["message"] . "',
+                                                                    nonblock: {
+                                                                    nonblock: false
+                                                                    },
+                                                                    styling: 'bootstrap3',
+                                                                    hide: true,
+                                                                    before_close: function(PNotify) {
+                                                                    PNotify.update({
+                                                                    title: PNotify.options.title + ' - Enjoy your Stay',
+                                                                    before_close: null
+                                                                    });
+
+                                                                    PNotify.queueRemove();
+
+                                                                    return false;
+                                                                    }
+                                                                    });
+                                                                    });
+                                                                    </script>";
                                                                 }
-                                                            } 
-                                                            else if ($row["parent_reply_teacher_id"] != null) 
-                                                            {
-                                                                $sql_info = "select * from egn_teacher where id=" . $row["parent_reply_teacher_id"];
-                                                                $result_info = $connection->query($sql_info);
-                                                                if ($result_info->num_rows > 0) {
-                                                                    $row_temp_2 = $result_info->fetch_assoc();
-                                                                    $author_info = "By " . $row_temp_2["full_name"] . "(Teacher)";
-                                                                } else {
-                                                                    $author_info = "By A Teacher";
+                                                            }
+                                                            ?>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                        <?php
+                                                        $sql = "select * from egn_forum_threads order by timestamp desc";
+//                                                        echo $sql;
+                                                        $result = $connection->query($sql);
+                                                        if ($result->num_rows > 0) {
+                                                            while ($row = $result->fetch_assoc()) {
+                                                                if ($row["student_id"] != null) {
+                                                                    $sql_info = "select * from egn_student where id=" . $row["student_id"];
+                                                                    $result_info = $connection->query($sql_info);
+                                                                    if ($result_info->num_rows > 0) {
+                                                                        $row_temp_2 = $result_info->fetch_assoc();
+                                                                        $author_info = "By " . $row_temp_2["firstname"] . " " . $row_temp_2["lastname"] . "(Student)";
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        $author_info = "By A Student";
+                                                                    }
                                                                 }
-                                                            } else {
-                                                                $author_info = "By Anonymous";
+                                                                else if ($row["teacher_id"] != null)
+                                                                {
+                                                                    $sql_info = "select * from egn_teacher where id=" . $row["teacher_id"];
+                                                                    $result_info = $connection->query($sql_info);
+                                                                    if ($result_info->num_rows > 0) {
+                                                                        $row_temp_2 = $result_info->fetch_assoc();
+                                                                        $author_info = "By " . $row_temp_2["firstname"] . " " . $row_temp_2["lastname"] . "(Teacher)";
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        $author_info = "By A Teacher";
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    $author_info = "By Anonymous";
+                                                                }
+
+                                                                if ($row["course_id"] != null) {
+                                                                    $sql_info = "select * from egn_course where id=" . $row["course_id"];
+                                                                    $result_info = $connection->query($sql_info);
+                                                                    if ($result_info->num_rows > 0) 
+                                                                    {
+                                                                        $row_temp_2 = $result_info->fetch_assoc();
+                                                                        $course_info = "In " . $row_temp_2["name"] . "(Course)";
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        $course_info = "In General Discussions";
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    $course_info = "In General Discussions";
+                                                                }
+
+                                                                if (strlen($row["description"]) <= 250)
+                                                                {
+                                                                    $description = $row["description"];
+                                                                }
+                                                                else
+                                                                {
+                                                                    $description = substr($row["description"], 0, 300) . "...";
+                                                                }
+                                                                echo '<div class="box box-default"
+                                                                        style="background-color: #d2d6de;
+                                                                        border: 1px solid #e3e3e3;">
+                                                                                <div class="box-header with-border" style="background-color: #d2d6de;">
+                                                                                    <a href="thread.php?id=' . $row["id"] . '">
+                                                                                        <h3  class="box-title">' . $row["title"] . '</h3>
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="box-body text-justify clearfix" style="background-color: #e3e3e3">
+                                                                                <p>' 
+                                                                                    . $description . 
+                                                                                '</p>
+                                                                                </div>
+
+                                                                                <div class="box-footer text-muted" style="background-color: #d2d6de;">
+                                                                                    <small>' 
+                                                                                        . $author_info .
+                                                                                    '&nbsp;&nbsp;' 
+                                                                                        . $course_info . 
+                                                                                    '</small>
+                                                                                </div>
+                                                                            </div>';
                                                             }
-                                                            echo "<h4>" . $author_info . "</h4>";
-                                                            echo "<p>" . $row["parent_reply"] . "</p>";
-                                                            echo "<a href='thread.php?id=" . $_REQUEST["id"] . "&parent_reply_id=" . $row["parent_reply_id"] . "#reply_box' class='btn btn-primary btn-sm'><i class='fa fa-mail-reply'></i>&nbsp;Reply</a>";
-                                                            echo "</div>";
                                                         }
-                                                        echo "<p>" . $row["reply"] . "</p>" .
-                                                            "<a href='thread.php?id=" . $_REQUEST["id"] . "&parent_reply_id=" . $row["reply_id"] .   "#reply_box' class='btn btn-primary btn-sm'><i class='fa fa-mail-reply'></i>&nbsp;Reply</a>";
-                                                        if ($_SESSION["id"] == $row["student_id"] || $_SESSION["id"] == $row["teacher_id"]) {
-                                                            echo "<a class='btn btn-danger btn-sm' style='margin-left:10px' id='delete_link' href='functions/delete_reply.php?id=" . $row["reply_id"] . "&thread_id=" . $_REQUEST["id"] . "'><i class='fa fa-trash'></i>&nbsp;Delete</a>";
+                                                        else
+                                                        {
+                                                            echo "<h3>No Threads Created</h3>";
                                                         }
-                                                        echo "</div>";
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    echo "<h3>No Replies</h3>";
-                                                }
-                                                ?>
-
-<!--/////////////////////////////////////////////////////////////////////////////////////////REPLY FORM DIV START-->
-                                                <div id="reply_form_div">
-                                                    <a name="reply_box"></a>
-
-                                                    <?php
-                                                    if (isset($_REQUEST["parent_reply_id"], $_REQUEST["id"])) {
-                                                        $sql_select_thread = "select * from egn_forum_thread_replies where id=" . $_REQUEST["parent_reply_id"];
-                                                        $result_replies = $connection->query($sql_select_thread);
-                                                        $row = $result_replies->fetch_assoc();
-                                                        if ($row["student_id"] != null) {
-                                                            $sql_info = "select * from egn_student where id=" . $row["student_id"];
-                                                            $result_info = $connection->query($sql_info);
-                                                            if ($result_info->num_rows > 0) {
-                                                                $row_temp_2 = $result_info->fetch_assoc();
-                                                                $author_info = "By " . $row_temp_2["firstname"] . " " . $row_temp_2["lastname"] . "(Student)";
-                                                            } else {
-                                                                $author_info = "By A Student";
-                                                            }
-                                                        } else if ($row["teacher_id"] != null) {
-                                                            $sql_info = "select * from egn_teacher where id=" . $row["teacher_id"];
-                                                            $result_info = $connection->query($sql_info);
-                                                            if ($result_info->num_rows > 0) {
-                                                                $row_temp_2 = $result_info->fetch_assoc();
-                                                                $author_info = "By " . $row_temp_2["firstname"] . " " . $row_temp_2["lastname"] . "(Teacher)";
-                                                            } else {
-                                                                $author_info = "By A Teacher";
-                                                            }
-                                                        } else {
-                                                            $author_info = "By Anonymous";
-                                                        }
-
-                                                        echo "
-                                                        <div style='border: 1px solid #e3e3e3;padding: 5px 15px;background: #e3e3e3;    margin: 10px 0 10px 0px;'>
-                                                        <h4>" . $author_info . "</h4>
-                                                        <p>" . $row["description"] . "</p>
-                                                        </div>";
-
-                                                    }
-                                                    ?>
-
-                                                    <form id="reply_form" action="functions/add_reply.php" method="post">
-                                                        <div class="form-group">
-                                                            <textarea class="form-control" style="resize: vertical;"  id="reply" placeholder="Enter a reply" name="reply" style="height:100px"></textarea>
-                                                        </div>
-                                                        
-                                                        <input type="hidden" id="parent_reply_id" name="parent_reply_id"
-                                                               value="<?php echo isset($_REQUEST['parent_reply_id']) ? $_REQUEST['parent_reply_id'] : 'null'; ?>">
-                                                        
-                                                        <input type="hidden" id="thread_id" name="thread_id"
-                                                               value="<?php echo $_REQUEST["id"]; ?>"/>
-                                                        
-                                                        <input id="student_id" type="hidden" name="student_id"
-                                                               value="<?php echo $_SESSION["role"] == Constants::ROLE_STUDENT_ID ? $_SESSION["id"] : "null"; ?>"/>
-                                                        
-                                                        <input id="teacher_id" type="hidden" name="teacher_id"
-                                                               value="<?php echo $_SESSION["role"] == Constants::ROLE_TEACHER_ID ? $_SESSION["id"] : "null"; ?>"/>
-                                                        
-                                                        <div class="form-group">
-                                                            <button class="btn btn-success" type="submit" id="reply_form_submit"><i class="fa fa-check"></i>&nbsp;Submit</button>
-                                                        </div>
-                                                        
-                                                    </form>
+                                                        ?>
+                                                    </div>
                                                 </div>
-    
+                                                
 <!--=============================================================================================================-->   
                         
                                             </div>
@@ -833,10 +869,20 @@ if ($row["course_id"] != null) {
                     <!-- ./wrapper -->
                     
                     <!-- jQuery 2.2.3 -->
-                    <script src="../../Resources/AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js"></script>
+                    <script src="../../../Resources/AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js"></script>
                     <!-- Bootstrap 3.3.6 -->
-                    <script src="../../Resources/AdminLTE-2.3.11/bootstrap/js/bootstrap.min.js"></script>
+                    <script src="../../../Resources/AdminLTE-2.3.11/bootstrap/js/bootstrap.min.js"></script>
+                    <!-- Select2 -->
+                    <script src="../../../Resources/AdminLTE-2.3.11/plugins/select2/select2.full.min.js"></script>
+                  
+
+                    <script>
+                        $(function () {
+                            //Initialize Select2 Elements
+                            $(".select2, #select2").select2();
+                        });
+                    </script>
                     
 <!--END OF FOOTER.PHP CODE=============================================================================================================-->
-</body>
-</html>
+                    </body>
+                </html>

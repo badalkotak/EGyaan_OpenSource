@@ -5,5 +5,5 @@
  * Date: 10/1/17
  * Time: 1:19 AM
  */
-header("Location: forum.php");
+header("Location: functions/forum.php");
 ?>
