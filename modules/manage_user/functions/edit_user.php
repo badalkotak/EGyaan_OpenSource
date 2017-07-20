@@ -161,7 +161,7 @@ if($getDetails!=null)
                                         echo "<div class='form-group'><label>Email-Id</label><input class='form-control' type=email name=email id=email value='$email'></div>";
                                         echo "<div class='form-group'><label>Mobile No.</label><input class='form-control' type=text name=mobile id=mobile value='$mobile'></div>";
                                         echo '<div class="form-group"><label>Role</label><select class="form-control select2" name="role_id" id="role_id">
-                                        <option value="-1" selected disabled>Select Role</option>';
+                                        <option value="-1" disabled>Select Role</option>';
                                             $getRoles=$role->getRole();
 
                                             if($getRoles!=null)
