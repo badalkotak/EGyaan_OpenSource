@@ -61,19 +61,28 @@ if($selectData!=null)
 				$title=$row['title'];
 				$id=$row['id'];
 				$type=$row['type'];
+				$date=$row['notice_date'];
+				$time=$row['notice_time'];
 			
 				$notices['id']=$id;
 				$notices['title']=$title;
 				$notices['type']=$type;
+				$notices['date']=$date;
+				$notices['time']=$time;
 
 				$json[]=$notices;
 			}
 		}
 	}
-
+	$final['status']="success";
 	$final['notice']=$json;
+}
+else
+{
+	$final['status']="fail";
+}
 
 header("Content-Type: application/json");
 
 	echo "[".json_encode($final)."]";
-}
+?>
