@@ -5,11 +5,14 @@
  * Date: 28/12/16
  * Time: 6:54 PM
  */
-require_once "../classes/Constants.php";
-require_once "../classes/DBConnect.php";
+require_once "../../classes/DBConnect.php";
+require_once "../../classes/Constants.php";
+$dbconnect = new DBConnect(Constants::SERVER_NAME,
+                           Constants::DB_USERNAME,
+                           Constants::DB_PASSWORD,
+                           Constants::DB_NAME);
+$connection = $dbconnect->getInstance();
 header("Content-Type: application/json");
-$db = new DBConnect();
-$connection = $db->getInstance();
 $sql = "select distinct id, student_fullname from egn_students";
 $result = $connection->query($sql);
 $array = array();
