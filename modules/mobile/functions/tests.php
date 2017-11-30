@@ -24,6 +24,7 @@ if($getTests!=null)
 	$final['status']="success";
 	while($row=$getTests->fetch_assoc())
 	{
+		$test['test_id']=$row['id'];
 		$test['title']=$row['title'];
 		$test['date_of_test']=$row['date_of_test'];
 		$test['marks']=$row['marks'];
