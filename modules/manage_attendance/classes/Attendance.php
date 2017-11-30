@@ -13,8 +13,8 @@ class Attendance{
         $this->connection = $connection;
     }
 
-    public function markAttendance($topic_id, $timetable_id, $attendees){
-        $sql = "insert into egn_attendance (timetable_id, date, topic_id) values(".$timetable_id.", '".date("Y/m/d")."',".$topic_id." )";
+    public function markAttendance($date, $timetable_id, $attendees){
+        $sql = "insert into egn_attendance (date_of_attendance, timetable_id) values( '".$date."', ".$timetable_id.")";
         $result = $this->connection->query($sql);
         if($result == true){
             $id = mysqli_insert_id($this->connection);
@@ -26,7 +26,7 @@ class Attendance{
                     $values = $values . "( ".$id.", ".$attendees[$i]." ),";
                 }
             }
-            $sql = "insert into egn_attendance_student_mapping values " . $values;
+            $sql = "insert into egn_student_attendance(attendance_id, student_id) values " . $values;
             $result = $this->connection->query($sql);
             if($result == true){
                 return true;

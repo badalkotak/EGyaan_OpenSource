@@ -109,7 +109,7 @@ error_reporting(0);
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="../../../Resources/AdminLTE-2.3.11/index2.html" class="logo">
+    <a href="../../login/functions/Dashboard.php" class="logo">
 <!--       mini logo for sidebar mini 50x50 pixels -->
        <span class="logo-mini"><img src="../../../Resources/images/E_logo_transparent_small.png"></span>
       <!-- logo for regular state and mobile devices -->
@@ -129,7 +129,7 @@ error_reporting(0);
         <ul class="nav navbar-nav">
             <nav class="navbar navbar-static-top">
                 <!--  -->
-                </a>
+            
 
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">

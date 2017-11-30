@@ -69,6 +69,94 @@ $user_id=$id;
                             <i class="fa fa-home"></i> <span>Home</span>
                         </a>
                     </li>
+                    <?php
+                    if($role_id==Constants::ROLE_ADMIN_ID)
+                    {
+                        echo '<li class="treeview">
+                        <a href="../../manage_branch/function/branch.php">
+                            <i class="fa  fa-sitemap"></i> <span>Manage Branch</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_batch/function/batch.php">
+                            <i class="fa fa-users"></i> <span>Manage Batch</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_course/function/course.php">
+                            <i class="fa fa-book"></i> <span>Manage Course</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_user/functions/user.php">
+                            <i class="fa fa-user"></i> <span>Manage Users</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_student/function/student.php">
+                            <i class="fa fa-graduation-cap"></i> <span>Manage Students</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_role/functions/role.php">
+                            <i class="fa fa-user"></i> <span>Manage Role</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_fees/function/manage_fees.php">
+                            <i class="fa fa-file-text-o"></i> <span>Manage Fees</span>
+                        </a>
+                    </li>
+                    <li class="treeview active">
+                        <a href="../../manage_noticeboard/function/index.php">
+                            <i class="fa fa-calendar-minus-o"></i> <span>Noticeboard</span>
+                        </a>
+                    </li>';
+                    }else if($role_id==Constants::ROLE_TEACHER_ID){
+                        echo'<li class="treeview">
+                        <a href="../../manage_notes/function/insert_page.php">
+                            <i class="fa fa-book"></i> <span>Notes</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="">
+                            <i class="fa fa-send-o"></i> <span>Submissions</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_test/function/manage_test.php">
+                            <i class="fa fa-pencil-square-o"></i> <span>Tests</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_timetable/function/view_teacher_timetable.php">
+                            <i class="fa fa-calendar"></i> <span>Timetable</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_syllabus/function/insert_page.php">
+                            <i class="fa fa-book"></i> <span>Syllabus</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_attendance/functions/attendanceMarking.php">
+                            <i class="fa fa-bar-chart"></i> <span>Attendance</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../discussion_forum/functions/forum.php">
+                            <i class="fa fa-wechat"></i> <span>Discussion Forum</span>
+                        </a>
+                    </li>
+                    <li class="treeview active">
+                        <a href="../../manage_noticeboard/index.php">
+                            <i class="fa  fa-calendar-minus-o"></i> <span>Noticeboard</span>
+                        </a>
+                    </li>';
+                    }else if($role_id==Constants::ROLE_STUDENT_ID){
+                        echo'';
+                    }
+                    ?>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-gears"></i>
