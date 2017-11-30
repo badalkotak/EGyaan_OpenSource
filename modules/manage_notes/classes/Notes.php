@@ -10,7 +10,7 @@ class Notes
 
 	public function getNotes($course_id)
 	{
-		 $sql="select * from egn_notes WHERE course_id='".$course_id."'";
+		 $sql="SELECT eNotes.id,eNotes.title,eNotes.file,eNotes.course_id,eNotes.downloadable,eNotes.user_id,eUsers.email,eUsers.gender,eUsers.mobile,eUsers.name FROM `egn_notes` AS eNotes, `egn_users` AS eUsers WHERE eNotes.user_id = eUsers.id AND course_id='".$course_id."'";
 		$result = $this->connection->query($sql);
 		if($result->num_rows > 0)
 		{

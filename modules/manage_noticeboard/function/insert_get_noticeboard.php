@@ -5,7 +5,7 @@ require_once("../../../classes/Constants.php");
 require_once("../../../classes/DBConnect.php");
 require_once("../classes/Noticeboard.php");
 require_once("../../manage_branch/classes/Branch.php");
-include("../../../Resources/sessions.php");
+include("../../../Resources/sessions_for_backend.php");
 
 
 if($role_id==Constants::ROLE_ADMIN_ID)
