@@ -285,7 +285,7 @@ $teacher_course=new TeacherCourse($dbconnect->getInstance());
                                         else
                                         {
                                             echo "Insert timing first";
-                                            break;
+                                            // break;
                                         }
                                         ?>
                                     </tbody>

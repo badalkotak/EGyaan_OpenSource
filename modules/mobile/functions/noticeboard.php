@@ -73,13 +73,43 @@ if($selectData!=null)
 				$json[]=$notices;
 			}
 		}
-	}
+
+		$var1="type";
+		$var2=1;
+		$var3=1;
+		$type="c";
+		$urgent=1;
+		$id=1;
+                                                
+		$noticeboard = new Noticeboard($dbConnect->getInstance());
+		$selectData=$noticeboard->getNoticeboard($var1,$type,$var2,$urgent,$var3,$id);
+		if($selectData)
+        {
+			while($row=$selectData->fetch_assoc())
+			{
+				$title=$row['title'];
+				$id=$row['id'];
+				$type=$row['type'];
+				$date=$row['notice_date'];
+				$time=$row['notice_time'];
+			
+				$notices['id']=$id;
+				$notices['title']=$title;
+				$notices['type']=$type;
+				$notices['date']=$date;
+				$notices['time']=$time;
+
+				$json[]=$notices;
+			}
 	$final['status']="success";
 	$final['notice']=$json;
 }
 else
 {
 	$final['status']="fail";
+}
+
+}
 }
 
 header("Content-Type: application/json");
