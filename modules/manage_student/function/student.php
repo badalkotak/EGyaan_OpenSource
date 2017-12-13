@@ -258,7 +258,7 @@ include "../../../Resources/Dashboard/header.php";
                                 </div>
                                 <br>
                                 <br>
-                                <div class="box-footer col-md">
+                                <div class="box-footer">
                                     <button type="submit" value="Submit" class="btn btn-success"><i class="fa fa-check  "></i>&nbsp;Submit</button>
                                 </div>
                             </div>
@@ -295,7 +295,7 @@ include "../../../Resources/Dashboard/header.php";
 //                        dataType: "json",
                         success: function (json) {
                             console.log(json);
-                            $("div#new-drop-down").removeClass("hide");
+                            $("#new-drop-down").removeClass("hide");
                             $("#batch-id").empty();
                             $("#batch-id").append("<option value='-3'>Select Batch</option>");
                             var parsed = jQuery.parseJSON(json);

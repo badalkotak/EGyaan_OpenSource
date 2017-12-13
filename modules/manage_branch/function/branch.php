@@ -126,11 +126,13 @@ include("../../../Resources/Dashboard/header.php");
                         <div class="row">
                             <form action="insert_branch.php" method="post">
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="branch_name"
-                                           placeholder="Enter Branch Name"></div>
-
-                                <button type="submit" class="btn btn-success" value="Submit"><i class="fa fa-check"></i>&nbsp;Submit
+                                    <input type="text" class="form-group form-control" name="branch_name"
+                                           placeholder="Enter Branch Name">
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-success" value="Submit"><i class="fa fa-check"></i>&nbsp;Submit
                                 </button>
+                                </div>
                             </form>
                         </div>
 
@@ -150,7 +152,7 @@ include("../../../Resources/Dashboard/header.php");
                             Constants::DB_PASSWORD,
                             Constants::DB_NAME);
 
-                        echo "<h4>List of Department - Branches</h4>";
+                        echo "<hr><h4>List of Department - Branches</h4>";
                         
                         $branch = new Branch($dbConnect->getInstance());
                         $result = $branch->getBranch(0);

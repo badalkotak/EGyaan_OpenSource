@@ -125,11 +125,11 @@
         }
         echo "<label>" . $branchName . "</label>";
         echo "<br>";
-        echo "<div class='row'><div class='col-md-6'><input type='hidden' name='branchId' value='" . $branchId . "'>";
+        echo "<div class='row'><div class='form-group col-md-6'><input type='hidden' name='branchId' value='" . $branchId . "'>";
         echo "<input type='hidden' name='batchId' value='" . $batchId . "'>";
         echo "<input type='text' class='form-control' name='batchName' value='" . $batchName . "'></div>";
         
-        echo "<button type='submit' class='btn btn-success' value='Update'><i class='fa fa-check'></i>&nbspUpdate</button></div>";
+        echo "<div class='col-md-6'><button type='submit' class='btn btn-success' value='Update'><i class='fa fa-check'></i>&nbspUpdate</button></div></div>";
       } else {
         echo Constants::STATUS_FAILED;
       }

@@ -105,7 +105,7 @@ $user_id=$_REQUEST['user_id'];
 	<form role="form" action="add_teacher_course.php" method="post">
 		<div class="form-group">
             <label>Branch</label>
-        <select class="form-control" name="branch" id="branch">
+        <select class="form-control select2" name="branch" id="branch">
 		<option value=-1>Select Branch</option>
 		<?php
 			$branch=new Branch($dbConnect->getInstance());
@@ -138,7 +138,7 @@ $user_id=$_REQUEST['user_id'];
                     echo "<hr><div class='box-header'>
                             <h3 class='box-title'><b>Courses</b></h3>
                         </div>";
-				    echo "<table class='table table-bordered table-hover example2'>
+				    echo "<div class='table-container1'><table class='table table-bordered table-hover example2'>
 							<thead>
 								<th>Sr No.</th>
 								<th>Branch</th>
@@ -183,7 +183,7 @@ $user_id=$_REQUEST['user_id'];
 					}
 
 					echo "</tbody>
-					</table>";
+					</table></div>";
 				}
 				else
 				{
