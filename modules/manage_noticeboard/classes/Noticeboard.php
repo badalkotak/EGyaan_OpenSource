@@ -25,6 +25,21 @@ class Noticeboard
         }
     }
 
+    public function getLatestNotice()
+    {
+        $sql = "select * from egn_noticeboard order by id DESC LIMIT 1";
+        $result = $this->connection->query($sql);
+
+        if($result->num_rows > 0)
+        {
+            return $result;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public function getNoticeboard($var1,$type,$var2,$urgent,$var3,$id)
     {
 
