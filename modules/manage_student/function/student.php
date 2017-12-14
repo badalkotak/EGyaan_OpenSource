@@ -198,7 +198,7 @@ include "../../../Resources/Dashboard/header.php";
                                 </div>
                                 <div class="form-group">
                                     <label>Fees Comment</label>
-                                    <textarea class="form-control" name="feesComment"
+                                    <textarea class="form-control" style="resize: vertical;"  name="feesComment"
                                               placeholder="Enter Fees Comment"></textarea>
                                 </div>
                                 <div class="form-group">

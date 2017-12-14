@@ -173,8 +173,7 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
                                 <div class="col-md-6">
                                     <form role="form" action="add_role.php" method="post" id="role">
                                         <div class="form-group">
-                                            <label>Role Name</label>
-                                            <input class="form-control" type="text" name="role_name" id="role_name">
+                                            <input class="form-control" type="text" name="role_name" id="role_name" placeholder="Enter Role Name">
                                         </div>
                                         <div class="alert-message" id="role_err"></div>
                                         <div class="form-group">

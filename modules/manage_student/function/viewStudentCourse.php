@@ -54,6 +54,46 @@
                         </a>
                     </li>
                     <li class="treeview">
+                        <a href="../../manage_branch/function/branch.php">
+                            <i class="fa  fa-sitemap"></i> <span>Manage Branch</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_batch/function/batch.php">
+                            <i class="fa fa-users"></i> <span>Manage Batch</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_course/function/course.php">
+                            <i class="fa fa-book"></i> <span>Manage Course</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_user/functions/user.php">
+                            <i class="fa fa-user"></i> <span>Manage Users</span>
+                        </a>
+                    </li>
+                    <li class="treeview active">
+                        <a href="../../manage_student/function/student.php">
+                            <i class="fa fa-graduation-cap"></i> <span>Manage Students</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_role/functions/role.php">
+                            <i class="fa fa-user"></i> <span>Manage Role</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_fees/function/manage_fees.php">
+                            <i class="fa fa-file-text-o"></i> <span>Manage Fees</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_noticeboard/function/index.php">
+                            <i class="fa fa-calendar-minus-o"></i> <span>Noticeboard</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-gears"></i>
                             <span>Settings</span>
@@ -124,7 +164,7 @@
                                     if ($getData != null) {
                                         $i = 1;
                                         echo "<br><table class='table table-bordered table-hover example2'>";
-                                        echo "<thead><tr><th>Sr. no.</th><th>Course Name</th></tr></thead>";
+                                        echo "<thead><tr><th>Sr No.</th><th>Course Name</th></tr></thead>";
                                         while ($row = $getData->fetch_assoc()) {
                                             $studentCourseRegistrationId = $row['courseRegId'];
                                             $studentCourseRegistrationCourseId = $row['courseRegCourseId'];
