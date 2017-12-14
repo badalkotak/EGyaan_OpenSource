@@ -16,136 +16,184 @@
 
 </head>
 <!--START OF SIDEBAR===========================================================================================================-->
-    <!-- Left side column. contains the sidebar -->
-        <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                <!-- Sidebar user panel -->
-                <div class="user-panel">
-                    <div class="pull-left image">
-                        <?
-                        if($profile!=null)
-                            		{
-                            			echo "<img src='../../manage_student/images/student/$profile' class=img-circle alt='User Image'>";
-                            		}
-                           			else
-                            		{
-                            			echo "<img src='../../../Resources/images/boy.png' class=img-circle alt='User Image'>";
-                            		}
-                        ?>
-                    </div>
-                    <div class="pull-left info">
-                    <?
-                    echo "<p>$display_name</p>";
-                    ?>
-                        <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> -->
-                    </div>
-                </div>
-                        <!-- search form -->
-                <form action="#" method="get" class="sidebar-form">
-                    <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
+<!-- Left side column. contains the sidebar -->
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <?
+                if ($profile != null) {
+                    echo "<img src='../../manage_student/images/student/$profile' class=img-circle alt='User Image'>";
+                } else {
+                    echo "<img src='../../../Resources/images/boy.png' class=img-circle alt='User Image'>";
+                }
+                ?>
+            </div>
+            <div class="pull-left info">
+                <?
+                echo "<p>$display_name</p>";
+                ?>
+                <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> -->
+            </div>
+        </div>
+        <!-- search form -->
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
                             <button type="submit" name="search" id="search-btn" class="btn btn-flat">
                                 <i class="fa fa-search"></i>
                             </button>
                         </span>
-                    </div>
-                </form>
-                <!-- /.search form -->
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu">
-                    <li class="header">MAIN NAVIGATION</li>
-                    <li class="treeview">
-                        <a href="../../login/functions/Dashboard.php">
-                            <i class="fa fa-home"></i> <span>Home</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-gears"></i>
-                            <span>Settings</span>
-                        </a>
-                    </li>
-                </ul>
-            </section>
-            <!-- /.sidebar -->
-        </aside>
-    
+            </div>
+        </form>
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+            <li class="header">MAIN NAVIGATION</li>
+            <li class="treeview">
+                <a href="../../login/functions/Dashboard.php">
+                    <i class="fa fa-home"></i> <span>Home</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="../../manage_branch/function/branch.php">
+                    <i class="fa  fa-sitemap"></i> <span>Manage Branch</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="../../manage_batch/function/batch.php">
+                    <i class="fa fa-users"></i> <span>Manage Batch</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="../../manage_course/function/course.php">
+                    <i class="fa fa-book"></i> <span>Manage Course</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="../../manage_user/functions/user.php">
+                    <i class="fa fa-user"></i> <span>Manage Users</span>
+                </a>
+            </li>
+            <li class="treeview active">
+                <a href="../../manage_student/function/student.php">
+                    <i class="fa fa-graduation-cap"></i> <span>Manage Students</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="../../manage_role/functions/role.php">
+                    <i class="fa fa-user"></i> <span>Manage Role</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="../../manage_fees/function/manage_fees.php">
+                    <i class="fa fa-file-text-o"></i> <span>Manage Fees</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="../../manage_noticeboard/function/index.php">
+                    <i class="fa fa-calendar-minus-o"></i> <span>Noticeboard</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-gears"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>
+
 <!--END OF SIDEBAR=============================================================================================================-->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <br>
-            <ol class="breadcrumb">
-                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
-                <li><a href="student.php">Add Student</a></li>
-                <li><a href="courseRegistrationStudent.php">Course Registration</a></li>
-                <li class="active"><b>Select Course</b></li>
-            </ol>
-        </section>
-        <section class="content">
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <br>
+        <ol class="breadcrumb">
+            <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
+            <li><a href="student.php">Add Student</a></li>
+            <li><a href="courseRegistrationStudent.php">Course Registration</a></li>
+            <li class="active"><b>Select Course</b></li>
+        </ol>
+    </section>
+    <section class="content">
 
-            <!-- Default box -->
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Select Course</h3>
-                </div>
-                <form role="form" action="editDeleteCourse.php" method="post">
-                    <div class="box-body">
-                        <div class="form-group">
-                            <select id="branch-id" name="branchId" class="form-control select2">
-                                <option value="-2">Select Branch</option>
-                                <?php
-                                /**
-                                 * Created by PhpStorm.
-                                 * User: fireion
-                                 * Date: 20/6/17
-                                 * Time: 1:17 PM
-                                 */
-                                require_once("../../../classes/Constants.php");
-                                require_once("../../../classes/DBConnect.php");
-                                require_once("../../manage_branch/classes/Branch.php");
-                                require_once("../../manage_batch/classes/Batch.php");
-
-                                $dbConnect = new DBConnect(Constants::SERVER_NAME,
-                                    Constants::DB_USERNAME,
-                                    Constants::DB_PASSWORD,
-                                    Constants::DB_NAME);
-
-                                $branch = new Branch($dbConnect->getInstance());
-                                $batch = new Batch($dbConnect->getInstance());
-
-                                $getBranchData = $branch->getBranch(0);
-                                if ($getBranchData != null) {
-                                    while ($row = $getBranchData->fetch_assoc()) {
-                                        $branchId = $row['id'];
-                                        $branchName = $row['name'];
-
-                                        echo "<option value='" . $branchId . "'>" . $branchName . "</option>";
-                                    }
-                                } else {
-                                    echo Constants::STATUS_FAILED;
-                                }
-                                ?>
-
-                            </select>
-                        </div>
-                        <div id="new-drop-down" class="hide">
+        <!-- Default box -->
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Select Course</h3>
+            </div>
+            <form role="form" action="editDeleteCourse.php" method="post">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <select name="batchId" id="batch-id" class="form-control">
-                                    <!--            <option value="-3">Select Batch</option>-->
+                                <select id="branch-id" name="branchId" class="form-control select2">
+                                    <option value="-2">Select Branch</option>
+                                    <?php
+                                    /**
+                                     * Created by PhpStorm.
+                                     * User: fireion
+                                     * Date: 20/6/17
+                                     * Time: 1:17 PM
+                                     */
+                                    require_once("../../../classes/Constants.php");
+                                    require_once("../../../classes/DBConnect.php");
+                                    require_once("../../manage_branch/classes/Branch.php");
+                                    require_once("../../manage_batch/classes/Batch.php");
+
+                                    $dbConnect = new DBConnect(Constants::SERVER_NAME,
+                                        Constants::DB_USERNAME,
+                                        Constants::DB_PASSWORD,
+                                        Constants::DB_NAME);
+
+                                    $branch = new Branch($dbConnect->getInstance());
+                                    $batch = new Batch($dbConnect->getInstance());
+
+                                    $getBranchData = $branch->getBranch(0);
+                                    if ($getBranchData != null) {
+                                        while ($row = $getBranchData->fetch_assoc()) {
+                                            $branchId = $row['id'];
+                                            $branchName = $row['name'];
+
+                                            echo "<option value='" . $branchId . "'>" . $branchName . "</option>";
+                                        }
+                                    } else {
+                                        echo Constants::STATUS_FAILED;
+                                    }
+                                    ?>
+
                                 </select>
                             </div>
                         </div>
-                        <br>
-                        <button class="btn btn-success" type="submit" value="Submit"><i class="fa fa-check"></i>&nbsp;Submit
-                        </button>
                     </div>
-                </form>
-            </div>
-        </section>
-    </div>
+                    <div class="row">
+                        <dv class="col-md-6">
+                            <div class="form-group">
+                                <div id="new-drop-down" class="hide">
+                                    <select name="batchId" id="batch-id" class="form-control select2">
+                                        <!--            <option value="-3">Select Batch</option>-->
+                                    </select>
+                                </div>
+                            </div>
+                        </dv>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-success" type="submit" value="Submit"><i class="fa fa-check"></i>&nbsp;Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
 
 <script type="text/javascript">
     $(document).ready(function () {

@@ -198,7 +198,7 @@ include "../../../Resources/Dashboard/header.php";
                                 </div>
                                 <div class="form-group">
                                     <label>Fees Comment</label>
-                                    <textarea class="form-control" name="feesComment"
+                                    <textarea class="form-control" style="resize: vertical;"  name="feesComment"
                                               placeholder="Enter Fees Comment"></textarea>
                                 </div>
                                 <div class="form-group">
@@ -258,7 +258,7 @@ include "../../../Resources/Dashboard/header.php";
                                 </div>
                                 <br>
                                 <br>
-                                <div class="box-footer col-md">
+                                <div class="box-footer">
                                     <button type="submit" value="Submit" class="btn btn-success"><i class="fa fa-check  "></i>&nbsp;Submit</button>
                                 </div>
                             </div>
@@ -295,7 +295,7 @@ include "../../../Resources/Dashboard/header.php";
 //                        dataType: "json",
                         success: function (json) {
                             console.log(json);
-                            $("div#new-drop-down").removeClass("hide");
+                            $("#new-drop-down").removeClass("hide");
                             $("#batch-id").empty();
                             $("#batch-id").append("<option value='-3'>Select Batch</option>");
                             var parsed = jQuery.parseJSON(json);

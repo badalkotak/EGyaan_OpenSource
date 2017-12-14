@@ -34,7 +34,10 @@ $user=new User($dbConnect->getInstance());
 
 				if(name=="" || email=="" || mobile=="" || role_id==-1)
 				{
-					$("#user_err").text("Please input all the fields!");
+                    var alert_icon = document.createElement('i');
+                    alert_icon.setAttribute('class', 'fa fa-exclamation-triangle');
+                    $("#user_err").html(alert_icon).append("&nbsp;Please input all the fields!");
+
 					return false;
 				}
 				else
@@ -201,7 +204,7 @@ $user=new User($dbConnect->getInstance());
                                         </select>
                                         </div>
                                         <button type="submit" class="btn btn-primary" value="Add Student" id="submit"><i class="fa fa-plus"></i>&nbsp;Add</button>
-                                        <div id="user_err"></div>
+                                        <div class="alert-message" id="user_err"></div>
                                     </form>
                                 </div>
                             </div>

@@ -72,6 +72,46 @@ $user_id=$_REQUEST['user_id'];
                         </a>
                     </li>
                     <li class="treeview">
+                        <a href="../../manage_branch/function/branch.php">
+                            <i class="fa  fa-sitemap"></i> <span>Manage Branch</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_batch/function/batch.php">
+                            <i class="fa fa-users"></i> <span>Manage Batch</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_course/function/course.php">
+                            <i class="fa fa-book"></i> <span>Manage Course</span>
+                        </a>
+                    </li>
+                    <li class="treeview active">
+                        <a href="../../manage_user/functions/user.php">
+                            <i class="fa fa-user"></i> <span>Manage Users</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_student/function/student.php">
+                            <i class="fa fa-graduation-cap"></i> <span>Manage Students</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_role/functions/role.php">
+                            <i class="fa fa-user"></i> <span>Manage Role</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_fees/function/manage_fees.php">
+                            <i class="fa fa-file-text-o"></i> <span>Manage Fees</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_noticeboard/function/index.php">
+                            <i class="fa fa-calendar-minus-o"></i> <span>Noticeboard</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-gears"></i>
                             <span>Settings</span>
@@ -105,7 +145,7 @@ $user_id=$_REQUEST['user_id'];
 	<form role="form" action="add_teacher_course.php" method="post">
 		<div class="form-group">
             <label>Branch</label>
-        <select class="form-control" name="branch" id="branch">
+        <select class="form-control select2" name="branch" id="branch">
 		<option value=-1>Select Branch</option>
 		<?php
 			$branch=new Branch($dbConnect->getInstance());
@@ -138,7 +178,7 @@ $user_id=$_REQUEST['user_id'];
                     echo "<hr><div class='box-header'>
                             <h3 class='box-title'><b>Courses</b></h3>
                         </div>";
-				    echo "<table class='table table-bordered table-hover example2'>
+				    echo "<div class='table-container1'><table class='table table-bordered table-hover example2'>
 							<thead>
 								<th>Sr No.</th>
 								<th>Branch</th>
@@ -183,7 +223,7 @@ $user_id=$_REQUEST['user_id'];
 					}
 
 					echo "</tbody>
-					</table>";
+					</table></div>";
 				}
 				else
 				{

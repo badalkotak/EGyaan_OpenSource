@@ -26,7 +26,9 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
                 var role_name = $("#role_name").val();
 
                 if (role_name == "") {
-                    $("#role_err").text("Please enter the Name of the Role");
+                    var alert_icon = document.createElement('i');
+                    alert_icon.setAttribute('class', 'fa fa-exclamation-triangle');
+                    $("#role_err").html(alert_icon).append("&nbsp;Please Enter the Name of the Role");
                     return false;
                 }
                 else {
@@ -171,10 +173,9 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
                                 <div class="col-md-6">
                                     <form role="form" action="add_role.php" method="post" id="role">
                                         <div class="form-group">
-                                            <label>Role Name</label>
-                                            <input class="form-control" type="text" name="role_name" id="role_name">
+                                            <input class="form-control" type="text" name="role_name" id="role_name" placeholder="Enter Role Name">
                                         </div>
-                                        <div id="role_err"></div>
+                                        <div class="alert-message" id="role_err"></div>
                                         <div class="form-group">
                                             <input type="checkbox" class="flat" name="isTeacher" value=1>&nbsp;Is Teacher<br>
                                         </div>

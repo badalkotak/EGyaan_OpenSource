@@ -1,3 +1,11 @@
+
+.select2{
+    margin-bottom:1em;
+}
+.col-bottom-margin{
+    margin-bottom: 0 0 1em;
+}
+
 .alert-message{
         color:red;
     }

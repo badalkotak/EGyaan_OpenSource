@@ -172,9 +172,9 @@ if($result!=null)
                             $pending_fees = $row["total_fees"] - $row["fees_paid"];
                             $input_fees ='<input type="number" id="fees_add_input_' . $row["id"] . '" value="0" min=1 max=' . $pending_fees . '>
                             <br><br>
-                            <button type="button" class="btn btn-primary btn-sm" onclick="add_fees(' . $row["id"] . ',' . $pending_fees . ')"><i class="fa fa-plus"></i>&nbspAdd fees</button>';
+                            <button type="button" class="btn btn-primary btn-sm" onclick="add_fees(' . $row["id"] . ',' . $pending_fees . ')"><i class="fa fa-plus"></i>&nbsp;Add Fees</button>';
                             $refund_fees ='<input type="number" id="fees_refund_input_' . $row["id"] . '" value="0" min=1 max=' . $row["fees_paid"] . '><br><br>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="refund_fees(' . $row["id"] . ',' . $row["fees_paid"] . ')"><i class="fa fa-exchange"></i>&nbspRefund</button>';
+                            <button type="button" class="btn btn-warning btn-sm" onclick="refund_fees(' . $row["id"] . ',' . $row["fees_paid"] . ')"><i class="fa fa-exchange"></i>&nbsp;Refund</button>';
                             echo '  <tr id =' . $row["id"] . '>
                             <td>' . $i . '</td>
                             <td>' . $row["firstname"] . ' ' . $row["lastname"] . '</td>

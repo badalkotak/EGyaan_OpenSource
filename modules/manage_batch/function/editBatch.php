@@ -53,6 +53,46 @@
                         </a>
                     </li>
                     <li class="treeview">
+                        <a href="../../manage_branch/function/branch.php">
+                            <i class="fa  fa-sitemap"></i> <span>Manage Branch</span>
+                        </a>
+                    </li>
+                    <li class="treeview active">
+                        <a href="../../manage_batch/function/batch.php">
+                            <i class="fa fa-users"></i> <span>Manage Batch</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_course/function/course.php">
+                            <i class="fa fa-book"></i> <span>Manage Course</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_user/functions/user.php">
+                            <i class="fa fa-user"></i> <span>Manage Users</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_student/function/student.php">
+                            <i class="fa fa-graduation-cap"></i> <span>Manage Students</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_role/functions/role.php">
+                            <i class="fa fa-user"></i> <span>Manage Role</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_fees/function/manage_fees.php">
+                            <i class="fa fa-file-text-o"></i> <span>Manage Fees</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_noticeboard/function/index.php">
+                            <i class="fa fa-calendar-minus-o"></i> <span>Noticeboard</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-gears"></i>
                             <span>Settings</span>
@@ -125,11 +165,11 @@
         }
         echo "<label>" . $branchName . "</label>";
         echo "<br>";
-        echo "<div class='row'><div class='col-md-6'><input type='hidden' name='branchId' value='" . $branchId . "'>";
+        echo "<div class='row'><div class='form-group col-md-6'><input type='hidden' name='branchId' value='" . $branchId . "'>";
         echo "<input type='hidden' name='batchId' value='" . $batchId . "'>";
         echo "<input type='text' class='form-control' name='batchName' value='" . $batchName . "'></div>";
         
-        echo "<button type='submit' class='btn btn-success' value='Update'><i class='fa fa-check'></i>&nbspUpdate</button></div>";
+        echo "<div class='col-md-6'><button type='submit' class='btn btn-success' value='Update'><i class='fa fa-check'></i>&nbspUpdate</button></div></div>";
       } else {
         echo Constants::STATUS_FAILED;
       }
