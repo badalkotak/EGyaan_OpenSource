@@ -11,7 +11,7 @@
 		Constants::DB_PASSWORD,
 		Constants::DB_NAME);
 
-$notice_id=$_REQUEST['id'];
+// $notice_id=$_REQUEST['id'];
 
 $noticeboard = new Noticeboard($dbConnect->getInstance());
 
