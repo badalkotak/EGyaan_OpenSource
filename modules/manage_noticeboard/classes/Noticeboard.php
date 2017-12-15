@@ -25,9 +25,9 @@ class Noticeboard
         }
     }
 
-    public function getLatestNotice()
+    public function getLatestNotice($branch_id)
     {
-        $sql = "select * from egn_noticeboard order by id DESC LIMIT 1";
+        $sql = "select * from egn_noticeboard WHERE type = '$branch_id' OR type = 'c' order by id DESC LIMIT 1";
         $result = $this->connection->query($sql);
 
         if($result->num_rows > 0)
