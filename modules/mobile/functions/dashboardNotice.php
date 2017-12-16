@@ -17,7 +17,7 @@ $branch_id = $_REQUEST['branch_id'];
 
 $noticeboard = new Noticeboard($dbConnect->getInstance());
 
-$getNotice = $noticeboard->getLatestNotice();
+$getNotice = $noticeboard->getLatestNotice($branch_id);
 
 $json=array();
 $notices=array();

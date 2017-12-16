@@ -145,4 +145,31 @@ class StudentTest
         return "<script>alert('" .  $message . "');window.location.href='manage_student_test.php'</script>";
     }
 
+    public function getLatestTest($student_id)
+    {
+        $sql="  SELECT DISTINCT t.id,title,total_marks,date_of_test,type,c.name,'-' as marks
+                FROM egn_test as t ,egn_course as c ,egn_student as s ,egn_course_reg as cr 
+                WHERE cr.student_id = s.id AND t.course_id = c.id AND cr.course_id = c.id AND s.id='$student_id' AND 
+                t.id NOT IN (   SELECT m.test_id
+                                FROM egn_test_marks as m
+                                WHERE m.student_id = '$student_id')
+                UNION
+                SELECT DISTINCT t.id,title,total_marks,date_of_test,type,c.name,marks
+                FROM egn_test as t ,egn_course as c ,egn_student as s ,egn_course_reg as cr,egn_test_marks as m
+                WHERE cr.student_id = s.id AND t.course_id = c.id AND cr.course_id = c.id AND m.student_id = s.id AND m.test_id = t.id AND s.id = '$student_id' AND 
+                t.id IN (   SELECT m.test_id
+                                FROM egn_test_marks as m
+                                WHERE m.student_id = '$student_id')
+                ORDER BY date_of_test DESC LIMIT 1";
+        $result = $this->connection->query($sql);
+        if($result->num_rows > 0)
+        {
+            return $result;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
 }
