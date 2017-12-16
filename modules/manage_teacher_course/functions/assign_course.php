@@ -12,8 +12,6 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_USERNAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
-
-$user_id=$_REQUEST['user_id'];
 ?>
 
 <html>
@@ -168,6 +166,8 @@ $user_id=$_REQUEST['user_id'];
 	<div id="batch_div"></div>
 			<?php
 				$course=new Course($dbConnect->getInstance());
+
+                $user_id = $_REQUEST['user_id'];
 
 				$getCourse=$course->getCourse("yes",$user_id,"no",0,0,null,0);
 

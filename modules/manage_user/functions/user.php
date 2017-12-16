@@ -298,7 +298,7 @@ $user=new User($dbConnect->getInstance());
                                                 echo "<td>";
                                                 if($role_id==Constants::ROLE_TEACHER_ID)
                                                 {
-                                                    echo "<form role='form' action=../../manage_teacher_course/functions/assign_course.php method=post><button class='btn btn-default btn-sm' type=submit name=user_id value=$user_id>&nbsp;Assign</button></form>";
+                                                    echo "<form role='form' action=../../manage_teacher_course/functions/assign_course.php method=get><button class='btn btn-default btn-sm' type=submit name=user_id value='$user_id'>&nbsp;Assign</button></form>";
                                                 }
                                                 else
                                                 {
@@ -307,11 +307,11 @@ $user=new User($dbConnect->getInstance());
                                                 echo "</td>";
 
                                                 echo "<td>";
-                                                echo "<form role='form' action=edit_user.php method=post><button class='btn btn-primary btn-sm' type=submit name=edit value=$user_id><i class='fa fa-pencil'></i>&nbsp;Edit</button></form>";
+                                                echo "<form role='form' action=edit_user.php method=post><button class='btn btn-primary btn-sm' type=submit name=edit value='$user_id'><i class='fa fa-pencil'></i>&nbsp;Edit</button></form>";
                                                 echo "</td>";
 
                                                 echo "<td>";
-                                                echo "<form action=delete_user.php method=post><button class='btn btn-danger btn-sm' type=submit name=delete value=$user_id><i class='fa fa-trash'></i>&nbsp;Delete</button></form>";
+                                                echo "<form action=delete_user.php method=post><button class='btn btn-danger btn-sm' type=submit name=delete value='$user_id'><i class='fa fa-trash'></i>&nbsp;Delete</button></form>";
                                                 echo "</td>";
 
                                                 echo "</tr>";

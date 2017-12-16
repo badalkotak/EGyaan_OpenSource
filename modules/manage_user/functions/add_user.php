@@ -1,5 +1,5 @@
 <?php
-include("../../../Resources/sessions.php");
+include("../../../Resources/sessions_for_backend.php");
 
 require_once("../../../classes/DBConnect.php");
 require_once("../../../classes/Constants.php");
@@ -38,11 +38,13 @@ $pass=generatePassword();
 $insert=$user->insertUser($email,$pass,$role_id,$gender,$mobile,$name);
 if($insert)
 {
-	echo "Done";
+	$message="User ".Constants::INSERT_SUCCESS_MSG;
+    echo "<script>alert('$message');window.location.href='user.php';</script>";
 }
 
 else
 {
-	echo "Not done";
+	$message=Constants::INSERT_FAIL_MSG."User";
+    echo "<script>alert('$message');window.location.href='user.php';</script>";
 }
 ?>
