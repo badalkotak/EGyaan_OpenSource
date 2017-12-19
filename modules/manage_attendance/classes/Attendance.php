@@ -37,4 +37,11 @@ class Attendance{
             return false;
         }
     }
+
+    public function generateReport(){
+        $sql = "select DISTINCT es.firstname, es.lastname, ea.date_of_attendance, ec.name, ec.batch_id, eb.name as batch_name, et.comment, ett.from_time, ett.to_time, ett.type, etty.name from egn_student_attendance as esa, egn_attendance as ea, egn_teacher_course as etc, egn_student as es, egn_course as ec, egn_batch as eb , egn_timetable as et, egn_time_timetable as ett , egn_time_type as etty where ec.id = 1 and ec.batch_id = es.batch_id and etc.course_id = 1 and etc.user_id = 3 and etc.id = et.teacher_course_id and et.id = ea.timetable_id and ea.date_of_attendance BETWEEN '2017-11-11' and '2017-11-13' and esa.student_id = es.id and esa.attendance_id = ea.id and ett.id = et.time_id and etty.id = ett.type";
+
+
+
+    }
 }
