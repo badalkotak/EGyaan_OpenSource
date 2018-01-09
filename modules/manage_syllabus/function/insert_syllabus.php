@@ -1,8 +1,10 @@
 <?php
 include("privilege.php");
 
+// echo "Bahar ADD:'$add'";
 if($add!=true)
 {
+	// echo "ADD:'$add'";
 	$message=Constants::NO_PRIVILEGE;
 	echo "<script>alert('$message');window.location.href='../../login/functions/logout.php'</script>";
 }
@@ -97,13 +99,6 @@ if ($uploadOk == 0) {
     else
     {
     	echo "error";
-    }
-       
+    }  
 }
-
-
-
-
-
-
 ?>

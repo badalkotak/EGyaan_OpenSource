@@ -194,7 +194,7 @@ if($result_get_student_batch!=null)
                                         else
                                         {
                                             echo "Insert timing first";
-                                            break;
+                                            // break;
                                         }
                                         ?>
                                     </tbody>

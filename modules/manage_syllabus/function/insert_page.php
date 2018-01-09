@@ -137,6 +137,8 @@ $course=new Course($dbconnect->getInstance());
                 <div class="box-body">
                     <div class="row">
                     <?php
+
+                    // echo "Bahar ADD:'$add'";
                     if($add===true)
                     {
                     ?>
