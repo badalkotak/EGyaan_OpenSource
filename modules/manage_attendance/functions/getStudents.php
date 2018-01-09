@@ -5,8 +5,8 @@
  * Date: 28/12/16
  * Time: 6:54 PM
  */
-require_once "../../classes/DBConnect.php";
-require_once "../../classes/Constants.php";
+require_once "../../../classes/DBConnect.php";
+require_once "../../../classes/Constants.php";
 $dbconnect = new DBConnect(Constants::SERVER_NAME,
                            Constants::DB_USERNAME,
                            Constants::DB_PASSWORD,

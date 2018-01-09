@@ -23,7 +23,7 @@ function output($status, $message = null){
         $json["message"] = $message;
         echo json_encode($json);
     } else {
-        $url = "Location: ../mark_attendance.php?status=" . $status;
+        $url = "Location: mark_attendance.php?status=" . $status;
         $url = $url . "&message=" . $message;
         header($url);
     }
@@ -44,8 +44,8 @@ if(isset($_REQUEST["date"], $_REQUEST["timetable_id"], $_REQUEST["attendees"])){
     )){
         output(Constants::STATUS_SUCCESS, "You have successfully marked the attendance of the students");
     }else{
-        output(Constants::STATUS_FAILED, "Something Went Wrong");
+        output(Constants::STATUS_FAILED, "<h4 class='alert-message'><i class='fa fa-exclamation-triangle'></i>Something Went Wrong</h4>");
     }
 }else{
-    output(Constants::STATUS_FAILED, "Params Cannot Be Empty");
+    output(Constants::STATUS_FAILED, "<h4 class='alert-message'><i class='fa fa-exclamation-triangle'></i>Params Cannot Be Empty</h4>");
 }

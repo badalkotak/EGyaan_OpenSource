@@ -1,3 +1,3 @@
 <?php
-header('Location:mark_attendance.php');
+header('Location:functions/mark_attendance.php');
 die();

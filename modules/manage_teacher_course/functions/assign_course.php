@@ -141,26 +141,30 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
                         <!-- /.box-header -->
                         <div class="box-body">
 	<form role="form" action="add_teacher_course.php" method="post">
-		<div class="form-group">
-            <label>Branch</label>
-        <select class="form-control select2" name="branch" id="branch">
-		<option value=-1>Select Branch</option>
-		<?php
-			$branch=new Branch($dbConnect->getInstance());
+		<div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Branch</label>
+                    <select class="form-control select2" name="branch" id="branch">
+                        <option value=-1>Select Branch</option>
+                        <?php
+                            $branch=new Branch($dbConnect->getInstance());
 
-			$getBranch=$branch->getBranch();
-			if($getBranch!=null)
-			{
-				while($row=$getBranch->fetch_assoc())
-				{
-					$branch_id=$row['id'];
-					$branch_name=$row['name'];
+                            $getBranch=$branch->getBranch();
+                            if($getBranch!=null)
+                            {
+                                while($row=$getBranch->fetch_assoc())
+                                {
+                                    $branch_id=$row['id'];
+                                    $branch_name=$row['name'];
 
-					echo "<option value=$branch_id>$branch_name</option>";
-				}
-			}
-		?>
-		</select>
+                                    echo "<option value=$branch_id>$branch_name</option>";
+                                }
+                            }
+                        ?>
+                    </select>
+                </div>
+            </div>
         </div>
 	</form>
 	<div id="batch_div"></div>
@@ -259,14 +263,14 @@ $(document).ready(function(){
 				{
 					var status=json.status;
 					var count=json.batch.length;
-					var batch_dropdown="<input type=radio hidden value="+user_id+" id=user_id><div class='form-group'><label>Batch</label><select class='form-control' name=batch id=batch><option value=-1>Select Batch</option>";
+					var batch_dropdown="<input type=radio hidden value="+user_id+" id=user_id><div class='row'><div class='col-md-6'><div class='form-group'><label>Batch</label><select class='form-control select2' name='batch' id='batch'><option value=-1>Select Batch</option>";
 
 					for(var i=0;i<count;i++)
 					{
 						batch_dropdown = batch_dropdown + "<option value="+json.batch[i].id+">"+json.batch[i].name+"</option>";
 					}
 
-					batch_dropdown = batch_dropdown + "</select></div><div id=course_div></div><script type=text/javascript src='getBatch.js'></ script>";
+					batch_dropdown = batch_dropdown + "</select></div></div></div><div id=course_div></div><script type=text/javascript src='getBatch.js'></ script>";
 
 					$("#batch_div").html(batch_dropdown);
 				}

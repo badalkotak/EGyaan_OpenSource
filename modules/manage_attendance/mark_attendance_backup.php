@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: adityajthakker
- * Date: 28/12/16
- * Time: 11:45 AM
- */
-require_once "../../classes/DBConnect.php";
-require_once "../../classes/Constants.php";
+require_once "../../../classes/DBConnect.php";
+require_once "../../../classes/Constants.php";
 $dbconnect = new DBConnect(Constants::SERVER_NAME,
-                           Constants::DB_USERNAME,
-                           Constants::DB_PASSWORD,
-                           Constants::DB_NAME);
+    Constants::DB_USERNAME,
+    Constants::DB_PASSWORD,
+    Constants::DB_NAME);
 $connection = $dbconnect->getInstance();
 session_start();
 $_SESSION["teacher_id"] = 3;
@@ -81,7 +75,7 @@ if (!isset($_SESSION["teacher_id"])) {
     </select><br/>
     <label>Date: </label>
     <?php
-        $date = isset($_REQUEST['date'])?$_REQUEST['date']:'';
+    $date = isset($_REQUEST['date'])?$_REQUEST['date']:'';
     ?>
 
     <input type="date" name="date" value="<?php echo $date ?>">
@@ -91,7 +85,7 @@ if (!isset($_SESSION["teacher_id"])) {
 
 <div id="content">
     <?php if (isset($_REQUEST["course_id"], $_REQUEST["date"], $_REQUEST["timetable_id"])): ?>
-        <form id="attendance_marking_form" action="functions/attendanceMarking.php" method="post">
+        <form id="attendance_marking_form" action="attendanceMarking.php" method="post">
             <input type="hidden" name="timetable_id"
                    value="<?php echo isset($_REQUEST["timetable_id"]) ? $_REQUEST["timetable_id"] : "null" ?>"/>
             <input type="hidden" name="date"
