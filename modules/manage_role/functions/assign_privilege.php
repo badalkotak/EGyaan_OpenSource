@@ -8,174 +8,165 @@
 </head>
 <body>
 <!--START OF SIDEBAR===========================================================================================================-->
-    <!-- Left side column. contains the sidebar -->
-        <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                <!-- Sidebar user panel -->
-                <div class="user-panel">
-                    <div class="pull-left image">
-                        <?
-                        if($profile!=null)
-                            		{
-                            			echo "<img src='../../manage_student/images/student/$profile' class=img-circle alt='User Image'>";
-                            		}
-                           			else
-                            		{
-                            			echo "<img src='../../../Resources/images/boy.png' class=img-circle alt='User Image'>";
-                            		}
-                        ?>
-                    </div>
-                    <div class="pull-left info">
-                    <?
-                    echo "<p>$display_name</p>";
-                    ?>
-                        <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> -->
-                    </div>
-                </div>
-                        <!-- search form -->
-                <form action="#" method="get" class="sidebar-form">
-                    <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
+<!-- Left side column. contains the sidebar -->
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <?
+                if ($profile != null) {
+                    echo "<img src='../../manage_student/images/student/$profile' class=img-circle alt='User Image'>";
+                } else {
+                    echo "<img src='../../../Resources/images/boy.png' class=img-circle alt='User Image'>";
+                }
+                ?>
+            </div>
+            <div class="pull-left info">
+                <?
+                echo "<p>$display_name</p>";
+                ?>
+                <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> -->
+            </div>
+        </div>
+        <!-- search form -->
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
                             <button type="submit" name="search" id="search-btn" class="btn btn-flat">
                                 <i class="fa fa-search"></i>
                             </button>
                         </span>
-                    </div>
-                </form>
-                <!-- /.search form -->
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu">
-                    <li class="header">MAIN NAVIGATION</li>
-                    <li class="treeview">
-                        <a href="../../login/functions/Dashboard.php">
-                            <i class="fa fa-home"></i> <span>Home</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="../../manage_branch/function/branch.php">
-                            <i class="fa  fa-sitemap"></i> <span>Manage Branch</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="../../manage_batch/function/batch.php">
-                            <i class="fa fa-users"></i> <span>Manage Batch</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="../../manage_course/function/course.php">
-                            <i class="fa fa-book"></i> <span>Manage Course</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="../../manage_user/functions/user.php">
-                            <i class="fa fa-user"></i> <span>Manage Users</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="../../manage_student/function/student.php">
-                            <i class="fa fa-graduation-cap"></i> <span>Manage Students</span>
-                        </a>
-                    </li>
-                    <li class="treeview active">
-                        <a href="../../manage_role/functions/role.php">
-                            <i class="fa fa-user"></i> <span>Manage Role</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="../../manage_fees/function/manage_fees.php">
-                            <i class="fa fa-file-text-o"></i> <span>Manage Fees</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="../../manage_noticeboard/function/index.php">
-                            <i class="fa fa-calendar-minus-o"></i> <span>Noticeboard</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-gears"></i>
-                            <span>Settings</span>
-                        </a>
-                    </li>
-                </ul>
-            </section>
-            <!-- /.sidebar -->
-        </aside>
-    
+            </div>
+        </form>
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+            <li class="header">MAIN NAVIGATION</li>
+            <li class="treeview">
+                <a href="../../login/functions/Dashboard.php">
+                    <i class="fa fa-home"></i> <span>Home</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="../../manage_branch/function/branch.php">
+                    <i class="fa  fa-sitemap"></i> <span>Manage Branch</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="../../manage_batch/function/batch.php">
+                    <i class="fa fa-users"></i> <span>Manage Batch</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="../../manage_course/function/course.php">
+                    <i class="fa fa-book"></i> <span>Manage Course</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="../../manage_user/functions/user.php">
+                    <i class="fa fa-user"></i> <span>Manage Users</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="../../manage_student/function/student.php">
+                    <i class="fa fa-graduation-cap"></i> <span>Manage Students</span>
+                </a>
+            </li>
+            <li class="treeview active">
+                <a href="../../manage_role/functions/role.php">
+                    <i class="fa fa-user"></i> <span>Manage Role</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="../../manage_fees/function/manage_fees.php">
+                    <i class="fa fa-file-text-o"></i> <span>Manage Fees</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="../../manage_noticeboard/function/index.php">
+                    <i class="fa fa-calendar-minus-o"></i> <span>Noticeboard</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-gears"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>
+
 <!--END OF SIDEBAR=============================================================================================================-->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <br>
-            <ol class="breadcrumb">
-                <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                <li><a href="role.php">Manage Roles</a></li>
-                <li class="active"><b>Assign Roles</b></li>
-            </ol>
-        </section>
-        <section class="content">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">Assign Roles</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-<?php
-require_once("../../../classes/DBConnect.php");
-require_once("../../../classes/Constants.php");
-require_once("../classes/Role.php");
-require_once("../../manage_privilege/classes/Privilege.php");
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <br>
+        <ol class="breadcrumb">
+            <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="role.php">Manage Roles</a></li>
+            <li class="active"><b>Assign Roles</b></li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Assign Roles</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <?php
+                        require_once("../../../classes/DBConnect.php");
+                        require_once("../../../classes/Constants.php");
+                        require_once("../classes/Role.php");
+                        require_once("../../manage_privilege/classes/Privilege.php");
 
-$dbConnect = new DBConnect(Constants::SERVER_NAME,
-    Constants::DB_USERNAME,
-    Constants::DB_PASSWORD,
-    Constants::DB_NAME);
+                        $dbConnect = new DBConnect(Constants::SERVER_NAME,
+                            Constants::DB_USERNAME,
+                            Constants::DB_PASSWORD,
+                            Constants::DB_NAME);
 
-$role_id=$_REQUEST['assign'];
+                        $role_id = $_REQUEST['assign'];
 
-if($role_id==Constants::ROLE_STUDENT_ID || $role_id==Constants::ROLE_PARENT_ID || $role_id==Constants::ROLE_TEACHER_ID)
-{
-	echo "<script>alert('You cannot change the privileges for Role: Student, Teacher, Parent!');window.location.href='role.php';</script>";
-}
+                        if ($role_id == Constants::ROLE_STUDENT_ID || $role_id == Constants::ROLE_PARENT_ID || $role_id == Constants::ROLE_TEACHER_ID) {
+                            echo "<script>alert('You cannot change the privileges for Role: Student, Teacher, Parent!');window.location.href='role.php';</script>";
+                        }
 
-$privilege = new Privilege($dbConnect->getInstance());
+                        $privilege = new Privilege($dbConnect->getInstance());
 
-$getPrivileges=$privilege->getPrivilege(0,0);
-if($getPrivileges!=null)
-{
-	$i=0;
-	echo "<form role='form' action=assign_privilege_role.php method=post>";
-	while($row=$getPrivileges->fetch_assoc())
-	{
-		$privilege_id=$row['id'];
-		$privilege_name=$row['name'];
-		$i++;
+                        $getPrivileges = $privilege->getPrivilege(0, 0);
+                        if ($getPrivileges != null) {
+                            $i = 0;
+                            echo "<form role='form' action=assign_privilege_role.php method=post>";
+                            while ($row = $getPrivileges->fetch_assoc()) {
+                                $privilege_id = $row['id'];
+                                $privilege_name = $row['name'];
+                                $i++;
 
-		$checkPrivilegeRole=$privilege->getPrivilege($role_id,$privilege_id);
+                                $checkPrivilegeRole = $privilege->getPrivilege($role_id, $privilege_id);
 
-		if($checkPrivilegeRole!=null)
-		{
-			echo "<div class='form-group'><input type=checkbox name=c$i value='$privilege_id' checked> $privilege_name</div>";
-		}
-		else
-		{
-			echo "<div class='form-group'><input type=checkbox name=c$i value='$privilege_id'> $privilege_name</div>";
-		}
-	}
-	echo "<button class='btn btn-success' type=submit value=$role_id name=role_id><i class='fa fa-check'></i>&nbsp;Assign</button>";
-	echo "</form>";
-}
-?>
-                        </div>
+                                if ($checkPrivilegeRole != null) {
+                                    echo "<div class='form-group'><input type=checkbox name=c$i value='$privilege_id' checked> $privilege_name</div>";
+                                } else {
+                                    echo "<div class='form-group'><input type=checkbox name=c$i value='$privilege_id'> $privilege_name</div>";
+                                }
+                            }
+                            echo "<button class='btn btn-success' type=submit value=$role_id name=role_id><i class='fa fa-check'></i>&nbsp;Assign</button>";
+                            echo "</form>";
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+</div>
 
 <?php
 include "../../../Resources/Dashboard/footer.php";

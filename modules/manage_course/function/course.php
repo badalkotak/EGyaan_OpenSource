@@ -123,7 +123,7 @@ include("../../../Resources/Dashboard/header.php");
                             <form action="" method="post">
                                 <div class="col-md-6">
                                     <select class="form-control select2" name="branchId">
-                                        <option value="-1">Select Branch</option>
+                                        <option value="-1" disabled selected>Select Branch</option>
                                         <?php
                                         /**
                                          * Created by PhpStorm.
@@ -177,7 +177,7 @@ include("../../../Resources/Dashboard/header.php");
                             if ($branch_Id > 0) {
                                 echo "<div class='row'><form action='' method='post'>";
                                 echo "<div class='col-md-6'><select class='form-control select2' name='batchId'>";
-                                echo "<option value='-2'>Select Batch</option>";
+                                echo "<option value='-2' disabled selected>Select Batch</option>";
                                 if ($getBatchData == true) {
                                     while ($array = $getBatchData->fetch_assoc()) {
                                         $batchId = $array['batchId'];
