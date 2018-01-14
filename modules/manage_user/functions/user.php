@@ -203,7 +203,7 @@ $user=new User($dbConnect->getInstance());
                                         ?>
                                         </select>
                                         </div>
-                                        <button type="submit" class="btn btn-primary" value="Add Student" id="submit"><i class="fa fa-plus"></i>&nbsp;Add</button>
+                                        <button type="submit" class="btn btn-success" value="Add Student" id="submit"><i class="fa fa-plus"></i>&nbsp;Add</button>
                                         <div class="alert-message" id="user_err"></div>
                                     </form>
                                 </div>

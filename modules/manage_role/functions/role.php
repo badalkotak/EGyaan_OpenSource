@@ -196,7 +196,7 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
                                     $getRoles = $roles->getRole();
 
                                     if ($getRoles != null) {
-                                        echo "<h3 class='box-title'>Roles:</h3>";
+                                        echo "<h4>Roles:</h4>";
                                         echo "<div class='table-container1'><table class='table table-bordered table-hover example2'>
                         <thead>
                             <th>Sr No</th>

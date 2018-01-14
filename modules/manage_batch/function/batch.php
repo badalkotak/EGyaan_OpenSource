@@ -126,7 +126,7 @@ include("../../../Resources/Dashboard/header.php");
                                 <div class="col-md-6">
                                     <select class="form-control select2" name="branchId" id="branchId"
                                             required>
-                                        <option value="-1">Select Branch</option>
+                                        <option value="-1" disabled selected>Select Branch</option>
 
                                         <?php
                                         /**

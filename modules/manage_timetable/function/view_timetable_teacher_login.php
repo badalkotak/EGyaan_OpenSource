@@ -104,6 +104,46 @@ else
                         </a>
                     </li>
                     <li class="treeview">
+                        <a href="../../manage_notes/function/insert_page.php">
+                            <i class="fa fa-book"></i> <span>Notes</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="">
+                            <i class="fa fa-send-o"></i> <span>Submissions</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_test/function/manage_test.php">
+                            <i class="fa fa-pencil-square-o"></i> <span>Tests</span>
+                        </a>
+                    </li>
+                    <li class="treeview active">
+                        <a href="../../manage_timetable/function/view_teacher_timetable.php">
+                            <i class="fa fa-calendar"></i> <span>Timetable</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_syllabus/function/insert_page.php">
+                            <i class="fa fa-book"></i> <span>Syllabus</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_attendance/functions/attendanceMarking.php">
+                            <i class="fa fa-bar-chart"></i> <span>Attendance</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../discussion_forum/functions/forum.php">
+                            <i class="fa fa-wechat"></i> <span>Discussion Forum</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="../../manage_noticeboard/index.php">
+                            <i class="fa  fa-calendar-minus-o"></i> <span>Noticeboard</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-gears"></i>
                             <span>Settings</span>

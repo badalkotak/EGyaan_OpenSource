@@ -8,7 +8,7 @@ $(document).ready(function(){
 		}
 		else
 		{
-			$("#course_err").text("Please select the Course!");
+			$("#course_err").html("<h4 class='alert-message'><i class='fa fa-exclamation-triangle'></i>Please select the Course!</h4>");
 			return false;
 		}
 	});

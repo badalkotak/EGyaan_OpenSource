@@ -143,7 +143,7 @@ $course=new Course($dbconnect->getInstance());
                     if($add===true)
                     {
                         ?>
-                        <div class="col-md-6">
+                            <div class="col-md-6">
                             <form method="post" action="insert_notes.php" enctype="multipart/form-data"> 
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="title" placeholder="Enter Title">
