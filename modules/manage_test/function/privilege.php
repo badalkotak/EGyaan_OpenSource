@@ -18,11 +18,11 @@ $view_id=Constants::TEST_VIEW_ID;
 $result_add=Constants::RESULT_ADD_ID;
 $result_view=Constants::RESULT_VIEW_ID;
 
-$add=$privilege->checkPrivilege($id,$add_id,$email);
-$delete=$privilege->checkPrivilege($id,$delete_id,$email);
-$view=$privilege->checkPrivilege($id,$view_id,$email);
-$result_view_id=$privilege->checkPrivilege($id,$result_view,$email);
-$result_add_id=$privilege->checkPrivilege($id,$result_add,$email);
+$add=$privilege->checkPrivilege($id,$add_id,$email,$role_id);
+$delete=$privilege->checkPrivilege($id,$delete_id,$email,$role_id);
+$view=$privilege->checkPrivilege($id,$view_id,$email,$role_id);
+$result_view_id=$privilege->checkPrivilege($id,$result_view,$email,$role_id);
+$result_add_id=$privilege->checkPrivilege($id,$result_add,$email,$role_id);
 
 if($result_add_id===true)
 {

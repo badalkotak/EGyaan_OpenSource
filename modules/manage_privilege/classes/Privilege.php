@@ -101,7 +101,7 @@ function __construct($connection)
             }
         }
 
-        public function checkPrivilege($user_id,$privilege_id,$email)
+        public function checkPrivilege($user_id,$privilege_id,$email,$role_id)
     {
         // $sql="SELECT role_id FROM egn_users WHERE id='$user_id'";
         // $result=$this->connection->query($sql);
@@ -110,42 +110,60 @@ function __construct($connection)
         // if($result->num_rows == 0)
         // {
             //It means the user_id is either a student or a parent
-            $checkStudent="SELECT email,parent_email FROM egn_student WHERE id='$user_id'";
-            $checkStudentResult=$this->connection->query($checkStudent);
+            // $checkStudent="SELECT email,parent_email FROM egn_student WHERE id='$user_id'";
+            // $checkStudentResult=$this->connection->query($checkStudent);
 
-            if($checkStudentResult->num_rows > 0)
-            {
-                while($row=$checkStudentResult->fetch_assoc())
-                {
-                    $student_email=$row['email'];
-                    $parent_email=$row['parent_email'];
-                }
+            // if($checkStudentResult->num_rows > 0)
+            // {
+            //     while($row=$checkStudentResult->fetch_assoc())
+            //     {
+            //         $student_email=$row['email'];
+            //         $parent_email=$row['parent_email'];
+            //     }
 
-                if($email===$student_email)
-                {
-                    $role_id=Constants::ROLE_STUDENT_ID;
-                }
+            //     if($email===$student_email)
+            //     {
+            //         $role_id=Constants::ROLE_STUDENT_ID;
+            //     }
 
-                else if($email===$parent_email)
-                {
-                    $role_id=Constants::ROLE_PARENT_ID;
-                }
-            }
+            //     else if($email===$parent_email)
+            //     {
+            //         $role_id=Constants::ROLE_PARENT_ID;
+            //     }
+            // }
 
-            else
-            {
-                $sql="SELECT role_id FROM egn_users WHERE id='$user_id'";
+    		if($role_id != Constants::ROLE_PARENT_ID || $role_id != Constants::ROLE_STUDENT_ID || $role_id != Constants::ROLE_TEACHER_ID)
+    		{
+				$sql="SELECT role_id FROM egn_users WHERE id='$user_id'";
                 $result=$this->connection->query($sql);
 
                 if($result->num_rows != 0)
                 {
-                    $role_id=$row['role_id'];
+                	while($row=$result->fetch_assoc())
+            		{
+                    	$role_id=$row['role_id'];
+                    }
                 }
                 else
                 {
                     return Constants::NO_USER_ERR; 
-                }
-            }
+                }    			
+    		}
+
+            // else
+            // {
+            //     $sql="SELECT role_id FROM egn_users WHERE id='$user_id'";
+            //     $result=$this->connection->query($sql);
+
+            //     if($result->num_rows != 0)
+            //     {
+            //         $role_id=$row['role_id'];
+            //     }
+            //     else
+            //     {
+            //         return Constants::NO_USER_ERR; 
+            //     }
+            // }
         // }
 
         // else
