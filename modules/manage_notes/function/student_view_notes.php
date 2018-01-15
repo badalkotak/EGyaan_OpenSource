@@ -84,7 +84,7 @@ $courses_result=$course->getCourse('no',$user_id,'no',0,0,null,0);
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Hello!<small>User</small></h1>
+            <br>
             <ol class="breadcrumb">
                 <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
                 <li class="active"><b>List Of Notes</b></li>

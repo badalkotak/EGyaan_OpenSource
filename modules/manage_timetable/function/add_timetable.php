@@ -119,7 +119,7 @@ $teacher_course=new TeacherCourse($dbconnect->getInstance());
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Hello!<small>User</small></h1>
+            <br>
             <ol class="breadcrumb">
                 <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
                 <li class="active">Add TimeTable</li>
