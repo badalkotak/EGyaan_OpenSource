@@ -160,6 +160,7 @@ $test = new Test($dbConnect->getInstance());
                                                     <thead>
                                                     <tr>
                                                         <th>Name</th>
+                                                        <th>Absent</th>
                                                         <th>Marks</th>
                                                     </tr>
                                                     </thead>
@@ -168,7 +169,8 @@ $test = new Test($dbConnect->getInstance());
                                                     while ($row = $result->fetch_assoc()) {
                                                         echo '<tr>
                                                             <td>' . $row["firstname"] . ' ' . $row["lastname"] . '</td>
-                                                            <td><input class="form-control" type="number" name="' . $row["id"] . '" value="' . (($row["marks"] != NULL) ? $row["marks"] : '0') . '" min="1" max="' . $row["total_marks"] . '" required> out of ' . $row["total_marks"] . '</td>
+                                                            <td><input type="checkbox" name="absent_' . $row["id"] . '" ' . (($row["marks"] == -1) ? 'checked' : '') . '></td>
+                                                            <td><input class="form-control" type="number" name="' . $row["id"] . '" value="' . (($row["marks"] != NULL) ? (($row["marks"] != -1)?$row["marks"] : '0' ) : '0') . '" min="0" max="' . $row["total_marks"] . '" required> out of ' . $row["total_marks"] . '</td>
                                                           </tr>';
                                                     }
                                                     ?>
