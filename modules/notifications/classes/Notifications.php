@@ -7,7 +7,7 @@ class Notifications
     	$ch = curl_init("https://fcm.googleapis.com/fcm/send");
 
 	    //Server Key
-	    $key="AAAAvMWRCd4:APA91bG4GveyfLkeuKDqxVaIKAD1kEhZeMdmmKnHTPSl9KTsDCE3nrTt6EhdXi4_1W06zV5TZqQSBsx0t0x2ceWv_ZeWzdxUL23g5WJBum8Wp6fLIAbXhzhFIi-R2zSvtlcphx43Bwfb";
+	    $key="AAAAAGv28AA:APA91bF2aPtEWRaU1sQm5DINpIRrGjSVs2fkCEfDeicBONJP2FHuf1bFI6hCceeVKusO-5WokX4dWf0fBRcQEdkyGJ9roi-ARTNNpZ0uDMmaIFjdwsudKVlZivH6J-0EICQjMZhu23NC";
 	    
 	    //Creating the notification array.
 	    $notification = array('title' =>$title , 'text' => $body);

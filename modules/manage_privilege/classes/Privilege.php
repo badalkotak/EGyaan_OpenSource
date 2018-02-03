@@ -132,7 +132,7 @@ function __construct($connection)
             //     }
             // }
 
-    		if($role_id != Constants::ROLE_PARENT_ID || $role_id != Constants::ROLE_STUDENT_ID || $role_id != Constants::ROLE_TEACHER_ID)
+    		if($role_id != Constants::ROLE_PARENT_ID && $role_id != Constants::ROLE_STUDENT_ID && $role_id != Constants::ROLE_TEACHER_ID)
     		{
 				$sql="SELECT role_id FROM egn_users WHERE id='$user_id'";
                 $result=$this->connection->query($sql);
