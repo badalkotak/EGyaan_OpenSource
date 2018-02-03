@@ -58,7 +58,7 @@ if (!isset($_SESSION["teacher_id"])) {
                     <i class="fa fa-home"></i> <span>Home</span>
                 </a>
             </li>
-            <li class="treeview active">
+            <li class="treeview">
                 <a href="../../manage_notes/function/insert_page.php">
                     <i class="fa fa-book"></i> <span>Notes</span>
                 </a>
@@ -83,7 +83,7 @@ if (!isset($_SESSION["teacher_id"])) {
                     <i class="fa fa-book"></i> <span>Syllabus</span>
                 </a>
             </li>
-            <li class="treeview">
+            <li class="treeview active">
                 <a href="../../manage_attendance/functions/attendanceMarking.php">
                     <i class="fa fa-bar-chart"></i> <span>Attendance</span>
                 </a>
@@ -115,9 +115,7 @@ if (!isset($_SESSION["teacher_id"])) {
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>Hello!
-            <small>User</small>
-        </h1>
+        <br>
         <ol class="breadcrumb">
             <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
             <li class="active"><b>Mark Attendance</b></li>

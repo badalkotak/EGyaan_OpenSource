@@ -185,13 +185,15 @@ class Test
         }
     }
 
-    public function createInsertMarksQuery($student_id,$test_id,$marks){
+    public function createInsertMarksQuery($student_id,$test_id,$marks,$is_absent){
         $sql = "INSERT INTO `egn_test_marks` (`id`, `student_id`, `test_id`, `marks`) 
-                VALUES (NULL, '$student_id', '$test_id', '$marks');";
+                VALUES (NULL, '$student_id', '$test_id', " . (($is_absent == 1)?'-1':$marks) . ");";
         return $sql;
     }
 
     public function insertMarks($sql){
+//        echo $sql;
+//        exit;
         $insert = $this->connection->multi_query($sql);
         if($insert === true)
         {
@@ -203,9 +205,9 @@ class Test
         }
     }
 
-    public function createUpdateMarksQuery($student_id,$test_id,$marks){
+    public function createUpdateMarksQuery($student_id,$test_id,$marks,$is_absent){
         $sql = "UPDATE `egn_test_marks`
-                SET marks = '$marks'
+                SET marks = " . (($is_absent == 1)?'-1':$marks) . "
                 WHERE student_id = '$student_id' AND test_id ='$test_id';";
         return $sql;
     }

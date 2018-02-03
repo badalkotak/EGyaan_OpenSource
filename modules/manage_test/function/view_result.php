@@ -121,7 +121,7 @@ $test = new Test($dbConnect->getInstance());
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Hello!<small>User</small></h1>
+            <br>
             <ol class="breadcrumb">
                 <li><a href="../../login/functions/Dashboard.php"><i class="fa fa-home"></i>Home</a></li>
                 <li><a href="manage_test.php">List of Test</a></li>
@@ -151,6 +151,7 @@ $test = new Test($dbConnect->getInstance());
                                                 <thead>
                                                 <tr>
                                                     <th>Name</th>
+                                                    <th>Present</th>
                                                     <th>Marks</th>
                                                     <? echo ($_REQUEST["type"] == "O")?'<th>View</th>':''; ?>
                                                 </tr>
@@ -161,7 +162,8 @@ $test = new Test($dbConnect->getInstance());
                                                     $answer_page = '<td><a class="btn btn-primary btn-sm" href="view_answer_by_teacher.php?student_id=' . $row["id"] . '&test_id=' . $_REQUEST["id"] . '&marks='. $_REQUEST["marks"] . '"><span class="fa fa-eye"></span> View</a></td>';
                                                     echo '<tr>
                                                     <td>' . $row["firstname"] . ' ' . $row["lastname"] . '</td>
-                                                    <td>' . $row["marks"] . ' out of  ' . $row["total_marks"] . '</td>'
+                                                    <td>' . (($row["marks"] != -1)? 'Yes' : 'No') . '</td>
+                                                    <td>' . (($row["marks"] != -1)?$row["marks"] : '0') . ' out of  ' . $row["total_marks"] . '</td>'
                                                     . (($_REQUEST["type"] == "O")?($answer_page):('')) .
                                                   '</tr>';
                                                 }

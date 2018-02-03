@@ -23,11 +23,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $marks_query = "";
     if($result != null){
         while($row = $result->fetch_assoc()){
-            if(is_numeric($_POST[$row["id"]]) && $_POST[$row["id"]]>0){
+            if(is_numeric($_POST[$row["id"]]) && $_POST[$row["id"]]>=0){
                 if($_POST["action"] == "add"){
-                    $marks_query = $marks_query . $test->createInsertMarksQuery($row["id"],$_POST["test_id"],$_POST[$row["id"]]);
+                    $marks_query = $marks_query . $test->createInsertMarksQuery($row["id"],$_POST["test_id"],$_POST[$row["id"]],isset($_POST["absent_".$row["id"]]));
                 }else{
-                    $marks_query = $marks_query . $test->createUpdateMarksQuery($row["id"],$_POST["test_id"],$_POST[$row["id"]]);
+                    $marks_query = $marks_query . $test->createUpdateMarksQuery($row["id"],$_POST["test_id"],$_POST[$row["id"]],isset($_POST["absent_".$row["id"]]));
                 }
             }else{
                 echo $test->parentPageRedirect("Marks should be greater than or equal to zero");
