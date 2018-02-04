@@ -21,7 +21,7 @@ function redirect($url){
 
 function output($status, $message = null, $id=null){
 
-    $url = "Location: ../thread.php?id=".$_REQUEST["thread_id"]."&status=" . $status;
+    $url = "Location: thread.php?id=".$_REQUEST["thread_id"]."&status=" . $status;
     $url = $url . "&message=" . $message;
     header($url);
 

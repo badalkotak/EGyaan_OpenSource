@@ -49,11 +49,11 @@ if ($row["student_id"] != null) {
         $author_info = "By A Student";
     }
 } else if ($row["teacher_id"] != null) {
-    $sql_info = "select * from egn_teacher where id=" . $row["teacher_id"];
+    $sql_info = "select * from egn_users where role_id=2 and id=" . $row["teacher_id"];
     $result_info = $connection->query($sql_info);
     if ($result_info->num_rows > 0) {
         $row_temp_2 = $result_info->fetch_assoc();
-        $author_info = "By " . $row_temp_2["firstname"] . " " . $row_temp_2["lastname"] . "(Teacher)";
+        $author_info = "By " . $row_temp_2["name"] . "(Teacher)";
     } else {
         $author_info = "By A Teacher";
     }
@@ -247,7 +247,7 @@ if ($row["course_id"] != null) {
 
                                                 <?php
                                                 $sql_replies = "select * from (select f1.id as reply_id, f2.student_id as parent_reply_student_id, f2.teacher_id as parent_reply_teacher_id, f2.id as parent_reply_id, f2.description as parent_reply, f1.student_id, f1.teacher_id, f1.description as reply, f1.timestamp from egn_forum_thread_replies as f1, egn_forum_thread_replies as f2 where f2.id = f1.parent_reply_id and f1.thread_id = f2.thread_id and f1.thread_id = " . $_REQUEST["id"] . " union select id as reply_id, parent_reply_id as parent_reply_student_id, parent_reply_id as parent_reply_teacher_id, parent_reply_id, parent_reply_id as parent_reply, student_id, teacher_id, description as reply, timestamp from egn_forum_thread_replies where thread_id = " . $_REQUEST["id"] . " and parent_reply_id is null) as t1 order by t1.timestamp desc";
-                                                //echo $sql_replies;
+//                                                echo $sql_replies;
                                                 $result_replies = $connection->query($sql_replies);
                                                 if ($result_replies->num_rows > 0) {
                                                     while ($row = $result_replies->fetch_assoc()) {

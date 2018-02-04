@@ -42,7 +42,8 @@ class Forum{
 
         $sql_insert = "INSERT INTO egn_forum_threads (title, description, student_id, teacher_id, course_id) 
                        VALUES('" . $thread_title . "', '" . $thread_description . "', " . $student_id . ", " . $teacher_id . ", " . $course_id . ")";
-//        echo $sql_insert;
+        echo $sql_insert;
+//        exit();
         $result_insert = $this->connection->query($sql_insert);
         if ($result_insert === true) {
             return $this->connection->insert_id;
@@ -150,6 +151,8 @@ class Forum{
 
     public function addReply($thread_id, $student_id, $teacher_id, $parent_reply_id, $reply){
         $sql = "insert into egn_forum_thread_replies (thread_id, parent_reply_id, description, student_id, teacher_id) values(".$thread_id.", ".$parent_reply_id.", '".$reply."', ".$student_id.", ".$teacher_id.")";
+//        echo $sql;
+//        exit();
         $result = $this->connection->query($sql);
         if($result == true){
             return $this->connection->insert_id;

@@ -5,10 +5,10 @@
  * Date: 28/12/16
  * Time: 11:45 AM
  */
+include("../../../Resources/Dashboard/header.php");
 require_once "../../../classes/DBConnect.php";
 require_once "../../../classes/Constants.php";
-include("../../../Resources/sessions.php");
-include("../../../Resources/Dashboard/header.php");
+session_start();
 $dbconnect = new DBConnect(Constants::SERVER_NAME,
                            Constants::DB_USERNAME,
                            Constants::DB_PASSWORD,
@@ -392,11 +392,11 @@ function redirect($url)
                                                                 }
                                                                 else if ($row["teacher_id"] != null)
                                                                 {
-                                                                    $sql_info = "select * from egn_teacher where id=" . $row["teacher_id"];
+                                                                    $sql_info = "select * from egn_users where role_id=2 and id=" . $row["teacher_id"];
                                                                     $result_info = $connection->query($sql_info);
                                                                     if ($result_info->num_rows > 0) {
                                                                         $row_temp_2 = $result_info->fetch_assoc();
-                                                                        $author_info = "By " . $row_temp_2["firstname"] . " " . $row_temp_2["lastname"] . "(Teacher)";
+                                                                        $author_info = "By " . $row_temp_2["name"] . "(Teacher)";
                                                                     }
                                                                     else
                                                                     {

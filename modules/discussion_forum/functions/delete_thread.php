@@ -22,7 +22,7 @@ function redirect($url){
 
 function output($status, $message = null, $id=null){
 
-    $url = "Location: ../forum.php?status=" . $status;
+    $url = "Location: forum.php?status=" . $status;
     $url = $url . "&message=" . $message;
     header($url);
 }
