@@ -18,6 +18,15 @@ if(isset($_REQUEST["message"]) && !empty(trim($_REQUEST["message"]))){
 }
 $test = new Test($dbConnect->getInstance());
 $result=$test->getTestsByTeacher($teacher_id);
+
+echo "Role:".$role_id = $_SESSION['role'];
+
+    if($role_id==Constants::ROLE_STUDENT_ID)
+{
+        // echo "Inn";
+    $msg = Constants::NO_PRIVILEGE;
+    echo "<script>alert('$msg');window.location.href='../../login/functions/logout.php';</script>";   
+}
 ?>
     
     <!--START OF SIDEBAR===========================================================================================================-->

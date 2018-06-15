@@ -28,6 +28,13 @@ if($result_branch!=null)
         $branch_id=$row_branch['batchBranchId'];
     }
 }
+
+if($role_id==Constants::ROLE_STUDENT_ID || $role_id==Constants::ROLE_PARENT_ID)
+{
+    // header('Location: view_timetable_student_parent.php');
+    $msg = Constants::NO_PRIVILEGE;
+    echo "<script>alert('$msg');window.location.href='../../login/functions/logout.php';</script>";
+}
 ?>
 <script src="../../../Resources/jquery.min.js"></script>
     

@@ -251,7 +251,7 @@ else
                                         else
                                         {
                                             echo "Insert timing first";
-                                            break;
+                                            // break;
                                         }
                                         ?>
                                     </tbody>

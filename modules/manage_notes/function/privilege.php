@@ -15,12 +15,7 @@ $add_id=Constants::NOTES_ADD_ID;
 $delete_id=Constants::NOTES_DELETE_ID;
 $view_id=Constants::NOTES_VIEW_ID;
 
-echo("User ID:".$id);
-
 $add=$privilege->checkPrivilege($id,$add_id,$email,$role_id);
-echo("ADD:".$add);
 $delete=$privilege->checkPrivilege($id,$delete_id,$email,$role_id);
-echo("Delete:".$delete);
 $view=$privilege->checkPrivilege($id,$view_id,$email,$role_id);
-echo("VIEW:".$view);
 ?>

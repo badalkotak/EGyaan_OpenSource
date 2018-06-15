@@ -89,6 +89,8 @@ $dbConnect = new DBConnect(Constants::SERVER_NAME,
     Constants::DB_PASSWORD,
     Constants::DB_NAME);
 
+// print("Role id:".$role_id);
+
 $privilege=new Privilege($dbConnect->getInstance());
 
 $getDashboard=$privilege->getDashboardPrivilege($role_id);
@@ -97,6 +99,7 @@ if($getDashboard!=null)
 {
     while($row=$getDashboard->fetch_assoc())
     {
+    	// var_dump($row);
         $i++;
         $privilege_folder=$row['folder'];
         $dashboard_name=$row['dashboard_name'];
