@@ -59,4 +59,14 @@ class Constants
     const MANAGE_FEES_ID = 37;
 
     const NO_PRIVILEGE = "You dont have the privilige to perform this operation!";
+
+    // const NOTES_ICON = "fa fa-sticky-note-o";
+    // const TEST_ICON = "fa fa-pencil-square-o";
+    // const TIMETABLE_ICON = "fa fa-table";
+    // const SYLLABUS_ICON = "fa fa-book";
+    // const ATTENDANCE_ICON = "fa fa-list-ol";
+    // const DISCUSSION_FORUM_ICON = "fa fa-users";
+    // const NOTICEBOARD_ICON = "fa fa-bell-o";
+    // const ADMIN_ICON = "fa fa-cogs";
+
 }

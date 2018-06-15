@@ -41,7 +41,7 @@ function __construct($connection)
 
         public function getDashboardPrivilege($role_id)
         {
-            $sql = "SELECT DISTINCT(dashboard_name),folder FROM `egn_privilege` WHERE id IN (Select privilege_id FROM egn_role_privilege WHERE role_id=$role_id)";
+            $sql = "SELECT DISTINCT(dashboard_name),folder,sidebar_icon FROM `egn_privilege` WHERE id IN (Select privilege_id FROM egn_role_privilege WHERE role_id=$role_id)";
 
             $result= $this->connection->query($sql);
             if($result->num_rows > 0)
